@@ -3,6 +3,10 @@ GEM
   specs:
     addressable (2.2.8)
     bcrypt-ruby (3.0.1)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.3.3)
     daemons (1.1.9)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
@@ -53,10 +57,19 @@ GEM
     do_postgres (0.10.8)
       data_objects (= 0.10.8)
     eventmachine (0.12.10)
+    execjs (1.4.0)
+      multi_json (~> 1.0)
     fastercsv (1.5.5)
+    fetchapp-api-ruby (2.0.0)
+      httparty
+    httparty (0.8.1)
+      multi_json
+      multi_xml
     json (1.7.5)
     json_pure (1.7.5)
     multi_json (1.3.6)
+    multi_xml (0.4.1)
+    pg (0.14.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -76,7 +89,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coffee-script
   data_mapper
   dm-postgres-adapter
+  fetchapp-api-ruby
+  json
+  pg
   sinatra
   thin

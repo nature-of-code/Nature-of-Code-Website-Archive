@@ -1,0 +1,50 @@
+<form id="new-order" method="post" action="/order">
+  <input type="hidden" id="order-stripe-card-token">
+
+  <div class="field">
+    <label for="order-email">Email Address</label>
+    <input type="text" name="order[email]" id="order-email">
+  </div>
+
+  <div class="field">
+    <label for="order-first-name">First Name</label>
+    <input type="text" name="order[first_name]" id="order-first-name">
+  </div>
+
+  <div class="field">
+    <label for="order-last-name">Last Name</label>
+    <input type="text" name="order[last_name]" id="order-last-name">
+  </div>
+
+  <div class="field">
+    <label for="card-number">Credit Card Number</label>
+    <input type="text" id="card-number">
+  </div>
+
+  <div class="field">
+    <label for="card-code">Security Code on Card (CVV)</label>
+    <input type="text" id="card-code">
+  </div>
+
+  <div class="field">
+    <label for="card-month">Card Expiration</label>
+    <select id="card-month">
+      <option>MONTH</option>
+      <% 12.times do |i| %>
+      <option value="<%= i+1 %>"><%= i+1 %></option>
+      <% end %>
+    </select>
+    <select id="card-year">
+      <% year = Date.today.year %>
+      <% 16.times do |i| %>
+      <option value="<%= year + i %>"><%= year + i %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+
+  <input type="submit">
+</form>
