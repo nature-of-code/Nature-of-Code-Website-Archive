@@ -29,6 +29,8 @@ class Order
 
   property :id, Serial, key: true
   property :response, Text
+  property :token, String
+  property :email, String
 
 end
 
@@ -48,6 +50,8 @@ class NatureOfCode < Sinatra::Base
     # get the credit card details submitted by the form
     token = params[:order][:token]
     amount_dollars = (params[:order][:amount].to_f * 100).to_i
+
+    order = Order.create(:token => token, :email => params[:order][:email])
 
     # create the charge on Stripe's servers - this will charge the user's card
     charge = Stripe::Charge.create(
