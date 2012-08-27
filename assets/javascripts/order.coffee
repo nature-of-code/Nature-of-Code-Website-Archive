@@ -2,30 +2,23 @@ jQuery ->
   # Get the stripe-key w/o jQuery
   stripeKey = document.querySelector('meta[name="stripe-key"]')['content']
   Stripe.setPublishableKey(stripeKey)
-  order.setupForm()
+  setupForm()
 
-order =
-  setupForm: ->
-    $('#new-order').submit ->
-      $('input[type=submit]').attr('disabled', true)
-      if $('#card-number').length
-        subscription.processCard()
-        false
-      else
-        true
+stripeResponseHandler = (status, response) ->
+  if response.error
+    $('#payment-errors').text response.error.message
+    $('.submit-button').removeAttr('disabled')
+  else
+    $('#order-stripe-card-token').val response['id']
+    $('#new-order')[0].submit()
 
-  processCard: ->
-    card =
+
+setupForm = ->
+  $('#new-order').submit (event) ->
+    $('.submit-button').attr('disabled',true)
+    Stripe.createToken {
       number: $('#card-number').val()
       cvc: $('#card-code').val()
       expMonth: $('#card-month').val()
-      expYear: $('#card-year').val()
-    Stripe.createToken(card, order.handleStripeResponse)
-
-  handleStripeResponse: (status, response) ->
-    if status == 200
-      $('#order-stripe-card-token').val(response.id)
-      $('#new-subscription')[0].submit()
-    else
-      $('#stripe-error').text(response.error.message)
-      $('input[type=submit]').attr('disabled', false)
+      expYear: $('#card-year').val()}, stripeResponseHandler
+    false

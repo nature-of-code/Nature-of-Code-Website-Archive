@@ -1,35 +1,41 @@
-<form id="new-order" method="post" action="/order">
-  <input type="hidden" id="order-stripe-card-token">
+<form id="new-order" method="post" action="/purchase">
+  <div id="payment-errors"></div>
+  <input type="hidden" id="order-stripe-card-token" name="order[token]">
+
+  <div class="field">
+    <label for="order-amount">Amount</label>
+    <input type=text name=order[amount] id=order-email value=10.00>
+  </div>
 
   <div class="field">
     <label for="order-email">Email Address</label>
-    <input type="text" name="order[email]" id="order-email">
+    <input type="text" name="order[email]" id="order-email" value='sklise@gmail.com'>
   </div>
 
   <div class="field">
     <label for="order-first-name">First Name</label>
-    <input type="text" name="order[first_name]" id="order-first-name">
+    <input type="text" name="order[first_name]" id="order-first-name" value="steve">
   </div>
 
   <div class="field">
     <label for="order-last-name">Last Name</label>
-    <input type="text" name="order[last_name]" id="order-last-name">
+    <input type="text" name="order[last_name]" id="order-last-name" value="klise">
   </div>
 
   <div class="field">
     <label for="card-number">Credit Card Number</label>
-    <input type="text" id="card-number">
+    <input type="text" size=20 autocomplete=off id="card-number" value="4242424242424242">
   </div>
 
   <div class="field">
     <label for="card-code">Security Code on Card (CVV)</label>
-    <input type="text" id="card-code">
+    <input type="text" size=4 autocomplete=off id="card-code" value="123">
   </div>
 
   <div class="field">
     <label for="card-month">Card Expiration</label>
     <select id="card-month">
-      <option>MONTH</option>
+      <option value="0">MONTH</option>
       <% 12.times do |i| %>
       <option value="<%= i+1 %>"><%= i+1 %></option>
       <% end %>
@@ -46,5 +52,5 @@
     <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
   </div>
 
-  <input type="submit">
+  <button type="submit" class="submit-button">Submit</button>
 </form>
