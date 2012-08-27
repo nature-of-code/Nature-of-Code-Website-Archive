@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require
 
+Stripe.api_key = ENV['STRIPE_SECRET']
+
 # Public: Process order information and create an order for FetchApp with
 # specified information. Triggers an email to be sent from Fetch.
 #
@@ -43,8 +45,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/purchase' do
-    Stripe.api_key = ENV['STRIPE_SECRET']
-
     # get the credit card details submitted by the form
     token = params[:order][:token]
     amount_dollars = (params[:order][:amount].to_f * 100).to_i
@@ -60,8 +60,9 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/deliver' do
+    event_json = JSON.parse(request.body.read)
     @order = Order.new
-    @order.response = "#{params}"
+    @order.response = event_json
     @order.save
   end
 
