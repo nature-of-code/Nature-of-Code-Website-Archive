@@ -51,8 +51,6 @@ class NatureOfCode < Sinatra::Base
     token = params[:order][:token]
     amount_dollars = (params[:order][:amount].to_f * 100).to_i
 
-    order = Order.create(:token => token, :email => params[:order][:email])
-
     # create the charge on Stripe's servers - this will charge the user's card
     charge = Stripe::Charge.create(
       :amount => amount_dollars,
@@ -66,8 +64,11 @@ class NatureOfCode < Sinatra::Base
   post '/deliver' do
     event_json = JSON.parse(request.body.read)
     @order = Order.new
-    @order.response = event_json
+    @order.response = event_json["data"]
     @order.save
+
+    status 200
+    body "ok"
   end
 
   get '/js/:file.js' do
