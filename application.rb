@@ -64,7 +64,7 @@ class NatureOfCode < Sinatra::Base
   post '/deliver' do
     event_json = JSON.parse(request.body.read)
     @order = Order.new
-    @order.response = event_json["data"]
+    @order.response = request.body.read
     @order.save
 
     status 200
