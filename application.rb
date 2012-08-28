@@ -65,8 +65,10 @@ class NatureOfCode < Sinatra::Base
   post '/deliver' do
     event_json = JSON.parse(request.body.read, symbolize_names: true)
 
-    name = event_json[:data][:object][:card][:name].split(' ')
-    email = event_json[:data][:object][:description]
+    event = Stripe::Event.retrieve(event_json[:id])
+
+    name = event.data.object[:card][:name].split(' ')
+    email = event.data.object[:description]
 
     @order = Order.new
     @order.response = event_json.to_json
@@ -74,12 +76,12 @@ class NatureOfCode < Sinatra::Base
 
     fetch = create_fetch_order({
       first_name: name[0],
-      last_name: name[1],
+      last_name: name[1..name.length].join(" "),
       email: email
     }, '001')
 
     @order.fetch_id = fetch.id
-    @order.stripe_id = event_json[:data][:object][:id]
+    @order.stripe_id = event.data.object[:id]
     @order.save
 
     status 200
