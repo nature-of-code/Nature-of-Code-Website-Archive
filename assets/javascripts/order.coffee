@@ -7,7 +7,7 @@ jQuery ->
 stripeResponseHandler = (status, response) ->
   if response.error
     $('#payment-errors').text response.error.message
-    # $('.submit-button').removeAttr('disabled')
+    $('.submit-button').removeAttr('disabled')
   else
     $('#order-stripe-card-token').val response['id']
     $('#new-order')[0].submit()
@@ -19,6 +19,7 @@ setupForm = ->
       number: $('#card-number').val()
       cvc: $('#card-code').val()
       expMonth: $('#card-month').val()
-      expYear: $('#card-year').val()}, stripeResponseHandler
-      # name: "#{$('#order-first-name').val()} #{$('#order-last-name').val()}"
+      expYear: $('#card-year').val()
+      name: "#{$('#order-first-name').val()} #{$('#order-last-name').val()}"
+    }, stripeResponseHandler
     false
