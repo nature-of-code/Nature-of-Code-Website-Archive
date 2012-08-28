@@ -13,14 +13,11 @@ Stripe.api_key = ENV['STRIPE_SECRET']
 # Returns nothing.
 def create_fetch_order(orderer, item)
   FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
-
-  orderer ||= {first_name:'one',last_name:'two',email:'sklise@gmail.com'}
-
   order = FetchAppAPI::Order.create(
     title:        "#{DateTime.now}",
-    first_name:   orderer['first_name'],
-    last_name:    orderer['last_name'],
-    email:        orderer['email'],
+    first_name:   orderer[:first_name],
+    last_name:    orderer[:last_name],
+    email:        orderer[:email],
     order_items:  [{sku: item}]
   )
 end
@@ -32,8 +29,9 @@ class Order
 
   property :id, Serial, key: true
   property :response, Text
-  property :token, String
   property :email, String
+  property :stripe_id, String
+  property :fetch_id, String
 
 end
 
@@ -73,19 +71,15 @@ class NatureOfCode < Sinatra::Base
     @order = Order.new
     @order.response = event_json.to_json
     @order.email = email
-    @order.save
 
-    orderer = {
-      first_name: name[0],
-      last_name: name[1],
-      email: email
-    }
-
-    create_fetch_order({
+    fetch = create_fetch_order({
       first_name: name[0],
       last_name: name[1],
       email: email
     }, '001')
+
+    @order.fetch_id = fetch.id
+    @order.save
 
     status 200
     body "ok"
