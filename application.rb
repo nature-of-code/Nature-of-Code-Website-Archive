@@ -12,9 +12,10 @@ Stripe.api_key = ENV['STRIPE_SECRET']
 #
 # Returns nothing.
 def create_fetch_order(orderer, item)
-  raise orderer.inspect
-
   FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
+
+  orderer ||= {first_name:'one',last_name:'two',email:'sklise@gmail.com'}
+
   order = FetchAppAPI::Order.create(
     title:        "#{DateTime.now}",
     first_name:   orderer['first_name'],
