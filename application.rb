@@ -64,17 +64,19 @@ class NatureOfCode < Sinatra::Base
   post '/deliver' do
     event_json = JSON.parse(request.body.read, symbolize_names: true)
 
-    name = event_json[:data][:object][:card][:name]
+    name = event_json[:data][:object][:card][:name].split(' ')
+    email = event_json[:data][:object][:description]
+
+    @order = Order.new
+    @order.response = event_json.to_json
+    @order.email = email
+    @order.save
 
     create_fetch_order({
       first_name: name[0],
       last_name: name[1],
-      email: event_json[:data][:object][:description]
+      email: email
     }, '001')
-
-    @order = Order.new
-    @order.response = event_json.to_json
-    @order.save
 
     status 200
     body "ok"
