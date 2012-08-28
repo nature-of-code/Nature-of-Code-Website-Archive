@@ -79,6 +79,7 @@ class NatureOfCode < Sinatra::Base
     }, '001')
 
     @order.fetch_id = fetch.id
+    @order.stripe_id = event_json[:data][:object][:id]
     @order.save
 
     status 200
