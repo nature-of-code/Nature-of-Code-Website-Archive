@@ -12,7 +12,6 @@ stripeResponseHandler = (status, response) ->
     $('#order-stripe-card-token').val response['id']
     $('#new-order')[0].submit()
 
-
 setupForm = ->
   $('#new-order').submit (event) ->
     $('.submit-button').attr('disabled',true)
@@ -21,4 +20,5 @@ setupForm = ->
       cvc: $('#card-code').val()
       expMonth: $('#card-month').val()
       expYear: $('#card-year').val()}, stripeResponseHandler
+      name: "#{$('#order-first-name').val()} #{$('#order-last-name').val()}"
     false
