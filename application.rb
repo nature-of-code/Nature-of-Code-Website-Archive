@@ -43,7 +43,8 @@ class NatureOfCode < Sinatra::Base
     erb :index
   end
 
-  get '/purchase' do
+  post '/order' do
+    @amount = params[:amount]
     erb :order
   end
 

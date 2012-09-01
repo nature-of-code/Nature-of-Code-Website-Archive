@@ -4,7 +4,8 @@
 
   <div class="field">
     <label for="order-amount">Amount</label>
-    <input type=text name=order[amount] id=order-email value=10.00>
+    <div id="amount">$<%= @amount %></div>
+    <input type=hidden name=order[amount] id=order-email value=<%= @amount %>>
   </div>
 
   <div class="field">

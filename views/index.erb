@@ -1,1 +1,55 @@
 A book about applying topics from mathematics, physics, and generative algorithms to computational systems. With Processing!
+
+<script>
+  $(function(){
+    function updateAmount (sliderPos){
+      amount = document.getElementById('amount');
+      displayAmount = document.getElementById('display-amount');
+
+      sliderAmount = (sliderPos * .5).toFixed(2)
+
+      displayAmount.innerHTML = "$"+sliderAmount;
+      amount.setAttribute('value',sliderAmount);
+    }
+    $('#slider').slider({
+      value: 22,
+      create: function(event,ui) {updateAmount(22)},
+      slide: function(event,ui) {updateAmount(ui.value)},
+      stop: function(event,ui) {updateAmount(ui.value)}
+    });
+  });
+</script>
+
+<div id="purchase-options">
+  <div id="purchase-pdf">
+    <h3>Buy <strong>The Nature of Code</strong> PDF</h3>
+    <p>Use the slider to name your price</p>
+    <form method="POST" action="/order" id="slider-form">
+      <div id="slider-holder">
+        <div id="slider"></div>
+      </div>
+      <input id="amount" type="hidden" name="amount" value="10.00">
+      <div id="display-amount">$9.00</div>
+      <button>Buy The PDF</button>
+    </form>
+
+
+    <div class="description">
+      <p>DRM-free, unlimited downloads.</p>
+
+      <p>The PDF is delivered via email, no login necessary. Receive all updates to the book for free.</p>
+    </div>
+  </div>
+
+  <div id="purchase-print">
+    <a href="#">Buy a Printed Copy from Amazon.com</a>
+  </div>
+</div>
+
+<div id="read">
+  <h3>Read the book online for free</h3>
+
+  <a href="/book">Read Now</a>
+
+  <p></p>
+</div>
