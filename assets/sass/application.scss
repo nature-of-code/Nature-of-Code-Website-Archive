@@ -1,0 +1,70 @@
+@import "reset";
+@import "grid";
+
+html {
+  background-color: #fefefe;
+  font-size: 18px;
+  font-family: 'Georgia';
+}
+
+a {
+  color: rgb(48,222,246);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ProximaNova-Regular';
+
+  strong {
+    font-family: 'ProximaNova-Bold';
+  }
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: 0.271em;
+  margin-bottom: 0.25em;
+}
+
+h2 {
+  font-size: 29.666px;
+  letter-spacing: 0.271em;
+}
+
+div {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#top {
+  background-color: rgb(235,0,90);
+  color: #ffffff;
+  padding: 3em 0 3em;
+}
+
+#middle {
+  background-color: rgb(247,244,226);
+  padding: 1em 0;
+}
+
+#bottom {
+  padding: 1em 0;
+}
+
+#header, #content, #footer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
+
+#header {
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
+#footer {
+  color: rgb(204, 203, 203);
+  font-size: 13px;
+  text-align: center;
+}

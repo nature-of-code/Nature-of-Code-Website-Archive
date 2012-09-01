@@ -40,7 +40,7 @@ DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
   get '/' do
-    redirect '/index.html'
+    erb :index
   end
 
   get '/purchase' do
@@ -86,6 +86,10 @@ class NatureOfCode < Sinatra::Base
 
     status 200
     body "ok"
+  end
+
+  get '/css/natureofcode.css' do
+    scss :"../assets/sass/application"
   end
 
   get '/js/:file.js' do

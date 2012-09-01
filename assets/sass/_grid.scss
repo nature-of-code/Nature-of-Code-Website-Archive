@@ -1,0 +1,114 @@
+//-----------------------------------
+// Defaults
+//-----------------------------------
+$column-width: 60px !default;
+$gutter-width: 20px !default;
+$columns: 12 !default;
+
+// output the generic CSS styles
+$grid-css: false !default;
+
+// apply fixes for IE6
+$grid-support-for-ie6: false !default;
+
+//-----------------------------------
+// Column Widths
+//-----------------------------------
+
+// apply a width to a column
+@mixin grid($i, $plus: 0) {
+  width: grid-width($i, $plus);
+}
+
+// return a width
+@function grid-width($i, $plus: 0) {
+  @return $column-width * $i + $gutter-width * ($i - 1) + $plus;
+}
+
+//-----------------------------------
+// Containers
+//-----------------------------------
+
+// specify a container as a page
+@mixin grid-page($i: $columns, $plus: 0) {
+  @extend .clearfix;
+  width: grid-width($i, $plus + $gutter-width);
+  margin: 0 auto;
+}
+
+// specify a container as a row
+@mixin grid-row($page: false) {
+  @extend .clearfix;
+  width: auto;
+
+  // rows directly inside a page don't need the negative margin
+  @if $page {
+    margin: 0 0;
+  } @else {
+    margin: 0 (-$gutter-width / 2);
+  }
+}
+
+//-----------------------------------
+// Columns
+//-----------------------------------
+
+// specify a column
+@mixin grid-column($i: false, $plus: 0) {
+  margin: 0 ($gutter-width / 2);
+  float: left;
+
+  // paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+  @if $grid-support-for-ie6 { .ie6 & { display: inline; } }
+
+  // apply a width
+  @if $i { @include grid($i, $plus); }
+}
+
+// alter the margins of a column
+@mixin grid-offset($i: 1, $plus: 0, $side: left) {
+  margin-#{$side}: (grid-width($i, $gutter-width + $plus) + ($gutter-width/2));
+}
+@mixin grid-offset-left($i: 1, $plus: 0) {
+  @include grid-offset($i, $plus, left);
+}
+@mixin grid-offset-right($i: 1, $plus: 0) {
+  @include grid-offset($i, $plus, right);
+}
+
+//-----------------------------------
+// Default Styles
+//-----------------------------------
+@if $grid-css {
+  // containers
+  .page {
+    @include grid-page;
+  }
+  .row {
+    @include grid-row;
+  }
+  .page > .row {
+    @include grid-row(true);
+  }
+
+  // columns
+  .column {
+    @include grid-column;
+  }
+
+  @for $i from 1 through $columns {
+    // columns widths
+    .grid-#{$i} { width: grid-width($i); }
+
+    // alter left and right margins
+    @if $i < $columns {
+      .before-#{$i} { @include grid-offset-left($i); }
+      .after-#{$i} { @include grid-offset-right($i); }
+    }
+  }
+
+  // Box
+  .box {
+    margin-bottom: $gutter-width;
+  }
+}
