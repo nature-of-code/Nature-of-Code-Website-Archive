@@ -2,7 +2,8 @@
 @import "grid";
 
 html {
-  background-color: #fefefe;
+  background-color: rgb(247,244,226);
+  background-color: rgb(246,246,246);
   font-size: 18px;
   font-family: 'Georgia';
 }
@@ -11,7 +12,11 @@ a {
   color: rgb(48,222,246);
 }
 
-h1, h2, h3, h4, h5, h6 {
+em {
+  font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6, #buy-now, .block-link {
   font-family: 'ProximaNova-Regular';
 
   strong {
@@ -25,6 +30,11 @@ h1 {
   margin-bottom: 0.25em;
 }
 
+h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
 h2 {
   font-size: 29.666px;
   letter-spacing: 0.271em;
@@ -32,6 +42,7 @@ h2 {
 
 h3 {
   font-size: 25.888px;
+  margin: 0.1em 0 0.65em;
 }
 
 div {
@@ -47,7 +58,6 @@ div {
 }
 
 #middle {
-  background-color: rgb(247,244,226);
   padding: 1em 0;
 }
 
@@ -56,6 +66,8 @@ div {
 }
 
 #header, #content, #footer {
+  clear: both;
+  overflow-y: hidden;
   margin-left: auto;
   margin-right: auto;
   width: 900px;
@@ -64,28 +76,30 @@ div {
 #header {
   text-align: center;
   text-transform: uppercase;
+}
 
+#content {
+  padding-bottom: 1em;
 }
 
 #footer {
-  color: rgb(204, 203, 203);
+  border-top: 1px solid #fff;
+  color: #ababab;
   font-size: 13px;
+  padding-top: 15px;
   text-align: center;
 }
 
 // INDEX PAGE
-//-----------------------------------------------------------------------------
+//_____________________________________________________________________________
 #purchase-options {
+  margin: 1em 0 2em;
   overflow-y:hidden;
+  padding: 10px 5px;
 }
 
 #purchase-options>div {
   float: left;
-}
-
-#purchase-pdf {
-  width: 70%;
-  padding:10px;
 }
 
 #slider-holder {
@@ -95,13 +109,163 @@ div {
 }
 
 #display-amount {
-  color: green;
+  clear: right;
+  color: rgb(0,156,0);
+  float: left;
   font-size: 25.888px;
-  padding: 10px;
+  padding: 0 10px;
+  width: 20%;
 }
 
-#purchase-print {
-  width: 30%;
+#purchase-print,
+#order-info {
+  margin-left: 1%;
+  margin-left: -webkit-calc(10px);
+  margin-left: -moz-calc(10px);
+  margin-left: calc(10px);
+  width: 29%;
+  width: -moz-calc(30% - 10px);
+  width: -webkit-calc(30% - 10px);
+  width: calc(30% - 10px);
+  text-align: center;
+}
+
+#purchase-pdf,
+#new-order {
+  background-color: #fff;
+  border: 1px solid rgba(127,127,127,0.4);
+
+  -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  margin-right: 1%;
+  margin-right: -moz-calc(15px);
+  margin-right: -webkit-calc(15px);
+  padding: 15px;
+  width: 69%;
+  width: -moz-calc(70% - 15px);
+  width: -webkit-calc(70% -  15px);
+
+  h3 {
+    text-align: center;
+  }
+
+  fieldset {
+    clear: both;
+    overflow:hidden;
+  }
+}
+
+#buy-now,
+.submit-button {
+  background-color: rgb(0,156,0);
+  border: none;
+  color: #fff;
+  clear: both;
+  display: block;
+  font-size: 18px;
+  margin: 0.7em auto 0;
+  padding: 0.5em 1em;
+  text-align: center;
+
+  &:hover {
+    background-color: rgb(0,196,0);
+    cursor: pointer
+  }
+}
+
+.block-link {
+  background-color: rgb(30,212,237);
+  color: #fff;
+  border: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 0.7em auto 0;
+  padding: 0.5em 1em;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgb(0,0,186);
+  }
+}
+
+
+.description {
+  font-size: 14px;
+  margin: 0.4em 0;
+  list-style-type: disc;
+  margin: 0.5em;
+  padding: 0 2em 1em;
+}
+
+// ORDER PAGE
+//_____________________________________________________________________________
+
+#payment-errors {
+  color: #A60000;
+  text-align: center;
+  margin: 1em;
+  font-weight: bold;
+}
+
+#new-order {
+  float: left;
+  &, input, label, div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  input, label {
+    margin: 0.3em 0;
+    padding: 0.4em 0.6em;
+  }
+
+  label {
+    display: block;
+    float: left;
+    text-align: right;
+    margin-right: 1%;
+    margin-right: -webkit-calc(10px);
+    margin-right: -moz-calc(10px);
+    margin-right: calc(10px);
+    width: 39%;
+    width: -webkit-calc(40% - 10px);
+    width: -moz-calc(40% - 10px);
+    width: calc(40% - 10px);
+  }
+
+  input, fieldset {
+    clear: right;
+    font-size: 18px;
+    width: 1%;
+    width: -moz-calc(60% - 10px);
+    width: -webkit-calc(60% - 10px);
+    width: calc(60% - 10px);
+  }
+
+  input {
+    background-color: #FCFCFC;
+    border: 1px solid #CCC;
+  }
+
+  #display-amount {
+    float: none;
+    font-size: 32px;
+    margin: 0.5em;
+    text-align: center;
+    width: auto;
+  }
+}
+
+#order-info {
+  float: left;
+  text-align: left;
+
+  p {
+    margin: 0 0 0.6em;
+  }
 }
 
 /*!

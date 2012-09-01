@@ -48,6 +48,11 @@ class NatureOfCode < Sinatra::Base
     erb :order
   end
 
+  get '/order' do
+    @amount = 10.00
+    erb :order
+  end
+
   post '/purchase' do
     # get the credit card details submitted by the form
     token = params[:order][:token]

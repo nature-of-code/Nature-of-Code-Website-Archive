@@ -1,12 +1,14 @@
 <form id="new-order" method="post" action="/purchase">
-  <div id="payment-errors"></div>
   <input type="hidden" id="order-stripe-card-token" name="order[token]">
 
-  <div class="field">
-    <label for="order-amount">Amount</label>
-    <div id="amount">$<%= @amount %></div>
-    <input type=hidden name=order[amount] id=order-email value=<%= @amount %>>
-  </div>
+  <h3>
+    The Nature of Code PDF
+    <div id="display-amount"><strong>$<%= "%5.2f" % [@amount] %></strong></div>
+  </h3>
+
+  <div id="payment-errors"></div>
+
+  <input type=hidden name=order[amount] id=order-email value=<%= @amount %>>
 
   <div class="field">
     <label for="order-email">Email Address</label>
@@ -29,29 +31,37 @@
   </div>
 
   <div class="field">
-    <label for="card-code">Security Code on Card (CVV)</label>
+    <label for="card-code">Security Code (CVV)</label>
     <input type="text" size=4 autocomplete=off id="card-code" value="123">
   </div>
 
   <div class="field">
     <label for="card-month">Card Expiration</label>
-    <select id="card-month">
-      <option value="0">MONTH</option>
-      <% 12.times do |i| %>
-      <option value="<%= i+1 %>"><%= i+1 %></option>
-      <% end %>
-    </select>
-    <select id="card-year">
-      <% year = Date.today.year %>
-      <% 16.times do |i| %>
-      <option value="<%= year + i %>"><%= year + i %></option>
-      <% end %>
-    </select>
+    <fieldset>
+      <select id="card-month">
+        <option value="0">MONTH</option>
+        <% 12.times do |i| %>
+        <option value="<%= i+1 %>"><%= i+1 %></option>
+        <% end %>
+      </select>
+      <select id="card-year">
+        <% year = Date.today.year %>
+        <% 16.times do |i| %>
+        <option value="<%= year + i %>"><%= year + i %></option>
+        <% end %>
+      </select>
+    </fieldset>
   </div>
 
   <div id="stripe_error">
     <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
   </div>
 
-  <button type="submit" class="submit-button">Submit</button>
+  <button type="submit" class="submit-button">Complete Purchase</button>
 </form>
+
+<div id="order-info">
+  <p>Upon successful payment you will receive an email with a link to download your PDF.</p>
+
+  <p>Payments handled securely with <a href="http://stripe.com">Stripe</a>.</p>
+</div>

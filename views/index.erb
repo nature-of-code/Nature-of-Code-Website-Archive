@@ -23,33 +23,42 @@ A book about applying topics from mathematics, physics, and generative algorithm
 <div id="purchase-options">
   <div id="purchase-pdf">
     <h3>Buy <strong>The Nature of Code</strong> PDF</h3>
-    <p>Use the slider to name your price</p>
-    <form method="POST" action="https://whispering-oasis-8529.herokuapp.com/order" id="slider-form">
+
+    <p>Download the entire book directly from the author.</p>
+
+    <ul class="description">
+      <li>DRM-free</li>
+      <li>Delivered by email, no login necessary</li>
+      <li>Receive book updates for free</li>
+    </ul>
+
+    <p>Drag the slider to name your price:</p>
+    <form method="POST" action="/order" id="slider-form">
+      <input id="amount" type="hidden" name="amount" value="10.00">
+      <fieldset>
       <div id="slider-holder">
         <div id="slider"></div>
       </div>
-      <input id="amount" type="hidden" name="amount" value="10.00">
-      <div id="display-amount">$9.00</div>
-      <button>Buy The PDF</button>
+
+      <div id="display-amount">$<div id="dollar" contenteditable style="">9.00</div></div>
+      </fieldset>
+      <input type="submit" id="buy-now" value="Buy Now">
     </form>
-
-
-    <div class="description">
-      <p>DRM-free, unlimited downloads.</p>
-
-      <p>The PDF is delivered via email, no login necessary. Receive all updates to the book for free.</p>
-    </div>
   </div>
 
   <div id="purchase-print">
-    <a href="#">Buy a Printed Copy from Amazon.com</a>
+    <h3>Also available in print!</h3>
+    <img src="http://farm9.staticflickr.com/8448/7749029626_04c08b4bed.jpg" style="max-width:100%;">
+    <a class="block-link" href="#">Buy from Amazon.com</a>
   </div>
 </div>
 
 <div id="read">
-  <h3>Read the book online for free</h3>
+  <h3>Read the Entire Book Online for Free</h3>
 
-  <a href="/book">Read Now</a>
+  <p>The complete book is available as HTML with interactive Processing.js examples.</p>
+
+  <a class="block-link" href="/book">Read Now</a>
 
   <p></p>
 </div>
