@@ -45,7 +45,11 @@ class NatureOfCode < Sinatra::Base
 
   post '/order' do
     @amount = params[:amount]
-    erb :order
+    if @amount.to_f == 0.0
+      erb :order_no_stripe
+    else
+      erb :order
+    end
   end
 
   get '/order' do
