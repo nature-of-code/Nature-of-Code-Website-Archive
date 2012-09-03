@@ -28,10 +28,13 @@ class Order
   include DataMapper::Resource
 
   property :id, Serial, key: true
-  property :response, Text
+  property :first_name, String
+  property :last_name, String
   property :email, String
   property :stripe_id, String
   property :fetch_id, String
+  property :amount, Float
+  property :donation, Integer
 
 end
 
@@ -45,6 +48,7 @@ class NatureOfCode < Sinatra::Base
 
   post '/order' do
     @amount = params[:amount]
+    @donation = params[:donation]
     if @amount.to_f == 0.0
       erb :order_no_stripe
     else
@@ -69,7 +73,11 @@ class NatureOfCode < Sinatra::Base
       :card => token,
       :description => params[:order][:email]
     )
-    "and..."
+    @order = Order.new(
+      email: params[:order][:email],
+      stripe_id: charge.id,
+      donation: params[:order][:donation],
+      amount: params[:order][:amount])
   end
 
   post '/deliver' do
@@ -77,21 +85,17 @@ class NatureOfCode < Sinatra::Base
 
     event = Stripe::Event.retrieve(event_json[:id])
 
-    name = event.data.object[:card][:name].split(' ')
     email = event.data.object[:description]
 
-    @order = Order.new
-    @order.response = event_json.to_json
-    @order.email = email
+    @order = Order.first(stripe_id: event.data.object[:id])
 
     fetch = create_fetch_order({
-      first_name: name[0],
-      last_name: name[1..name.length].join(" "),
+      first_name: @order.first_name,
+      last_name: @order.last_name,
       email: email
     }, '001')
 
     @order.fetch_id = fetch.id
-    @order.stripe_id = event.data.object[:id]
     @order.save
 
     status 200

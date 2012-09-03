@@ -45,7 +45,7 @@ h3 {
   margin: 0.1em 0 0.65em;
 }
 
-div {
+div, input, label {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -102,19 +102,26 @@ div {
   float: left;
 }
 
-#slider-holder {
-  padding: 10px;
+.slider-holder {
+  padding: 15px 20px 10px 10px;
   width: 80%;
   float: left;
 }
 
-#display-amount {
+#display-amount,
+#display-percent {
+  border: 1px solid rgba(127,127,127,0.4);
   clear: right;
   color: rgb(0,156,0);
   float: left;
   font-size: 25.888px;
-  padding: 0 10px;
+  padding: 5px 10px;
+  text-align: right;
   width: 20%;
+}
+
+#display-percent {
+  color: #000;
 }
 
 #purchase-print,
@@ -212,7 +219,7 @@ div {
 
 #new-order {
   float: left;
-  &, input, label, div {
+  &, div {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
