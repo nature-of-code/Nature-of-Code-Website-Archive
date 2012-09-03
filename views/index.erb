@@ -1,96 +1,6 @@
 A book about applying topics from mathematics, physics, and generative algorithms to computational systems. With Processing!
 
-<script>
-  var defaultPrice = 11.00;
-  function dollarToSliderPos (dollar) { return dollar * 2; }
-
-  function sliderPosToDollar (sliderPos) { return sliderPos * .5; }
-
-  function cleanDollarInput (dollarInput) {
-    noDollar = raw.replace('$','');
-    dollarFloat = parseFloat(noDollar).toFixed(2) || defaultPrice;
-    if(dollarFloat < 0) {
-      return defaultPrice.toFixed(2);
-    } else {
-      return dollarFloat;
-    }
-  }
-
-  function updateAmountFromSlider (sliderPos){
-    amount = document.getElementById('amount');
-    displayAmount = document.getElementById('display-amount');
-
-    sliderAmount = sliderPosToDollar(sliderPos).toFixed(2)
-
-    displayAmount.setAttribute('value',"$"+sliderAmount);
-    amount.setAttribute('value',sliderAmount);
-  }
-
-  function updateSliderFromAmount (newAmount) {
-    $('#amount').val(newAmount);
-    $('#slider').slider('value',dollarToSliderPos(newAmount));
-  }
-
-  function updatePercentFromInput (percentString) {
-    percent = parseInt(percentString.replace('%','')) || 5;
-    if(percent < 0) {
-      percent = 0;
-    } else if (percent > 100) {
-      percent = 100;
-    }
-    $('#percent-slider').slider('value',percent);
-    $('#percent').val(percent);
-    $('#display-percent').val(percent+'%');
-  }
-
-  function updatePercentFromSlider (sliderPos) {
-    percentInput = document.getElementById('percent');
-    percentInput.setAttribute('value', sliderPos);
-    percentDisplay = document.getElementById('display-percent');
-    percentDisplay.setAttribute('value', sliderPos + '%');
-  }
-
-  $(function(){
-    $('#display-percent').blur(function(){
-      raw = $(this).val() || 5;
-      updatePercentFromInput(raw);
-    });
-
-    $('#display-percent').change(function(){
-      raw = $(this).val() || 5;
-      updatePercentFromInput(raw);
-    });
-
-    $('#display-amount').blur(function(){
-      raw = $(this).val() || defaultPrice;
-      newDollar = cleanDollarInput(raw);
-      updateSliderFromAmount(newDollar);
-      $(this).val('$'+newDollar);
-    });
-
-    $('#display-amount').change(function(event){
-      raw = $(this).val() || defaultPrice+'';
-      newDollar = cleanDollarInput(raw);
-      updateSliderFromAmount(newDollar);
-      $(this).val('$'+newDollar);
-    });
-
-    $('#percent-slider').slider({
-      value: 5,
-      animate: true,
-      slide:  function(e,ui) { updatePercentFromSlider(ui.value) },
-      stop:   function(e,ui) { updatePercentFromSlider(ui.value) }
-    });
-
-    $('#slider').slider({
-      value: dollarToSliderPos(defaultPrice),
-      animate: true,
-      create: function() {updateAmountFromSlider(dollarToSliderPos(defaultPrice))},
-      slide: function(e,ui) {updateAmountFromSlider(ui.value)},
-      stop: function(e,ui) {updateAmountFromSlider(ui.value)}
-    });
-  });
-</script>
+<script src="/js/index.js"></script>
 
 <div id="purchase-options">
   <div id="purchase-pdf">
@@ -119,7 +29,7 @@ A book about applying topics from mathematics, physics, and generative algorithm
         <div class="slider-holder">
           <div id="percent-slider"></div>
         </div>
-        <input type="hidden" id="percent" name="percent" value="5">
+        <input type="hidden" id="percent" name="donation" value="5">
         <input type="text" id="display-percent" name="percent" value="5%">
       </fieldset>
       <input type="submit" id="buy-now" value="Buy Now">
