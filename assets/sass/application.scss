@@ -124,6 +124,13 @@ div, input, label {
   color: #000;
 }
 
+h3 {
+  #display-amount,
+  #display-percent {
+    border: none;
+  }
+}
+
 #purchase-print,
 #order-info {
   margin-left: 1%;
