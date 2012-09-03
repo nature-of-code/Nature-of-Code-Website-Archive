@@ -4,6 +4,7 @@
   <h3>
     The Nature of Code PDF
     <div id="display-amount"><strong>$<%= "%5.2f" % [@amount] %></strong></div>
+    <div id="display-percent"><%= @donation %>%</div>
   </h3>
 
   <div id="payment-errors"></div>
@@ -39,12 +40,13 @@
     <label for="card-month">Card Expiration</label>
     <fieldset>
       <select id="card-month">
-        <option>MONTH</option>
-        <% 12.times do |i| %>
-        <option><%= i+1 %></option>
+        <option>MM</option>
+        <% 1.upto(12) do |i| %>
+        <option><%= i %></option>
         <% end %>
       </select>
       <select id="card-year">
+        <option>YYYY</option>
         <% year = Date.today.year %>
         <% 16.times do |i| %>
         <option><%= year + i %></option>
