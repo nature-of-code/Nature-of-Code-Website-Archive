@@ -35,6 +35,7 @@ class Order
   property :fetch_id, String
   property :amount, Float
   property :donation, Integer
+  property :donated, Boolean
 
 end
 
@@ -73,26 +74,27 @@ class NatureOfCode < Sinatra::Base
       :card => token,
       :description => params[:order][:email]
     )
+
     @order = Order.new(
       email: params[:order][:email],
       stripe_id: charge.id,
       donation: params[:order][:donation],
-      amount: params[:order][:amount])
+      amount: params[:order][:amount],
+      first_name: params[:order][:first_name],
+      last_name: params[:order][:last_name])
+    @order.save
   end
 
   post '/deliver' do
     event_json = JSON.parse(request.body.read, symbolize_names: true)
-
+    # Get event from Stripe API to ensure validity.
     event = Stripe::Event.retrieve(event_json[:id])
-
-    email = event.data.object[:description]
-
     @order = Order.first(stripe_id: event.data.object[:id])
 
     fetch = create_fetch_order({
       first_name: @order.first_name,
       last_name: @order.last_name,
-      email: email
+      email: @order.email
     }, '001')
 
     @order.fetch_id = fetch.id
