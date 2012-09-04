@@ -43,6 +43,10 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
+  before do
+    puts request['SERVER_NAME']
+  end
+
   get '/' do
     File.read(File.join('public','index.html'))
   end
