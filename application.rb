@@ -44,7 +44,7 @@ DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
   get '/' do
-    erb :index
+    File.read(File.join('public','index.html'))
   end
 
   post '/order' do
@@ -115,4 +115,5 @@ class NatureOfCode < Sinatra::Base
 
   # send email after payment
   # Resend email from Fetch if order exists
+  # admin page for donations
 end
