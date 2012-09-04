@@ -1,4 +1,4 @@
-defaultPrice = 20.00
+defaultPrice = 10.00
 
 dollarToSliderPos = (dollar) -> dollar * 2
 

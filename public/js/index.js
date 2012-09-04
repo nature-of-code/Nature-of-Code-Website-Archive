@@ -1,7 +1,7 @@
 (function() {
   var cleanDollarInput, defaultPrice, dollarToSliderPos, sliderPosToDollar, updateAmountFromSlider, updatePercentFromInput, updatePercentFromSlider;
 
-  defaultPrice = 20.00;
+  defaultPrice = 10.00;
 
   dollarToSliderPos = function(dollar) {
     return dollar * 2;
