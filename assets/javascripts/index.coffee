@@ -13,18 +13,11 @@ cleanDollarInput = (dollarInput) ->
     return dollarFloat
 
 updateAmountFromSlider = (sliderPos) ->
-  amount = document.getElementById('amount')
-  displayAmount = document.getElementById('display-amount')
-
   sliderAmount = sliderPosToDollar(sliderPos).toFixed(2)
 
-  displayAmount.setAttribute('value',"$"+sliderAmount)
-  amount.setAttribute('value',sliderAmount)
-
-updateSliderFromAmount = (newAmount) ->
-  $('#amount').val(newAmount)
-  $('#slider').slider('value',dollarToSliderPos(newAmount))
-  false
+  $('#display-amount').val("$"+sliderAmount)
+  $('#amount').val(sliderAmount)
+  @
 
 updatePercentFromInput = (percentString) ->
   percent = parseInt(percentString.replace('%','')) || 5
@@ -39,32 +32,36 @@ updatePercentFromInput = (percentString) ->
   false
 
 updatePercentFromSlider = (sliderPos) ->
-  percentInput = document.getElementById('percent')
-  percentInput.setAttribute('value', sliderPos)
-  percentDisplay = document.getElementById('display-percent')
-  percentDisplay.setAttribute('value', sliderPos + '%')
+  $('#percent').val(sliderPos)
+  $('#display-percent').val(sliderPos + '%')
   @
 
 jQuery ->
   $('#display-percent').blur ->
     raw = $(this).val() || 5
     updatePercentFromInput(raw)
+    false
 
   $('#display-percent').change ->
     raw = $(this).val() || 5
     updatePercentFromInput(raw)
+    false
 
   $('#display-amount').blur ->
     raw = $(this).val() || defaultPrice
-    newDollar = cleanDollarInput(raw)
-    updateSliderFromAmount(newDollar)
-    $(this).val('$'+newDollar)
+    newAmount = cleanDollarInput(raw)
+    $('#amount').val(newAmount)
+    $('#slider').slider('value',dollarToSliderPos(newAmount))
+    $(this).val('$'+newAmount)
+    false
 
   $('#display-amount').change (event) ->
     raw = $(this).val() || defaultPrice+''
-    newDollar = cleanDollarInput(raw)
-    updateSliderFromAmount(newDollar)
-    $(this).val('$'+newDollar)
+    newAmount = cleanDollarInput(raw)
+    $('#amount').val(newAmount)
+    $('#slider').slider('value',dollarToSliderPos(newAmount))
+    $(this).val('$'+newAmount)
+    false
 
   $('#percent-slider').slider({
     value: 5,

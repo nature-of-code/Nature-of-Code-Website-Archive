@@ -1,5 +1,5 @@
 (function() {
-  var cleanDollarInput, defaultPrice, dollarToSliderPos, sliderPosToDollar, updateAmountFromSlider, updatePercentFromInput, updatePercentFromSlider, updateSliderFromAmount;
+  var cleanDollarInput, defaultPrice, dollarToSliderPos, sliderPosToDollar, updateAmountFromSlider, updatePercentFromInput, updatePercentFromSlider;
 
   defaultPrice = 20.00;
 
@@ -23,18 +23,11 @@
   };
 
   updateAmountFromSlider = function(sliderPos) {
-    var amount, displayAmount, sliderAmount;
-    amount = document.getElementById('amount');
-    displayAmount = document.getElementById('display-amount');
+    var sliderAmount;
     sliderAmount = sliderPosToDollar(sliderPos).toFixed(2);
-    displayAmount.setAttribute('value', "$" + sliderAmount);
-    return amount.setAttribute('value', sliderAmount);
-  };
-
-  updateSliderFromAmount = function(newAmount) {
-    $('#amount').val(newAmount);
-    $('#slider').slider('value', dollarToSliderPos(newAmount));
-    return false;
+    $('#display-amount').val("$" + sliderAmount);
+    $('#amount').val(sliderAmount);
+    return this;
   };
 
   updatePercentFromInput = function(percentString) {
@@ -52,11 +45,8 @@
   };
 
   updatePercentFromSlider = function(sliderPos) {
-    var percentDisplay, percentInput;
-    percentInput = document.getElementById('percent');
-    percentInput.setAttribute('value', sliderPos);
-    percentDisplay = document.getElementById('display-percent');
-    percentDisplay.setAttribute('value', sliderPos + '%');
+    $('#percent').val(sliderPos);
+    $('#display-percent').val(sliderPos + '%');
     return this;
   };
 
@@ -64,26 +54,32 @@
     $('#display-percent').blur(function() {
       var raw;
       raw = $(this).val() || 5;
-      return updatePercentFromInput(raw);
+      updatePercentFromInput(raw);
+      return false;
     });
     $('#display-percent').change(function() {
       var raw;
       raw = $(this).val() || 5;
-      return updatePercentFromInput(raw);
+      updatePercentFromInput(raw);
+      return false;
     });
     $('#display-amount').blur(function() {
-      var newDollar, raw;
+      var newAmount, raw;
       raw = $(this).val() || defaultPrice;
-      newDollar = cleanDollarInput(raw);
-      updateSliderFromAmount(newDollar);
-      return $(this).val('$' + newDollar);
+      newAmount = cleanDollarInput(raw);
+      $('#amount').val(newAmount);
+      $('#slider').slider('value', dollarToSliderPos(newAmount));
+      $(this).val('$' + newAmount);
+      return false;
     });
     $('#display-amount').change(function(event) {
-      var newDollar, raw;
+      var newAmount, raw;
       raw = $(this).val() || defaultPrice + '';
-      newDollar = cleanDollarInput(raw);
-      updateSliderFromAmount(newDollar);
-      return $(this).val('$' + newDollar);
+      newAmount = cleanDollarInput(raw);
+      $('#amount').val(newAmount);
+      $('#slider').slider('value', dollarToSliderPos(newAmount));
+      $(this).val('$' + newAmount);
+      return false;
     });
     $('#percent-slider').slider({
       value: 5,
