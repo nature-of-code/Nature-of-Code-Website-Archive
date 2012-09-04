@@ -1,0 +1,57 @@
+body,td,th {
+	font:14px/18px Verdana, Helvetica, sans-serif;
+	color: #FFFFFF;
+}
+body {
+	background-color:#eb106a;
+	/*background-image: url(../img/bgd.jpg);*/
+	margin: 0;
+	padding:0;
+}
+img{border:0}
+img, div { behavior: url(../js/iepngfix.htc) }
+a{color:#ffea00;}
+#bar{
+	height:320px;
+	margin-top:125px;
+	background-color: #da4f76;
+	/*background:url(../img/barbgd.png);*/
+}
+.holder{
+	width:1000px;
+	margin:0 auto;
+}
+#col1{
+	margin:40px 0 0 115px;
+	width:345px;
+	float:left;
+}
+#col2{
+	margin:40px 0 0 0;
+	width:500px;
+	padding-right:40px;
+	float:right;
+}
+#buttons{margin-top:20px;}
+#teaser{
+	width:147px;
+	height:118px;
+	position:absolute;
+	margin-left:-50px;
+	top:370px;
+}
+#emailbox{
+	width:427px;
+	height:41px;
+	margin-left:0px;
+	padding:5px 0px;
+	/*background:url(../img/emailbox_bgd.gif) no-repeat;*/
+	background-color: #da4f76
+}
+#emailbox table{margin:0 auto;}
+td{
+	padding:2px 5px;
+}
+.clearer{
+	clear:both;
+}
