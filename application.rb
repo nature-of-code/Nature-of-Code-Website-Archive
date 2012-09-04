@@ -48,7 +48,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/order' do
-    puts "1" + request.server_name
     puts "2" + request['SERVER_NAME']
     puts "3" + request[:SERVER_NAME]
     puts "4" + request["SERVER_NAME"]
