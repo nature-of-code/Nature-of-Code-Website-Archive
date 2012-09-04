@@ -69,7 +69,7 @@ class NatureOfCode < Sinatra::Base
       first_name: params[:order][:first_name],
       last_name: params[:order][:last_name])
 
-    if params[:free] == 'true'
+    if params[:order][:free] == 'true'
       fetch = create_fetch_order({
         first_name: @order.first_name,
         last_name: @order.last_name,

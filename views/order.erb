@@ -1,6 +1,4 @@
 <form id="new-order" method="post" action="/purchase" <% if !@paying %>class="centered"<% end %> >
-  <input type="hidden" id="order-stripe-card-token" name="order[token]">
-
   <h3>
     The Nature of Code PDF
     <div id="display-amount"><strong>$<%= "%.2f" % [@amount] %></strong></div>
@@ -12,6 +10,7 @@
   </h3>
 
   <% if @paying %>
+  <input type="hidden" id="order-stripe-card-token" name="order[token]">
   <div id="payment-errors"></div>
   <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
   <% else %>
