@@ -1,19 +1,26 @@
-<form id="new-order" method="post" action="/purchase">
+<form id="new-order" method="post" action="/purchase" <% if !@paying %>class="centered"<% end %> >
   <input type="hidden" id="order-stripe-card-token" name="order[token]">
 
   <h3>
     The Nature of Code PDF
-    <div id="display-amount"><strong>$<%= "%5.2f" % [@amount] %></strong></div>
-    <div id="display-percent"><%= @donation %>%</div>
+    <div id="display-amount"><strong>$<%= "%.2f" % [@amount] %></strong></div>
+    <% if @paying %>
+    <div id="donation">
+      $<%= "%.2f" % [@amount.to_f * @donation.to_i/100.0] %> of purchase will be donated to Processing
+    </div>
+    <% end %>
   </h3>
 
+  <% if @paying %>
   <div id="payment-errors"></div>
-
-  <input type=hidden name=order[amount] id=order-email value=<%= @amount %>>
+  <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
+  <% else %>
+    <input type=hidden name=order[free] value="true">
+  <% end %>
 
   <div class="field">
     <label for="order-email">Email Address</label>
-    <input type="text" name="order[email]" id="order-email" value='sklise@gmail.com'>
+    <input type="text" name="order[email]" id="order-email">
   </div>
 
   <div class="field">
@@ -26,6 +33,7 @@
     <input type="text" name="order[last_name]" id="order-last-name">
   </div>
 
+  <% if @paying %>
   <div class="field">
     <label for="card-number">Credit Card Number</label>
     <input type="text" size=20 autocomplete=off id="card-number">
@@ -58,12 +66,17 @@
   <div id="stripe_error">
     <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
   </div>
+  <% end %>
+
+  <p>You will receive an email with a link to download the book after purchase.</p>
 
   <button type="submit" class="submit-button">Complete Purchase</button>
 </form>
 
+<% if @paying %>
 <div id="order-info">
   <p>Upon successful payment you will receive an email with a link to download your PDF.</p>
 
   <p>Payments handled securely with <a href="http://stripe.com">Stripe</a>.</p>
 </div>
+<% end %>

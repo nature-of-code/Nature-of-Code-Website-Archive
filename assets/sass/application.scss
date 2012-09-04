@@ -51,6 +51,10 @@ div, input, label {
   box-sizing: border-box;
 }
 
+p {
+  margin: 0.3em 0 0.8em;
+}
+
 #top {
   background-color: rgb(235,0,90);
   color: #ffffff;
@@ -226,6 +230,12 @@ h3 {
 
 #new-order {
   float: left;
+
+  &.centered {
+    float: none;
+    margin: 0 auto;
+  }
+
   &, div {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

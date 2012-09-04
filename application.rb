@@ -50,11 +50,10 @@ class NatureOfCode < Sinatra::Base
   post '/order' do
     @amount = params[:amount]
     @donation = params[:donation]
-    if @amount.to_f == 0.0
-      erb :order_no_stripe
-    else
-      erb :order
-    end
+    @amount = @amount.to_f
+    @paying = true unless @amount == 0.0
+
+    erb :order
   end
 
   get '/order' do
@@ -63,26 +62,40 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/purchase' do
-    # get the credit card details submitted by the form
-    token = params[:order][:token]
-    amount_dollars = (params[:order][:amount].to_f * 100).to_i
-
-    # create the charge on Stripe's servers - this will charge the user's card
-    charge = Stripe::Charge.create(
-      :amount => amount_dollars,
-      :currency => "usd",
-      :card => token,
-      :description => params[:order][:email]
-    )
-
     @order = Order.new(
+      amount: 0,
+      donation: 0,
       email: params[:order][:email],
-      stripe_id: charge.id,
-      donation: params[:order][:donation],
-      amount: params[:order][:amount],
       first_name: params[:order][:first_name],
       last_name: params[:order][:last_name])
-    @order.save
+
+    if params[:free] == 'true'
+      fetch = create_fetch_order({
+        first_name: @order.first_name,
+        last_name: @order.last_name,
+        email: @order.email
+      }, '001')
+      @order.fetch_id = fetch.id
+      @order.save
+    else
+      # get the credit card details submitted by the form
+      token = params[:order][:token]
+      amount_dollars = (params[:order][:amount].to_f * 100).to_i
+
+      # create the charge on Stripe's servers - this will charge the user's card
+      charge = Stripe::Charge.create(
+        :amount => amount_dollars,
+        :currency => "usd",
+        :card => token,
+        :description => params[:order][:email]
+      )
+
+      @order[:stripe_id] = charge.id
+      @order[:donation] = params[:order][:donation]
+      @order[:amount] = params[:order][:amount]
+      @order.save
+    end
+    erb :purchased
   end
 
   post '/deliver' do
