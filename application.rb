@@ -43,25 +43,18 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
-  before do
-    puts request[:SERVER_NAME]
-  end
-
   get '/' do
+    puts request
     File.read(File.join('public','index.html'))
   end
 
   post '/order' do
+    puts request
     @amount = params[:amount]
     @donation = params[:donation]
     @amount = @amount.to_f
     @paying = true unless @amount == 0.0
 
-    erb :order
-  end
-
-  get '/order' do
-    @amount = 10.00
     erb :order
   end
 
