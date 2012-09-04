@@ -44,7 +44,7 @@ DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
   before do
-    puts request['SERVER_NAME']
+    puts request[:SERVER_NAME]
   end
 
   get '/' do
