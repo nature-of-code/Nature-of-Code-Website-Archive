@@ -48,9 +48,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/order' do
-    puts "2" + request['SERVER_NAME']
-    puts "3" + request[:SERVER_NAME]
-    puts "4" + request["SERVER_NAME"]
     @amount = params[:amount]
     @donation = params[:donation]
     @amount = @amount.to_f
