@@ -44,12 +44,12 @@ DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
   get '/' do
-    puts request
+    puts request.inspect
     File.read(File.join('public','index.html'))
   end
 
   post '/order' do
-    puts request
+    puts request.inspect
     @amount = params[:amount]
     @donation = params[:donation]
     @amount = @amount.to_f
