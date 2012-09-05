@@ -35,7 +35,31 @@ class Order
   property :fetch_id, String
   property :amount, Float
   property :donation, Integer
-  property :donated, Boolean
+  property :donated, Boolean, default: false
+
+  def self.author_total
+    total = 0
+    all.each do |order|
+      total += (1 - order.donation.to_f/100.0) * order.amount
+    end
+    total
+  end
+
+  def self.donation_total
+    total = 0
+    all.each do |order|
+      total += (order.donation.to_f/100.0 * order.amount)
+    end
+    total
+  end
+
+  def donation_amount
+    amount * donation / 100.0
+  end
+
+  def author_amount
+    amount - donation_amount
+  end
 
 end
 
@@ -43,6 +67,22 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 class NatureOfCode < Sinatra::Base
+  helpers do
+
+    def protected!
+      unless authorized?
+        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        throw(:halt, [401, "Not authorized\n"])
+      end
+    end
+
+    def authorized?
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [ENV['ADMIN_USERNAME'], ENV['ADMIN_PASSWORD']]
+    end
+
+  end
+
   get '/' do
     File.read(File.join('public','index.html'))
   end
@@ -119,6 +159,18 @@ class NatureOfCode < Sinatra::Base
   get '/js/:file.js' do
     # path relative to /views
     coffee :"../assets/javascripts/#{params[:file]}"
+  end
+
+  get '/admin/?' do
+    protected!
+    @undonated = Order.all(:donated.not => true)
+    erb :dashboard
+  end
+
+  post '/admin/mark-paid/?' do
+    protected!
+    @orders = Order.all(donated: false).update(donated: true)
+    redirect '/admin'
   end
 
   # send email after payment
