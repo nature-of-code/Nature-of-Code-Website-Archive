@@ -9,7 +9,7 @@
   };
 
   sliderPosToDollar = function(sliderPos) {
-    return sliderPos * .25;
+    return sliderPos * .5;
   };
 
   calculateBreakdown = function() {
