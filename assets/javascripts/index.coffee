@@ -1,8 +1,15 @@
 defaultPrice = 10.00
 
-dollarToSliderPos = (dollar) -> dollar * 2
+dollarToSliderPos = (dollar) -> dollar * 4
 
-sliderPosToDollar = (sliderPos) -> sliderPos * .5
+sliderPosToDollar = (sliderPos) -> sliderPos * .25
+
+calculateBreakdown = ->
+  totalAmount = parseFloat $('#amount').val()
+  donationPercent = (parseFloat $('#percent').val()) / 100.0
+  donationDollars = totalAmount * donationPercent
+  $('#author-dollars').text("$#{(totalAmount - donationDollars).toFixed(2)}")
+  $('#donation-dollars').text("$#{donationDollars.toFixed(2)}")
 
 cleanDollarInput = (dollarInput) ->
   noDollar = dollarInput.replace('$','')
@@ -14,9 +21,18 @@ cleanDollarInput = (dollarInput) ->
 
 updateAmountFromSlider = (sliderPos) ->
   sliderAmount = sliderPosToDollar(sliderPos).toFixed(2)
-
   $('#display-amount').val("$"+sliderAmount)
   $('#amount').val(sliderAmount)
+  calculateBreakdown()
+  @
+
+updateAmountFromInput = ->
+  raw = $('#display-amount').val() || defaultPrice
+  newAmount = cleanDollarInput(raw)
+  $('#amount').val(newAmount)
+  $('#slider').slider('value',dollarToSliderPos(newAmount))
+  $(this).val('$'+newAmount)
+  calculateBreakdown()
   @
 
 updatePercentFromInput = (percentString) ->
@@ -29,11 +45,13 @@ updatePercentFromInput = (percentString) ->
   $('#percent-slider').slider('value',percent)
   $('#percent').val(percent)
   $('#display-percent').val(percent+'%')
+  calculateBreakdown()
   false
 
 updatePercentFromSlider = (sliderPos) ->
   $('#percent').val(sliderPos)
   $('#display-percent').val(sliderPos + '%')
+  calculateBreakdown()
   @
 
 jQuery ->
@@ -48,19 +66,11 @@ jQuery ->
     false
 
   $('#display-amount').blur ->
-    raw = $(this).val() || defaultPrice
-    newAmount = cleanDollarInput(raw)
-    $('#amount').val(newAmount)
-    $('#slider').slider('value',dollarToSliderPos(newAmount))
-    $(this).val('$'+newAmount)
+    updateAmountFromInput()
     false
 
-  $('#display-amount').change (event) ->
-    raw = $(this).val() || defaultPrice+''
-    newAmount = cleanDollarInput(raw)
-    $('#amount').val(newAmount)
-    $('#slider').slider('value',dollarToSliderPos(newAmount))
-    $(this).val('$'+newAmount)
+  $('#display-amount').change ->
+    updateAmountFromInput()
     false
 
   $('#percent-slider').slider({
