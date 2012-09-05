@@ -14,12 +14,15 @@ stripeResponseHandler = (status, response) ->
 
 setupForm = ->
   $('#new-order').submit (event) ->
-    $('.submit-button').attr('disabled',true)
-    Stripe.createToken {
-      number: $('#card-number').val()
-      cvc: $('#card-code').val()
-      expMonth: $('#card-month').val()
-      expYear: $('#card-year').val()
-      name: "#{$('#order-first-name').val()} #{$('#order-last-name').val()}"
-    }, stripeResponseHandler
+    if $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]+^/)
+      $('.submit-button').attr('disabled',true)
+      Stripe.createToken {
+        number: $('#card-number').val()
+        cvc: $('#card-code').val()
+        expMonth: $('#card-month').val()
+        expYear: $('#card-year').val()
+        name: "#{$('#order-first-name').val()} #{$('#order-last-name').val()}"
+      }, stripeResponseHandler
+    else
+      $('#payment-errors').text "Please enter an email address."
     false
