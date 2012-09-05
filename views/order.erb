@@ -1,3 +1,17 @@
+<% if !@paying %>
+<script>
+$(function(){
+  $('#new-order').submit(function(){
+    if($('#order-email').val().match(/\S+@\S+\.[a-zA-Z]+^/)) {
+
+    } else {
+      $('#payment-errors').text("Please enter an email address.");
+      return false;
+    }
+  });
+});
+</script>
+<% end %>
 <form id="new-order" method="post" action="/purchase" <% if !@paying %>class="centered"<% end %> >
   <h3>
     The Nature of Code PDF
@@ -9,17 +23,18 @@
     <% end %>
   </h3>
 
+  <div id="payment-errors"></div>
   <% if @paying %>
   <input type="hidden" id="order-stripe-card-token" name="order[token]">
-  <div id="payment-errors"></div>
   <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
+  <input type=hidden name=order[donation] value="<%= @donation %>">
   <% else %>
     <input type=hidden name=order[free] value="true">
   <% end %>
 
   <div class="field">
     <label for="order-email">Email Address</label>
-    <input type="text" name="order[email]" id="order-email">
+    <input type="email" name="order[email]" id="order-email">
   </div>
 
   <div class="field">

@@ -1,0 +1,12 @@
+<table>
+<% @undonated.each do |order| %>
+  <tr>
+    <td><%= order.amount %></td>
+    <td><%= order.donation_amount %></td>
+  </tr>
+<% end %>
+<tfoot>
+  <td><%= "$%.2f" % [@undonated.author_total] %></td>
+  <td><%= "$%.2f" % [@undonated.donation_total] %></td>
+</tfoot>
+</table>
