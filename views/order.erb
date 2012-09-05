@@ -13,6 +13,7 @@
   <input type="hidden" id="order-stripe-card-token" name="order[token]">
   <div id="payment-errors"></div>
   <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
+  <input type=hidden name=order[donation] value="<%= @donation %>">
   <% else %>
     <input type=hidden name=order[free] value="true">
   <% end %>
