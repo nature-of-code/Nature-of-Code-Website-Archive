@@ -139,6 +139,8 @@ class NatureOfCode < Sinatra::Base
     event = Stripe::Event.retrieve(event_json[:id])
     @order = Order.first(stripe_id: event.data.object[:id])
 
+    puts "Creating fetch order"
+    
     fetch = create_fetch_order({
       first_name: @order.first_name,
       last_name: @order.last_name,
