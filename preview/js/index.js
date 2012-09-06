@@ -54,7 +54,7 @@
 
   updatePercentFromInput = function(percentString) {
     var percent;
-    percent = parseInt(percentString.replace('%', '')) || 5;
+    percent = parseInt(percentString.replace('%', '')) || 10;
     if (percent < 0) {
       percent = 0;
     } else if (percent > 100) {
