@@ -97,6 +97,9 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/purchase' do
+
+    puts "Shiffman: purchasing"
+
     @order = Order.new(
       amount: 0,
       donation: 0,
@@ -134,13 +137,16 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/deliver' do
+    puts "Shiffman: delivering"
+
+
     event_json = JSON.parse(request.body.read, symbolize_names: true)
     # Get event from Stripe API to ensure validity.
     event = Stripe::Event.retrieve(event_json[:id])
     @order = Order.first(stripe_id: event.data.object[:id])
 
     puts "Creating fetch order"
-    
+
     fetch = create_fetch_order({
       first_name: @order.first_name,
       last_name: @order.last_name,
