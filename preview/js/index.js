@@ -77,13 +77,13 @@
   jQuery(function() {
     $('#display-percent').blur(function() {
       var raw;
-      raw = $(this).val() || 5;
+      raw = $(this).val() || 10;
       updatePercentFromInput(raw);
       return false;
     });
     $('#display-percent').change(function() {
       var raw;
-      raw = $(this).val() || 5;
+      raw = $(this).val() || 10;
       updatePercentFromInput(raw);
       return false;
     });
