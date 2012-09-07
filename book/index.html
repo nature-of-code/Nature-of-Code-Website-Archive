@@ -1,0 +1,376 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Document</title>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+			// $('code').each(function(){ inlineComments($(this)); });
+			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+		});
+	</script>
+	<script type="text/javascript" src="processingjs/processing.js"></script>
+	<link rel="stylesheet" href="stylesheets/fonts.css" type="text/css">
+	<link rel="stylesheet" href="stylesheets/html.css" type="text/css">
+	<link rel="stylesheet" href="stylesheets/code-html.css">
+</head>
+<body>
+	<div id="container">
+		<h1 id="the-nature-of-code">The Nature of Code</h1><h2 id=""></h2>
+<h2>Table of Contents</h2>
+
+<ul>
+
+  
+	<li><a href="chapter0.html#introduction">Introduction</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter0.html#i1-random-walks">I.1 Random Walks</a></li>
+		
+	   	<li><a href="chapter0.html#i2-the-random-walker-class">I.2 The Random Walker Class</a></li>
+		
+	   	<li><a href="chapter0.html#i3-probability-and-non-uniform-distributions">I.3 Probability and Non-Uniform Distributions</a></li>
+		
+	   	<li><a href="chapter0.html#i4-a-normal-distribution-of-random-numbers">I.4 A Normal Distribution of Random Numbers</a></li>
+		
+	   	<li><a href="chapter0.html#i5-a-custom-distribution-of-random-numbers">I.5 A Custom Distribution of Random Numbers</a></li>
+		
+	   	<li><a href="chapter0.html#i6-perlin-noise-a-smoother-approach">I.6 Perlin Noise (A Smoother Approach)</a></li>
+		
+	   	<li><a href="chapter0.html#i7-onward">I.7 Onward</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter1.html#chapter-1-vectors">Chapter 1.  Vectors</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter1.html#11-vectors-you-complete-me">1.1 Vectors, You Complete Me</a></li>
+		
+	   	<li><a href="chapter1.html#12-vectors-what-are-they-to-us-processing-programmers">1.2 Vectors: What are they to us Processing programmers?</a></li>
+		
+	   	<li><a href="chapter1.html#13-vector-addition">1.3 Vector Addition</a></li>
+		
+	   	<li><a href="chapter1.html#14-more-vector-math">1.4 More Vector Math</a></li>
+		
+	   	<li><a href="chapter1.html#15-vector-magnitude">1.5 Vector Magnitude</a></li>
+		
+	   	<li><a href="chapter1.html#16-normalizing-vectors">1.6 Normalizing Vectors</a></li>
+		
+	   	<li><a href="chapter1.html#17-vector-motion-velocity">1.7 Vector Motion: Velocity</a></li>
+		
+	   	<li><a href="chapter1.html#18-vector-motion-acceleration">1.8 Vector Motion: Acceleration</a></li>
+		
+	   	<li><a href="chapter1.html#19-static-vs-non-static-functions">1.9 Static vs. Non-Static Functions</a></li>
+		
+	   	<li><a href="chapter1.html#110-interactivity-with-acceleration">1.10 Interactivity with acceleration</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter2.html#chapter-2-forces">Chapter 2.  Forces</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter2.html#21-forces-and-newtons-laws-of-motion">2.1 Forces and Newton’s Laws of Motion</a></li>
+		
+	   	<li><a href="chapter2.html#22-forces-and-processingnewtons-second-law-as-a-function">2.2 Forces and Processing—Newton’s Second Law as a Function</a></li>
+		
+	   	<li><a href="chapter2.html#23-force-accumulation">2.3 Force Accumulation</a></li>
+		
+	   	<li><a href="chapter2.html#24-dealing-with-mass">2.4 Dealing with Mass</a></li>
+		
+	   	<li><a href="chapter2.html#25-creating-forces">2.5 Creating Forces</a></li>
+		
+	   	<li><a href="chapter2.html#26-gravity-on-earth-and-modeling-a-force">2.6 Gravity on Earth and Modeling a Force</a></li>
+		
+	   	<li><a href="chapter2.html#27-friction">2.7 Friction</a></li>
+		
+	   	<li><a href="chapter2.html#28-air-and-fluid-resistance">2.8 Air and Fluid Resistance</a></li>
+		
+	   	<li><a href="chapter2.html#29-gravitational-attraction">2.9 Gravitational Attraction</a></li>
+		
+	   	<li><a href="chapter2.html#210-everything-attracts-or-repels-everything">2.10 Everything Attracts (or Repels) Everything</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter3.html#chapter-3-oscillation">Chapter 3.  Oscillation</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter3.html#31-angles">3.1  Angles</a></li>
+		
+	   	<li><a href="chapter3.html#32-angular-motion">3.2 Angular Motion</a></li>
+		
+	   	<li><a href="chapter3.html#33-trigonometry">3.3 Trigonometry</a></li>
+		
+	   	<li><a href="chapter3.html#34-pointing-in-the-direction-of-movement">3.4 Pointing in the Direction of Movement</a></li>
+		
+	   	<li><a href="chapter3.html#35-polar-vs-cartesian-coordinates">3.5 Polar vs. Cartesian Coordinates</a></li>
+		
+	   	<li><a href="chapter3.html#36-oscillation-amplitude-and-period">3.6 Oscillation Amplitude and Period</a></li>
+		
+	   	<li><a href="chapter3.html#37-oscillation-with-angular-velocity">3.7 Oscillation with Angular Velocity</a></li>
+		
+	   	<li><a href="chapter3.html#38-waves">3.8 Waves</a></li>
+		
+	   	<li><a href="chapter3.html#39-trigonometry-and-forces-the-pendulum">3.9 Trigonometry and Forces: The Pendulum</a></li>
+		
+	   	<li><a href="chapter3.html#310-spring-forces">3.10 Spring Forces</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter4.html#chapter-4-particle-systems">Chapter 4.  Particle Systems</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter4.html#41-why-we-need-particle-systems">4.1 Why We Need Particle Systems</a></li>
+		
+	   	<li><a href="chapter4.html#42-a-single-particle">4.2 A Single Particle</a></li>
+		
+	   	<li><a href="chapter4.html#43-the-arraylist">4.3 The ArrayList</a></li>
+		
+	   	<li><a href="chapter4.html#44-the-particle-system-class">4.4 The Particle System Class</a></li>
+		
+	   	<li><a href="chapter4.html#45-a-system-of-systems">4.5 A System of Systems</a></li>
+		
+	   	<li><a href="chapter4.html#46-inheritance-and-polymorphism-an-introduction">4.6 Inheritance and Polymorphism: An Introduction</a></li>
+		
+	   	<li><a href="chapter4.html#47-inheritance-basics">4.7 Inheritance Basics</a></li>
+		
+	   	<li><a href="chapter4.html#48-particles-with-inheritance">4.8 Particles with Inheritance</a></li>
+		
+	   	<li><a href="chapter4.html#49-polymorphism-basics">4.9 Polymorphism Basics</a></li>
+		
+	   	<li><a href="chapter4.html#410-particle-systems-with-polymorphism">4.10 Particle Systems with Polymorphism</a></li>
+		
+	   	<li><a href="chapter4.html#411-particle-systems-with-forces">4.11 Particle Systems with Forces</a></li>
+		
+	   	<li><a href="chapter4.html#412-particle-systems-with-repellers">4.12 Particle Systems with Repellers</a></li>
+		
+	   	<li><a href="chapter4.html#413-image-textures-and-additive-blending">4.13 Image Textures and Additive Blending</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter5.html#chapter-5-physics-libraries">Chapter 5.  Physics Libraries</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter5.html#51-what-is-box2d-and-when-might-i-use-it">5.1 What is Box2D and When Might I Use It?</a></li>
+		
+	   	<li><a href="chapter5.html#52-how-do-i-get-box2d-in-processing">5.2 How do I get Box2D in Processing?</a></li>
+		
+	   	<li><a href="chapter5.html#53-box2d-basics">5.3 Box2D Basics</a></li>
+		
+	   	<li><a href="chapter5.html#54-living-in-a-box2d-world">5.4 Living in a Box2D World</a></li>
+		
+	   	<li><a href="chapter5.html#55-building-a-box2d-body">5.5 Building a Box2D Body</a></li>
+		
+	   	<li><a href="chapter5.html#56-threes-company-bodies-and-shapes-and-fixtures">5.6 Three’s Company: Bodies and Shapes and Fixtures</a></li>
+		
+	   	<li><a href="chapter5.html#57-box2d-and-processing-reunited-and-it-feels-so-good">5.7  Box2D and Processing: Reunited and It Feels So Good</a></li>
+		
+	   	<li><a href="chapter5.html#58-fixed-box2d-objects">5.8  Fixed Box2D Objects</a></li>
+		
+	   	<li><a href="chapter5.html#59-a-curvy-boundary">5.9  A Curvy Boundary</a></li>
+		
+	   	<li><a href="chapter5.html#510-complex-forms">5.10  Complex Forms</a></li>
+		
+	   	<li><a href="chapter5.html#511-feeling-attachedbox2d-joints">5.11 Feeling Attached—Box2D Joints</a></li>
+		
+	   	<li><a href="chapter5.html#512-bringing-it-all-back-home-to-forces">5.12 Bringing It All Back Home to Forces</a></li>
+		
+	   	<li><a href="chapter5.html#513-collision-events">5.13 Collision Events</a></li>
+		
+	   	<li><a href="chapter5.html#514-a-brief-interludeintegration-methods">5.14 A Brief Interlude—Integration Methods</a></li>
+		
+	   	<li><a href="chapter5.html#515-verlet-physics-with-toxiclibs">5.15 Verlet Physics with toxiclibs</a></li>
+		
+	   	<li><a href="chapter5.html#516-particles-and-springs-in-toxiclibs">5.16 Particles and Springs in Toxiclibs</a></li>
+		
+	   	<li><a href="chapter5.html#517-putting-it-all-together-a-simple-interactive-spring">5.17 Putting It All Together: A Simple Interactive Spring</a></li>
+		
+	   	<li><a href="chapter5.html#518-connected-systems-part-i-string">5.18 Connected Systems Part I: String</a></li>
+		
+	   	<li><a href="chapter5.html#519-connected-systems-part-ii-force-directed-graph">5.19 Connected Systems Part II: Force-Directed Graph</a></li>
+		
+	   	<li><a href="chapter5.html#520-attraction-and-repulsion-behaviors">5.20 Attraction and Repulsion Behaviors</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter6.html#chapter-6-autonomous-agents">Chapter 6.  Autonomous Agents</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter6.html#61-forces-from-within">6.1  Forces from Within</a></li>
+		
+	   	<li><a href="chapter6.html#62-vehicles-and-steering">6.2  Vehicles and Steering</a></li>
+		
+	   	<li><a href="chapter6.html#63-the-steering-force">6.3  The Steering Force</a></li>
+		
+	   	<li><a href="chapter6.html#64-arriving-behavior">6.4  Arriving Behavior</a></li>
+		
+	   	<li><a href="chapter6.html#65-your-own-desires-desired-velocity">6.5 Your Own Desires: Desired Velocity</a></li>
+		
+	   	<li><a href="chapter6.html#66-flow-fields">6.6  Flow Fields</a></li>
+		
+	   	<li><a href="chapter6.html#67-the-dot-product">6.7  The Dot Product</a></li>
+		
+	   	<li><a href="chapter6.html#68-path-following">6.8  Path Following</a></li>
+		
+	   	<li><a href="chapter6.html#69-path-following-with-multiple-segments">6.9 Path Following with Multiple Segments</a></li>
+		
+	   	<li><a href="chapter6.html#610-complex-systems">6.10  Complex Systems</a></li>
+		
+	   	<li><a href="chapter6.html#611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</a></li>
+		
+	   	<li><a href="chapter6.html#612-combinations">6.12  Combinations</a></li>
+		
+	   	<li><a href="chapter6.html#613-flocking">6.13  Flocking</a></li>
+		
+	   	<li><a href="chapter6.html#614-algorithmic-efficiency-or-why-does-my-run-so-slowly">6.14  Algorithmic Efficiency (or: Why does my $@(*%! run so slowly?)</a></li>
+		
+	   	<li><a href="chapter6.html#615-a-few-last-notes-optimization-tricks">6.15  A Few Last Notes: Optimization Tricks</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter7.html#chapter-7-cellular-automata">Chapter 7.  Cellular Automata</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter7.html#71-what-is-a-cellular-automaton">7.1 What Is a Cellular Automaton?</a></li>
+		
+	   	<li><a href="chapter7.html#72-elementary-cellular-automata">7.2  Elementary Cellular Automata</a></li>
+		
+	   	<li><a href="chapter7.html#73-how-to-program-an-elementary-ca">7.3 How to Program an Elementary CA</a></li>
+		
+	   	<li><a href="chapter7.html#74-drawing-an-elementary-ca">7.4 Drawing an Elementary CA</a></li>
+		
+	   	<li><a href="chapter7.html#75-wolfram-classification">7.5 Wolfram Classification</a></li>
+		
+	   	<li><a href="chapter7.html#76-the-game-of-life">7.6 The Game of Life</a></li>
+		
+	   	<li><a href="chapter7.html#77-programming-the-game-of-life">7.7  Programming the Game of Life</a></li>
+		
+	   	<li><a href="chapter7.html#78-object-oriented-cells">7.8 Object-Oriented Cells</a></li>
+		
+	   	<li><a href="chapter7.html#79-variations-of-traditional-ca">7.9 Variations of Traditional CA</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter8.html#chapter-8-fractals">Chapter 8.  Fractals</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter8.html#81-what-is-a-fractal">8.1  What Is a Fractal?</a></li>
+		
+	   	<li><a href="chapter8.html#82-recursion">8.2 Recursion</a></li>
+		
+	   	<li><a href="chapter8.html#83-the-cantor-set-with-a-recursive-function">8.3  The Cantor Set with a Recursive Function</a></li>
+		
+	   	<li><a href="chapter8.html#84-the-koch-curve-and-the-arraylist-technique">8.4  The Koch Curve and the ArrayList Technique</a></li>
+		
+	   	<li><a href="chapter8.html#85-trees">8.5  Trees</a></li>
+		
+	   	<li><a href="chapter8.html#86-l-systems">8.6  L-Systems</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter9.html#chapter-9-the-evolution-of-code">Chapter 9.  The Evolution of Code</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter9.html#91-genetic-algorithms-inspired-by-actual-events">9.1  Genetic Algorithms: Inspired by Actual Events</a></li>
+		
+	   	<li><a href="chapter9.html#92-why-use-genetic-algorithms">9.2 Why Use Genetic Algorithms?</a></li>
+		
+	   	<li><a href="chapter9.html#93-darwinian-natural-selection">9.3  Darwinian Natural Selection</a></li>
+		
+	   	<li><a href="chapter9.html#94-the-genetic-algorithm-part-i-creating-a-population">9.4 The Genetic Algorithm, Part I: Creating a Population</a></li>
+		
+	   	<li><a href="chapter9.html#95-the-genetic-algorithm-part-ii-selection">9.5 The Genetic Algorithm, Part II: Selection</a></li>
+		
+	   	<li><a href="chapter9.html#96-the-genetic-algorithm-part-iii-reproduction">9.6 The Genetic Algorithm, Part III: Reproduction</a></li>
+		
+	   	<li><a href="chapter9.html#97-code-for-creating-the-population">9.7  Code for Creating the Population</a></li>
+		
+	   	<li><a href="chapter9.html#98-genetic-algorithms-putting-it-all-together">9.8  Genetic Algorithms: Putting It All Together</a></li>
+		
+	   	<li><a href="chapter9.html#99-genetic-algorithms-make-them-your-own">9.9  Genetic Algorithms: Make Them Your Own</a></li>
+		
+	   	<li><a href="#key-2-the-fitness-function">Key #2: The fitness function</a></li>
+		
+	   	<li><a href="chapter9.html#910-evolving-forces-smart-rockets">9.10  Evolving Forces: Smart Rockets</a></li>
+		
+	   	<li><a href="chapter9.html#911-smart-rockets-putting-it-all-together">9.11 Smart Rockets: Putting It All Together</a></li>
+		
+	   	<li><a href="chapter9.html#912-smarter-rockets">9.12 Smarter Rockets</a></li>
+		
+	   	<li><a href="chapter9.html#913-interactive-selection">9.13 Interactive Selection</a></li>
+		
+	   	<li><a href="chapter9.html#914-ecosystem-simulation">9.14  Ecosystem Simulation</a></li>
+		
+		</ul>
+	
+
+
+  
+	<li><a href="chapter10.html#chapter-10-neural-networks">Chapter 10.  Neural Networks</a></li>
+	
+		<ul>
+		
+	   	<li><a href="chapter10.html#101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</a></li>
+		
+	   	<li><a href="chapter10.html#102-the-perceptron">10.2  The Perceptron</a></li>
+		
+	   	<li><a href="chapter10.html#103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</a></li>
+		
+	   	<li><a href="chapter10.html#104-coding-the-perceptron">10.4  Coding the Perceptron</a></li>
+		
+	   	<li><a href="chapter10.html#105-a-steering-perceptron">10.5  A Steering Perceptron</a></li>
+		
+	   	<li><a href="chapter10.html#106-its-a-network-remember">10.6  It’s a “Network,” Remember?</a></li>
+		
+	   	<li><a href="chapter10.html#107-neural-network-diagram">10.7  Neural Network Diagram</a></li>
+		
+	   	<li><a href="chapter10.html#108-animating-feed-forward">10.8  Animating Feed Forward</a></li>
+		
+		</ul>
+	
+
+
+</ul>
+	</div>
+</body>
+</html>

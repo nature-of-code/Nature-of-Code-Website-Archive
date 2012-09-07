@@ -1,0 +1,460 @@
+/* Skeleton
+_____________________________________________________________________________ */
+
+body {
+  font-size: 13px;
+	font-family: "Georgia", serif;
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	padding-top: 2.5em;
+	width: 800px;
+	margin: 0 auto;
+	line-height: 1.317em;
+/*	background-image: url('../imgs/vertical_grid.jpg');*/
+}
+
+
+
+h1 {
+	font-size: 320%;
+	line-height: 1em;
+	font-style: normal;
+	margin-bottom:1.3em;
+	margin-top: 0.4em;
+}
+
+h2 {
+	font-size: 270%;
+	line-height: 1em;
+	font-style: normal;
+	margin-top: 3.5em;
+	margin-bottom: 0.3em;
+	color: #202020;
+}
+
+h3 {
+	font-size: 150%;
+	color: #404040;
+	margin-top: 2em;
+}
+
+h4,h5 {
+	font-size: 125%;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'ProximaNovaA-Bold';
+	color: #222;
+	font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+}
+
+h3, h4, h5, h6 {
+  line-height: 1.317em;
+  margin: 1.6em 0 0.5em;
+}
+
+p {
+	font-size: 120%;
+  line-height: 1.618em;
+	letter-spacing:0.03em;
+}
+
+/* Tables
+_____________________________________________________________________________ */
+
+table {
+	font-size: 8pt;
+	font-family: "ProximaNova-Regular";
+	color: #606060;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+	margin: 3em 0;
+	table-layout: fixed;
+	border: 1px solid #D1D1D1;
+}
+
+table td, table th {
+	padding: 0.5em;
+}
+
+/* weird fix. setting font size 1pt up in header to make it look the same size */
+table th {
+	color: #404040;
+	font-size: 9pt;
+	border: 1px solid #D1D1D1;
+	background-color: rgb(92%,92%,92%);
+	font-family: "ProximaNova-Bold";
+	font-style: normal;
+}
+
+table td {
+	border: 1px solid #D1D1D1;
+}
+
+table td p {
+	margin: 0;
+}
+
+table.code pre {
+  font-size: 0.9em;
+}
+
+table.code td {
+	text-align: left;
+}
+
+/* Styles
+_____________________________________________________________________________ */
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+/* Default Elements
+_____________________________________________________________________________ */
+
+blockquote {
+	font-size: 1.8em;
+	margin: 0em 4em 2em 4em;
+	font-style: italic;
+	line-height: 1.65em;
+	position: relative;
+}
+
+blockquote span.attribution {
+	display: block;
+	font-style: normal;
+	font-size: 0.6em;
+}
+
+blockquote .quote_start {
+	position: absolute;
+	top: 0.1em;
+	left: -0.5em;
+	font-size: 4em;
+	font-family: 'Akkurat-Bold', Helvetica;
+}
+
+canvas {
+	border: 1px solid gray;
+	//margin-bottom: 1.15em;
+	//border-left: 0.4em solid #272727;
+}
+
+/* Span Classes Styling
+_____________________________________________________________________________ */
+
+span.highlight {
+	background-color: #E9E9E9;
+	font-size: 10pt;
+	display: block;
+	margin: 2em 1em;
+	padding: 0.8em;
+	text-align: center;
+}
+
+/* .example = exercises
+	 .tip = projects
+	 .note = breakout boxes
+*/
+
+.note h2, .tip, .example h2,
+.note h3, .tip h3, .example h3,
+.note h4, .tip h4, .example h4 {
+	font-size: 12pt;
+	color: #191919;
+	margin-bottom: 0.3em;
+	font-style: normal;
+	font-family: 'ProximaNova-Bold';
+}
+
+/* == BREAKOUT BOXES */
+.note {
+	font-size: 10pt;
+	color: #191919;
+	padding: 1.4em 1.5em;
+	margin: 1.15em 0;
+	background-color: #E9E9E9;
+}
+
+/* == EXERCISES */
+div.example {
+	background-color: rgb(112, 115, 115);
+  color: #ffffff;
+  padding: 3em 1.5em 1em;
+	position: relative;
+  margin: 1.15em 0;
+	overflow-y:auto;
+}
+
+div.example h3[id],
+div.example h4[id],
+div.example h5[id],
+div.example h6[id] {
+  text-align: right;
+  margin: 1em 0.9em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+div.example * {
+  color: #ffffff;
+}
+
+/* == PROJECTS */
+.tip {
+	padding: 0.7em 1.5em;
+	margin: 1.15em 0;
+	background-color: #E9E9E9;
+}
+
+.note h2:first-child, .tip h2:first-child, .example h2:first-child,
+.note h3:first-child, .tip h3:first-child, .example h3:first-child,
+.note h4:first-child, .tip h4:first-child, .example h4:first-child,
+.note p:first-child, .tip p:first-child, .example p:first-child {
+	margin-top: 0;
+}
+
+.note p:last-child, .tip p:last-child, .example p:last-child {
+	margin-bottom: 0;
+}
+
+/* Style functions */
+.function, .klass, .var, .mono, .formula{
+    font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+    font-size: 1em;
+	color: #00000;
+}
+.mono, .formula{
+    font-weight: bold;
+}
+
+.formula{
+    margin-left: 2em;
+}
+/* Style note to self */
+.notetoself {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+/* Style example heading */
+span.example {
+  font-family: "ProximaNova-Bold";
+  background-color: #CACCCB;
+  clear: both;
+  display: block;
+  font-size:1em;
+  padding: 0.7em 1em;
+}
+
+/* Image Classes
+_____________________________________________________________________________ */
+
+img {
+	width: 100%;
+	margin: 0;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  max-width: 100%;
+}
+
+.screenshot img {
+	width: 100%;
+	margin: 0px;
+	//-webkit-box-shadow: 1px 1px 2px gray;
+  	border:1px solid gray;
+	// Need a magic solution for border side borders to be partial, not extend all the way to top
+}
+
+.image-container .caption {
+  color: #222;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 100%; /* 100% == 13px when not inside a p tag */
+  border: 0;
+}
+
+.half-width,
+.half-width-right,
+.half-width-right-border {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  position: relative;
+  width: 48%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.half-width {
+  float: left;
+  margin-right: 2em;
+}
+
+.half-width-right,
+.half-width-right-border {
+  float: right;
+  margin-left: 2em;
+}
+
+.half-width-right-border img {
+  border:1px solid gray;
+}
+
+.two-col,
+.two-col-borderless,
+.three-col
+{
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: 1em;
+  //margin-right: 1em;
+  float: left;
+}
+
+.two-col img,
+.two-col canvas,
+.two-col-borderless canvas,
+.three-col img,
+.three-col canvas
+{
+  width: 100%;
+  max-width: 100%;
+  border:1px solid gray;
+  //-webkit-box-shadow: 1px 1px 2px gray;
+}
+
+.two-col-borderless img {
+  border:0px solid gray;
+}
+
+.three-col {
+  width: 33%;
+}
+
+
+/* Code Formatting
+_____________________________________________________________________________ */
+
+pre {
+	width: 100%;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.source-code {
+  border-left: 0.4em solid #272727;
+  margin-bottom: 2em;
+  padding: 0.7em 1.5em;
+  background-color: #F4F4F4;
+  position: relative;
+  clear: both;
+}
+
+.source-code a.toggle {
+  font-family: 'Helvetica', Arial, sans-serif;
+  position: absolute;
+  right: 0.8em;
+  bottom: -1.8em;
+  margin: 0;
+  font-size: 0.8em;
+  color: #656565;
+  z-index:1;
+}
+
+.note .source-code,
+.example .source-code,
+.tip .source-code {
+  border-left: none;
+}
+
+/* Div wrapper for code blocks */
+.code-block {
+  font-size: 90%;
+  line-height: 1.4em;
+  overflow: auto;
+  position: relative;
+}
+
+pre {
+  /*line-height: 1.4em;*/
+}
+
+.code-block * {
+  position: relative;
+}
+
+/* Wrapper for every pairing of code and comment.
+Used to catch the .code-comment-line inside of
+a relatively positioned parent. */
+.code-comment-pair {
+  clear: both;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.code-comment-line {
+  border-top: 1px dashed #C7C7C7;
+  display: block;
+  height: 2px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+}
+
+/* Div wrapper for code comments */
+.code-comment {
+  clear: right;
+  color: #444;
+  font-style: bold;
+  display: block;
+  float: right;
+  font-family: sans-serif;
+  width: 300px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 0.0em;
+}
+
+/* The code goes in here. */
+.code-block code {
+  clear: left;
+  display: block;
+}
+
+.source-code textarea {
+  background-color: #f0f0f0;
+  display: none;
+  width: 100%;
+}
+
+/* CSS for some lists */
+.list h4, .table h4 {
+  clear: none;
+}
+
