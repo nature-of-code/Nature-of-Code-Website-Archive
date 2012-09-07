@@ -18,7 +18,7 @@ def create_fetch_order(orderer, item)
     first_name:   orderer[:first_name],
     last_name:    orderer[:last_name],
     email:        orderer[:email],
-    order_items:  [{sku: item}]
+    order_items:  [{sku: item, price:orderer[:amount]}]
   )
 end
 
@@ -151,7 +151,8 @@ class NatureOfCode < Sinatra::Base
     fetch = create_fetch_order({
       first_name: @order.first_name,
       last_name: @order.last_name,
-      email: @order.email
+      email: @order.email,
+      amount: @order.amount
     }, '001')
 
     @order.fetch_id = fetch.id
