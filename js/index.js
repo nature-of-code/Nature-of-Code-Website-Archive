@@ -5,11 +5,11 @@
   defaultPrice = 10.00;
 
   dollarToSliderPos = function(dollar) {
-    return dollar * 2;
+    return dollar * 4;
   };
 
   sliderPosToDollar = function(sliderPos) {
-    return sliderPos * .5;
+    return sliderPos * .25;
   };
 
   calculateBreakdown = function() {
@@ -54,7 +54,7 @@
 
   updatePercentFromInput = function(percentString) {
     var percent;
-    percent = parseInt(percentString.replace('%', '')) || 10;
+    percent = parseInt(percentString.replace('%', '')) || 5;
     if (percent < 0) {
       percent = 0;
     } else if (percent > 100) {
@@ -75,15 +75,16 @@
   };
 
   jQuery(function() {
+    $('.eml').html("<a href='ma" + "il" + "to:dan" + "iel" + "@" + "shiffman.net'>daniel" + "@shi" + "ffman" + ".net</a>");
     $('#display-percent').blur(function() {
       var raw;
-      raw = $(this).val() || 10;
+      raw = $(this).val() || 5;
       updatePercentFromInput(raw);
       return false;
     });
     $('#display-percent').change(function() {
       var raw;
-      raw = $(this).val() || 10;
+      raw = $(this).val() || 5;
       updatePercentFromInput(raw);
       return false;
     });
@@ -96,7 +97,7 @@
       return false;
     });
     $('#percent-slider').slider({
-      value: 10,
+      value: 5,
       animate: true,
       slide: function(e, ui) {
         return updatePercentFromSlider(ui.value);

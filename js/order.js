@@ -21,7 +21,7 @@
 
   setupForm = function() {
     return $('#new-order').submit(function(event) {
-      if ($('#order-email').val().match(/\S+@\S+\.[a-zA-Z]+^/)) {
+      if ($('#order-email').val().match(/\S+?@\S+?\.[a-zA-Z]{2,}$/)) {
         $('.submit-button').attr('disabled', true);
         Stripe.createToken({
           number: $('#card-number').val(),
