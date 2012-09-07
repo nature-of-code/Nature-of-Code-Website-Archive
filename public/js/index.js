@@ -5,11 +5,11 @@
   defaultPrice = 10.00;
 
   dollarToSliderPos = function(dollar) {
-    return dollar * 2;
+    return dollar * 4;
   };
 
   sliderPosToDollar = function(sliderPos) {
-    return sliderPos * .5;
+    return sliderPos * .25;
   };
 
   calculateBreakdown = function() {
@@ -75,6 +75,7 @@
   };
 
   jQuery(function() {
+    $('.eml').html("<a href='ma" + "il" + "to:dan" + "iel" + "@" + "shiffman.net'>daniel" + "@shi" + "ffman" + ".net</a>");
     $('#display-percent').blur(function() {
       var raw;
       raw = $(this).val() || 5;
