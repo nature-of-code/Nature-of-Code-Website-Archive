@@ -55,6 +55,11 @@ updatePercentFromSlider = (sliderPos) ->
   @
 
 jQuery ->
+  # Replace email
+  $('.eml').html("<a href='ma"+"il"+"to:dan"+"iel"+"@"+"shiffman.net'>daniel" +
+    "@shi" +"ffman"+".net</a>");
+
+
   $('#display-percent').blur ->
     raw = $(this).val() || 5
     updatePercentFromInput(raw)
