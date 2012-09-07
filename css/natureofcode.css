@@ -93,7 +93,7 @@ p {
   padding: 1em 0; }
 
 #bottom {
-  padding: 1em 0; }
+  padding: 1em 0 3em; }
 
 #header, #content, #footer {
   clear: both;
