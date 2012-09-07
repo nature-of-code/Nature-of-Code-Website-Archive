@@ -84,7 +84,8 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/' do
-    File.read(File.join('public','index.html'))
+    # File.read(File.join('public','index.html'))
+    redirect 'http://natureofcode.com'
   end
 
   post '/order' do
