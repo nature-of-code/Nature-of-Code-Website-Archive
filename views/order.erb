@@ -2,12 +2,12 @@
 <script>
 $(function(){
   $('#new-order').submit(function(){
-    /*if($('#order-email').val().match(/\S+@\S+\.[a-zA-Z]+^/)) {
-
-    } else {
+    match = $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]{2,}$/);
+    console.log(!match);
+    if(!match) {
       $('#payment-errors').text("Please enter an email address.");
       return false;
-    }*/
+    }
   });
 });
 </script>
