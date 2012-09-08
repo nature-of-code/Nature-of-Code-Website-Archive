@@ -85,12 +85,15 @@ $(function(){
   <p>You will receive an email with a link to download the book after purchase.</p>
 
   <button type="submit" class="submit-button">Complete Purchase</button>
+
+  <p class="caveat">(If you've stumbled your way here, you are viewing a "preview" of my book purchasing site. You can buy an advance draft of the book here and you will receive updates as I make revisions and publish the finished version.)</a>
+
 </form>
 
 <% if @paying %>
 <div id="order-info">
   <p>Upon successful payment you will receive an email with a link to download your PDF.</p>
 
-  <p>Payments handled securely with <a href="http://stripe.com">Stripe</a>.</p>
+  <p>Payments handled securely with <a href="http://stripe.com">Stripe</a>.  PDF delivered via <a href="http://www.fetchapp.com/">FetchApp</a>.</p>
 </div>
 <% end %>
