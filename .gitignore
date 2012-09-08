@@ -15,3 +15,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Adding DS_Store
+.DS_Store
