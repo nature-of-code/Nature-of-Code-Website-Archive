@@ -166,11 +166,6 @@ class NatureOfCode < Sinatra::Base
     scss :"../assets/sass/application"
   end
 
-  get '/js/:file.js' do
-    # path relative to /views
-    coffee :"../assets/javascripts/#{params[:file]}"
-  end
-
   get '/admin/?' do
     protected!
     @undonated = Order.all(:donated.not => true)

@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'thin'
 gem 'json'
-gem 'coffee-script'
 gem 'sass'
 gem 'pg'
 gem 'fetchapp-api-ruby' # https://github.com/getsy/fetchapp-api-ruby
