@@ -5,11 +5,11 @@
   defaultPrice = 10.00;
 
   dollarToSliderPos = function(dollar) {
-    return dollar * 4;
+    return dollar * 2;
   };
 
   sliderPosToDollar = function(sliderPos) {
-    return sliderPos * .25;
+    return sliderPos * .5;
   };
 
   calculateBreakdown = function() {
