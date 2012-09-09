@@ -39,6 +39,17 @@ class Order
 
   property :created_at, DateTime
 
+  def self.fees_total
+    total = 0
+    all.each do |order|
+      if order.amount > 0
+        # Subtract Stripe fee as well as donation
+        total += 0.029 * order.amount + 0.30
+      end
+    end
+    total
+  end
+
   def self.author_total
     total = 0
     all.each do |order|
@@ -193,9 +204,6 @@ class NatureOfCode < Sinatra::Base
     redirect '/admin'
   end
 
-
-
   # send email after payment
   # Resend email from Fetch if order exists
-  # admin page for donations
 end

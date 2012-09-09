@@ -32,9 +32,33 @@
     </div>
 
     <div>
+      <label>Stripe Fees</label>
+      <%= "$%.2f" % @orders.fees_total %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
       <label>Average Price Paid</label>
       <%= "$%.2f" % @paid.avg(:amount) %>
     </div>
+
+    <div>
+      <label>Average Donation</label>
+      <%= "$%.2f" % [@paid.donation_total / @paid.length] %>
+    </div>
+
+    <div>
+      <label>Biggest Purchase</label>
+      <%= "$%.2f" % @paid.max(:amount) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h4>Amount to be Donated: <%= "$%.2f" % @undonated.donation_total %></h4>
+    <form action="/admin/mark-paid" method="post">
+      <input type="submit" class="submit-button" value="Mark As Donated">
+    </form>
   </div>
 </div>
 
@@ -48,7 +72,7 @@
     <th>Date</th>
   </thead>
   <tbody>
-<% @undonated.each do |order| %>
+<% @orders.each do |order| %>
   <tr>
     <td><%= "$%.2f" % order.amount %></td>
     <td><%= "$%.2f" % order.donation_amount %></td>
