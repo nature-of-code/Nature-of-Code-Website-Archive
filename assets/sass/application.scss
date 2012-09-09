@@ -61,7 +61,7 @@ p {
 }
 
 #middle {
-  padding: 1em 0;
+  padding: 0 0 1em;
 }
 
 #bottom {
@@ -79,6 +79,18 @@ p {
 #header {
   text-align: center;
   text-transform: uppercase;
+}
+
+#secure {
+  background-color: #ffedad;
+  margin: 0 0 1em;
+
+  p {
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 900px;
+  }
 }
 
 #content {

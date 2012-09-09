@@ -35,6 +35,11 @@
   </div>
 
   <div id="middle">
+    <% if @paying %>
+    <div id="secure">
+      <p>Credit card information encrypted and processed securely with <a href="https://stripe.com">Stripe</a>.</p>
+    </div>
+    <% end %>
     <div id="content">
     <%= yield %>
     </div>
