@@ -168,7 +168,8 @@ class NatureOfCode < Sinatra::Base
 
   get '/admin/?' do
     protected!
-    @undonated = Order.all(:donated.not => true)
+    @orders = Order.all
+    @undonated = @orders.all(:donated.not => true)
     erb :dashboard
   end
 
