@@ -181,6 +181,7 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/admin/orders.csv' do
+    protected!
     content_type :text
     @orders = Order.all
     erb :orders_csv, layout:false
