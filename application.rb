@@ -100,8 +100,8 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/' do
-    # File.read(File.join('public','index.html'))
-    redirect 'http://natureofcode.com'
+    File.read(File.join('public','index.html'))
+    # redirect 'http://natureofcode.com'
   end
 
   post '/order' do
@@ -117,12 +117,17 @@ class NatureOfCode < Sinatra::Base
 
     puts "Shiffman: purchasing"
 
+    email_parts = params[:order][:email].split('@')
+
+    first_name = params[:order][:first_name].length > 0 ? params[:order][:first_name] : email_parts[0]
+    last_name = params[:order][:last_name].length > 0 ? params[:order][:last_name] : email_parts[0]
+
     @order = Order.new(
       amount: 0,
       donation: 0,
       email: params[:order][:email],
-      first_name: params[:order][:first_name],
-      last_name: params[:order][:last_name])
+      first_name: first_name,
+      last_name: last_name)
 
     if params[:order][:free] == 'true'
       fetch = create_fetch_order({
