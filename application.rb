@@ -180,11 +180,19 @@ class NatureOfCode < Sinatra::Base
     erb :dashboard
   end
 
+  get '/admin/orders.csv' do
+    content_type :text
+    @orders = Order.all
+    erb :orders_csv, layout:false
+  end
+
   post '/admin/mark-paid/?' do
     protected!
     @orders = Order.all(donated: false).update(donated: true)
     redirect '/admin'
   end
+
+
 
   # send email after payment
   # Resend email from Fetch if order exists
