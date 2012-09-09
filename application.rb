@@ -37,6 +37,8 @@ class Order
   property :donation, Integer
   property :donated, Boolean, default: false
 
+  property :created_at, DateTime
+
   def self.author_total
     total = 0
     all.each do |order|
@@ -170,6 +172,8 @@ class NatureOfCode < Sinatra::Base
     protected!
     @orders = Order.all
     @undonated = @orders.all(:donated.not => true)
+    @paid = @orders.all(:amount.not => 0.0)
+    @free = @orders.all(:amount => 0.0)
     erb :dashboard
   end
 
