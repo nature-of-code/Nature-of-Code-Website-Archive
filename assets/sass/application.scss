@@ -374,3 +374,70 @@ h3 {
 }
 
 @import "jqueryui";
+
+
+// ADMIN
+//_____________________________________________________________________________
+#orders-breakdown {
+  background-color: #fceab6;
+  font-family: "Helvetica", sans-serif;
+  font-weight: bold;
+  margin: 20px 0 30px;
+  padding: 0 20px;
+  overflow-y: auto;
+  width: 100%;
+
+  .row {
+    margin: 20px 0;
+    text-align: center;
+
+    label {
+      font-weight: normal;
+      clear: both;
+      color: #999;
+      display: block;
+      font-size: 13px;
+      margin: 0 0 10px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .row:nth-child(1) {
+    border-bottom: 1px solid rgba(127,127,127,0.3);
+
+    div {
+      display: block;
+      float: left;
+      font-size: 40px;
+      padding: 10px 0 25px;
+      position: relative;
+      width: 33.33333333333%;
+    }
+  }
+
+  .row:nth-child(2) div {
+    display: block;
+    float: left;
+    font-size: 30px;
+    width: 25%;
+  }
+}
+
+#order-table {
+  font-family: "Lucida Grande", "Helvetica", sans-serif;
+  font-size: 14px;
+  width: 100%;
+
+  tr:nth-child(2n) {
+    background-color: #ededed;
+  }
+
+  td {
+    padding: 4px 8px;
+    &:nth-child(1), &:nth-child(2) {
+      text-align: right;
+      width: 90px;
+    }
+  }
+}

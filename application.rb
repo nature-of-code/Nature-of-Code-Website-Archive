@@ -42,7 +42,10 @@ class Order
   def self.author_total
     total = 0
     all.each do |order|
-      total += (1 - order.donation.to_f/100.0) * order.amount
+      if order.amount > 0
+        # Subtract Stripe fee as well as donation
+        total += (1 - order.donation.to_f/100.0 - 0.029) * order.amount - 0.30
+      end
     end
     total
   end

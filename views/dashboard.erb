@@ -1,12 +1,61 @@
-<table>
+
+<div id="orders-breakdown">
+  <div class="row">
+    <div>
+      <label>Total Orders</label>
+      <%= @orders.length %>
+    </div>
+    <div>
+      <label>Paid</label>
+      <%= @paid.length %>
+    </div>
+    <div>
+      <label>Free</label>
+      <%= @free.length %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label>Total Revenue</label>
+      <%= "$%.2f" % [@orders.sum(:amount)] %>
+    </div>
+
+    <div>
+      <label>Net to Author</label>
+      <%= "$%.2f" % [@orders.author_total] %>
+    </div>
+
+    <div>
+      <label>Total Donations</label>
+      <%= "$%.2f" % [@orders.donation_total] %>
+    </div>
+
+    <div>
+      <label>Average Price Paid</label>
+      <%= "$%.2f" % @paid.avg(:amount) %>
+    </div>
+  </div>
+</div>
+
+<table id="order-table">
+  <thead>
+    <th>To Author</th>
+    <th>Donation</th>
+    <th>Order Email</th>
+    <th>Date</th>
+  </thead>
+  <tbody>
 <% @undonated.each do |order| %>
   <tr>
-    <td><%= order.amount %></td>
-    <td><%= order.donation_amount %></td>
+    <td><%= "$%.2f" % order.amount %></td>
+    <td><%= "$%.2f" % order.donation_amount %></td>
+    <td><%= order.email %></td>
+    <td><%= order.created_at %></td>
   </tr>
 <% end %>
+</tbody>
 <tfoot>
-  <td><%= "$%.2f" % [@undonated.author_total] %></td>
-  <td><%= "$%.2f" % [@undonated.donation_total] %></td>
+
 </tfoot>
 </table>
