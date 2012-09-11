@@ -33,6 +33,7 @@ class Order
   property :email, String
   property :stripe_id, String
   property :fetch_id, String
+  property :paypal_token, String
   property :amount, Float
   property :donation, Integer
   property :donated, Boolean, default: false
@@ -137,6 +138,31 @@ class NatureOfCode < Sinatra::Base
       }, '001')
       @order.fetch_id = fetch.id
       @order.save
+      erb :purchased
+    elsif params[:order][:paypal] == 'true'
+      # Setup Paypal request with business credentials
+      request = Paypal::Express::Request.new(
+        :username   => ENV['PAYPAL_USERNAME'],
+        :password   => ENV['PAYPAL_PASSWORD'],
+        :signature  => ENV['PAYPAL_SIGNATURE']
+      )
+      # Fill in money details for purchase, use email address as description
+      payment_request = Paypal::Payment::Request.new(
+        :currency_code => :USD, # if nil, PayPal use USD as default
+        :amount        => params[:order][:amount],
+        :description   => params[:order][:email]
+      )
+      # Create the transaction request with payment and callback urls
+      response = request.setup(
+        payment_request,
+        "http://128.122.151.180:5000/purchase/confirm",
+        "http://128.122.151.180:5000/purchase/error"
+      )
+
+      @order.paypal_token = response.token
+      @order.save
+
+      redirect response.redirect_uri
     else
       # get the credit card details submitted by the form
       token = params[:order][:token]
@@ -154,8 +180,8 @@ class NatureOfCode < Sinatra::Base
       @order[:donation] = params[:order][:donation]
       @order[:amount] = params[:order][:amount]
       @order.save
+      erb :purchased
     end
-    erb :purchased
   end
 
   post '/deliver' do
@@ -181,6 +207,30 @@ class NatureOfCode < Sinatra::Base
 
     status 200
     body "ok"
+  end
+
+  get '/purchase/confirm' do
+    raise params.inspect
+    response = request.details(params[:token])
+    # inspect these attributes for more details
+    response.payer
+    response.amount
+    response.ship_to
+    response.payment_responses
+
+    response = request.checkout!(
+      params[:token],
+      params[:payer_id],
+      payment_request
+    )
+    # inspect this attribute for more details
+    response.payment_info
+
+    puts "success"
+  end
+
+  get '/purchase/error' do
+    "ohno"
   end
 
   get '/css/natureofcode.css' do

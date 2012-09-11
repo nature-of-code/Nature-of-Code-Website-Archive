@@ -1,17 +1,18 @@
 <% if !@paying %>
-<script>
-$(function(){
-  $('#new-order').submit(function(){
-    match = $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]{2,}$/);
+  <script>
+  $(function(){
+    $('#new-order').submit(function(){
+      match = $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]{2,}$/);
 
-    if(!match) {
-      $('#payment-errors').text("Please enter an email address.");
-      return false;
-    }
+      if(!match) {
+        $('#payment-errors').text("Please enter an email address.");
+        return false;
+      }
+    });
   });
-});
-</script>
+  </script>
 <% end %>
+
 <form id="new-order" method="post" action="/purchase" <% if !@paying %>class="centered"<% end %> >
   <h3>
     The Nature of Code PDF
@@ -24,6 +25,7 @@ $(function(){
   </h3>
 
   <div id="payment-errors"></div>
+
   <% if @paying %>
   <input type="hidden" id="order-stripe-card-token" name="order[token]">
   <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
@@ -47,38 +49,42 @@ $(function(){
     <input type="text" name="order[last_name]" id="order-last-name">
   </div>
 
+  <input type="checkbox" name="order[paypal]" id="paypal-toggle">
+
   <% if @paying %>
-  <div class="field">
-    <label for="card-number">Credit Card Number</label>
-    <input type="text" size=20 autocomplete=off id="card-number">
-  </div>
+  <div id="stripe-info">
+    <div class="field">
+      <label for="card-number">Credit Card Number</label>
+      <input type="text" size=20 autocomplete=off id="card-number">
+    </div>
 
-  <div class="field">
-    <label for="card-code">Security Code (CVV)</label>
-    <input type="text" size=4 autocomplete=off id="card-code">
-  </div>
+    <div class="field">
+      <label for="card-code">Security Code (CVV)</label>
+      <input type="text" size=4 autocomplete=off id="card-code">
+    </div>
 
-  <div class="field">
-    <label for="card-month">Card Expiration</label>
-    <fieldset>
-      <select id="card-month">
-        <option>MM</option>
-        <% 1.upto(12) do |i| %>
-        <option><%= i %></option>
-        <% end %>
-      </select>
-      <select id="card-year">
-        <option>YYYY</option>
-        <% year = Date.today.year %>
-        <% 16.times do |i| %>
-        <option><%= year + i %></option>
-        <% end %>
-      </select>
-    </fieldset>
-  </div>
+    <div class="field">
+      <label for="card-month">Card Expiration</label>
+      <fieldset>
+        <select id="card-month">
+          <option>MM</option>
+          <% 1.upto(12) do |i| %>
+          <option><%= i %></option>
+          <% end %>
+        </select>
+        <select id="card-year">
+          <option>YYYY</option>
+          <% year = Date.today.year %>
+          <% 16.times do |i| %>
+          <option><%= year + i %></option>
+          <% end %>
+        </select>
+      </fieldset>
+    </div>
 
-  <div id="stripe_error">
-    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+    <div id="stripe_error">
+      <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+    </div>
   </div>
   <% end %>
 

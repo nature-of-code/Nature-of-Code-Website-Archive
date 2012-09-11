@@ -6,6 +6,11 @@
     stripeKey = document.querySelector('meta[name="stripe-key"]')['content'];
     Stripe.setPublishableKey(stripeKey);
     setupForm();
+
+    $('#paypal-toggle').click(function() {
+      $('#new-order').unbind();
+      $(this).val('true');
+    });
   });
 
   stripeResponseHandler = function(status, response) {
