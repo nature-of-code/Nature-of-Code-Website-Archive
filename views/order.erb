@@ -14,6 +14,17 @@
 <% end %>
 
 <form id="new-order" method="post" action="/purchase" <% if !@paying %>class="centered"<% end %> >
+
+  <% if @paying %>
+  <input type="hidden" id="order-type" name="order_type" value="stripe">
+
+  <input type="hidden" id="order-stripe-card-token" name="order[token]">
+  <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
+  <input type=hidden name=order[donation] value="<%= @donation %>">
+  <% else %>
+  <input type="hidden" id="order-type" name="order_type" value="free">
+  <% end %>
+
   <h3>
     The Nature of Code PDF
     <div id="display-amount"><strong>$<%= "%.2f" % [@amount] %></strong></div>
@@ -24,15 +35,7 @@
     <% end %>
   </h3>
 
-  <div id="payment-errors"></div>
-
-  <% if @paying %>
-  <input type="hidden" id="order-stripe-card-token" name="order[token]">
-  <input type=hidden name=order[amount] id=order-amount value="<%= @amount %>">
-  <input type=hidden name=order[donation] value="<%= @donation %>">
-  <% else %>
-    <input type=hidden name=order[free] value="true">
-  <% end %>
+  <div id="order-form-errors"></div>
 
   <div class="field">
     <label for="order-email">Email Address</label>
@@ -49,9 +52,9 @@
     <input type="text" name="order[last_name]" id="order-last-name">
   </div>
 
+  <% if @paying %>
   <input type="checkbox" name="order[paypal]" id="paypal-toggle">
 
-  <% if @paying %>
   <div id="stripe-info">
     <div class="field">
       <label for="card-number">Credit Card Number</label>

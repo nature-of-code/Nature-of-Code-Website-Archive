@@ -10,12 +10,13 @@
     $('#paypal-toggle').click(function() {
       $('#new-order').unbind();
       $(this).val('true');
+      $('#order-type').val('paypal');
     });
   });
 
   stripeResponseHandler = function(status, response) {
     if (response.error) {
-      $('#payment-errors').text(response.error.message);
+      $('#order-form-errors').text(response.error.message);
       return $('.submit-button').removeAttr('disabled');
     } else {
       $('#order-stripe-card-token').val(response['id']);
@@ -35,7 +36,7 @@
           name: "" + ($('#order-first-name').val()) + " " + ($('#order-last-name').val())
         }, stripeResponseHandler);
       } else {
-        $('#payment-errors').text("Please enter an email address.");
+        $('#order-form-errors').text("Please enter an email address.");
       }
       return false;
     });

@@ -34,16 +34,12 @@ class NatureOfCode < Sinatra::Base
       first_name: first_name,
       last_name: last_name)
 
-    if params[:order][:free] == 'true'
-      fetch = create_fetch_order({
-        first_name: @order.first_name,
-        last_name: @order.last_name,
-        email: @order.email
-      }, '001')
+    if params[:order_type] == "free"
+      fetch = create_fetch_order(@order, '001')
       @order.fetch_id = fetch.id
       @order.save
       erb :purchased
-    elsif params[:order][:paypal] == 'true'
+    elsif params[:order_type] == "paypal"
       # Fill in money details for purchase, use email address as description
       payment_request = Paypal::Payment::Request.new(
         :currency_code => :USD, # if nil, PayPal use USD as default
@@ -70,6 +66,7 @@ class NatureOfCode < Sinatra::Base
       @order.save
 
       redirect response.redirect_uri
+    # Otherwise it's a stripe order
     else
       # get the credit card details submitted by the form
       token = params[:order][:token]
