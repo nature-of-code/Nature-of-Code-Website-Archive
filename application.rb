@@ -14,9 +14,10 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/order' do
-    @amount = params[:amount]
+    @amount = params[:amount].to_f
     @donation = params[:donation]
-    @amount = @amount.to_f
+
+    # If amount is 0, serve up order form without credit card info
     @paying = true unless @amount == 0.0
 
     erb :order
@@ -84,10 +85,11 @@ class NatureOfCode < Sinatra::Base
       @order[:donation] = params[:order][:donation]
       @order[:amount] = params[:order][:amount]
       @order.save
-      erb :purchased
+      redirect '/purchase/success'
     end
   end
 
+  # Stripe webhook URL
   post '/deliver' do
     event_json = JSON.parse(request.body.read, symbolize_names: true)
     # Get event from Stripe API to ensure validity.
@@ -97,7 +99,6 @@ class NatureOfCode < Sinatra::Base
     puts "Creating fetch order"
 
     fetch = create_fetch_order(@order, '001')
-
     @order.fetch_id = fetch.id
     @order.save
 
