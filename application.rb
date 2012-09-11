@@ -94,7 +94,7 @@ class NatureOfCode < Sinatra::Base
     end
 
     def authorized?
-      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth ||=  Rack::Auth::Basic::Request.new(@paypal_request.env)
       @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [ENV['ADMIN_USERNAME'], ENV['ADMIN_PASSWORD']]
     end
 
@@ -115,7 +115,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/purchase' do
-
     puts "Shiffman: purchasing"
 
     email_parts = params[:order][:email].split('@')
@@ -140,25 +139,28 @@ class NatureOfCode < Sinatra::Base
       @order.save
       erb :purchased
     elsif params[:order][:paypal] == 'true'
-      # Setup Paypal request with business credentials
-      request = Paypal::Express::Request.new(
-        :username   => ENV['PAYPAL_USERNAME'],
-        :password   => ENV['PAYPAL_PASSWORD'],
-        :signature  => ENV['PAYPAL_SIGNATURE']
-      )
       # Fill in money details for purchase, use email address as description
       payment_request = Paypal::Payment::Request.new(
         :currency_code => :USD, # if nil, PayPal use USD as default
         :amount        => params[:order][:amount],
         :description   => params[:order][:email]
       )
+
+      Paypal.sandbox!
+      # Setup Paypal request with business credentials
+      @paypal_request = Paypal::Express::Request.new(
+        :username   => ENV['PAYPAL_USERNAME'],
+        :password   => ENV['PAYPAL_PASSWORD'],
+        :signature  => ENV['PAYPAL_SIGNATURE']
+      )
       # Create the transaction request with payment and callback urls
-      response = request.setup(
+      response = @paypal_request.setup(
         payment_request,
         "http://128.122.151.180:5000/purchase/confirm",
         "http://128.122.151.180:5000/purchase/error"
       )
-
+      @order.amount = params[:order][:amount]
+      @order[:donation] = params[:order][:donation]
       @order.paypal_token = response.token
       @order.save
 
@@ -210,23 +212,32 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/purchase/confirm' do
-    raise params.inspect
-    response = request.details(params[:token])
-    # inspect these attributes for more details
-    response.payer
-    response.amount
-    response.ship_to
-    response.payment_responses
 
-    response = request.checkout!(
-      params[:token],
-      params[:payer_id],
-      payment_request
+    # Setup Paypal request with business credentials
+    Paypal.sandbox!
+    @paypal_request = Paypal::Express::Request.new(
+      :username   => ENV['PAYPAL_USERNAME'],
+      :password   => ENV['PAYPAL_PASSWORD'],
+      :signature  => ENV['PAYPAL_SIGNATURE']
+    )
+
+    # raise params.inspect
+    @order = Order.first(:paypal_token => params[:token])
+    response = @paypal_request.details(@order.paypal_token)
+
+    response = @paypal_request.checkout!(
+      @order.paypal_token,
+      params[:PayerID],
+      Paypal::Payment::Request.new(
+        :currency_code => :USD, # if nil, PayPal use USD as default
+        :amount        => @order.amount,
+        :description   => "@order.email"
+      )
     )
     # inspect this attribute for more details
     response.payment_info
 
-    puts "success"
+    "success"
   end
 
   get '/purchase/error' do
