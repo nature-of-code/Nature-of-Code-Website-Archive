@@ -53,7 +53,11 @@
   </div>
 
   <% if @paying %>
-  <input type="checkbox" name="order[paypal]" id="paypal-toggle">
+  <div class="radios">
+    <label><input type="radio" name="payment-toggle" id="stripe-toggle" checked> Pay with credit card</label>
+    or
+    <label><input type="radio" name="payment-toggle" id="paypal-toggle"> Pay with PayPal <!-- PayPal Logo --><div class="PayPalLogo"> <style type="text/css">div.PayPalLogo{text-align:center;margin:0;padding:0;font:normal 7px arial,helvetica,san-serif;line-height:10px;} div.PayPalLogo a{text-decoration:none;color:black;} div.PayPalLogo a:visited{color:black;} div.PayPalLogo a:active{color:black;} div.PayPalLogo a:hover{text-decoration:underline;color:black;} div.PayPalLogo a img{border:0px;margin:0px;text-decoration:none;} </style><a href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=500, height=350');"><img  src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" border="0" alt="PayPal Logo"></a></br></div><!-- PayPal Logo --></label>
+  </div>
 
   <div id="stripe-info">
     <div class="field">

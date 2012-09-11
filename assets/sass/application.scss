@@ -353,6 +353,33 @@ h3 {
   p {
     clear: both;
   }
+
+
+  .radios {
+    margin: 0.5em 0;
+    font-style: italic;
+    text-align: center;
+
+    h4 {
+      font-style: normal;
+    }
+
+    label {
+      display: inline-block;
+      float: none;
+      font-style: normal;
+    }
+
+    input {
+      width: auto;
+    }
+
+    .PayPalLogo {
+      display: inline-block;
+      float: right;
+      margin-left: 5px;
+    }
+  }
 }
 
 #order-info {

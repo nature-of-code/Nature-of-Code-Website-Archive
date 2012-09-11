@@ -276,7 +276,7 @@ h3 #display-percent {
   font-size: 14px;
   font-style: italic; }
 
-#payment-errors {
+#order-form-errors {
   color: #A60000;
   text-align: center;
   margin: 1em;
@@ -324,6 +324,22 @@ h3 #display-percent {
     width: auto; }
   #new-order p {
     clear: both; }
+  #new-order .radios {
+    margin: 0.5em 0;
+    font-style: italic;
+    text-align: center; }
+    #new-order .radios h4 {
+      font-style: normal; }
+    #new-order .radios label {
+      display: inline-block;
+      float: none;
+      font-style: normal; }
+    #new-order .radios input {
+      width: auto; }
+    #new-order .radios .PayPalLogo {
+      display: inline-block;
+      float: right;
+      margin-left: 5px; }
 
 #order-info {
   float: left;
