@@ -3,44 +3,10 @@ Bundler.require
 
 Stripe.api_key = ENV['STRIPE_SECRET']
 
-# Public: Process order information and create an order for FetchApp with
-# specified information. Triggers an email to be sent from Fetch.
-#
-# order - A hash containing the orderer's first name, last name and email
-#         address
-# item  - SKU for the ordered item
-#
-# Returns nothing.
-def create_fetch_order(orderer, item)
-  FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
-  order = FetchAppAPI::Order.create(
-    title:        "#{DateTime.now}",
-    first_name:   orderer[:first_name],
-    last_name:    orderer[:last_name],
-    email:        orderer[:email],
-    order_items:  [{sku: item, price:orderer[:amount]}]
-  )
-end
-
 require './models'
+require './helpers'
 
 class NatureOfCode < Sinatra::Base
-  helpers do
-
-    def protected!
-      unless authorized?
-        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
-        throw(:halt, [401, "Not authorized\n"])
-      end
-    end
-
-    def authorized?
-      @auth ||=  Rack::Auth::Basic::Request.new(@paypal_request.env)
-      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [ENV['ADMIN_USERNAME'], ENV['ADMIN_PASSWORD']]
-    end
-
-  end
-
   get '/' do
     File.read(File.join('public','index.html'))
     # redirect 'http://natureofcode.com'
@@ -126,9 +92,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/deliver' do
-    puts "Shiffman: delivering"
-
-
     event_json = JSON.parse(request.body.read, symbolize_names: true)
     # Get event from Stripe API to ensure validity.
     event = Stripe::Event.retrieve(event_json[:id])
@@ -136,12 +99,7 @@ class NatureOfCode < Sinatra::Base
 
     puts "Creating fetch order"
 
-    fetch = create_fetch_order({
-      first_name: @order.first_name,
-      last_name: @order.last_name,
-      email: @order.email,
-      amount: @order.amount
-    }, '001')
+    fetch = create_fetch_order(@order, '001')
 
     @order.fetch_id = fetch.id
     @order.save
@@ -151,7 +109,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/purchase/confirm' do
-
     # Setup Paypal request with business credentials
     Paypal.sandbox!
     @paypal_request = Paypal::Express::Request.new(

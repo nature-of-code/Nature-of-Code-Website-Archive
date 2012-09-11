@@ -11,7 +11,7 @@ class Order
   property :stripe_id, String
   property :fetch_id, String
   property :paypal_token, String
-  property :amount, Float
+  property :amount, Float, default: 0
   property :donation, Integer
   property :donated, Boolean, default: false
 
