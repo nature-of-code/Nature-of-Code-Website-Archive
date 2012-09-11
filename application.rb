@@ -115,8 +115,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   post '/purchase' do
-    puts "Shiffman: purchasing"
-
     email_parts = params[:order][:email].split('@')
 
     first_name = params[:order][:first_name].length > 0 ? params[:order][:first_name] : email_parts[0]
@@ -244,10 +242,6 @@ class NatureOfCode < Sinatra::Base
     "ohno"
   end
 
-  get '/css/natureofcode.css' do
-    scss :"../assets/sass/application"
-  end
-
   get '/admin/?' do
     protected!
     @orders = Order.all
@@ -270,6 +264,8 @@ class NatureOfCode < Sinatra::Base
     redirect '/admin'
   end
 
-  # send email after payment
-  # Resend email from Fetch if order exists
+  # For Development only.
+  get '/css/natureofcode.css' do
+    scss :"../assets/sass/application"
+  end
 end
