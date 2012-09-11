@@ -5,13 +5,19 @@
     var stripeKey;
     stripeKey = document.querySelector('meta[name="stripe-key"]')['content'];
     Stripe.setPublishableKey(stripeKey);
-    setupForm();
+    setupStripe();
 
     $('#paypal-toggle').click(function() {
-      $('#new-order').unbind();
-      $(this).val('true');
+      removeStripe();
+      $('#stripe-info').hide();
       $('#order-type').val('paypal');
     });
+
+    $('#stripe-toggle').click(function() {
+      setupStripe();
+      $('#stripe-info').show();
+      $('#order-type').val('stripe');
+    })
   });
 
   stripeResponseHandler = function(status, response) {
@@ -24,7 +30,19 @@
     }
   };
 
-  setupForm = function() {
+  removeStripe = function() {
+    $('#new-order').unbind().submit(function() {
+      match = $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]{2,}$/);
+
+      if(!match) {
+        $('#payment-errors').text("Please enter an email address.");
+        return false;
+      }
+
+    });
+  }
+
+  setupStripe = function() {
     $('#new-order').submit(function(event) {
       if ($('#order-email').val().match(/\S+?@\S+?\.[a-zA-Z]{2,}$/)) {
         $('.submit-button').attr('disabled', true);
