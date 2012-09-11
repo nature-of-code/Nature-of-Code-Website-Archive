@@ -2,6 +2,7 @@ require 'bundler'
 Bundler.require
 
 Stripe.api_key = ENV['STRIPE_SECRET']
+Paypal.sandbox!
 
 require './models'
 require './helpers'
@@ -47,7 +48,6 @@ class NatureOfCode < Sinatra::Base
         :description   => params[:order][:email]
       )
 
-      Paypal.sandbox!
       # Setup Paypal request with business credentials
       @paypal_request = Paypal::Express::Request.new(
         :username   => ENV['PAYPAL_USERNAME'],
@@ -105,9 +105,8 @@ class NatureOfCode < Sinatra::Base
     body "ok"
   end
 
+  # Paypal success callback url
   get '/purchase/confirm' do
-    # Setup Paypal request with business credentials
-    Paypal.sandbox!
     @paypal_request = Paypal::Express::Request.new(
       :username   => ENV['PAYPAL_USERNAME'],
       :password   => ENV['PAYPAL_PASSWORD'],
@@ -127,16 +126,25 @@ class NatureOfCode < Sinatra::Base
         :description   => "@order.email"
       )
     )
-    # inspect this attribute for more details
-    response.payment_info
 
-    "success"
+    fetch = create_fetch_order(@order, '001')
+    @order.fetch_id = fetch.id
+    @order.save
+
+    redirect '/purchase/success'
   end
 
+  get '/purchase/success' do
+    erb :purchased
+  end
+
+  # Paypal error callback url
   get '/purchase/error' do
-    "ohno"
+    erb :unsuccessful
   end
 
+  # ADMIN DASHBOARD
+  #____________________________________________________________________________
   get '/admin/?' do
     protected!
     @orders = Order.all
