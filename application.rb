@@ -2,15 +2,14 @@ require 'bundler'
 Bundler.require
 
 Stripe.api_key = ENV['STRIPE_SECRET']
-Paypal.sandbox!
 
 require './models'
 require './helpers'
 
 class NatureOfCode < Sinatra::Base
   get '/' do
-    File.read(File.join('public','index.html'))
-    # redirect 'http://natureofcode.com'
+    # File.read(File.join('public','index.html'))
+    redirect 'http://natureofcode.com'
   end
 
   post '/order' do
@@ -58,8 +57,8 @@ class NatureOfCode < Sinatra::Base
       # Create the transaction request with payment and callback urls
       response = @paypal_request.setup(
         payment_request,
-        "http://128.122.151.180:5000/purchase/confirm",
-        "http://128.122.151.180:5000/purchase/error"
+        "https://natureofcode.herokuapp.com/purchase/confirm",
+        "https://natureofcode.herokuapp.com/purchase/error"
       )
       @order.amount = params[:order][:amount]
       @order[:donation] = params[:order][:donation]
@@ -166,10 +165,5 @@ class NatureOfCode < Sinatra::Base
     protected!
     @orders = Order.all(donated: false).update(donated: true)
     redirect '/admin'
-  end
-
-  # For Development only.
-  get '/css/natureofcode.css' do
-    scss :"../assets/sass/application"
   end
 end
