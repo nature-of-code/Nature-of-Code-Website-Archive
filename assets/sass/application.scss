@@ -207,6 +207,7 @@ h3 {
   font-size: 18px;
   margin: 0.7em auto 0;
   padding: 0.5em 1em;
+  position: relative;
   text-align: center;
 
   &:hover {
@@ -248,13 +249,13 @@ h3 {
 .half-box {
   float: left;
   padding: 5px;
-  width: 48%;
+  width: 49%;
   width: -webkit-calc(50% - 10px);
   width: -moz-calc(50% - 10px);
   width: calc(50% - 10px);
 
   &:nth-child(2) {
-    margin-left: 2%;
+    margin-left: 1%;
     margin-left: -webkit-calc(20px);
     margin-left: -moz-calc(20px);
     margin-left: calc(20px);
