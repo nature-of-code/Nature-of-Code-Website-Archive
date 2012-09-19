@@ -1277,7 +1277,7 @@ h3 #display-percent {
     font-size: 30px;
     width: 25%; }
   #orders-breakdown .row:nth-child(1),
-  #orders-breakdown .row:nth-child(3) {
+  #orders-breakdown .row:nth-child(4) {
     border-bottom: 1px solid rgba(127, 127, 127, 0.3);
     padding-bottom: 20px; }
   #orders-breakdown .row:nth-child(1) div {
@@ -1287,10 +1287,10 @@ h3 #display-percent {
     padding: 10px 0 5px;
     position: relative;
     width: 33.33333333333%; }
-  #orders-breakdown .row:nth-child(4) * {
+  #orders-breakdown .row:nth-child(5) * {
     display: inline;
     margin: 0; }
-  #orders-breakdown .row:nth-child(4) h4 {
+  #orders-breakdown .row:nth-child(5) h4 {
     font-size: 20px;
     line-height: 2.3em;
     padding-right: 20px; }

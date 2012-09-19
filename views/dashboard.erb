@@ -55,6 +55,18 @@
   </div>
 
   <div class="row">
+    <div>
+      <label>Purchased with Stripe</label>
+      <%= @paid.count(:stripe_id.not => nil ) %>
+    </div>
+
+    <div>
+      <label>Purchased with Paypal</label>
+      <%= @paid.count(:paypal_token.not => nil) %>
+    </div>
+  </div>
+
+  <div class="row">
     <h4>Amount to be Donated: <%= "$%.2f" % @undonated.donation_total %></h4>
     <form action="/admin/mark-paid" method="post">
       <input type="submit" class="submit-button" value="Mark As Donated">
@@ -70,6 +82,7 @@
     <th>Donation</th>
     <th>Order Email</th>
     <th>Date</th>
+    <th>Stripe or Paypal</th>
   </thead>
   <tbody>
 <% @orders.each do |order| %>
@@ -78,6 +91,11 @@
     <td><%= "$%.2f" % order.donation_amount %></td>
     <td><%= order.email %></td>
     <td><%= order.created_at %></td>
+    <% if order.amount > 0 %>
+    <td><%= order.stripe_id ? "Stripe" : "Paypal" %></td>
+    <% else %>
+    <td>-</td>
+    <% end %>
   </tr>
 <% end %>
 </tbody>
