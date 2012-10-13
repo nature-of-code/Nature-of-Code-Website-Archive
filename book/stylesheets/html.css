@@ -1,3 +1,10 @@
+/*
+  F8E419
+  9F1046
+  1299B8
+  08839F
+*/
+
 /* Skeleton
 _____________________________________________________________________________ */
 
@@ -8,15 +15,311 @@ body {
 	padding: 0;
 }
 
+a {
+  color: #1299B8;
+}
+
+#top {
+  background-color: rgb(235,0,90);
+  color: #ffffff;
+  padding: 3em 0 3em;
+  position: relative;
+  z-index: 3;
+}
+
+#bottom {
+  margin-top: 4em;
+}
+
+#header, #footer {
+  clear: both;
+  overflow-y: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+
+#header {
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#top #header h1 {
+  font-family: "ProximaNova-Regular";
+  font-size: 48px;
+  letter-spacing: 0.271em;
+  margin-bottom: 0.25em;
+}
+
+#top #header h1 strong {
+  font-family: 'ProximaNovaA-Bold';
+}
+
+#top #header h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#top #header h2 {
+  color: #ffffff;
+  font-size: 29.666px;
+  letter-spacing: 0.271em;
+  margin: 0;
+}
+
+#middle {
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  min-width: 1020px;
+}
+
+/* NAVIGATOR BLOCK LEVEL
+_____________________________________________________________________________*/
+#navigator {
+  margin: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  position: absolute;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#navigator-inner {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  min-width: 1020px;
+  max-width: 1240px;
+}
+
+#mask{
+  position: absolute;
+  top: -10px;
+  left: -8px;
+  right: -8px;
+  background-color: #fff;
+  height: 30px;
+  display: block;
+}
+
+#nav-bar {
+  background-color: rgb(235,0,90);
+  position: relative;
+  width: 100%;
+  -webkit-box-shadow: 0 5px 10px #fff;
+  -moz-box-shadow: 0 5px 10px #fff;
+  box-shadow: 0 5px 10px #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#nav-bar-wrap {
+  margin: 0;
+  position: absolute;
+  max-width: 1240px;
+  min-width: 1020px;
+  width: 100%;
+  z-index: 3;
+}
+
+#toc-holder {
+  clear: both;
+  display: block;
+  margin: 160px auto 0;
+  position: relative;
+  min-width: 1020px;
+  max-width: 1240px;
+}
+
+#toc-list {
+  padding-top: 46px;
+  z-index: 2;
+}
+
+/* NAVIGATOR STYLE
+_____________________________________________________________________________*/
+#navigator,
+#navigator h1,
+#navigator h2 {
+  font-family: "ProximaNova-Regular";
+}
+
+#navigator h1 {
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
+  padding: 8px 0;
+  position: relative;
+  text-align: center;
+  width: 210px;
+}
+
+#navigator h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#navigator h2 {
+  font-size: 16px;
+  margin: 10px 4px 10px;
+}
+
+#nav-bar h1, #nav-bar h2 {
+  display: inline-block;
+}
+
+#navigator strong {
+  font-family: "ProximaNova-Bold";
+}
+
+#table-of-contents {
+  float: left;
+}
+
+#toc-holder a {
+  color: #000;
+  /*display: block;*/
+  text-decoration: none;
+}
+
+#toc-holder a:hover {
+  color: rgb(235,0,90);
+}
+
+#toc-list ul {
+  list-style: none;
+  width: 220px;
+  float: left;
+  margin: 0 800px 0 auto;
+  min-width: 220px;
+}
+
+#toc-list ul>li .expand {
+  font-family: "Pictos";
+  float: right;
+  text-transform: lowercase;
+  display:none;
+}
+
+#toc-list>ul {
+  clear: both;
+  display: block;
+  margin: 0;
+  padding: 0 0 0 5px;
+  position: relative;
+}
+
+#toc-list ul>li:hover .expand {
+  cursor: pointer;
+  visibility: visible;
+}
+
+#toc-list ul>li .expand:hover {
+  color: #08839F;
+}
+
+/* Chapter Titles*/
+#toc-list>ul>li {
+  font-family: "ProximaNova-Bold";
+  margin: 10px 0 8px;
+  text-transform: uppercase;
+}
+
+/* Chapter Section lists*/
+#toc-list ul>ul {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: none;
+}
+
+#toc-list ul>ul a {
+  color: #777;
+}
+
+/* Chapter Section */
+#toc-list ul>ul li {
+  margin: 0 0 1px;
+  padding: 0;
+}
+
+a#purchase-link {
+  color: #fff;
+  float: right;
+  padding: 10px;
+}
+
+/* END NAVIGATOR
+_____________________________________________________________________________*/
+
+#footer {
+  background-color: rgb(246,246,246);
+  color: #ababab;
+  font-size: 13px;
+  overflow-y: auto;
+  width: 800px;
+}
+
+#footer a {
+  color: #777777;
+}
+
+#footer h4 {
+  color: #000000;
+  font-size: 15px;
+  margin-bottom: 0.8em;
+}
+
+#footer .one-third {
+  float: left;
+  font-size: 13px;
+  margin: 0 1%;
+  margin: 0 -webkit-calc(10px);
+  margin: 0 -moz-calc(10x);
+  margin: 0 calc(10px);
+  width: 31%;
+  width: -webkit-calc(33% - 20px);
+  width: -moz-calc(33% - 20px);
+  width: calc(33% - 20px);
+}
+
+#footer p {
+  font-size: 13px;
+}
+
+#footer img {
+  width: auto;
+}
+
 #container {
 	padding-top: 2.5em;
 	width: 800px;
 	margin: 0 auto;
 	line-height: 1.317em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 /*	background-image: url('../imgs/vertical_grid.jpg');*/
 }
 
+@media screen and (max-width:1240px) {
+  #container {
+    margin-left: 220px;
+    margin-right: 0;
+  }
+}
 
+@media screen and (max-width:1020px) {
+}
 
 h1 {
 	font-size: 320%;
@@ -30,9 +333,14 @@ h2 {
 	font-size: 270%;
 	line-height: 1em;
 	font-style: normal;
-	margin-top: 3.5em;
+	margin-top: 2.5em;
 	margin-bottom: 0.3em;
 	color: #202020;
+}
+
+/* To squash extra h2 element on title page */
+body>h2:nth-child(2) {
+  display: none;
 }
 
 h3 {
@@ -151,6 +459,32 @@ canvas {
 	border: 1px solid gray;
 	//margin-bottom: 1.15em;
 	//border-left: 0.4em solid #272727;
+}
+
+.sketch-controls {
+  color: #000000;
+  margin: 5px 0 15px;
+}
+
+.sketch-controls button {
+  border: 0;
+  color: white;
+  padding: 5px 8px;
+  font-size: 100%;
+  font-family: "ProximaNova-Regular";
+}
+
+.sketch-controls button:hover {
+  cursor: pointer;
+  background-color: #000;
+}
+
+.sketch-controls .reset {
+  background-color: #404383;
+}
+
+.sketch-controls .pause {
+  background-color: #408448;
 }
 
 /* Span Classes Styling
