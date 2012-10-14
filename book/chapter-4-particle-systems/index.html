@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -101,11 +101,11 @@
 <h2 id="chapter-4-particle-systems">Chapter 4.  Particle Systems</h2>
 <blockquote >
   “That is wise. Were I to invoke logic, however, logic clearly dictates that the needs of the many outweigh the needs of the few.”
-  
+
     <span class="attribution">
 Spock
 </span>
-  
+
 </blockquote><p>In 1982, William T. Reeves, a researcher at Lucasfilm Ltd., was working on the film <em>Star Trek II: The Wrath of Khan</em>.   Much of the movie revolves around the Genesis Device, a torpedo that when shot at a barren, lifeless planet has the ability to reorganize matter and create a habitable world for colonization. During the sequence, a wall of fire ripples over the planet while it is being “terraformed.”   The term <strong><em>particle system</em></strong>, an incredibly common and useful technique in computer graphics, was coined in the creation of this particular effect.</p>
 _A particle system is a collection of many many minute particles that together represent a fuzzy object. Over a period of time, particles are generated into a system, move and change from within the system, and die from the system.”_
 —William Reeves, Particle Systems—a Technique for Modeling a Class of Fuzzy Objects, _ACM Transactions on Graphics_ 2:2 (April 1983), 92.<p>Since the early 1980s, particle systems have been used in countless video games, animations, digital art pieces, and installations to model various irregular types of natural phenomena, such as fire, smoke, waterfalls, fog, grass, bubbles, and so on.</p>
@@ -129,9 +129,9 @@ void draw() {
   ps.run();
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Ah, isn’t this main program so simple and lovely?</div><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span>
@@ -182,9 +182,9 @@ void draw() {
     ellipse(location.x,location.y,8,8);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span></pre></code></div>
@@ -249,9 +249,9 @@ void draw() {
     ellipse(location.x,location.y,8,8);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span>
@@ -301,9 +301,9 @@ has been “alive”</div><code><pre><span class='one-line'>  <strong><span clas
     }
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">boolean</span> <span class="nf">isDead</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -320,7 +320,7 @@ has been “alive”</div><code><pre><span class='one-line'>  <strong><span clas
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Before we get to the next step of making many particles, it’s worth taking a moment to make sure our Particle works correctly and create a sketch with one single Particle object.  Here is the full code below, with two small additions.  We add a convenience function called <span class="function">run()</span> that simply calls both <span class="function">update()</span> and <span class="function">display()</span> for us.  In addition, we give the Particle a random initial velocity as well as a downward acceleration (to simulate gravity).</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_01_SingleParticle/_4_01_SingleParticle.pde /book/processingjs/chapter04/_4_01_SingleParticle/Particle.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -328,8 +328,8 @@ has been “alive”</div><code><pre><span class='one-line'>  <strong><span clas
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter04_example1" style="display: block;"></a>
 <span class="example">Example 4.1: A single particle</span></p>
@@ -394,9 +394,9 @@ class Particle {
     }
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Particle</span> <span class="n">p</span><span class="o">;</span></span>
@@ -494,9 +494,9 @@ void draw() {
     p.run();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span></span>
@@ -541,9 +541,9 @@ void draw() {
     p.run();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span></span>
@@ -572,9 +572,9 @@ void draw() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ArrayList<Particle> plist = new ArrayList<Particle>();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Particle</span><span class="o">&gt;</span> <span class="n">plist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Particle</span><span class="o">&gt;();</span></span></pre></code></div>
@@ -587,9 +587,9 @@ void draw() {
   <textarea>for (Particle p: particles) {
   p.run();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="n">Particle</span> <span class="nl">p:</span> <span class="n">particles</span><span class="o">)</span> <span class="o">{</span></span>
@@ -607,9 +607,9 @@ void draw() {
 for (Particle p : particles) {
   p.run();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>This enhanced loop also works for regular arrays!</div><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="n">Particle</span> <span class="n">p</span> <span class="o">:</span> <span class="n">particles</span><span class="o">)</span> <span class="o">{</span></span>
@@ -640,9 +640,9 @@ void draw() {
     p.run();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Particle</span><span class="o">&gt;</span> <span class="n">particles</span><span class="o">;</span></span>
@@ -679,9 +679,9 @@ void draw() {
     }
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">particles</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
@@ -705,9 +705,9 @@ void draw() {
     //[offset-up] Adding a new Particle to the list while iterating?
     particles.add(new Particle(new PVector(width/2,50)));
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">particles</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
@@ -723,9 +723,9 @@ void draw() {
 <p>While removing elements from the ArrayList during a loop doesn’t cause the program to crash (as it does with adding), the problem is almost more insidious in that it leaves no evidence.  To discover the problem we must first establish an important fact.  When an object is removed from the ArrayList, all elements are shifted one spot to the left.  Note the diagram below where particle C (index 2) is removed.  Particles A and B keep the same index, while particles D and E shift from 3 and 4 to 2 and 3, respectively.</p>
 <a id="chapter04_figure1" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter04/ch04_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 4.1</p>
 </div>
 <p>Let’s pretend we are <span class="var">i</span> looping through the ArrayList.</p>
@@ -742,9 +742,9 @@ void draw() {
       particles.remove(i);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Looping through the list backwards</div><code><pre><span class='one-line'>  <strong><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span></strong></span>
@@ -767,9 +767,9 @@ void draw() {
 // specify the type that the Iterator will
 // reference.
 Iterator<Particle> it = particles.iterator();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Note that with the Iterator object, we can also
@@ -787,9 +787,9 @@ reference.</div><code><pre><span class='one-line'><span class="n">Iterator</span
     Particle p = it.next();
     p.run();
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> An Iterator object doing the iterating for you</div><code><pre><span class='one-line'>  <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span></span>
@@ -808,9 +808,9 @@ reference.</div><code><pre><span class='one-line'><span class="n">Iterator</span
       it.remove();
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">isDead</span><span class="o">())</span> <span class="o">{</span></span></pre></code></div>
@@ -823,7 +823,7 @@ reference.</div><code><pre><span class='one-line'><span class="n">Iterator</span
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Putting it all together, we have:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_02_ArrayListParticles/_4_02_ArrayListParticles.pde /book/processingjs/chapter04/_4_02_ArrayListParticles/Particle.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -831,8 +831,8 @@ reference.</div><code><pre><span class='one-line'><span class="n">Iterator</span
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter04_example2" style="display: block;"></a>
 <span class="example">Example 4.2: ArrayList of particles with Iterator</span></p>
@@ -861,9 +861,9 @@ void draw() {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ArrayList</span> <span class="n">particles</span><span class="o">;</span></span>
@@ -910,9 +910,9 @@ void draw() {
   background(255);
   ps.run();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Just one wee ParticleSystem!</div><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span>
@@ -1012,9 +1012,9 @@ class ParticleSystem {
     // The origin is passed to each Particle when it is added.
     particles.add(new Particle(origin)); //[bold]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">ParticleSystem</span> <span class="o">{</span></span>
@@ -1048,7 +1048,7 @@ includes an origin point where each Particle begins.</div><code><pre><span class
 <p>This line of thinking could of course take us even further, and you might lock yourself in a basement for days sketching out a diagram of a system of systems of systems of systems of systems of systems.  Of systems.   After all, this is how the world works.  An organ is a system of cells, a human body is a system of organs, a neighborhood is a system of human bodies, a city is a system of neighborhoods, and so on and so forth.   While this is an interesting road to travel down, it’s a bit beyond where we need to be right now.   It is, however, quite useful to know how to write a Processing sketch that keeps track of many particle systems, each of which keep track of many particles.  Let’s take the following scenario.</p>
 <p>You start with a blank screen.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_04_SystemofSystems/_4_04_SystemofSystems.pde /book/processingjs/chapter04/_4_04_SystemofSystems/Particle.pde /book/processingjs/chapter04/_4_04_SystemofSystems/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1056,12 +1056,12 @@ includes an origin point where each Particle begins.</div><code><pre><span class
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>You click the mouse and generate a particle system at the mouse’s location.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_04_SystemofSystems_b/_4_04_SystemofSystems_b.pde /book/processingjs/chapter04/_4_04_SystemofSystems_b/Particle.pde /book/processingjs/chapter04/_4_04_SystemofSystems_b/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1069,12 +1069,12 @@ includes an origin point where each Particle begins.</div><code><pre><span class
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>Each time you click the mouse a new particle system is created at the mouse’s location.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_04_SystemofSystems_c/_4_04_SystemofSystems_c.pde /book/processingjs/chapter04/_4_04_SystemofSystems_c/Particle.pde /book/processingjs/chapter04/_4_04_SystemofSystems_c/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1082,8 +1082,8 @@ includes an origin point where each Particle begins.</div><code><pre><span class
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>In Example <a href="#chapter04_example3">4.3</a>
 , we stored a single reference to a particle system object in the variable <span class="var">ps</span>.</p>
@@ -1101,9 +1101,9 @@ void draw() {
   ps.run();
   ps.addParticle();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span>
@@ -1133,9 +1133,9 @@ void setup() {
   size(600,200);
   systems = new ArrayList<ParticleSystem>();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>This time, the type of thing we are putting
@@ -1153,9 +1153,9 @@ in the ArrayList is a ParticleSystem itself!</div><code><pre><span class='one-li
   <textarea>void mousePressed() {
   systems.add(new ParticleSystem(1,new PVector(mouseX,mouseY)));
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1176,9 +1176,9 @@ in the ArrayList is a ParticleSystem itself!</div><code><pre><span class='one-li
     ps.addParticle();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1219,9 +1219,9 @@ class FunConfetti {
 class WackyConfetti {
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">HappyConfetti</span> <span class="o">{</span></span>
@@ -1253,9 +1253,9 @@ class WackyConfetti {
       else               { particles.add(new WackyConfetti()); }
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">ParticleSystem</span> <span class="o">{</span></span>
@@ -1283,9 +1283,9 @@ class WackyConfetti {
   <textarea>ArrayList<HappyConfetti> a1 = new ArrayList<HappyConfetti>();
 ArrayList<FunConfetti>   a2 = new ArrayList<FunConfetti>();
 ArrayList<WackyConfetti> a3 = new ArrayList<WackyConfetti>();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">HappyConfetti</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">HappyConfetti</span><span class="o">&gt;();</span></span>
@@ -1322,9 +1322,9 @@ ArrayList<WackyConfetti> a3 = new ArrayList<WackyConfetti>();</textarea>
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Dog</span> <span class="o">{</span></span>
@@ -1374,9 +1374,9 @@ ArrayList<WackyConfetti> a3 = new ArrayList<WackyConfetti>();</textarea>
     println("MEOW!");
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Cat</span> <span class="o">{</span></span>
@@ -1403,26 +1403,26 @@ ArrayList<WackyConfetti> a3 = new ArrayList<WackyConfetti>();</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>As we rewrite the same code for fish, horses, koala bears, and lemurs, this process will become rather tedious.  Instead, let’s develop a generic Animal class that can describe any type of animal.  All animals eat and sleep, after all.  We could then say:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 A dog is an animal and has all the properties of animals and can do all the things animals do. Also, a dog can bark.
 </p>
 </li>
-		
+
 			<li><p>
 A cat is an animal and has all the properties of animals and can do all the things animals do. Also, a cat can meow.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Inheritance makes this all possible.  With inheritance, classes can inherit properties (variables) and functionality (methods) from other classes.  A Dog class is a child (<strong><em>subclass</em></strong>) of an Animal class.  Children will automatically inherit all variables and functions from the parent (<strong><em>superclass</em></strong>), but can also include functions and variables not found in the parent.  Like a phylogenetic "tree of life," inheritance follows a tree structure.    Dogs inherit from Canines, which inherit from Mammals, which inherit from Animals, etc.</p>
 <a id="chapter04_figure2" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter04/ch04_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 4.2</p>
 </div>
 <p>Here is how the syntax works with inheritance.</p>
@@ -1468,9 +1468,9 @@ class Cat extends Animal {
     println("MEOW!");
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The Animal class is the parent (or super) class.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span></span></pre></code></div>
@@ -1517,17 +1517,17 @@ class Cat extends Animal {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This brings up two new terms:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>extends</em></strong> – This keyword is used to indicate a parent for the class being defined.  Note that classes can only extend <strong>one</strong> class.   However, classes can extend classes that extend other classes, i.e.  Dog extends Animal, Terrier extends Dog.  Everything is inherited all the way down the line.
 </p>
 </li>
-		
+
 			<li><p><strong><em>super()</em></strong> – This calls the constructor in the parent class.   In other words, whatever you do in the parent constructor, do so in the child constructor as well.   Other code can be written into the constructor in addition to <span class="function">super()</span>.   <span class="function">super()</span> can also receive arguments if there is a parent constructor defined with matching arguments.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>A subclass can be expanded to include additional functions and properties beyond what is contained in the superclass.  For example, let’s assume that a Dog object has a haircolor variable in addition to age, which is set randomly in the constructor.  The class would now look like this:</p>
 <div class="source-code">
@@ -1545,9 +1545,9 @@ class Cat extends Animal {
     println("WOOF!");
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="n">Animal</span> <span class="o">{</span></span></pre></code></div>
@@ -1587,9 +1587,9 @@ included in the parent.</div><code><pre><span class='one-line'>  <span class="n"
     println("WOOF!");
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="n">Animal</span> <span class="o">{</span></span>
@@ -1638,9 +1638,9 @@ included in the parent.</div><code><pre><span class='one-line'>  <span class="n"
     println("WOOF!");
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="n">Animal</span> <span class="o">{</span></span>
@@ -1699,9 +1699,9 @@ for a Dog's specific eating characteristics.</div><code><pre><span class='one-li
     ellipse(location.x,location.y,8,8);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span>
@@ -1755,9 +1755,9 @@ for a Dog's specific eating characteristics.</div><code><pre><span class='one-li
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Confetti</span> <span class="kd">extends</span> <span class="n">Particle</span> <span class="o">{</span></span>
@@ -1788,9 +1788,9 @@ for a Dog's specific eating characteristics.</div><code><pre><span class='one-li
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float angle = map(location.x,0,width,0,TWO_PI);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">location</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">width</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">TWO_PI</span><span class="o">);</span></span></pre></code></div>
@@ -1814,9 +1814,9 @@ for a Dog's specific eating characteristics.</div><code><pre><span class='one-li
     popMatrix();
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1864,9 +1864,9 @@ for (int i = 0; i < 6; i++) {
 for (int i = 0; i < 98; i++) {
   kiwis.add(new Kiwi());
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Separate ArrayLists for each animal</div><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span> <span class="n">dogs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;();</span></span>
@@ -1907,9 +1907,9 @@ for (Kiwi k: kiwis) {
   k.eat();
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Separate loops for each animal</div><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="n">Dog</span> <span class="nl">d:</span> <span class="n">dogs</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1945,9 +1945,9 @@ for (int i = 0; i < 1000; i++) {
 for (Animal a: kingdom) {
   a.eat();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair offset-down'><div class='code-comment '> Just one ArrayList for all the animals!</div><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span> <span class="n">kingdom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;();</span></span>
@@ -1970,9 +1970,9 @@ for (Animal a: kingdom) {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Dog rover = new Dog();
 Animal spot = new Dog();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Dog</span> <span class="n">rover</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">();</span></span>
@@ -2030,9 +2030,9 @@ Animal spot = new Dog();</textarea>
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">ParticleSystem</span> <span class="o">{</span></span></pre></code></div>
@@ -2083,7 +2083,7 @@ Animal spot = new Dog();</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Notice how we have two separate lists, one for Particle objects and one for Confetti objects.  Every action we want to perform we have to do twice!   Polymorphism allows us to simplify the above by just making one ArrayList of Particle objects that contains both standard Particle objects as well as Confetti objects.  We don’t have to worry about which are which; this will all be taken care of for us!  (Also, note that the code for the main program and the classes has not changed so we aren’t including it here.  See the website for the full example.)</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_05_ParticleSystemInheritancePolymorphism/_4_05_ParticleSystemInheritancePolymorphism.pde /book/processingjs/chapter04/_4_05_ParticleSystemInheritancePolymorphism/Confetti.pde /book/processingjs/chapter04/_4_05_ParticleSystemInheritancePolymorphism/Particle.pde /book/processingjs/chapter04/_4_05_ParticleSystemInheritancePolymorphism/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2091,8 +2091,8 @@ Animal spot = new Dog();</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter04_example5" style="display: block;"></a>
 <span class="example">Example 4.5: Particle system inheritance and polymorphism</span></p>
@@ -2132,9 +2132,9 @@ Animal spot = new Dog();</textarea>
     }
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">ParticleSystem</span> <span class="o">{</span></span></pre></code></div>
@@ -2190,9 +2190,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
     location = l.get();
     lifespan = 255.0;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Particle</span><span class="o">(</span><span class="n">PVector</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -2217,9 +2217,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
 
     lifespan -= 2.0;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2243,9 +2243,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
     f.div(mass);
     acceleration.add(f);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2266,9 +2266,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
    acceleration.mult(0);
    lifespan -= 2.0;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2341,9 +2341,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span>
@@ -2412,9 +2412,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector gravity = new PVector(0,0.1);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">gravity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mf">0.1</span><span class="o">);</span></span></pre></code></div>
@@ -2429,9 +2429,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
   ps.addParticle();
   ps.run();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2455,9 +2455,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
   ps.addParticle();
   ps.run();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2481,9 +2481,9 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
       p.applyForce(f);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2497,7 +2497,7 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
 </div><p>It almost seems silly to write this function.   What we’re saying is “apply a force to a particle system so that the system can apply that force to all of the individual particles.”   Nevertheless, it’s really quite reasonable.  After all, the ParticleSystem object is in charge of managing the particles, so if we want to talk to the particles, we’ve got to talk to them through their manager.  (Also, here’s a chance for the enhanced loop since we aren’t deleting particles!)</p>
 <p>Here is the full example (assuming the existence of the Particle class written above; no need to include it again since nothing has changed):</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_06_ParticleSystemForces/_4_06_ParticleSystemForces.pde /book/processingjs/chapter04/_4_06_ParticleSystemForces/Particle.pde /book/processingjs/chapter04/_4_06_ParticleSystemForces/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2505,8 +2505,8 @@ Particle, whether it is a Particle or a Confetti.</div><code><pre><span class='o
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter04_example6" style="display: block;"></a>
 <span class="example">Example 4.6: Particle system with forces</span></p>
@@ -2566,9 +2566,9 @@ class ParticleSystem {
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span>
@@ -2633,33 +2633,33 @@ class ParticleSystem {
  that pushes any particles away that get close?  This requires a bit more sophistication because, unlike the gravity force, each force an Attractor or Repeller exerts on a particle must be calculated for each Particle.</p>
 <a id="chapter04_figure3" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/chapter04/ch04_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 4.3: Gravity force: Vectors are all identical</p>
 </div>
 <a id="chapter04_figure4" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/chapter04/ch04_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 4.4: Attractor force: Vectors are all different</p>
 </div>
 <p>Let’s start solving this problem by examining how we would incorporate a new Repeller object into our simple particle system plus forces example.  We’re going to need two major additions to our code:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 A Repeller object (declared, initialized, and displayed).
 </p>
 </li>
-		
+
 			<li><p>
 A function that passes the Repeller object into the ParticleSystem so that it can apply a force to each particle object.
 </p>
 </li>
-		
+
 	</ol>
 </div><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2689,9 +2689,9 @@ void draw() {
   // New thing: we display the Repeller object.
   repeller.display(); //[bold]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span></pre></code></div>
@@ -2742,9 +2742,9 @@ void draw() {
     ellipse(location.x,location.y,r*2,r*2);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Repeller</span> <span class="o">{</span></span></pre></code></div>
@@ -2810,9 +2810,9 @@ void applyRepeller(Repeller r) {
     dir.mult(force);
     return dir;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>All the same steps we had to calculate an attractive force, only pointing in the opposite direction.</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="nf">repel</span><span class="o">(</span><span class="n">Particle</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -2835,7 +2835,7 @@ void applyRepeller(Repeller r) {
 </div><p>Notice how throughout this entire process of adding a Repeller to the environment, we’ve never once considered editing the Particle class itself.   A particle doesn’t actually have to know anything about the details of its environment; it simply needs to manage its location, velocity, and acceleration, as well as have the ability to receive an external force and act on it.</p>
 <p>So we can now look at this example in its entirety, again leaving out the Particle class, which hasn’t changed.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_07_ParticleSystemForcesRepeller/_4_07_ParticleSystemForcesRepeller.pde /book/processingjs/chapter04/_4_07_ParticleSystemForcesRepeller/Repeller.pde /book/processingjs/chapter04/_4_07_ParticleSystemForcesRepeller/Particle.pde /book/processingjs/chapter04/_4_07_ParticleSystemForcesRepeller/ParticleSystem.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2843,8 +2843,8 @@ void applyRepeller(Repeller r) {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter04_example7" style="display: block;"></a>
 <span class="example">Example 4.7: ParticleSystem with repeller</span></p>
@@ -2947,9 +2947,9 @@ class Repeller {
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>One ParticleSystem</div><code><pre><span class='one-line'><span class="n">ParticleSystem</span> <span class="n">ps</span><span class="o">;</span></span></pre></code></div>
@@ -3063,7 +3063,7 @@ class Repeller {
 <h3 id="413-image-textures-and-additive-blending">4.13 Image Textures and Additive Blending</h3><p>Even though this book is really about behaviors and algorithms rather than computer graphics and design, I don’t think we would be able to live with ourselves if we went through a discussion of particle systems and never once looked at an example that involves texturing each particle with an image.  The way you choose to draw a particle is a big part of the puzzle in terms of designing certain types of visual effects.</p>
 <p>Let’s try to create a smoke simulation in Processing.  Take a look at the following two images:</p>
 <div class="image-container two-col-borderless" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_08_ParticleSystemSmoke_b/_4_08_ParticleSystemSmoke_b.pde /book/processingjs/chapter04/_4_08_ParticleSystemSmoke_b/Particle.pde /book/processingjs/chapter04/_4_08_ParticleSystemSmoke_b/ParticleSystem.pde" class="two-col-borderless">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -3071,11 +3071,11 @@ class Repeller {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">White circles</p>
 </div>
 <div class="image-container two-col-borderless" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter04/_4_08_ParticleSystemSmoke/_4_08_ParticleSystemSmoke.pde /book/processingjs/chapter04/_4_08_ParticleSystemSmoke/Particle.pde /book/processingjs/chapter04/_4_08_ParticleSystemSmoke/ParticleSystem.pde" class="two-col-borderless">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -3083,15 +3083,15 @@ class Repeller {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">Fuzzy images with transparency</p>
 </div>
 <p>Both of these images were generated from identical algorithms. The only difference is that a white circle is drawn in image A for each particle and a “fuzzy” blob is drawn for each in B.</p>
 <a id="chapter04_figure5" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter04/ch04_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 4.5</p>
 </div>
 <p>The good news here is that you get a lot of bang for very little buck.   Before you write any code, however, you’ve got to make your image texture!  I recommend using PNG format, as Processing will retain the alpha channel (i.e. transparency) when drawing the image, which is needed for blending the texture as particles layer on top of each other.  Once you’ve made your PNG and deposited it in your sketch’s “data” folder, you are on your way with just a few lines of code.</p>
@@ -3101,9 +3101,9 @@ class Repeller {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PImage img;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PImage</span> <span class="n">img</span><span class="o">;</span></span></pre></code></div>
@@ -3117,9 +3117,9 @@ class Repeller {
   // Loading the PNG
   img = loadImage("texture.png");
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -3138,9 +3138,9 @@ class Repeller {
     tint(255,lifespan);
     image(img,loc.x,loc.y);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span></span>
@@ -3160,9 +3160,9 @@ class Repeller {
   <textarea>    float vx = (float) generator.nextGaussian()*0.3;
     float vy = (float) generator.nextGaussian()*0.3 - 1.0;
     vel = new PVector(vx,vy);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">vx</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">generator</span><span class="o">.</span><span class="na">nextGaussian</span><span class="o">()*</span><span class="mf">0.3</span><span class="o">;</span></span>
@@ -3188,9 +3188,9 @@ class Repeller {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -3223,10 +3223,10 @@ class Repeller {
 .</p>
 <p>Additive blending is in fact one of the simplest blend algorithms and involves adding the pixel values of one layer with another (capping all values at 255 of course).  This results in a space-age glow effect due to the colors getting brighter and brighter with more layers.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter04/ch04_ex09.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>To achieve additive blending in Processing, you’ll need to use the <span class="var">P2D</span> or <span class="var">P3D</span> renderer.</p>
 <p><a id="chapter04_example9" style="display: block;"></a>
@@ -3237,9 +3237,9 @@ class Repeller {
   // Using the P2D  renderer
   size(200,200,P2D);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -3264,9 +3264,9 @@ class Repeller {
   // All your other particle stuff would go here.
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>

@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -101,11 +101,11 @@
 <h2 id="chapter-3-oscillation">Chapter 3.  Oscillation</h2>
 <blockquote >
   “Trigonometry is a sine of the times.”
-  
+
     <span class="attribution">
 Anonymous
 </span>
-  
+
 </blockquote><p>In Chapters 1 and 2, we carefully worked out an object-oriented structure to make something move on the screen, using the concept of a vector to represent location, velocity, and acceleration driven by forces in the environment.   We could move straight from here into topics such as particle systems, steering forces, group behaviors, etc.  If we did that, however, we’d skip an important area of mathematics that we’re going to need: <strong><em>trigonometry</em></strong>, or the mathematics of triangles, specifically right triangles.</p>
 <p>Trigonometry is going to give us a lot of tools.   We’ll get to think about angles and angular velocity and acceleration.  Trig will teach us about the sine and cosine functions, which when used properly can yield an nice ease-in, ease-out wave pattern.   It’s going to allow us to calculate more complex forces in an environment that involves angles, such as a pendulum swinging or a box sliding down an incline.</p>
 <p>So this chapter is a bit of a mishmash. We’ll start with the basics of angles in Processing and cover many trigonometric topics, tying it all into forces at the end.  And by taking this break now, we’ll also pave the way for more advanced examples that require trig later in this book.</p>
@@ -115,25 +115,25 @@ Anonymous
 The first order of business is <em>radians</em> and <em>degrees</em>.  You’re probably familiar with the concept of an angle in degrees.  A full rotation goes from zero to 360 degrees.   90 degrees (a right angle) is 1/4th  of 360, shown below as two perpendicular lines.</p>
 <a id="chapter03_figure1" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.1</p>
 </div>
 <p>It’s fairly intuitive for us to think of angles in terms of degrees.  For example, the square in Figure 3.2 is rotated 45 degrees around its center.</p>
 <a id="chapter03_figure2" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.2</p>
 </div>
 <p>Processing, however, requires angles to be specified in <strong><em>radians</em></strong>.   A radian is a unit of measurement for angles defined by the ratio of the length of the arc of a circle to the radius of that circle.   One radian is the angle at which that ratio equals one (see figure 3.1).  180 degrees = PI radians, 360 degrees = 2*PI radians, 90 degrees = PI/2 radians, etc.</p>
 <a id="chapter03_figure3" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.3</p>
 </div>
 <p>The formula to convert from degrees to radians is:</p>
@@ -143,9 +143,9 @@ The first order of business is <em>radians</em> and <em>degrees</em>.  You’re 
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float angle = radians(60);
 rotate(angle);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">radians</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span></span>
@@ -162,7 +162,7 @@ rotate(angle);</textarea>
   <a id="chapter03_exercise1" style="display: block;"></a>
 <h4 id="exercise-31">Exercise 3.1</h4><p>Rotate a baton-like object (see below) around its center using <span class="function">translate()</span> and <span class="function">rotate()</span>.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/Ex_3_01_exercise_baton/Ex_3_01_exercise_baton.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -170,8 +170,8 @@ rotate(angle);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter03_section2" style="display: block;"></a>
@@ -188,9 +188,9 @@ rotate(angle);</textarea>
   line(-50,0,50,0);
   ellipse(50,0,8,8);
   ellipse(-50,0,8,8);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">translate</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span>
@@ -203,7 +203,7 @@ rotate(angle);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Adding in our principles of motion, we’d have something like:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_01_angular_motion/_3_01_angular_motion.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -211,8 +211,8 @@ rotate(angle);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example1" style="display: block;"></a>
 <span class="example">Example 3.1: Angular motion using rotate()</span></p>
@@ -246,9 +246,9 @@ void draw() {
   // Angular equivalent of location.add(velocity);
   angle += aVelocity;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Location</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span></pre></code></div>
@@ -295,9 +295,9 @@ void draw() {
   float angle = 0;
   float aVelocity = 0;
   float aAcceleration = 0;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Mover</span> <span class="o">{</span></span>
@@ -330,9 +330,9 @@ void draw() {
 
     acceleration.mult(0);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -371,9 +371,9 @@ void draw() {
     rect(0,0,mass*16,mass*16);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -399,9 +399,9 @@ affect the rest of our world.</div><code><pre><span class='one-line'>    <span c
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float aAcceleration = 0.01;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">aAcceleration</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code></div>
@@ -415,9 +415,9 @@ affect the rest of our world.</div><code><pre><span class='one-line'>    <span c
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    aAcceleration = acceleration.x;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">aAcceleration</span> <span class="o">=</span> <span class="n">acceleration</span><span class="o">.</span><span class="na">x</span><span class="o">;</span></span></pre></code></div>
@@ -426,7 +426,7 @@ affect the rest of our world.</div><code><pre><span class='one-line'>    <span c
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Yes, this is completely arbitrary.  But it does do something.  If the object is accelerating to the right, its angular rotation accelerates in a clockwise direction; acceleration to the left results in a counterclockwise rotation.  Of course, it’s important to think about scale in this case. The <em>x</em> component of the acceleration vector might be a quantity that’s too large, causing the object to spin in a way that looks ridiculous or unrealistic.  So dividing the <em>x</em> component by some value, or perhaps constraining the angular velocity to a reasonable range, could really help.  Here’s the entire <span class="function">update()</span> function with these tweaks added:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_02_forces_angular_motion/_3_02_forces_angular_motion.pde /book/processingjs/chapter03/_3_02_forces_angular_motion/Attractor.pde /book/processingjs/chapter03/_3_02_forces_angular_motion/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -434,8 +434,8 @@ affect the rest of our world.</div><code><pre><span class='one-line'>    <span c
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example2" style="display: block;"></a>
 <span class="example">Example 3.2: Forces with (arbitrary) angular aotion</span></p>
@@ -458,9 +458,9 @@ affect the rest of our world.</div><code><pre><span class='one-line'>    <span c
 
     acceleration.mult(0);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -492,33 +492,33 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 <h3 id="33-trigonometry">3.3 Trigonometry</h3><p>I think it may be time.  We’ve looked at angles, we’ve spun an object.  It’s time for: <em>sohcahtoa</em>.  Yes, <em>sohcahtoa</em>.  This seemingly nonsensical word is actually the foundation for a lot of computer graphics work.    A basic understanding of trigonometry is essential if you want to calculate an angle, figure out the distance between points, work with circles, arcs, or lines.  And <em>sohcahtoa</em> is a  mnemonic device (albeit a somewhat absurd one) for what the trigonometric functions sine, cosine, and tangent mean.</p>
 <a id="chapter03_figure4" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.4</p>
 </div>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>soh</em></strong>: sine  = opposite / hypotenuse
 </p>
 </li>
-		
+
 			<li><p><strong><em>cah</em></strong>: cosine  = adjacent / hypotenuse
 </p>
 </li>
-		
+
 			<li><p><strong><em>toa</em></strong>: tangent  = opposite / adjacent
 </p>
 </li>
-		
+
 	</ul>
 </div><a id="chapter03_figure5" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.5</p>
 </div>
 <p>Take a look at the above diagram again.  There’s no need to memorize it, but make sure you feel comfortable with it.  Draw it again yourself.    Now let’s draw it a slightly different way (Figure 3.5).</p>
@@ -527,7 +527,7 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 </section><section><a id="chapter03_section4" style="display: block;"></a>
 <h3 id="34-pointing-in-the-direction-of-movement">3.4 Pointing in the Direction of Movement</h3><p>Let’s go all the way back to Example 1.10, which features a <span class="class">Mover</span> object accelerating towards the mouse.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter01/_1_10_motion101_acceleration/_1_10_motion101_acceleration.pde /book/processingjs/chapter01/_1_10_motion101_acceleration/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -535,15 +535,15 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>You might notice that almost all of the shapes we’ve been drawing so far are circles.   This is convenient for a number of reasons, one of which is that we don’t have to consider the question of rotation.  Rotate a circle and, well, it looks exactly the same.  However, there comes a time in all motion programmers’ lives when they want to draw something on the screen that points in the direction of movement. Perhaps you are drawing an ant, or a car, or a spaceship. And when we say point in the direction of movement, what we are really saying is “rotate according to the velocity vector.”  Velocity is a vector, with an <span class="var">x</span> and a <span class="var">y</span> component, but to rotate in Processing we need an angle, in radians.   Let’s draw our trigonometry diagram one more time, with an object’s velocity vector (Figure 3.6).</p>
 <a id="chapter03_figure6" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_06.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.6</p>
 </div>
 <p>OK. We know that the definition of tangent is:</p>
@@ -551,31 +551,31 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 <p>The problem with the above is that we know velocity, but we don’t know the angle.  We have to solve for the angle.   This is where a special function known as <em>inverse tangent</em> comes in, sometimes referred to as <em>arctangent</em>.  (There is also an <em>inverse sine</em> and an <em>inverse cosine</em>.)</p>
 <p>If the tangent of some value <span class="var">a</span> equals some value <span class="var">b</span>, then the inverse tangent of <span class="var">b</span> equals <span class="var">a</span>, for example:</p>
 <div class="list">
-	
+
 	<dl >
-		
+
 			<dt><em>if</em></dt>
 			<dd><p><span class="formula">tangent(a) = b</span></p>
 </dd>
-		
+
 			<dt><em>then</em></dt>
 			<dd><p><span class="formula">a = arctangent(b)</span></p>
 </dd>
-		
+
 	</dl>
 </div><p>See how that is the inverse?   The above now allows us to solve for the angle:</p>
 <div class="list">
-	
+
 	<dl >
-		
+
 			<dt><em>if</em></dt>
 			<dd><p><span class="formula">tangent(angle) = velocity<sub>y</sub>  / velocity<sub>x</sub></span></p>
 </dd>
-		
+
 			<dt><em>then</em></dt>
 			<dd><p><span class="formula">angle = arctangent(velocity<sub>y</sub>  / velocity<sub>x</sub>)</span></p>
 </dd>
-		
+
 	</dl>
 </div><p>Now that we have the formula, let’s see where it should go in our Mover’s <span class="function">display()</span> function.   Notice that in Processing, the function for arctangent is called <span class="function">atan()</span>.</p>
 <div class="source-code">
@@ -594,9 +594,9 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
     rect(0,0,30,10);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -619,16 +619,16 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 </div><p>Now the above code is pretty darn close, and almost works.   There’s a pretty big problem, though.  Let’s consider the below two velocity vectors depicted.</p>
 <a id="chapter03_figure7" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_07.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.7</p>
 </div>
 <p>Though superficially similar, the two vectors point in quite different directions—opposite  directions, in fact!  However, if we were to apply our formula to solve for the angle to each vector…</p>
 <p><span class="formula">V1 ⇒ angle = atan(-4/3) = atan(-1.25) = -0.9272952 radians = -53 degrees</span><br /><span class="formula">V2 ⇒ angle = atan(4/-3) = atan(-1.25) = -0.9272952 radians = -53 degrees</span></p>
 <p>…we get the same angle for each vector.   This can’t be right for both; the vectors point in opposite directions!   The thing is, this is a pretty common problem in computer graphics. Rather than simply using <span class="function">atan()</span> along with a bunch of conditional statements to account for positive/negative scenarios, Processing (and pretty much all programming environments) has a nice function called <span class="function">atan2()</span> that does it for you.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_03_pointing_velocity/_3_03_pointing_velocity.pde /book/processingjs/chapter03/_3_03_pointing_velocity/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -636,8 +636,8 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example3" style="display: block;"></a>
 <span class="example">Example 3.3: Pointing in the direction of motion</span></p>
@@ -656,9 +656,9 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
     rect(0,0,30,10);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -682,9 +682,9 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    // The easiest way to do this!
     float angle = velocity.heading2D();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The easiest way to do this!</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">velocity</span><span class="o">.</span><span class="na">heading2D</span><span class="o">();</span></span></pre></code></div>
@@ -703,9 +703,9 @@ Polar coordinate—the magnitude (length) and direction (angle) of a vector</p>
 <p>Processing’s drawing functions, however, don’t understand polar coordinates.  Whenever we want to display something in Processing, we have to specify locations as <em>(x,y)</em> Cartesian coordinates.   However, sometimes it is a great deal more convenient for us to think in polar coordinates when designing.   Happily for us, with trigonometry we can convert back and forth between polar and Cartesian, which allows us to design with whatever coordinate system we have in mind but always draw with Cartesian coordinates.</p>
 <a id="chapter03_figure8" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_08.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.8: The Greek letter θ (theta) is often used to denote an angle.  Since a polar coordinate is conventionally referred to as (r, θ), we’ll use theta as a variable name when referring to an angle.</p>
 </div>
 <p><span class="formula">sine(theta)   = y/r   →   y = r * sine(theta)</span><br /><span class="formula">cosine(theta) = x/r   →   x = r * cosine(theta)</span></p>
@@ -718,9 +718,9 @@ float theta = PI / 4;
 float x = r * cos(theta);
 float y = r * sin(theta);
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">75</span><span class="o">;</span></span>
@@ -736,7 +736,7 @@ float y = r * sin(theta);
 </div><p>This type of conversion can be useful in certain applications.  For example, to move a shape along a circular path using Cartesian coordinates is not so easy.  With polar coordinates, on the other hand, it’s simple: increment the angle!</p>
 <p>Here’s how it is done with global variables <span class="var">r</span> and <span class="var">theta</span>.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_04_PolarToCartesian/_3_04_PolarToCartesian.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -744,8 +744,8 @@ float y = r * sin(theta);
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example4" style="display: block;"></a>
 <span class="example">Example 3.4: Polar to Cartesian</span></p>
@@ -773,9 +773,9 @@ void draw() {
 
   theta += 0.01;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">75</span><span class="o">;</span></span>
@@ -807,17 +807,17 @@ void draw() {
   <a id="chapter03_exercise4" style="display: block;"></a>
 <h4 id="exercise-34">Exercise 3.4</h4><p>Using Example 3.4 as a basis, draw a spiral path.  Start in the center and move outwards.  Note that this can be done by only changing one line of code and adding one line of code!</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_exc04.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><div class="example">
   <a id="chapter03_exercise5" style="display: block;"></a>
 <h4 id="exercise-35">Exercise 3.5</h4><p>Simulate the spaceship in the game Asteroids.   In case you aren’t familiar with Asteroids, here is a brief description: A spaceship (represented as a triangle) floats in two dimensional space.   The left arrow key turns the spaceship counterclockwise, the right clockwise.  The <em>z</em> key applies a “thrust” force in the direction the spaceship is pointing.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/Ex_3_05_asteroids/Ex_3_05_asteroids.pde /book/processingjs/chapter03/Ex_3_05_asteroids/Spaceship.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -825,8 +825,8 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter03_section6" style="display: block;"></a>
@@ -834,9 +834,9 @@ void draw() {
 <p>Let’s take a look at a graph of the sine function, where <em>y = sine(x)</em>.</p>
 <a id="chapter03_figure9" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_09.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.9</p>
 </div>
 <p>You’ll notice that the output of the sine function is a smooth curve alternating between –1 and 1.  This type of a behavior is known as <strong><em>oscillation</em></strong>, a periodic movement between two points.  Plucking a guitar string, swinging a pendulum, bouncing on a pogo stick—these are all examples of oscillating motion.</p>
@@ -844,7 +844,7 @@ void draw() {
 .</p>
 <p>Let’s begin with a really basic scenario.  We want a circle to oscillate from the left side to the right side of a Processing window.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_05_simple_harmonic_motion/_3_05_simple_harmonic_motion.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -852,22 +852,22 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>This is what is known as <strong><em>simple harmonic motion</em></strong> (or, to be fancier, “the periodic sinusoidal oscillation of an object”).   This is going to be a simple program to write, but before we get into the code, let’s familiarize ourselves with some of the terminology of oscillation (and waves).</p>
 <p>Simple harmonic motion can be expressed as any location (in our case, the <span class="var">x</span> location) as a function of time, with the following two elements:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>Amplitude</em></strong>: The distance from the center of motion to either extreme<br /></p>
 </li>
-		
+
 			<li><p><strong><em>Period</em></strong>: The amount of time it takes for one complete cycle of motion
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Looking at the graph of sine (Figure 3.9), we can see that the amplitude is 1 and the period is TWO PI; the output of sine never rises above 1 or below -1; and every TWO PI radians (or 360 degrees) the wave pattern repeats.</p>
 <p>Now, in the Processing world we live in, what is amplitude and what is period?  Amplitude can be measured rather easily in pixels.   In the case of a window 200 pixels wide, we would oscillate from the center 100 pixels to the right and 100 pixels to the left. Therefore:</p>
@@ -875,9 +875,9 @@ void draw() {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Our amplitude is measured in pixels.
 float amplitude = 100;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Our amplitude is measured in pixels.</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">amplitude</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span></span></pre></code></div>
@@ -889,9 +889,9 @@ float amplitude = 100;</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Our period is measured in frames (our unit of time for animation).
 float period = 120;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Our period is measured in frames (our unit of time for animation).</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">period</span> <span class="o">=</span> <span class="mi">120</span><span class="o">;</span></span></pre></code></div>
@@ -902,9 +902,9 @@ float period = 120;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float x = amplitude * cos(TWO_PI * frameCount / period);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">cos</span><span class="o">(</span><span class="n">TWO_PI</span> <span class="o">*</span> <span class="n">frameCount</span> <span class="o">/</span> <span class="n">period</span><span class="o">);</span></span></pre></code></div>
@@ -916,91 +916,91 @@ float period = 120;</textarea>
 <p><span class="formula">TWO_PI * frameCount / period</span></p>
 <p>What’s going on here?   Let’s start with what we know.  We know that cosine will repeat every 2PI radians—i.e., it will start at 0, repeat at 2PI, 4PI, 6PI, etc.   If the period is 120, then we want the oscillating motion to repeat when the frameCount is at 120 frames, 240 frames, 360 frames, etc.  <span class="var">frameCount</span> is really the only variable; it starts at 0 and counts upward.   Let’s take a look at what the formula yields at those values:</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>frameCount     </th>
-					
+
 						<th>frameCount / period    </th>
-					
+
 						<th>TWO_PI * frameCount / period</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>60</p>
 </td>
-				
+
 					<td><p>0.5</p>
 </td>
-				
+
 					<td><p>PI</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>120</p>
 </td>
-				
+
 					<td><p>1</p>
 </td>
-				
+
 					<td><p>TWO_PI</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>240</p>
 </td>
-				
+
 					<td><p>2</p>
 </td>
-				
+
 					<td><p>2 * TWO_PI (or 4* PI)</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>etc.</p>
 </td>
-				
+
 					<td><p></p>
 </td>
-				
+
 					<td><p></p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><p><span class="var">frameCount</span> divided by <span class="var">period</span> tells us how many cycles we’ve completed—are we halfway through the first cycle?  Have we completed two  cycles?  By multiplying that number by TWO_PI, we get the result we want, since TWO_PI is the number of radians required for one cosine (or sine) to complete one cycle.</p>
@@ -1026,9 +1026,9 @@ void draw() {
   line(0,0,x,0);
   ellipse(x,0,20,20);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1061,9 +1061,9 @@ void draw() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float x = amplitude * cos(TWO_PI * frameCount / period);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">cos</span><span class="o">(</span><span class="n">TWO_PI</span> <span class="o">*</span> <span class="n">frameCount</span> <span class="o">/</span> <span class="n">period</span><span class="o">);</span></span></pre></code></div>
@@ -1074,9 +1074,9 @@ void draw() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float x = amplitude * cos ( some value that increments slowly );</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">cos</span> <span class="o">(</span> <span class="n">some</span> <span class="n">value</span> <span class="n">that</span> <span class="n">increments</span> <span class="n">slowly</span> <span class="o">);</span></span></pre></code></div>
@@ -1089,9 +1089,9 @@ void draw() {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float angle = 0;
 float aVelocity = 0.05;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1104,9 +1104,9 @@ float aVelocity = 0.05;</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>angle += aVelocity;
 float x = amplitude * cos(angle);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">angle</span> <span class="o">+=</span> <span class="n">aVelocity</span><span class="o">;</span></span>
@@ -1141,9 +1141,9 @@ void draw() {
   line(0,0,x,0);
   ellipse(x,0,20,20);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1175,7 +1175,7 @@ void draw() {
 <p><span class="formula">period = TWO_PI / angular velocity</span></p>
 <p>Let’s expand this example a bit more and create an Oscillator class.  And let’s assume we want the oscillation to happen along both the x-axis (as above) and the y-axis.  To do this, we’ll need two angles, two angular velocities, and two amplitudes (one for each axis).   Another perfect opportunity for PVector!</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_07_oscillating_objects/_3_07_oscillating_objects.pde /book/processingjs/chapter03/_3_07_oscillating_objects/Oscillator.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1183,8 +1183,8 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example7" style="display: block;"></a>
 <span class="example">Example 3.7: Oscillator objects</span></p>
@@ -1224,9 +1224,9 @@ void draw() {
     popMatrix();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Oscillator</span>  <span class="o">{</span></span>
@@ -1277,7 +1277,7 @@ void draw() {
 </div></section><section><a id="chapter03_section8" style="display: block;"></a>
 <h3 id="38-waves">3.8 Waves</h3><p>If you’re saying to yourself, “Um, this is all great and everything, but what I really want is to draw a wave onscreen,” well, then, the time has come.   The thing is, we’re about 90% there.  When we oscillate a single circle up and down according to the sine function, what we are doing is looking at a single point along the x-axis of a wave pattern.  With a little panache and a for loop, we can place a whole bunch of these oscillating circles next to each other.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave/_3_09_wave.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1285,8 +1285,8 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>This wavy pattern could be used in the design of the body or appendages of a creature, as well as to simulate a soft surface (such as water).</p>
 <p>Here, we’re going to encounter the same questions of amplitude (height of pattern) and period.  Instead of period referring to time, however, since we’re looking at the full wave, we can talk about period as the width (in pixels) of a full wave cycle.    And just as with simple oscillation, we have the option of computing the wave pattern according to a precise period or simply following the model of angular velocity.</p>
@@ -1296,9 +1296,9 @@ void draw() {
   <textarea>float angle = 0;
 float angleVel = 0.2;
 float amplitude = 100;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1309,24 +1309,24 @@ float amplitude = 100;</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Then we’re going to loop through all of the <span class="var">x</span> values where we want to draw a point of the wave.  Let’s say every 24 pixels for now.  In that loop, we’re going to want to do three things:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Calculate the y location according to amplitude and sine of the angle.
 </p>
 </li>
-		
+
 			<li><p>
 Draw a circle at the <em>(x,y)</em> location.
 </p>
 </li>
-		
+
 			<li><p>
 Increment the angle according to angular velocity.
 </p>
 </li>
-		
+
 	</ol>
 </div><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1342,9 +1342,9 @@ Increment the angle according to angular velocity.
     // 3) Increment the angle according to angular velocity.
     angle += angleVel;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">width</span><span class="o">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="mi">24</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1364,7 +1364,7 @@ amplitude and sine of the angle.</div><code><pre><span class='one-line'>    <spa
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Let’s look at the results with different values for <span class="var">angleVel</span>:</p>
 <div class="image-container three-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave_a/_3_09_wave_a.pde" class="three-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1372,11 +1372,11 @@ amplitude and sine of the angle.</div><code><pre><span class='one-line'>    <spa
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">angleVel = 0.05</p>
 </div>
 <div class="image-container three-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave_b/_3_09_wave_b.pde" class="three-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1384,11 +1384,11 @@ amplitude and sine of the angle.</div><code><pre><span class='one-line'>    <spa
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">angleVel = 0.2</p>
 </div>
 <div class="image-container three-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave_c/_3_09_wave_c.pde" class="three-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1396,12 +1396,12 @@ amplitude and sine of the angle.</div><code><pre><span class='one-line'>    <spa
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">angleVel = 0.4</p>
 </div>
 <p>Notice how, although we’re not precisely computing the period of the wave, the higher the angular velocity, the shorter the period.  It’s also worth noting that as the period becomes shorter, it becomes more and more difficult to make out the wave itself as the distance between the individual points increases.  One option we have is to use <span class="function">beginShape()</span> and <span class="function">endShape()</span> to connect the points with a line.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_08_static_wave_lines/_3_08_static_wave_lines.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1409,8 +1409,8 @@ amplitude and sine of the angle.</div><code><pre><span class='one-line'>    <spa
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example8" style="display: block;"></a>
 <span class="example">Example 3.8: Static wave drawn as a continuous line</span></p>
@@ -1439,9 +1439,9 @@ for (int x = 0; x <= width; x += 5) {
   angle +=angleVel;
 }
 endShape();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1473,7 +1473,7 @@ vertex() to set all the vertices of your shape.</div><code><pre><span class='one
 </div><p>You may have noticed that the above example is static.  The wave never changes, never undulates.   This additional step is a bit tricky.  Your first instinct might be to say: “Hey, no problem, we’ll just let theta be a global variable and let it increment from one cycle through <span class="function">draw()</span> to another.”</p>
 <p>While it’s a nice thought, it doesn’t work.   If you look at the wave, the righthand edge doesn’t match the lefthand; where it ends in one cycle of <span class="function">draw()</span> can’t be where it starts in the next.  Instead, what we need to do is have a variable dedicated entirely to tracking what value of angle the wave should start with.   This angle (which we’ll call <span class="var">startAngle</span>) increments with its own angular velocity.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave/_3_09_wave.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1481,8 +1481,8 @@ vertex() to set all the vertices of your shape.</div><code><pre><span class='one
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example9" style="display: block;"></a>
 <span class="example">Example 3.9: The Wave</span></p>
@@ -1510,9 +1510,9 @@ void draw() {
     angle += angleVel;
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">startAngle</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1548,7 +1548,7 @@ void draw() {
   <a id="chapter03_exercise10" style="display: block;"></a>
 <h4 id="exercise-310">Exercise 3.10</h4><p>Encapsulate the above examples into a Wave class and create a sketch that displays two waves (with different amplitudes/periods) as in the screenshot below.  Move beyond plain circles and lines and try visualizing the wave in a more creative way.</p>
 <div class="image-container " >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/Ex_3_10_OOPWave/Ex_3_10_OOPWave.pde /book/processingjs/chapter03/Ex_3_10_OOPWave/Wave.pde" >
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1556,15 +1556,15 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 
 </div><div class="example">
   <a id="chapter03_exercise11" style="display: block;"></a>
 <h4 id="exercise-311">Exercise 3.11</h4><p>More complex waves can be produced by the values of multiple waves together.  Create a sketch that implements this, as in the screenshot below.</p>
 <div class="image-container " >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/Ex_3_11_AdditiveWave/Ex_3_11_AdditiveWave.pde" >
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1572,24 +1572,24 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter03_section9" style="display: block;"></a>
 <h3 id="39-trigonometry-and-forces-the-pendulum">3.9 Trigonometry and Forces: The Pendulum</h3><p>Do you miss Newton’s laws of motion?  I know I sure do.  Well, lucky for you, it’s time to bring it all back home.  After all, it’s been nice learning about triangles and tangents and waves, but really, the core of this book is about simulating the physics of moving bodies.  Let’s take a look at how trigonometry can help us with this pursuit.</p>
 <a id="chapter03_figure10" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_10.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.10</p>
 </div>
 <a id="chapter03_figure11" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_11.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.11</p>
 </div>
 <p>A pendulum is a bob suspended from a pivot.  Obviously a real-world pendulum would live in a 3D space, but we’re going to look at a simpler scenario, a pendulum in a 2D space—a Processing window (see Figure 3.10).</p>
@@ -1598,9 +1598,9 @@ void draw() {
 <p>Let’s zoom in on the right triangle from the pendulum diagram.</p>
 <a id="chapter03_figure12" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_12.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.12</p>
 </div>
 <p>We can see that the force of the pendulum (<span class="var">F<sub>p</sub></span>) should point perpendicular to the arm of the pendulum in the direction that the pendulum is swinging.  After all, if there were no arm, the bob would just fall straight down.  It’s the tension force of the arm that keeps the bob accelerating towards the pendulum’s rest state. Since the force of gravity (<span class="var">F<sub>p</sub></span>) points downward, by making a right triangle out of these two vectors, we’ve accomplished something quite magnificent.  We’ve made the force of gravity the hypotenuse of a right triangle and separated the vector into two components, one of which represents the force of the pendulum.   Since sine equals opposite over hypotenuse, we have:</p>
@@ -1616,29 +1616,29 @@ void draw() {
 <p>Amazing.  After all that, the formula is so simple.  You might be wondering, why bother going through the derivation at all?  I mean, learning is great and all, but we could have easily just said: Hey, the angular acceleration of a pendulum is some constant times the sine of the angle.   This is just another moment in which we remind ourselves that the purpose of the book is not to learn how pendulums swing or gravity works.  The point is to think creatively about how things can move about the screen in a computationally based graphics system.  The pendulum is just a case study.   If you can understand the approach to programming a pendulum, then however you choose to design your onscreen world, you can apply the same techniques.</p>
 <p>Of course, we’re not finished yet.  We may be happy with our simple, elegant formula, but we still have to apply it in code.   This is most definitely a good time to practice our object-oriented programming skills and create a Pendulum class.  Let’s think about all the properties we’ve encountered in our pendulum discussion that the class will need:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 arm length
 </p>
 </li>
-		
+
 			<li><p>
 angle
 </p>
 </li>
-		
+
 			<li><p>
 angular velocity
 </p>
 </li>
-		
+
 			<li><p>
 angular acceleration
 </p>
 </li>
-		
+
 	</ul>
 </div><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1652,9 +1652,9 @@ angular acceleration
   float aVelocity;
   // Angular acceleration
   float aAcceleration;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Pendulum</span>  <span class="o">{</span></span>
@@ -1683,9 +1683,9 @@ angular acceleration
     // Increment angle.
     angle += aVelocity;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -1703,9 +1703,9 @@ angular acceleration
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><a id="chapter03_figure13" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_13.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.13</p>
 </div>
 <p>…as well as a function <span class="function">display()</span> to draw the pendulum in the window. This begs the question: “Um, where do we draw the pendulum?”  We know the angle and the arm length, but how do we know the <span class="var">x</span>,<span class="var">y</span> (Cartesian!) coordinates for both the pendulum’s pivot point (let’s call it origin) and bob location (let’s call it location)?  This may be getting a little tiring, but the answer, yet again, is trigonometry.</p>
@@ -1714,9 +1714,9 @@ angular acceleration
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector origin = new PVector(100,10);
 float r = 125;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">origin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span></span>
@@ -1728,9 +1728,9 @@ float r = 125;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector location = new PVector(r*sin(angle),r*cos(angle));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">location</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="n">r</span><span class="o">*</span><span class="n">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">),</span><span class="n">r</span><span class="o">*</span><span class="n">cos</span><span class="o">(</span><span class="n">angle</span><span class="o">));</span></span></pre></code></div>
@@ -1741,9 +1741,9 @@ float r = 125;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>location.add(origin);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">location</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">origin</span><span class="o">);</span></span></pre></code></div>
@@ -1757,9 +1757,9 @@ float r = 125;</textarea>
 fill(175);
 line(origin.x,origin.y,location.x,location.y);
 ellipse(location.x,location.y,16,16);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
@@ -1774,9 +1774,9 @@ ellipse(location.x,location.y,16,16);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>aAcceleration = (-1 * G * sin(angle)) / r;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">aAcceleration</span> <span class="o">=</span> <span class="o">(-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">))</span> <span class="o">/</span> <span class="n">r</span><span class="o">;</span></span></pre></code></div>
@@ -1787,9 +1787,9 @@ ellipse(location.x,location.y,16,16);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>aVelocity *= 0.99;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">aVelocity</span> <span class="o">*=</span> <span class="mf">0.99</span><span class="o">;</span></span></pre></code></div>
@@ -1798,7 +1798,7 @@ ellipse(location.x,location.y,16,16);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Putting everything together, we have the following example (with the pendulum beginning at a 45-degree angle).</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_10_PendulumExample/_3_10_PendulumExample.pde /book/processingjs/chapter03/_3_10_PendulumExample/Pendulum.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1806,8 +1806,8 @@ ellipse(location.x,location.y,16,16);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example10" style="display: block;"></a>
 <span class="example">Example 3.10: Swinging pendulum</span></p>
@@ -1884,9 +1884,9 @@ class Pendulum  {
     ellipse(location.x,location.y,16,16);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Pendulum</span> <span class="n">p</span><span class="o">;</span></span>
@@ -1972,17 +1972,17 @@ Polar to Cartesian coordinates will tell us!</div><code><pre><span class='one-li
 </div><div class="example">
   <a id="chapter03_exercise13" style="display: block;"></a>
 <h4 id="exercise-313">Exercise 3.13</h4><div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_exc13.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>Using trigonometry, what is the magnitude of the normal force in the illustration on the right (the force perpendicular to the incline on which the sled rests)?   Note that, as indicated, the “normal” force is a component of the force of gravity.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><div class="example">
@@ -1992,9 +1992,9 @@ Polar to Cartesian coordinates will tell us!</div><code><pre><span class='one-li
 </div></section><section><a id="chapter03_section10" style="display: block;"></a>
 <h3 id="310-spring-forces">3.10 Spring Forces</h3><a id="chapter03_figure14" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_14.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.14</p>
 </div>
 <p>In <a href="#chapter03_section6">Section 3.6</a>
@@ -2004,32 +2004,32 @@ Polar to Cartesian coordinates will tell us!</div><code><pre><span class='one-li
 <p><span class="highlight">The force of the spring is directly proportional to the extension of the spring.</span></p>
 <a id="chapter03_figure15" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter03/ch03_15.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.15: x = current length - rest length</p>
 </div>
 <p>In other words, if you pull on the bob a lot, the force will be strong; if you pull on the bob a little, the force will be weak.  Mathematically, the law is stated as follows:</p>
 <p><span class="formula">F<sub>spring</sub> = - k * x</span></p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><span class="var">k</span> is constant and its value will ultimately scale the force.  Is the spring highly elastic or quite rigid?
 </p>
 </li>
-		
+
 			<li><p><span class="var">x</span> refers to the displacement of the spring, i.e. the difference between the current length and the rest length.  The rest length is defined as the length of the spring in a state of equilibrium.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Now remember, force is a vector, so we need to calculate both magnitude and direction.  Let’s look at one more diagram of the spring and label all the givens we might have in a Processing sketch.</p>
 <a id="chapter03_figure16" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_16.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.16</p>
 </div>
 <p>Let’s establish the following three variables as shown in Figure 3.16.</p>
@@ -2038,9 +2038,9 @@ Polar to Cartesian coordinates will tell us!</div><code><pre><span class='one-li
   <textarea>PVector anchor;
 PVector location;
 float restLength;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">anchor</span><span class="o">;</span></span>
@@ -2053,9 +2053,9 @@ float restLength;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float k = 0.1;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span></span></pre></code></div>
@@ -2070,9 +2070,9 @@ float restLength;</textarea>
 PVector dir = PVector.sub(bob,anchor);
 float currentLength = dir.mag();
 float x = restLength - currentLength;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A vector pointing from anchor to bob
@@ -2085,9 +2085,9 @@ gives us the current length of the spring.</div><code><pre><span class='one-line
 </div><p>Now that we’ve sorted out the elements necessary for the magnitude of the force (-1 * <span class="var">k</span> * <span class="var">x</span>), we need to figure out the direction, a unit vector pointing in the direction of the force.  The good news is that we already have this vector.  Right?  Just a moment ago we thought to ourselves: “How we can calculate that distance?  How about the magnitude of a vector that points from the anchor to the bob?”  Well, that is the direction of the force!</p>
 <a id="chapter03_figure17" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_17.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.17</p>
 </div>
 <p>In Figure 3.17, we can see that if we stretch the spring beyond its rest length, there should be a force pulling it back towards the anchor.  And if it shrinks below its rest length, the force should push it away from the anchor.   This reversal of direction is accounted for in the formula with the -1.  And so all we need to do is normalize the PVector we used for the distance calculation!  Let’s take a look at the code and rename that PVector variable as “force.”</p>
@@ -2104,9 +2104,9 @@ force.normalize();
 
 // Putting it together: direction and magnitude!
 force.mult(-1 * k * x);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Magnitude of spring force according to Hooke’s law</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span></span>
@@ -2144,9 +2144,9 @@ void draw()  {
   bob.update();
   bob.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Bob</span> <span class="n">bob</span><span class="o">;</span></span>
@@ -2173,9 +2173,9 @@ void draw()  {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><a id="chapter03_figure18" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter03/ch03_18.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 3.18</p>
 </div>
 <p>One option would be to write out all of the spring force code in the main <span class="function">draw()</span> loop.  But thinking ahead to when you might have multiple bobs and multiple spring connections, it makes a good deal of sense to write an additional class, a Spring class.  As shown in Figure 3.18, the Bob object keeps track of the movements of the Bob; the Spring class keeps track of the Spring’s anchor and its rest length and calculates the Spring force on the Bob.</p>
@@ -2203,9 +2203,9 @@ void draw()  {
   bob.display();
   spring.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Bob</span> <span class="n">bob</span><span class="o">;</span></span></pre></code></div>
@@ -2238,9 +2238,9 @@ computing the force of the spring on the bob.</div><code><pre><span class='one-l
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector force = attractor.attract(mover);
   mover.applyForce(force);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">force</span> <span class="o">=</span> <span class="n">attractor</span><span class="o">.</span><span class="na">attract</span><span class="o">(</span><span class="n">mover</span><span class="o">);</span></span>
@@ -2253,9 +2253,9 @@ computing the force of the spring on the bob.</div><code><pre><span class='one-l
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector force = spring.connect(bob);
   bob.applyForce(force);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">force</span> <span class="o">=</span> <span class="n">spring</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">bob</span><span class="o">);</span></span>
@@ -2267,9 +2267,9 @@ computing the force of the spring on the bob.</div><code><pre><span class='one-l
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  spring.connect(bob);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">spring</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">bob</span><span class="o">);</span></span></pre></code></div>
@@ -2287,9 +2287,9 @@ computing the force of the spring on the bob.</div><code><pre><span class='one-l
     // area.
     b.applyForce(force);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">Bob</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2306,7 +2306,7 @@ area.</div><code><pre><span class='one-line'>    <span class="n">b</span><span c
 </div><p>Why do it one way with the Attractor and another way with the Spring?    When we were first learning about forces, it was a bit clearer to show all the forces being applied in the main <span class="function">draw()</span> loop, and hopefully this helped you learn about force accumulation.  Now that we’re more comfortable with that, perhaps it’s simpler to embed some of the details inside the objects themselves.</p>
 <p>Let’s take a look at the rest of the elements in the Spring class.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_11_spring/_3_11_spring.pde /book/processingjs/chapter03/_3_11_spring/Mover.pde /book/processingjs/chapter03/_3_11_spring/Spring.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2314,8 +2314,8 @@ area.</div><code><pre><span class='one-line'>    <span class="n">b</span><span c
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter03_example11" style="display: block;"></a>
 <span class="example">Example 3.11: A Spring connection</span></p>
@@ -2372,9 +2372,9 @@ area.</div><code><pre><span class='one-line'>    <span class="n">b</span><span c
   //[end]
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Spring</span> <span class="o">{</span></span>
@@ -2458,9 +2458,9 @@ distance and rest length.</div><code><pre><span class='one-line'>    <strong><sp
     b.velocity.mult(0);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">constrainLength</span><span class="o">(</span><span class="n">Bob</span> <span class="n">b</span><span class="o">,</span> <span class="kt">float</span> <span class="n">minlen</span><span class="o">,</span> <span class="kt">float</span> <span class="n">maxlen</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>

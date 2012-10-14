@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <script type="text/javascript">
 
@@ -101,110 +102,110 @@
 <h2 id="introduction">Introduction</h2>
 <blockquote >
   “I am two with nature.”
-  
+
     <span class="attribution">
 Woody Allen
 </span>
-  
+
 </blockquote><p>Here we are: the beginning.  Well, almost the beginning. If it’s been a while since you’ve done any programming in Processing (or any math, for that matter), this introduction will get your mind back into computational thinking before we approach some of the more difficult and complex material.</p>
 <p>In Chapter 1, we’re going to talk about the concept of a vector and how it will serve as the building block for simulating motion throughout this book.   But before we take that step, let’s think about what it means for something to simply move around the screen.   Let’s begin with one of the best-known and simplest simulations of motion—the random walk.</p>
 <section><a id="intro_section1" style="display: block;"></a>
 <h3 id="i1-random-walks">I.1 Random Walks</h3><p>Imagine you are standing in the middle of a balance beam.  Every ten seconds, you flip a coin.  Heads, take a step forward.  Tails, take a step backward.   This is a random walk—a path defined as a series of random steps.    Stepping off that balance beam and onto the floor, you could perform a random walk in two dimensions by flipping that same coin twice with the following results:</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Flip 1 </th>
-					
+
 						<th>Flip 2 </th>
-					
+
 						<th>Result</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>Heads</p>
 </td>
-				
+
 					<td><p>Heads</p>
 </td>
-				
+
 					<td><p>Step forward.</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Heads</p>
 </td>
-				
+
 					<td><p>Tails</p>
 </td>
-				
+
 					<td><p>Step right.</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Tails</p>
 </td>
-				
+
 					<td><p>Heads</p>
 </td>
-				
+
 					<td><p>Step left.</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Tails</p>
 </td>
-				
+
 					<td><p>Tails</p>
 </td>
-				
+
 					<td><p>Step backward.</p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><p>Yes, this may seem like a particularly unsophisticated algorithm.  Nevertheless, random walks can be used to model phenomena that occur in the real world, from the movements of molecules in a gas to the behavior of a gambler spending a day at the casino.  As or us, we begin this book studying a random walk with three goals in mind.</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 We need to review a programming concept central to this book—object-oriented programming.  The random walker will serve as a template for how we will use object-oriented design to make things that move around a Processing window.
 </p>
 </li>
-		
+
 			<li><p>
 The random walk instigates the two questions that we will ask over and over again throughout this book: “How do we define the rules that govern the behavior of our objects?” and then, “How do we implement these rules in Processing?”
 </p>
 </li>
-		
+
 			<li><p>
 Throughout the book, we’ll periodically need a basic understanding of randomness, probability, and Perlin noise.  The random walk will allow us to demonstrate a few key points that will come in handy later.
 </p>
 </li>
-		
+
 	</ol>
 </div></section><section><a id="intro_section2" style="display: block;"></a>
 <h3 id="i2-the-random-walker-class">I.2 The Random Walker Class</h3><p>Let’s review a bit of object-oriented programming (OOP) first by building a “Walker” object.   This will be only a cursory review.  If you have never worked with OOP before, you may want something more comprehensive; I’d suggest stopping here and reviewing the <a href="http://processing.org/learning/objects/">basics on the Processing website</a>
@@ -219,9 +220,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   int x;
   int y;
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Walker</span> <span class="o">{</span></span></pre></code></div>
@@ -242,9 +243,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
     y = height/2;
   }
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Objects have a constructor where they are initialized.</div><code><pre><span class='one-line'>  <span class="n">Walker</span><span class="o">()</span> <span class="o">{</span></span>
@@ -265,9 +266,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
     point(x,y);
   }
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Objects have functions.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -285,9 +286,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   <textarea>  void step() {
     // 0, 1, 2, or 3
     int choice = int(random(4));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -312,9 +313,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> The random “choice” determines our step.</div><code><pre><span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">choice</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span></span>
@@ -337,9 +338,9 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// A Walker object
 Walker w;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A Walker object</div><code><pre><span class='one-line'><span class="n">Walker</span> <span class="n">w</span><span class="o">;</span></span></pre></code></div>
@@ -357,9 +358,9 @@ Walker w;</textarea>
   w = new Walker();  //[bold]
   background(0);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -380,9 +381,9 @@ Walker w;</textarea>
   w.display(); //[bold]
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -396,7 +397,7 @@ Walker w;</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Since we only draw the background once in <span class="function">setup()</span>, rather than clearing it continually each time through <span class="function">draw()</span>, we see the trail of the random walk in our Processing window.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_I_1_RandomWalkTraditional/_I_1_RandomWalkTraditional.pde /book/processingjs/intro/_I_1_RandomWalkTraditional/Walker.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -404,15 +405,15 @@ Walker w;</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p>There are a couple improvements we could make to the random walker.  For one, this Walker’s step choices are limited to four options—up, down, left, and right.  But any given pixel in the window has eight possible neighbors, and a ninth possibility is to stay in the same place.</p>
 <a id="intro_figure1" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.1</p>
 </div>
 <p>To implement a Walker that can step to any neighboring pixel (or stay put), we could pick a number between 0 and 8 (nine possible choices).  However, a more efficient way to write the code would be to simply pick from three possible steps along the x-axis (-1, 0, or 1) and three possible steps along the y-axis.</p>
@@ -426,9 +427,9 @@ Walker w;</textarea>
     x += stepx;
     y += stepy;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -453,9 +454,9 @@ Walker w;</textarea>
     x += stepx;
     y += stepy;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -472,7 +473,7 @@ Walker w;</textarea>
 </div><p>All of these variations on the “traditional” random walk have one thing in common: at any moment in time, the probability that the Walker will take a step in a given direction is equal to the probability that the Walker will take a step in any direction.   In other words, if there are four possible steps, there is a 1 in 4 (or 25%) chance the Walker will take any given step.  With nine possible steps, it’s a 1 in 9 (or 11.1%) chance.</p>
 <p>Conveniently, this is how the <span class="function">random()</span> function works.  Processing’s random number generator (which operates behind the scenes) produces what is known as a “uniform” distribution of numbers.   We can test this distribution with a Processing sketch that counts each time a random number is picked and graphs it as the height of a rectangle.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_I_2_RandomDistribution/_I_2_RandomDistribution.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -480,8 +481,8 @@ Walker w;</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="intro_example2" style="display: block;"></a>
 <span class="example">Example I.2: Random number distribution</span></p>
@@ -511,9 +512,9 @@ void draw() {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>An array to keep track of how often random numbers are picked</div><code><pre><span class='one-line'><span class="kt">int</span><span class="o">[]</span> <span class="n">randomCounts</span><span class="o">;</span></span>
@@ -580,9 +581,9 @@ stuff[3] = 3;
 stuff[4] = 3;
 // Picking a random element from an array
 int index = int(random(stuff.length));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">int</span><span class="o">[]</span> <span class="n">stuff</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span></span></pre></code></div>
@@ -612,9 +613,9 @@ if (r < prob) {
    // try again!
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A probability of 10%</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">prob</span> <span class="o">=</span> <span class="mf">0.10</span><span class="o">;</span></span></pre></code></div>
@@ -632,18 +633,18 @@ if (r < prob) {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This method can also be applied to multiple outcomes.  Let’s say that Outcome A has a 60% chance of happening, Outcome B, a 10% chance, and Outcome C, a 30% chance. We implement this in code by picking a random float and seeing into what range it falls.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><em>between 0.00 and 0.60 (60%) –> outcome A</em></p>
 </li>
-		
+
 			<li><p><em>between 0.60 and 0.70 (10%) –> outcome B</em></p>
 </li>
-		
+
 			<li><p><em>between 0.70 and 1.00 (30%) –> outcome C</em></p>
 </li>
-		
+
 	</ul>
 </div><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -659,9 +660,9 @@ if (num < 0.6) {
 } else {
   println("Outcome C");
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">num</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span>
@@ -681,24 +682,24 @@ if (num < 0.6) {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We could use the above methodology to create a random walker that tends to move to the right.  Here is an example of a Walker with the following probabilities:</p>
 <div class="list packed">
-	
+
 	<ul>
-		
+
 			<li><p><em>chance of moving up:         20%</em></p>
 </li>
-		
+
 			<li><p><em>chance of moving down:       20%</em></p>
 </li>
-		
+
 			<li><p><em>chance of moving left:       20%</em></p>
 </li>
-		
+
 			<li><p><em>chance of moving right:      40%</em></p>
 </li>
-		
+
 	</ul>
 </div><div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_I_3_RandomWalkTendsToRight/_I_3_RandomWalkTendsToRight.pde /book/processingjs/intro/_I_3_RandomWalkTendsToRight/Walker.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -706,8 +707,8 @@ if (num < 0.6) {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="intro_example3" style="display: block;"></a>
 <span class="example">Example I.3: Walker that tends to move to the right</span></p>
@@ -728,9 +729,9 @@ if (num < 0.6) {
       y--;
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span>
@@ -760,9 +761,9 @@ if (num < 0.6) {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float h = random(200,300);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">h</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">300</span><span class="o">);</span></span></pre></code></div>
@@ -774,16 +775,16 @@ if (num < 0.6) {
 <p>When you graph the distribution, you get something that looks like the following, informally known as a bell curve:</p>
 <a id="intro_figure2" style="display: block;"></a>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/intro/intro_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.2</p>
 </div>
 <a id="intro_figure3" style="display: block;"></a>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/intro/intro_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.3</p>
 </div>
 <p>The curve is generated by a mathematical function that defines the probability of any given value occurring as a function of the mean (often written as μ, the Greek letter <em>mu</em>) and standard deviation (σ, the Greek letter <em>sigma</em>).</p>
@@ -795,80 +796,80 @@ if (num < 0.6) {
 <p><strong><em>The mean is the average:  81.3</em></strong></p>
 <p>The standard deviation is calculated as the square root of the average of the squares of deviations around the mean. In other words, take the difference from the mean for each person and square it (variance). Calculate the average of all these values and take the square root as the standard deviation.</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Score  </th>
-					
+
 						<th>Difference from Mean </th>
-					
+
 						<th>Variance</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
+
+
+
 			<tfoot>
 				<tr>
-					
+
 						<th><p></p>
 </th>
-					
+
 						<th><p><strong>Average Variance:</strong></p>
 </th>
-					
+
 						<th><p>254.23</p>
 </th>
-					
+
 				</tr>
 			</tfoot>
-		
-	
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>85</p>
 </td>
-				
+
 					<td><p>85-81.3 = 3.7</p>
 </td>
-				
+
 					<td><p>(3.7)<sup>2</sup> = 13.69</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>40</p>
 </td>
-				
+
 					<td><p>40-81.3 = -41.3</p>
 </td>
-				
+
 					<td><p>(-41.3)<sup>2</sup> = 1705.69</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>etc.</p>
 </td>
-				
+
 					<td><p></p>
 </td>
-				
+
 					<td><p></p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><p><strong><em>The standard deviation is the square root of the average variance:  15.13</em></strong></p>
@@ -886,9 +887,9 @@ void setup() {
   size(640,360);
   generator = new Random();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>We use the variable name “generator” because what we
@@ -908,9 +909,9 @@ have here can be thought of as a random number generator.</div><code><pre><span 
   // Asking for a Gaussian random number
   float num = generator.nextGaussian();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -923,7 +924,7 @@ have here can be thought of as a random number generator.</div><code><pre><span 
 </div><p>Here’s the thing.  What are we supposed to do with this value?  What if we wanted to use it, for example, to assign the x-position of a shape we draw on screen?</p>
 <p>The <span class="function">nextGaussian()</span> function returns a normal distribution of random numbers with the following parameters: <strong>a mean of zero</strong> and <strong>a standard deviation of one</strong>.    Let’s say we want a mean of 320 (the center horizontal pixel in a window of width 640) and a standard deviation of 60 pixels.   We can adjust the value to our parameters by multiplying it by the standard deviation and adding the mean.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_I_4_Gaussian/_I_4_Gaussian.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -931,8 +932,8 @@ have here can be thought of as a random number generator.</div><code><pre><span 
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="intro_example4" style="display: block;"></a>
 <span class="example">Example I.4: Gaussian distribution</span></p>
@@ -951,9 +952,9 @@ have here can be thought of as a random number generator.</div><code><pre><span 
   fill(255,10);
   ellipse(x,180,16,16);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -996,9 +997,9 @@ if (r < 0.01) {
   xstep = random(-1,1);
   ystep = random(-1,1);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span></pre></code></div>
@@ -1017,42 +1018,42 @@ if (r < 0.01) {
 </div><p>However, this reduces the probabilities to a fixed number of options.  What if we wanted to make a more general rule—the higher a number, the more likely it is to be picked?  3.145 would be more likely to be picked than 3.144, even if that likelihood is just a tiny bit greater.  In other words, if x is the random number, we could map the likelihood on the y-axis with <span class="var">y</span> = <span class="var">x</span>.</p>
 <a id="intro_figure4" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.4</p>
 </div>
 <p>If we can figure out how to generate a distribution of random numbers according to the above graph, then we will be able to apply the same methodology to any curve for which we have a formula.</p>
 <p>One solution is to pick two random numbers instead of one.  The first random number is just that, a random number.  The second one, however, is what we’ll call a “qualifying random value.”  It will tell us whether to use the first one or throw it away and pick another one.  Numbers that have an easier time qualifying will be picked more often, and numbers that rarely qualify will be picked infrequently.   Here are the steps (for now, let’s consider only random values between 0 and 1):</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Pick a random number: R1
 </p>
 </li>
-		
+
 			<li><p>
 Compute a probability P that R1 should qualify.  Let’s try: P = R1.
 </p>
 </li>
-		
+
 			<li><p>
 Pick another random number: R2
 </p>
 </li>
-		
+
 			<li><p>
 If R2 is less than P, then we have found our number—R1!
 </p>
 </li>
-		
+
 			<li><p>
 If R2 is not less than P, go back to step 1 and start over.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Here we are saying that the likelihood that a random value will qualify is equal to the random number itself.  Let’s say we pick 0.1 for R1.  This means that R1 will have a 10% chance of qualifying.  If we pick 0.83 for R1 then it will have a 83% chance of qualifying.  The higher the number, the greater the likelihood that we will actually use it.</p>
 <p>Here is a function (named for the Monte Carlo method, which was named for the Monte Carlo casino) that implements the above algorithm, returning a random value between zero and one.</p>
@@ -1075,9 +1076,9 @@ If R2 is not less than P, go back to step 1 and start over.
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="nf">montecarlo</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -1113,9 +1114,9 @@ If R2 is not less than P, go back to step 1 and start over.
 
   x += stepx;
   y += stepy;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A uniform distribution of step sizes. Change this!</div><code><pre><span class='one-line'>  <span class="kt">float</span> <span class="n">stepsize</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">10</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span></span>
@@ -1134,15 +1135,15 @@ If R2 is not less than P, go back to step 1 and start over.
 <h3 id="i6-perlin-noise-a-smoother-approach">I.6 Perlin Noise (A Smoother Approach)</h3><p>A good random number generator produces numbers that have no relationship and show no discernible pattern. As we are beginning to see, a little bit of randomness can be a good thing when programming organic, lifelike behaviors.  However, randomness as the single guiding principle is not necessarily natural.   An algorithm known as “Perlin noise,” named for its inventor Ken Perlin, takes this concept into account.   Perlin developed the noise function while working on the original <em>Tron</em> movie in the early 1980s; it was designed to create procedural textures for computer-generated effects. In 1997 Perlin won an Academy Award in technical achievement for this work. Perlin noise can be used to generate various effects with natural qualities, such as clouds, landscapes, and patterned textures like marble.</p>
 <p>Perlin noise has a more organic appearance because it produces a naturally ordered (“smooth”) sequence of pseudo-random numbers.    The graph on the left below shows Perlin noise over time, with the x-axis representing time; note the smoothness of the curve. The graph on the right shows pure random numbers over time.  (The code for generating these graphs is available in the accompanying book downloads.)</p>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/intro/intro_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.5: Noise</p>
 </div>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/intro/intro_06.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.6: Random</p>
 </div>
 <p>Processing has a built-in implementation of the Perlin noise algorithm: the function <span class="function">noise()</span>.  The <span class="function">noise()</span> function takes one, two, or three arguments, as noise is computed in one, two, or three dimensions.  Let’s start by looking at one-dimensional noise.</p>
@@ -1158,9 +1159,9 @@ If R2 is not less than P, go back to step 1 and start over.
   <textarea>// A random x-location
 float x = random(0,width);
 ellipse(x,180,16,16);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A random x-location</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">width</span><span class="o">);</span></span>
@@ -1173,9 +1174,9 @@ ellipse(x,180,16,16);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// A noise x-location?
 float x = noise(0,width); //[line-through]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A noise x-location?</div><code><pre><span class='one-line'><span class="line-through"><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">noise</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">width</span><span class="o">);</span></span></span></pre></code></div>
@@ -1185,83 +1186,83 @@ float x = noise(0,width); //[line-through]</textarea>
 </div><p>While conceptually this is exactly what we want to do—calculate an x-value that ranges between 0 and the width according to Perlin noise—this is not the correct implementation.    While the arguments to the <span class="function">random()</span> function specify a range of values between a minimum and a maximum, <span class="function">noise()</span> does not work this way.  Instead, the output range is fixed—it always returns a value between 0 and 1.  We’ll see in a moment that we can get around this easily with Processing’s <span class="function">map()</span> function, but first we must examine what exactly <span class="function">noise()</span> expects us to pass in as an argument.</p>
 <p>We can think of one-dimensional Perlin noise as a linear sequence of values over time.   For example:</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Time   </th>
-					
+
 						<th>Noise Value</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 					<td><p>0.365</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>1</p>
 </td>
-				
+
 					<td><p>0.363</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>2</p>
 </td>
-				
+
 					<td><p>0.363</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>3</p>
 </td>
-				
+
 					<td><p>0.364</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>4</p>
 </td>
-				
+
 					<td><p>0.366</p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><p>Now, in order to access a particular noise value in Processing, we have to pass a specific "moment in time" to the <span class="function">noise()</span> function.  For example:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float n = noise(3);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">n</span> <span class="o">=</span> <span class="n">noise</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span></span></pre></code></div>
@@ -1278,9 +1279,9 @@ void draw() {
   float n = noise(t);
   println(n);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span></span>
@@ -1305,9 +1306,9 @@ void draw() {
   // Now, we move forward in time!
   t += 0.01;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Typically we would start at time = 0, though this is arbitrary.</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1324,9 +1325,9 @@ void draw() {
 </div><p>How quickly we increment <span class="var">t</span> also affects the smoothness of the noise.   If we make large jumps in time, then we are skipping ahead and the values will be more random.</p>
 <a id="intro_figure7" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_07.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.7</p>
 </div>
 <p>Try running the code several times, incrementing t by 0.01, 0.02, 0.05, 0.1, 0.0001, and you will see different results.</p>
@@ -1334,9 +1335,9 @@ void draw() {
 <h4 id="mapping-noise">Mapping Noise</h4><p>Now we’re ready to answer the question of what to do with the noise value.   Once we have the value with a range between 0 and 1, it’s up to us to map that range to what we want.   The easiest way to do this is with Processing’s <span class="function">map()</span> function.   The <span class="function">map()</span> function takes five arguments.  First up is the value we want to map, in this case <span class="var">n</span>.  Then we have to give it the value’s current range (minimum and maximum), followed by our desired range.</p>
 <a id="intro_figure8" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_08.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.8</p>
 </div>
 <p>In this case, we know that noise has a range between 0 and 1, but we’d like to draw our circle with a range between 0 and the window’s width.</p>
@@ -1352,9 +1353,9 @@ void draw() {
 
   t += 0.01;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -1372,7 +1373,7 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We can apply the exact same logic to our random walker, and assign both its x- and y-values according to Perlin noise.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_I_5_NoiseWalk/_I_5_NoiseWalk.pde /book/processingjs/intro/_I_5_NoiseWalk/Walker.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1380,8 +1381,8 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="intro_example5" style="display: block;"></a>
 <span class="example">Example I.5: Perlin noise walker</span></p>
@@ -1409,9 +1410,9 @@ void draw() {
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Walker</span> <span class="o">{</span></span>
@@ -1442,9 +1443,9 @@ void draw() {
 </div><p>Notice how the above example requires an additional pair of variables: <span class="var">tx</span> and  <span class="var">ty</span>.  This is because we need to keep track of two time variables, one for the x-location of the Walker and one for the y-location.   But there is something a bit odd about these variables. Why does <span class="var">tx</span> start at 0 and  <span class="var">ty</span> at 10,000?  While these numbers are arbitrary choices, we have very specifically initialized our two time variables with different values.  This is because the noise function is deterministic; it gives you the same result for a specific time <span class="var">t</span> each and every time.  If we asked for the noise value at the same time <span class="var">t</span> for both <span class="var">x</span> and <span class="var">y</span>, then <span class="var">x</span> and <span class="var">y</span> would always be equal, meaning that the Walker would only move along a diagonal.   Instead, we simply use two different parts of the noise space, starting at 0 for <span class="var">x</span> and 10,000 for <span class="var">y</span> so that <span class="var">x</span> and <span class="var">y</span> can appear to act independently of each other.</p>
 <a id="intro_figure9" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_09.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.9</p>
 </div>
 <p>In truth, there is no true concept of time at play here.  It’s a useful metaphor to help us understand how the noise function works, but really what we have is space, rather than time.  The graph above depicts a linear sequence of noise values in a one-dimensional space, and we can ask for a value at a specific x-location whenever we want.   In examples, you will often see a variable named <span class="var">xoff</span> to indicate the x-offset along the noise graph, rather than t for time (as noted in the diagram).</p>
@@ -1456,25 +1457,25 @@ void draw() {
 <h4 id="two-dimensional-noise">Two-Dimensional Noise</h4><p>This idea of noise values living in a one-dimensional space is important because it leads us right into a discussion of two-dimensional space.  Let’s think about this for a moment.  With one-dimensional noise, we have a sequence of values in which any given value is similar to its neighbor.  Because the value is in one dimension, it only has two neighbors: a value that comes before it (to the left on the graph) and one that comes after it (to the right).</p>
 <a id="intro_figure10" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/intro/intro_10.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.10: 1D Noise</p>
 </div>
 <a id="intro_figure11" style="display: block;"></a>
 <div class="image-container two-col-borderless" >
-	
+
 	<img src="/book/imgs/intro/intro_11.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure I.11: 2D Noise</p>
 </div>
 <p>Two-dimensional noise works exactly the same way conceptually.  The difference of course is that we aren’t looking at values along a linear path, but values that are sitting on a grid.  Think of a piece of graph paper with numbers written into each cell.  A given value will be similar to all of its neighbors: above, below, to the right, to the left, and along any diagonal.</p>
 <p>If you were to visualize this graph paper with each value mapped to the brightness of a color, you would get something that looks like clouds.  White sits next to light gray, which sits next to gray, which sits next to dark grey, which sits next to black, which sits next to dark gray, etc.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_ex06.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>This is why noise was originally invented.   You tweak the parameters a bit or play with color to make the resulting image look more like marble or wood or any other organic texture.</p>
 <p>Let’s take a quick look at how to implement two-dimensional noise in Processing.  If you wanted to color every pixel of a window randomly, you would need a nested loop, one that accessed each pixel and picked a random brightness.</p>
@@ -1489,9 +1490,9 @@ for (int x = 0; x < width; x++) {
   }
 }
 updatePixels();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">loadPixels</span><span class="o">();</span></span>
@@ -1511,9 +1512,9 @@ updatePixels();</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>   // A Perlin noise brightness!
    float bright = map(noise(x,y),0,1,0,255); //[bold]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A Perlin noise brightness!</div><code><pre><span class='one-line'>   <strong><span class="kt">float</span> <span class="n">bright</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">noise</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">),</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">255</span><span class="o">);</span></strong></span></pre></code></div>
@@ -1543,9 +1544,9 @@ for (int x = 0; x < width; x++) {
   // Increment xoff.
   xoff += 0.01;  //[bold]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Start xoff at 0.</div><code><pre><span class='one-line'><strong><span class="kt">float</span> <span class="n">xoff</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span></strong></span>
@@ -1580,16 +1581,16 @@ for (int x = 0; x < width; x++) {
   <a id="intro_exercise10" style="display: block;"></a>
 <h5 id="exercise-i10">Exercise I.10</h5><p>Use the noise values as the elevations of a landscape.  See the screenshot below as a reference.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/intro/intro_exc10.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><p>We’ve examined several traditional uses of Perlin noise in this section.  With one-dimensional noise, we used smooth values to assign the location of an object to give the appearance of wandering.  With two-dimensional noise, we created a cloudy pattern with smoothed values on a plane of pixels.  It’s important to remember, however, that Perlin noise values are just that—values.  They aren’t inherently tied to pixel locations or color.  Any example in this book that has a variable could be controlled via Perlin noise.  When we model a wind force, its strength could be controlled by Perlin noise.  Same goes for the angles between the branches in a fractal tree pattern, or the speed and direction of objects moving along a grid in a flow field simulation.</p>
 <a id="intro_figure12" style="display: block;"></a>
 <div class="image-container two-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/TreeStochasticNoise/TreeStochasticNoise.pde" class="two-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1597,12 +1598,12 @@ for (int x = 0; x < width; x++) {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">Figure I.12: Tree with Perlin noise</p>
 </div>
 <a id="intro_figure13" style="display: block;"></a>
 <div class="image-container two-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/intro/_6_04_Flowfield/_6_04_Flowfield.pde /book/processingjs/intro/_6_04_Flowfield/FlowField.pde /book/processingjs/intro/_6_04_Flowfield/Vehicle.pde" class="two-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1610,7 +1611,7 @@ for (int x = 0; x < width; x++) {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">Figure I.13: Flow field with Perlin noise</p>
 </div>
 </section></section><section><a id="intro_section7" style="display: block;"></a>
