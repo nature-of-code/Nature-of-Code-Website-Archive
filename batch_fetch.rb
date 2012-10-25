@@ -27,6 +27,8 @@ if File.exists? reference_file_name
   previous_run = File.readlines(reference_file_name, "r+")[0]
 end
 
+FetchAppAPI::Base.basic_auth(key: fetch_key, token: fetch_token)
+
 # Skip the first line of the csv, which is the header.
 csv[1..csv.length].each do |line|
   date_entered = DateTime.parse line[0]
