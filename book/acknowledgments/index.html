@@ -4,20 +4,23 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
+	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
@@ -59,12 +62,13 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/preview">Buy as a PDF</a>
+          Like this stuff? Support this project by<a id="purchase-link" href="/">buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
@@ -90,7 +94,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -112,14 +115,14 @@ Dynamic Bodies course description
 <p>I had been using these concepts informally in my own projects, but had never taken the time to closely examine the science behind the algorithms or learn object-oriented techniques to formalize their implementation.    That very semester, I also enrolled in Foundations of Generative Art Systems, a course taught by Philip Galanter that focused on the theory and practice of generative art, covering topics such as chaos, cellular automata, genetic algorithms, neural networks, and fractals.  Both Tu’s course and Galanter’s course opened my eyes to a world of simulation algorithms and techniques that carried me through the next several years of work and teaching, and served as the foundation and inspiration for this book.</p>
 <p>But there’s another piece of the puzzle missing from this story.</p>
 <p>Galanter’s course was mostly theory-based, while Tu’s was taught using Macromedia Director and the Lingo programming language.  That semester, I learned many of the algorithms by translating them into C (the language I was using quite awkwardly at the time, well before C creative coding environments like openFrameworks and Cinder had arrived).    Towards the end of the semester, I discovered something called <a href="http://www.processing.org">Processing</a>
-.   Processing was in alpha then, version 000065 <span class="notetoself">[made this up, check this]</span> and, having had some experience with Java, it intrigued me enough to ask the question: Could this open-source, artist-friendly programming language and environment be the right place to develop a suite of tutorials and examples about programming and simulation? With the support of the ITP and Processing communities, I embarked on what has now been an almost eight-year journey of teaching a variety of programming concepts and their applications using Processing.</p>
+.   Processing was in alpha then, version 0055 and, having had some experience with Java, it intrigued me enough to ask the question: Could this open-source, artist-friendly programming language and environment be the right place to develop a suite of tutorials and examples about programming and simulation? With the support of the ITP and Processing communities, I embarked on what has now been an almost eight-year journey of teaching a variety of programming concepts and their applications using Processing.</p>
 <p>I’d like to first thank Red Burns, ITP’s founder, who has supported and encouraged me in my work for over ten years.    Dan O’Sullivan, the chair of ITP, has been my teaching mentor and was the first to suggest that I try teaching a course on Processing, giving me a reason to start assembling programming tutorials in the first place.   Shawn Van Every, developer extraordinaire and author of <em>Pro Android Media</em>, has also been a rich source of help and inspiration at ITP over the years.    ITP faculty members Clay Shirky, Danny Rozin, Katherine Dillon, Marianne Petit, Marina Zurkow, and Tom Igoe have provided a great deal of support and feedback throughout the writing of this book.  The rest of the faculty and staff at ITP have also made this possible: Brian Kim, Edward Gordon, George Agudow, John Duane, Marlon Evans, Matt Berger, Megan Demarest, Midori Yasuda, and Rob Ryan.</p>
 <p>The students of ITP, too numerous to mention, have been an amazing source of feedback throughout this process. Much of the material in this book comes from my course of the same title, which I’ve now taught for five years.  I have stacks of draft printouts of the book with notes scrawled along the margins as well as a vast archive of student e-mails with corrections, comments, and generous words of encouragement.</p>
-<p>I am also indebted to the energetic and supportive community of Processing programmers and artists.   I’d probably be out of a job if it weren’t for Casey Reas and Ben Fry, who created Processing.  I’ve learned half of what I know simply from reading through the Processing source code; the elegant simplicity of the Processing language, web site, and IDE has made programming accessible and fun for all of my students.  I’ve received advice, suggestions, and comments from many Processing programmers including Andrés Colubri, Jer Thorp, Marius Watz, Karsten Schmidt, Robert Hodgin, Seb-Lee Delisle, and Ira Greenberg.  Heather Dewey-Hagborg provided a great deal of excellent advice for Chapter 10 (Neural Networks).</p>
+<p>I am also indebted to the energetic and supportive community of Processing programmers and artists.   I wouldn’t be writing this book if it weren’t for Casey Reas and Ben Fry, who created Processing.  I’ve learned half of what I know simply from reading through the Processing source code; the elegant simplicity of the Processing language, web site, and IDE has made programming accessible and fun for all of my students.  I’ve received advice, suggestions, and comments from many Processing programmers including Andrés Colubri, Jer Thorp, Marius Watz, Karsten Schmidt, Robert Hodgin, Seb-Lee Delisle, and Ira Greenberg.  Heather Dewey-Hagborg provided a great deal of excellent advice for Chapter 10 (Neural Networks).</p>
 <p>I am indebted to Shannon Fry, who edited this book every step of the way.  The knowledge that I would always have her careful and thoughtful feedback on my writing allowed me to plow ahead, aware that everything would come out sounding better after she got her hands on my chapters.</p>
-<p>A special mention goes to Zannah Marsh who worked tirelessly to create the over one hundred illustrations in this book, developing a friendly and informal look.  I especially want to thank her for her patience and willingness to go with the flow as we continued to change the illlustration requirements several times.    I also want to thank David Wilson who came to my rescue at the last minute and designed the interior layout and cover for the book.</p>
+<p>A special mention goes to Zannah Marsh who worked tirelessly to create the over one hundred illustrations in this book, developing a friendly and informal look.  I especially want to thank her for her patience and willingness to go with the flow as we continued to change the illlustration requirements several times.   I also want to thank David Wilson who came to my rescue at the last minute and designed the interior layout and cover for the book.  I am particularly grateful for Steve Klise who designed and built the book’s web site, helping me to develop a "pay what you want model" for the digital PDF.</p>
 <p>As I’ll explain a bit more in the Preface, this book was generated with a new open-source system for publishing called “The Magic Book.”  A crack team of ITP programmers, designers, and artists at ITP worked over the course of more than a year to develop this system, which generates a  book in a variety of formats (PDF, HTML, and more) from one single ASCIIDOC file, all designed with CSS layout.  Rune Madsen began the project and developed the original Ruby / Sinatra framework.  Steve Klise contributed countless bug fixes and engineered the system that allows us to restyle code comments to the side of the code blocks themselves.  Miguel Bermudez, Evan Emolo and Luisa Pereira Hors contributed in many ways from learning the ins and outs of ASCIIDOC as well as CSS Paged Media.  ITP Researcher Greg Borenstein provided a tremendous amount of advice and support along the way in the areas of publishing for the web and print.</p>
-<p>Finally I’d like to thank my family: my wife Aliki Caloyeras, who supported this project throughout while having her own giant tome to write, and my children Elias and Olympia, motivation for finishing this up so I could spend more time hanging out with them.  I’d also like to thank my father, Bernard Shiffman, who generously lent his mathematical expertise and provided feedback along the way, as well as my mother, Doris Shiffman, and brother, Jonathan Shiffman, who were always tremendously supportive in asking the question: “How is the book going?”</p>
+<p>Finally I’d like to thank my family: my wife, Aliki Caloyeras, who supported this project throughout while having her own giant tome to write, and my children, Elias and Olympia, motivation for finishing this up so I could spend more time hanging out with them.  I’d also like to thank my father, Bernard Shiffman, who generously lent his mathematical expertise and provided feedback along the way, as well as my mother, Doris Shiffman, and brother, Jonathan Shiffman, who were always tremendously supportive in asking the question: “How is the book going?”</p>
 </section><section><a id="_a_2_kickstarter" style="display: block;"></a>
 <h3 id="a2-kickstarter">A.2 Kickstarter</h3><p>There is another organization and community that has made this book possible: Kickstarter.</p>
 <p>In 2008, I completed work on my first book, <em>Learning Processing</em>, published by Morgan Kaufmann/Elsevier. <em>Learning Processing</em> took almost three years to finish. I didn’t take a lot of care in choosing a publisher or thinking about the terms. I just thought — “Really? You want to publish a book by me? OK, I’ll do it.” Unfortunately, my experience was not positive. I had five different editors assigned to me throughout the process, and I received little to no feedback on the content itself. The publisher outsourced the typesetting, which resulted in a great deal of mistakes and inconsistencies in production. In addition, I found the pricing of the book to be off the mark. My goal was to write a friendly, inexpensive (black and white), paperback introduction to programming in Processing and the book ended up retailing for a "textbook" price of $50.</p>
@@ -188,6 +191,8 @@ Bob Ippolito
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

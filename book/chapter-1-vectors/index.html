@@ -4,20 +4,23 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
+	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
@@ -59,12 +62,13 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/preview">Buy as a PDF</a>
+          Like this stuff? Support this project by<a id="purchase-link" href="/">buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
@@ -90,7 +94,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -2607,6 +2610,8 @@ Normalize.</div><code><pre><span class='one-line'>    <span class="n">dir</span>
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 
