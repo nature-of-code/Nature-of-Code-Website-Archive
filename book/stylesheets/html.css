@@ -54,6 +54,7 @@ a {
 
 #top #header h1 strong {
   font-family: 'ProximaNova-Bold';
+  margin-bottom: 0.25em;
 }
 
 #top #header h1 a {
