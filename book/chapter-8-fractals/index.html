@@ -1,27 +1,30 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Document</title>
+	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -59,13 +62,15 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/">Buy as a PDF</a>
+          <a id="purchase-link" href="/">Like this stuff? Support this project by buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
             <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
@@ -90,7 +95,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -181,7 +185,7 @@ lyrics from “Mandelbrot Set”
 
 	<img src="/book/imgs/chapter08/ch08_08.png" alt="Nature of Code Image" />
 
-	<p class="caption">Figure 8.8: The Cantor Set</p>
+	<p class="caption">Figure 8.8: The Cantor set</p>
 </div>
 <p>There is a feedback loop at work here.  Take a single line and break it into two.  Then return to those two lines and apply the same rule, breaking each line into two, and now we’re left with four.  Then return to those four lines and apply the rule.  Now you’ve got eight.   This process is known as <strong><em>recursion</em></strong>: the repeated application of a rule to successive results.   Cantor was interested in what happens when you apply these rules an infinite number of times.   We, however, are working in a finite pixel space and can mostly ignore the questions and paradoxes that arise from infinite recursion.  We will instead construct our code in such a way that we do not apply the rules forever (which would cause our program to freeze).</p>
 <p>Before we implement the Cantor set, let’s take a look at what it means to have recursion in code.
@@ -340,7 +344,7 @@ calling itself recursively.</div><code><pre><span class='one-line'>    <span cla
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p><span class="function">drawCircle()</span> draws an ellipse based on a set of parameters that it receives as arguments. It then calls itself with those same parameters, adjusting them slightly. The result is a series of circles, each of which is drawn inside the previous circle.</p>
-<p>Notice that the above function only recursively calls itself if the radius is greater than 2.  This is a crucial point.  As with iteration, <em>all recursive functions must have an exit condition!</em>    You likely are already aware that all for and while loops must include a Boolean test that eventually evaluates to false, thus exiting the loop. Without one, the program would crash, caught inside of an infinite loop. The same can be said about recursion.  If a recursive function calls itself forever and ever, you’ll be most likely be treated to a nice frozen screen.</p>
+<p>Notice that the above function only recursively calls itself if the radius is greater than 2.  This is a crucial point.  As with iteration, <em>all recursive functions must have an exit condition!</em>    You likely are already aware that all for and while loops must include a Boolean expression that eventually evaluates to false, thus exiting the loop. Without one, the program would crash, caught inside of an infinite loop. The same can be said about recursion.  If a recursive function calls itself forever and ever, you’ll be most likely be treated to a nice frozen screen.</p>
 <p>This circles example is rather trivial; it could easily be achieved through simple iteration. However, for scenarios in which a function calls itself more than once, recursion becomes wonderfully elegant.</p>
 <p>Let’s make <span class="function">drawCircle()</span> a bit more complex.    For every circle displayed, draw a circle half its size to the left and right of that circle.</p>
 <div class="image-container screenshot" >
@@ -621,7 +625,7 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 
 </div>
 <p><a id="chapter08_example4" style="display: block;"></a>
-<span class="example">Example 8.4: Cantor Set</span></p>
+<span class="example">Example 8.4: Cantor set</span></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void cantor(float x, float y, float len) {
@@ -683,7 +687,7 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 
 </div><p>We could proceed in the same manner as we did with the Cantor set, and write a recursive function that iteratively applies the Koch rules over and over.   Nevertheless, we are going to tackle this problem in a different manner by treating each segment of the Koch curve as an individual object.  This will open up some design possibilities.  For example, if each segment is an object, we could allow each segment to move independently from its original location and participate in a physics simulation.  In addition, we could use a random color, line thickness, etc. to display each segment differently.</p>
 <p>In order to accomplish our goal of treating each segment as an individual object, we must first decide what this object should be in the first place.  What data should it store?  What functions should it have?</p>
-<p>The Koch curve is a series of connected lines, and so we will think of each segment as a “KochLine.”  The KochLine will have a start point (“a”) and an end point (“b”).  These points will be PVector objects, and the KochLine can be drawn with Processing’s <span class="function">line()</span> function.</p>
+<p>The Koch curve is a series of connected lines, and so we will think of each segment as a “KochLine.”  Each Koch line has a start point (“a”) and an end point (“b”).  These points are <span class="klass">PVector</span> objects, and the line is drawn with Processing’s <span class="function">line()</span> function.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class KochLine {
@@ -730,7 +734,7 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now that we have our KochLine class, we can get started on the main program.  We’ll need a data structure to keep track of what will eventually become many KochLine objects, and an ArrayList (see Chapter 4 for a review of ArrayLists) will do just fine.</p>
+</div><p>Now that we have our <span class="klass">KochLine</span> class, we can get started on the main program.  We’ll need a data structure to keep track of what will eventually become many <span class="klass">KochLine</span> objects, and an <span class="klass">ArrayList</span> (see Chapter 4 for a review of [klass]*ArrayList*s) will do just fine.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ArrayList<KochLine> lines;</textarea>
@@ -743,7 +747,7 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In <span class="function">setup()</span>, we’ll want to create the ArrayList and add the first line segment to it, a line that stretches from 0 to the width of the sketch.</p>
+</div><p>In <span class="function">setup()</span>, we’ll want to create the <span class="klass">ArrayList</span> and add the first line segment to it, a line that stretches from 0 to the width of the sketch.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void setup() {
@@ -780,7 +784,7 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Then in <span class="function">draw()</span>, all KochLine objects (just one right now) can be displayed in a loop.</p>
+</div><p>Then in <span class="function">draw()</span>, all <span class="klass">KochLine</span> objects (just one right now) can be displayed in a loop.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void draw() {
@@ -812,14 +816,14 @@ a smaller circle is drawn to the left and right.</div><code><pre><span class='on
 </p>
 </li>
 
-			<li><p><strong><em>ArrayList:</em></strong> A list of all KochLine objects.
+			<li><p><strong><em>ArrayList:</em></strong> A list of all <span class="klass">KochLine</span> objects.
 </p>
 </li>
 
 	</ul>
 </div><p>With the above elements, how and where do we apply Koch rules and principles of recursion?</p>
 <p>Remember the Game of Life cellular automata?  In that simulation, we always kept track of two generations: current and next.  When we were finished computing the next generation, next became current and we moved on to computing the new next generation.
- We are going to apply a similar technique here.  We have an ArrayList that keeps track of the current set of KochLine objects (at the start of the program, there is only one).  We will need a second ArrayList (let’s call it “next”) where we will place all the new KochLine objects that are generated from applying the Koch rules.   For every KochLine in the current ArrayList, four new KochLine objects are added to the next ArrayList.  When we’re done, the next ArrayList becomes the current one.</p>
+ We are going to apply a similar technique here.  We have an <span class="klass">ArrayList</span> that keeps track of the current set of <span class="klass">KochLine</span> objects (at the start of the program, there is only one).  We will need a second <span class="klass">ArrayList</span> (let’s call it “next”) where we will place all the new KochLine objects that are generated from applying the Koch rules.   For every <span class="klass">KochLine</span> object in the current <span class="klass">ArrayList</span>, four new <span class="klass">KochLine</span> objects are added to the next <span class="klass">ArrayList</span>.  When we’re done, the next <span class="klass">ArrayList</span> becomes the current one.</p>
 <a id="chapter08_figure15" style="display: block;"></a>
 <div class="image-container " >
 
@@ -876,8 +880,8 @@ one we care about!</div><code><pre><span class='one-line'>  <span class="n">line
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>By calling <span class="function">generate()</span> over and over again (for example, each time the mouse is pressed), we recursively apply the Koch curve rules to the existing set of KochLine objects.
- Of course, the above omits the real “work” here, which is figuring out those rules.  How do we break one line segment into four as described by the rules?   While this can be accomplished with some simple arithmetic and trigonometry, since our KochLine object uses PVector, this is a nice opportunity for us to practice our vector math.  Let’s establish how many points we need to compute for each KochLine object.</p>
+</div><p>By calling <span class="function">generate()</span> over and over again (for example, each time the mouse is pressed), we recursively apply the Koch curve rules to the existing set of <span class="klass">KochLine</span> objects.
+ Of course, the above omits the real “work” here, which is figuring out those rules.  How do we break one line segment into four as described by the rules?   While this can be accomplished with some simple arithmetic and trigonometry, since our <span class="klass">KochLine</span> object uses <span class="klass">PVector</span>, this is a nice opportunity for us to practice our vector math.  Let’s establish how many points we need to compute for each <span class="klass">KochLine</span> object.</p>
 <a id="chapter08_figure16" style="display: block;"></a>
 <div class="image-container " >
 
@@ -885,7 +889,7 @@ one we care about!</div><code><pre><span class='one-line'>  <span class="n">line
 
 	<p class="caption">Figure 8.16</p>
 </div>
-<p>As you can see from the above figure, we need five points  (A, B, C, D, and E) to generate the new KochLine objects and make the new line segments (AB, BC, CD, and DE).</p>
+<p>As you can see from the above figure, we need five points  (A, B, C, D, and E) to generate the new <span class="klass">KochLine</span> objects and make the new line segments (AB, BC, CD, and DE).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    next.add(new KochLine(a,b));
@@ -904,7 +908,7 @@ one we care about!</div><code><pre><span class='one-line'>  <span class="n">line
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Where do we get these points?  Since we have a KochLine object, why not ask the KochLine object to compute all these points for us?</p>
+</div><p>Where do we get these points?  Since we have a <span class="klass">KochLine</span> object, why not ask the <span class="klass">KochLine</span> object to compute all these points for us?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void generate() {
@@ -959,8 +963,8 @@ to the Koch rules</div><code><pre><span class='one-line'>    <span class="n">PVe
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now we just need to write five new functions in the KochLine class, each one returning a PVector according to <a href="#chapter08_figure16">Figure 8.16</a>
- above.  Let’s knock off <span class="function">kochA()</span> and <span class="function">kochE()</span> first, which are simply the start and end points of the original KochLine.</p>
+</div><p>Now we just need to write five new functions in the <span class="klass">KochLine</span> class, each one returning a <span class="klass">PVector</span> according to <a href="#chapter08_figure16">Figure 8.16</a>
+ above.  Let’s knock off <span class="function">kochA()</span> and <span class="function">kochE()</span> first, which are simply the start and end points of the original line.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector kochA() {
@@ -993,7 +997,7 @@ independently of each other.</div><code><pre><span class='one-line'>    <span cl
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now let’s move on to points B and D.  B is one-third of the way along the line segment and D is two-thirds.  Here we can make a PVector that points from start to end and shrink it to one-third the length for B and two-thirds the length for D to find these points.</p>
+</div><p>Now let’s move on to points B and D.  B is one-third of the way along the line segment and D is two-thirds.  Here we can make a <span class="klass">PVector</span> that points from start to end and shrink it to one-third the length for B and two-thirds the length for D to find these points.</p>
 <a id="chapter08_figure17" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1049,7 +1053,7 @@ along the line instead of one-third.</div><code><pre><span class='one-line'>    
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The last point, C, is the most difficult one to find.  However, if you recall that the angles of an equilateral triangle are all sixty degrees, this makes it a little bit easier.  If we know how to find point B with a PVector one-third the length of the line, what if we were to rotate that same PVector sixty degrees and move along that vector from point B?  We’d be at point C!</p>
+</div><p>The last point, C, is the most difficult one to find.  However, if you recall that the angles of an equilateral triangle are all sixty degrees, this makes it a little bit easier.  If we know how to find point B with a <span class="klass">PVector</span> one-third the length of the line, what if we were to rotate that same <span class="klass">PVector</span> sixty degrees and move along that vector from point B?  We’d be at point C!</p>
 <a id="chapter08_figure18" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1173,7 +1177,7 @@ void setup() {
   <h4 id="exercise-83">Exercise 8.3</h4><p>Try animating the Koch curve.  For example, can you draw it from left to right?  Can you vary the visual design of the line segments?  Can you move the line segments using techniques from earlier chapters?  What if each line segment were made into a spring (toxiclibs) or joint (box2d)?</p>
 
 </div><div class="example">
-  <h4 id="exercise-84">Exercise 8.4</h4><p>Rewrite the Cantor set example using objects and an ArrayList.</p>
+  <h4 id="exercise-84">Exercise 8.4</h4><p>Rewrite the Cantor set example using objects and an <span class="klass">ArrayList</span>.</p>
 
 </div><div class="example">
   <h4 id="exercise-85">Exercise 8.5</h4><p>Draw the Sierpiński triangle (as seen in Wolfram elementary CA) using recursion.</p>
@@ -1439,7 +1443,7 @@ include the length argument.</div><code><pre><span class='one-line'>    <span cl
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We’ve also included a variable for theta that allows us, when writing the rest of the code in <span class="function">setup()</span> and <span class="function">draw()</span>, to vary the branching angle according to, say, the mouseX location.</p>
+</div><p>We’ve also included a variable for theta that allows us, when writing the rest of the code in <span class="function">setup()</span> and <span class="function">draw()</span>, to vary the branching angle according to, say, the <span class="var">mouseX</span> location.</p>
 <div class="image-container three-col" >
 
 	<img src="/book/imgs/chapter08/ch08_ex06a.png" alt="Nature of Code Image" />
@@ -1516,10 +1520,10 @@ bottom of the window.</div><code><pre><span class='one-line'>  <span class="n">t
 </div>
 
 </div><div class="example">
-  <h4 id="exercise-88">Exercise 8.8</h4><p>The tree structure can also be generated using the ArrayList technique demonstrated with the Koch curve.  Recreate the tree using a Branch object and an ArrayList to keep track of the branches.  Hint: you’ll want to keep track of the branch directions and lengths using vector math instead of Processing transformations.</p>
+  <h4 id="exercise-88">Exercise 8.8</h4><p>The tree structure can also be generated using the <span class="klass">ArrayList</span> technique demonstrated with the Koch curve.  Recreate the tree using a <span class="var">Branch</span> object and an <span class="klass">ArrayList</span> to keep track of the branches.  Hint: you’ll want to keep track of the branch directions and lengths using vector math instead of Processing transformations.</p>
 
 </div><div class="example">
-  <h4 id="exercise-89">Exercise 8.9</h4><p>Once you have the tree built with an ArrayList of Branch objects, animate the tree’s growth.  Can you draw leaves at the end of the branches?</p>
+  <h4 id="exercise-89">Exercise 8.9</h4><p>Once you have the tree built with an <span class="klass">ArrayList</span> of <span class="var">Branch</span> objects, animate the tree’s growth.  Can you draw leaves at the end of the branches?</p>
 
 </div><p>The recursive tree fractal is a nice example of a scenario in which adding a little bit of randomness can make the tree look more natural.  Take a look outside and you’ll notice that branch lengths and angles vary from branch to branch, not to mention the fact that branches don’t all have exactly the same number of smaller branches.   First, let’s see what happens when we simply vary the angle and length.  This is a pretty easy one, given that we can just ask Processing for a random number each time we draw the tree.</p>
 <div class="image-container screenshot" >
@@ -1654,15 +1658,15 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
   <h4 id="exercise-811">Exercise 8.11</h4><p>Use toxiclibs to simulate tree physics.  Each branch of the tree should be two particles connected with a spring.  How can you get the tree to stand up and not fall down?</p>
 
 </div></section><section><a id="chapter08_section6" style="display: block;"></a>
-<h3 id="86-l-systems">8.6  L-Systems</h3><p>In 1968, Hungarian botanist Aristid Lindenmayer developed a grammar-based system to model the growth patterns of plants.    L-Systems (short for Lindenmayer systems) can be used to generate all of the recursive fractal patterns we’ve seen so far in this chapter.   We don’t need L-Systems to do the kind of work we’re doing here; however, they are incredibly useful because they provide a mechanism for keeping track of fractal structures that require complex and multi-faceted production rules.</p>
-<p>In order to create an example that implements L-Systems in Processing, we are going to have to be comfortable with working with (a) recursion, (b) transformation matrices, and (c) Strings.    So far we’ve worked with recursion and transformations, but Strings are new here.  We will assume the basics, but if that is not comfortable for you, I would suggest taking a look at the Processing tutorial “Strings and Drawing text,” available here: <a href="http://www.processing.org/learning/text/">Strings and Drawing Text</a>
+<h3 id="86-l-systems">8.6  L-systems</h3><p>In 1968, Hungarian botanist Aristid Lindenmayer developed a grammar-based system to model the growth patterns of plants.    L-systems (short for Lindenmayer systems) can be used to generate all of the recursive fractal patterns we’ve seen so far in this chapter.   We don’t need L-systems to do the kind of work we’re doing here; however, they are incredibly useful because they provide a mechanism for keeping track of fractal structures that require complex and multi-faceted production rules.</p>
+<p>In order to create an example that implements L-systems in Processing, we are going to have to be comfortable with working with (a) recursion, (b) transformation matrices, and (c) strings.    So far we’ve worked with recursion and transformations, but strings are new here.  We will assume the basics, but if that is not comfortable for you, I would suggest taking a look at the Processing tutorial “Strings and Drawing text,” available here: <a href="http://www.processing.org/learning/text/">Strings and Drawing Text</a>
 </p>
-<p>An L-System involves three main components:</p>
+<p>An L-system involves three main components:</p>
 <div class="list">
 
 	<ul>
 
-			<li><p><strong><em>Alphabet.</em></strong>  An L-System’s alphabet is comprised of the valid characters that can be included.  For example, we could say the alphabet is “ABC”, meaning that any valid “sentence” (a string of characters) in an L-System can only include these three characters.
+			<li><p><strong><em>Alphabet.</em></strong>  An L-system’s alphabet is comprised of the valid characters that can be included.  For example, we could say the alphabet is “ABC”, meaning that any valid “sentence” (a string of characters) in an L-system can only include these three characters.
 </p>
 </li>
 
@@ -1670,12 +1674,12 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 </p>
 </li>
 
-			<li><p><strong><em>Rules.</em></strong>  The rules of an L-System are applied to the axiom and then applied recursively, generating new sentences over and over again.  An L-System rule includes two sentences,a “predecessor” and a “successor.”  For example, with the Rule “A —> AB”, whenever an “A” is found in a string, it is replaced with “AB.”
+			<li><p><strong><em>Rules.</em></strong>  The rules of an L-system are applied to the axiom and then applied recursively, generating new sentences over and over again.  An L-system rule includes two sentences,a “predecessor” and a “successor.”  For example, with the Rule “A —> AB”, whenever an “A” is found in a string, it is replaced with “AB.”
 </p>
 </li>
 
 	</ul>
-</div><p>Let’s begin with a very simple L-System.  (This is, in fact, Lindenmayer’s original L-System for modeling the growth of algae.)</p>
+</div><p>Let’s begin with a very simple L-system.  (This is, in fact, Lindenmayer’s original L-system for modeling the growth of algae.)</p>
 <a id="chapter08_figure24" style="display: block;"></a>
 <div class="image-container half-width-right" >
 
@@ -1686,8 +1690,8 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 <p><strong><em>Alphabet:</em></strong> A B<br />
 <strong><em>Axiom:</em></strong>  A<br />
 <strong><em>Rules:</em></strong>  (A —> AB)  (B —> A)</p>
-<p>As with our recursive fractal shapes, we can consider each successive application of the L-System rules to be a generation.  Generation 0 is, by definition, the axiom.</p>
-<p>Let’s look at how we might create these generations with code.  We’ll start by using a String object to store the axiom.</p>
+<p>As with our recursive fractal shapes, we can consider each successive application of the L-system rules to be a generation.  Generation 0 is, by definition, the axiom.</p>
+<p>Let’s look at how we might create these generations with code.  We’ll start by using a <span class="klass">String</span> object to store the axiom.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>String current = "A";</textarea>
@@ -1700,7 +1704,7 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>And once again, just as we did with the Game of Life and the Koch curve ArrayList examples, we will need an entirely separate String to keep track of the “next” generation.</p>
+</div><p>And once again, just as we did with the Game of Life and the Koch curve <span class="klass">ArrayList</span> examples, we will need an entirely separate string to keep track of the “next” generation.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>String next = "";</textarea>
@@ -1765,7 +1769,7 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 
 </div>
 <p><a id="chapter08_example9" style="display: block;"></a>
-<span class="example">Example 8.9: Simple L-System sentence generation</span></p>
+<span class="example">Example 8.9: Simple L-system sentence generation</span></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Start with an axiom.
@@ -1829,7 +1833,7 @@ void mousePressed() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Since the rules are applied recursively to each generation, the length of the String grows exponentially.   By generation #11, the sentence is 233 characters long; by generation #22, it is over 46,000 characters long.   The Java String class, while convenient to use, is a grossly inefficient data structure for concatenating large Strings.   A String object is “immutable,” which means once the object is created it can never be changed.  Whenever you add on to the end of a String object, Java has to make a brand new String object (even if you are using the same variable name).</p>
+</div><p>Since the rules are applied recursively to each generation, the length of the string grows exponentially.   By generation #11, the sentence is 233 characters long; by generation #22, it is over 46,000 characters long.   The Java <span class="klass">String</span> class, while convenient to use, is a grossly inefficient data structure for concatenating large strings.   A <span class="klass">String</span> object is “immutable,” which means once the object is created it can never be changed.  Whenever you add on to the end of a <span class="klass">String</span> object, Java has to make a brand new <span class="klass">String</span> object (even if you are using the same variable name).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>String s = "blah";
@@ -1844,7 +1848,7 @@ s += "add some more stuff";</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In most cases, this is fine, but why duplicate a 46,000-character String if you don’t have to?   For better efficiency in our L-System examples, we’ll use the StringBuffer, which is optimized for this type of task and can easily be converted into a String after concatenation is complete.</p>
+</div><p>In most cases, this is fine, but why duplicate a 46,000-character string if you don’t have to?   For better efficiency in our L-system examples, we’ll use the <span class="klass">StringBuffer</span> class, which is optimized for this type of task and can easily be converted into a string after concatenation is complete.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  // A StringBuffer for the “next” sentence
@@ -1882,14 +1886,14 @@ back to a String.</div><code><pre><span class='one-line'>  <span class="n">curre
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>You may find yourself wondering right about now: what exactly is the point of all this?  After all, isn’t this a chapter about <em>drawing</em> fractal patterns?   Yes, the recursive nature of the L-System sentence structure seems relevant to the discussion, but how exactly does this model plant growth in a visual way?</p>
-<p>What we’ve left unsaid until now is that embedded into these L-System sentences are instructions for drawing.   Let’s see how this works with another example.</p>
+</div><p>You may find yourself wondering right about now: what exactly is the point of all this?  After all, isn’t this a chapter about <em>drawing</em> fractal patterns?   Yes, the recursive nature of the L-system sentence structure seems relevant to the discussion, but how exactly does this model plant growth in a visual way?</p>
+<p>What we’ve left unsaid until now is that embedded into these L-system sentences are instructions for drawing.   Let’s see how this works with another example.</p>
 <p><span class="formula">Alphabet: A</span><br /><span class="formula">Axiom:  A</span><br /><span class="formula">Rules:  (A → ABA)  (B → BBB)</span></p>
 <p>To read a sentence, we’ll translate it in the following way:</p>
 <p><span class="formula">A:  Draw a line forward.</span><br /><span class="formula">B:  Move forward without drawing.</span></p>
 <p>Let’s look at the sentence of each generation and its visual output.</p>
 <p><span class="formula">Generation 0: A</span><br /><span class="formula">Generation 1: ABA</span><br /><span class="formula">Generation 2: ABABBBABA</span><br /><span class="formula">Generation 3: ABABBBABABBBBBBBBBABABBBABA</span></p>
-<p>Look familiar?  This is the Cantor set generated with an L-System.</p>
+<p>Look familiar?  This is the Cantor set generated with an L-system.</p>
 <a id="chapter08_figure25" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1897,12 +1901,12 @@ back to a String.</div><code><pre><span class='one-line'>  <span class="n">curre
 
 	<p class="caption">Figure 8.25</p>
 </div>
-<p>The following alphabet is often used with L-Systems: “FG+-[]”, meaning:</p>
+<p>The following alphabet is often used with L-systems: “FG+-[]”, meaning:</p>
 <p><span class="formula">F:  Draw a line and move forward</span><br /><span class="formula">G:  Move forward (without drawing a line)</span><br /><span class="formula">+:  Turn right</span><br /><span class="formula">-:  Turn left</span><br /><span class="formula">[:  Save current location</span><br /><span class="formula">]:  Restore previous location</span></p>
 <p>This type of drawing framework is often referred to as “Turtle graphics” (from the old days of LOGO programming).   Imagine a turtle sitting on your computer screen to which you could issue a small set of commands: turn left, turn right, draw a line, etc.  Processing isn’t set up to operate this way by default, but by using <span class="function">translate()</span>, <span class="function">rotate()</span>, and <span class="function">line()</span>, we can emulate a Turtle graphics engine fairly easily.</p>
-<p>Here’s how we would translate the above L-System alphabet into Processing code.</p>
+<p>Here’s how we would translate the above L-system alphabet into Processing code.</p>
 <p><span class="formula">F:  line(0,0,0,len); translate(0,len);</span><br /><span class="formula">G:  translate(0,len);</span><br /><span class="formula">+:  rotate(angle);</span><br /><span class="formula">-:  rotate(-angle);</span><br /><span class="formula">[:  pushMatrix();</span><br /><span class="formula">]:  popMatrix();</span></p>
-<p>Assuming we have a sentence generated from the L-System, we can walk through the sentence character by character and call the appropriate function as outlined above.</p>
+<p>Assuming we have a sentence generated from the L-system, we can walk through the sentence character by character and call the appropriate function as outlined above.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>for (int i = 0; i < sentence.length(); i++) {
@@ -1963,22 +1967,22 @@ if/else if structure helps readers not familiar with case statements.</div><code
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The next example will draw a more elaborate structure with the following L-System.</p>
+</div><p>The next example will draw a more elaborate structure with the following L-system.</p>
 <p><span class="formula">Alphabet:   FG+-[]</span><br /><span class="formula">Axiom:  F</span><br /><span class="formula">Rules:  F -→ FF+[+F-F-F]-[-F+F+F]</span></p>
-<p>The example available for download on the book’s website takes all of the L-System code provided in this section and organizes it into three classes:</p>
+<p>The example available for download on the book’s website takes all of the L-system code provided in this section and organizes it into three classes:</p>
 <div class="list">
 
 	<ul>
 
-			<li><p><span class="mono">Rule</span>:  A class that stores the predecessor and successor Strings for an L-System rule.
+			<li><p><span class="mono">Rule</span>:  A class that stores the predecessor and successor strings for an L-system rule.
 </p>
 </li>
 
-			<li><p><span class="mono">L-System</span>: A class to iterate a new L-System generation (as demonstrated with the StringBuffer technique).
+			<li><p><span class="mono">L-system</span>: A class to iterate a new L-system generation (as demonstrated with the <span class="klass">StringBuffer</span> technique).
 </p>
 </li>
 
-			<li><p><span class="mono">Turtle</span>: A class to manage reading the L-System sentence and following its instructions to draw on the screen.
+			<li><p><span class="mono">Turtle</span>: A class to manage reading the L-system sentence and following its instructions to draw on the screen.
 </p>
 </li>
 
@@ -2004,7 +2008,7 @@ void setup() {
   Rule[] ruleset = new Rule[1];
   ruleset[0] = new Rule('F',"FF+[+F-F-F]-[-F+F+F]");
 
-  // The L-System is created with an axiom and a ruleset.
+  // The L-system is created with an axiom and a ruleset.
   lsys = new LSystem("F",ruleset);
 
   //[offset-down] The Turtle graphics renderer is given a sentence,
@@ -2043,7 +2047,7 @@ void mousePressed() {
 <span class='one-line'>  <span class="n">ruleset</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Rule</span><span class="o">(</span><span class="sc">&#39;F&#39;</span><span class="o">,</span><span class="s">&quot;FF+[+F-F-F]-[-F+F+F]&quot;</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>The L-System is created with an axiom and a ruleset.</div><code><pre><span class='one-line'>  <span class="n">lsys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LSystem</span><span class="o">(</span><span class="s">&quot;F&quot;</span><span class="o">,</span><span class="n">ruleset</span><span class="o">);</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>The L-system is created with an axiom and a ruleset.</div><code><pre><span class='one-line'>  <span class="n">lsys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LSystem</span><span class="o">(</span><span class="s">&quot;F&quot;</span><span class="o">,</span><span class="n">ruleset</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair offset-down'><div class='code-comment '> The Turtle graphics renderer is given a sentence,
@@ -2069,11 +2073,11 @@ a starting length, and an angle for rotations.</div><code><pre><span class='one-
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
-  <h4 id="exercise-812">Exercise 8.12</h4><p>Use an L-System as a set of instructions for creating objects stored in an ArrayList.  Use trigonometry and vector math to perform the rotations instead of matrix transformations (much like we did in the KochCurve example).</p>
+  <h4 id="exercise-812">Exercise 8.12</h4><p>Use an L-system as a set of instructions for creating objects stored in an <span class="klass">ArrayList</span>.  Use trigonometry and vector math to perform the rotations instead of matrix transformations (much like we did in the KochCurve example).</p>
 
 </div><div class="example">
-  <h4 id="exercise-813">Exercise 8.13</h4><p>The seminal work in L-Systems and plant structures, <em>The Algorithmic Beauty of Plants</em> by Przemyslaw Prusinkiewicz and Aristid Lindenmayer, was published in 1990.  It is available for free in its entirety online at: <a href="http://algorithmicbotany.org/papers/#abop">http://algorithmicbotany.org/papers/#abop</a>
-.  Chapter 1 describes many sophisticated L-Systems with additional drawing rules and available alphabet characters.  In addition, it describes several methods for generating stochastic L-Systems.   Expand the L-System example to include one or more additional features described by Prusinkiewicz and Lindenmayer.</p>
+  <h4 id="exercise-813">Exercise 8.13</h4><p>The seminal work in L-systems and plant structures, <em>The Algorithmic Beauty of Plants</em> by Przemyslaw Prusinkiewicz and Aristid Lindenmayer, was published in 1990.  It is available for free in its entirety online at: <a href="http://algorithmicbotany.org/papers/#abop">http://algorithmicbotany.org/papers/#abop</a>
+.  Chapter 1 describes many sophisticated L-systems with additional drawing rules and available alphabet characters.  In addition, it describes several methods for generating stochastic L-systems.   Expand the L-system example to include one or more additional features described by Prusinkiewicz and Lindenmayer.</p>
 
 </div><div class="example">
   <h4 id="exercise-814">Exercise 8.14</h4><p>In this chapter, we emphasized using fractal algorithms for generating visual patterns. However, fractals can be found in other creative mediums.  For example, fractal patterns are evident in Johann Sebastian Bach’s Cello Suite No. 3.  The structure of David Foster Wallace’s novel <em>Infinite Jest</em> was inspired by fractals.  Consider using the examples in this chapter to generate audio or text.</p>
@@ -2101,7 +2105,7 @@ Design a creature with a fractal pattern.
 </li>
 
 			<li><p>
-Use an L-System to generate instructions for how a creature should move or behave.
+Use an L-system to generate instructions for how a creature should move or behave.
 </p>
 </li>
 
@@ -2134,6 +2138,8 @@ Use an L-System to generate instructions for how a creature should move or behav
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

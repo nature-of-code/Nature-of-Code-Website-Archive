@@ -1,27 +1,30 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Document</title>
+	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -59,13 +62,15 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/">Buy as a PDF</a>
+          <a id="purchase-link" href="/">Like this stuff? Support this project by buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
             <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
@@ -90,7 +95,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -138,7 +142,7 @@ The first order of business is <em>radians</em> and <em>degrees</em>.  You’re 
 </div>
 <p>The formula to convert from degrees to radians is:</p>
 <p>radians = 2 * PI * (degrees / 360)</p>
-<p>Thankfully, if we prefer to think in degrees but code with radians, Processing makes this easy.  The <span class="function">radians()</span> function will automatically convert values from degrees to radians, and the constants PI and TWO_PI provide convenient access to these commonly used numbers (equivalent to 180 and 360 degrees, respectively).   The following code, for example, will rotate shapes by 60 degrees.</p>
+<p>Thankfully, if we prefer to think in degrees but code with radians, Processing makes this easy.  The <span class="function">radians()</span> function will automatically convert values from degrees to radians, and the constants <span class="var">PI</span> and <span class="var">TWO_PI</span> provide convenient access to these commonly used numbers (equivalent to 180 and 360 degrees, respectively).   The following code, for example, will rotate shapes by 60 degrees.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float angle = radians(60);
@@ -156,7 +160,7 @@ rotate(angle);</textarea>
 </div><p>If you are not familiar with how rotation is implemented in Processing, I would suggest this tutorial: <a href="http://www.processing.org/learning/transform2d/">Processing - Transform 2D</a>
 .</p>
 <div class="note">
-  <h4 id="what-is-pi">What is PI?</h4><p>The mathematical constant pi (or π) is a real number defined as the ratio of a circle’s circumference (the distance around the perimeter) to its diameter (a straight line that passes through the circle’s center).  It is equal to approximately 3.14159 and can be accessed in Processing with the built-in variable PI.</p>
+  <h4 id="what-is-pi">What is PI?</h4><p>The mathematical constant pi (or π) is a real number defined as the ratio of a circle’s circumference (the distance around the perimeter) to its diameter (a straight line that passes through the circle’s center).  It is equal to approximately 3.14159 and can be accessed in Processing with the built-in variable <span class="var">PI</span>.</p>
 
 </div><div class="example">
   <a id="chapter03_exercise1" style="display: block;"></a>
@@ -282,7 +286,7 @@ void draw() {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The baton starts onscreen with no rotation and then spins faster and faster as the angle of rotation accelerates.</p>
-<p>This idea can be incorporated into our Mover object.  For example, we can add the variables related to angular motion to our Mover.</p>
+<p>This idea can be incorporated into our <span class="klass">Mover</span> object.  For example, we can add the variables related to angular motion to our <span class="klass">Mover</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Mover {
@@ -525,7 +529,7 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 <p>See how we create a right triangle out of a vector?  The vector arrow itself is the hypotenuse and the components of the vector (<span class="var">x</span> and <span class="var">y</span>) are the sides of the triangle.  The angle is an additional means for specifying the vector’s direction (or “heading”).</p>
 <p>Because the trigonometric functions allow us to establish a relationship between the components of a vector and its direction + magnitude, they will prove very useful throughout this book.  We’ll begin by looking at an example that requires the tangent function.</p>
 </section><section><a id="chapter03_section4" style="display: block;"></a>
-<h3 id="34-pointing-in-the-direction-of-movement">3.4 Pointing in the Direction of Movement</h3><p>Let’s go all the way back to Example 1.10, which features a <span class="class">Mover</span> object accelerating towards the mouse.</p>
+<h3 id="34-pointing-in-the-direction-of-movement">3.4 Pointing in the Direction of Movement</h3><p>Let’s go all the way back to Example 1.10, which features a <span class="klass">Mover</span> object accelerating towards the mouse.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter01/_1_10_motion101_acceleration/_1_10_motion101_acceleration.pde /book/processingjs/chapter01/_1_10_motion101_acceleration/Mover.pde" class="screenshot">
@@ -577,7 +581,7 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 </dd>
 
 	</dl>
-</div><p>Now that we have the formula, let’s see where it should go in our Mover’s <span class="function">display()</span> function.   Notice that in Processing, the function for arctangent is called <span class="function">atan()</span>.</p>
+</div><p>Now that we have the formula, let’s see where it should go in our mover’s <span class="function">display()</span> function.   Notice that in Processing, the function for arctangent is called <span class="function">atan()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void display() {
@@ -677,7 +681,7 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>To simplify this even further, the <span class="class">PVector</span> class itself provides a function called <span class="class">heading2D()</span>, which takes care of calling <span class="function">atan2()</span> for you so you can get the direction angle, in radians, for any Processing PVector.</p>
+</div><p>To simplify this even further, the <span class="klass">PVector</span> class itself provides a function called <span class="klass">heading2D()</span>, which takes care of calling <span class="function">atan2()</span> for you so you can get the direction angle, in radians, for any Processing <span class="klass">PVector</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    // The easiest way to do this!
@@ -698,7 +702,7 @@ velocity doesn’t spin out of control.</div><code><pre><span class='one-line'> 
 </div></section><section><a id="chapter03_section5" style="display: block;"></a>
 <h3 id="35-polar-vs-cartesian-coordinates">3.5 Polar vs. Cartesian Coordinates</h3><p>Any time we display a shape in Processing, we have to specify a pixel location, a set of <span class="var">x</span> and <span class="var">y</span> coordinates.  These coordinates are known as <strong><em>Cartesian coordinates</em></strong>, named for the René Descartes, the French mathematician who developed the ideas behind Cartesian space.</p>
 <p>Another useful coordinate system known as <strong><em>polar coordinates</em></strong> describes a point in space as an angle of rotation around the origin and a radius from the origin.   Thinking about this in terms of a vector:</p>
-<p>Cartesian coordinate—the x,y components of a vector<br />
+<p>Cartesian coordinate—the <em>x</em>,<em>y</em> components of a vector<br />
 Polar coordinate—the magnitude (length) and direction (angle) of a vector</p>
 <p>Processing’s drawing functions, however, don’t understand polar coordinates.  Whenever we want to display something in Processing, we have to specify locations as <em>(x,y)</em> Cartesian coordinates.   However, sometimes it is a great deal more convenient for us to think in polar coordinates when designing.   Happily for us, with trigonometry we can convert back and forth between polar and Cartesian, which allows us to design with whatever coordinate system we have in mind but always draw with Cartesian coordinates.</p>
 <a id="chapter03_figure8" style="display: block;"></a>
@@ -709,7 +713,7 @@ Polar coordinate—the magnitude (length) and direction (angle) of a vector</p>
 	<p class="caption">Figure 3.8: The Greek letter θ (theta) is often used to denote an angle.  Since a polar coordinate is conventionally referred to as (r, θ), we’ll use theta as a variable name when referring to an angle.</p>
 </div>
 <p><span class="formula">sine(theta)   = y/r   →   y = r * sine(theta)</span><br /><span class="formula">cosine(theta) = x/r   →   x = r * cosine(theta)</span></p>
-<p>For example, if <span class="var">r</span> is 75 and <span class="var">theta</span> is 45 degrees (or PI/4 radians), we can calculate x and y as below.  The functions for sine and cosine in Processing are <span class="function">sin()</span> and <span class="function">cos()</span>, respectively.  They each take one argument, an angle measured in radians.</p>
+<p>For example, if <span class="var">r</span> is 75 and <span class="var">theta</span> is 45 degrees (or PI/4 radians), we can calculate <span class="var">x</span> and <span class="var">y</span> as below.  The functions for sine and cosine in Processing are <span class="function">sin()</span> and <span class="function">cos()</span>, respectively.  They each take one argument, an angle measured in radians.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float r = 75;
@@ -869,7 +873,7 @@ void draw() {
 </li>
 
 	</ul>
-</div><p>Looking at the graph of sine (Figure 3.9), we can see that the amplitude is 1 and the period is TWO PI; the output of sine never rises above 1 or below -1; and every TWO PI radians (or 360 degrees) the wave pattern repeats.</p>
+</div><p>Looking at the graph of sine (Figure 3.9), we can see that the amplitude is 1 and the period is <span class="var">TWO_PI</span>; the output of sine never rises above 1 or below -1; and every <span class="var">TWO_PI</span> radians (or 360 degrees) the wave pattern repeats.</p>
 <p>Now, in the Processing world we live in, what is amplitude and what is period?  Amplitude can be measured rather easily in pixels.   In the case of a window 200 pixels wide, we would oscillate from the center 100 pixels to the right and 100 pixels to the left. Therefore:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -914,7 +918,7 @@ float period = 120;</textarea>
 </div><p>Let’s dissect the formula a bit more and try to understand each component.   The first is probably the easiest.   Whatever comes out of the cosine function we multiply by amplitude.   We know that cosine will oscillate between -1 and 1. If we take that value and multiply it by amplitude then we’ll get the desired result: a value oscillating between -amplitude and amplitude.   (Note: this is also a place where we could use Processing’s <span class="function">map()</span> function to map the output of cosine to a custom range.)</p>
 <p>Now, let’s look at what is inside the cosine function:</p>
 <p><span class="formula">TWO_PI * frameCount / period</span></p>
-<p>What’s going on here?   Let’s start with what we know.  We know that cosine will repeat every 2PI radians—i.e., it will start at 0, repeat at 2PI, 4PI, 6PI, etc.   If the period is 120, then we want the oscillating motion to repeat when the frameCount is at 120 frames, 240 frames, 360 frames, etc.  <span class="var">frameCount</span> is really the only variable; it starts at 0 and counts upward.   Let’s take a look at what the formula yields at those values:</p>
+<p>What’s going on here?   Let’s start with what we know.  We know that cosine will repeat every 2*PI radians—i.e., it will start at 0, repeat at 2*PI, 4*PI, 6*PI, etc.   If the period is 120, then we want the oscillating motion to repeat when the frameCount is at 120 frames, 240 frames, 360 frames, etc.  <span class="var">frameCount</span> is really the only variable; it starts at 0 and counts upward.   Let’s take a look at what the formula yields at those values:</p>
 <div class="table">
 
 	<table>
@@ -1003,7 +1007,7 @@ float period = 120;</textarea>
 
 		</tbody>
 	</table>
-</div><p><span class="var">frameCount</span> divided by <span class="var">period</span> tells us how many cycles we’ve completed—are we halfway through the first cycle?  Have we completed two  cycles?  By multiplying that number by TWO_PI, we get the result we want, since TWO_PI is the number of radians required for one cosine (or sine) to complete one cycle.</p>
+</div><p><span class="var">frameCount</span> divided by <span class="var">period</span> tells us how many cycles we’ve completed—are we halfway through the first cycle?  Have we completed two  cycles?  By multiplying that number by <span class="var">TWO_PI</span>, we get the result we want, since <span class="var">TWO_PI</span> is the number of radians required for one cosine (or sine) to complete one cycle.</p>
 <p>Wrapping this all up, here’s the Processing example that oscillates the <span class="var">x</span> location of a circle with an amplitude of 100 pixels and a period of 120 frames.</p>
 <p><a id="chapter03_example5" style="display: block;"></a>
 <span class="example">Example 3.5 Simple Harmonic Motion</span></p>
@@ -1171,9 +1175,9 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Just because we’re not referencing it directly doesn’t mean that we’ve eliminated the concept of <span class="var">period</span>.  After all, the greater the angular velocity, the faster the circle will oscillate (therefore lowering the period).   In fact, the number of times it takes to add up the angular velocity to get to TWO_PI is the period or:</p>
+</div><p>Just because we’re not referencing it directly doesn’t mean that we’ve eliminated the concept of <span class="var">period</span>.  After all, the greater the angular velocity, the faster the circle will oscillate (therefore lowering the period).   In fact, the number of times it takes to add up the angular velocity to get to <span class="var">TWO_PI</span> is the period or:</p>
 <p><span class="formula">period = TWO_PI / angular velocity</span></p>
-<p>Let’s expand this example a bit more and create an Oscillator class.  And let’s assume we want the oscillation to happen along both the x-axis (as above) and the y-axis.  To do this, we’ll need two angles, two angular velocities, and two amplitudes (one for each axis).   Another perfect opportunity for PVector!</p>
+<p>Let’s expand this example a bit more and create an <span class="klass">Oscillator</span> class.  And let’s assume we want the oscillation to happen along both the x-axis (as above) and the y-axis.  To do this, we’ll need two angles, two angular velocities, and two amplitudes (one for each axis).   Another perfect opportunity for <span class="klass">PVector</span>!</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_07_oscillating_objects/_3_07_oscillating_objects.pde /book/processingjs/chapter03/_3_07_oscillating_objects/Oscillator.pde" class="screenshot">
@@ -1268,14 +1272,14 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
   <a id="chapter03_exercise7" style="display: block;"></a>
-<h4 id="exercise-37">Exercise 3.7</h4><p>Try initializing each Oscillator object with velocities and amplitudes that are not random to create some sort of regular pattern.  Can you make the oscillators appear to be the legs of a insect-like creature?</p>
+<h4 id="exercise-37">Exercise 3.7</h4><p>Try initializing each <span class="klass">Oscillator</span> object with velocities and amplitudes that are not random to create some sort of regular pattern.  Can you make the oscillators appear to be the legs of a insect-like creature?</p>
 
 </div><div class="example">
   <a id="chapter03_exercise8" style="display: block;"></a>
-<h4 id="exercise-38">Exercise 3.8</h4><p>Incorporate angular acceleration into the Oscillator object.</p>
+<h4 id="exercise-38">Exercise 3.8</h4><p>Incorporate angular acceleration into the <span class="klass">Oscillator</span> object.</p>
 
 </div></section><section><a id="chapter03_section8" style="display: block;"></a>
-<h3 id="38-waves">3.8 Waves</h3><p>If you’re saying to yourself, “Um, this is all great and everything, but what I really want is to draw a wave onscreen,” well, then, the time has come.   The thing is, we’re about 90% there.  When we oscillate a single circle up and down according to the sine function, what we are doing is looking at a single point along the x-axis of a wave pattern.  With a little panache and a for loop, we can place a whole bunch of these oscillating circles next to each other.</p>
+<h3 id="38-waves">3.8 Waves</h3><p>If you’re saying to yourself, “Um, this is all great and everything, but what I really want is to draw a wave onscreen,” well, then, the time has come.   The thing is, we’re about 90% there.  When we oscillate a single circle up and down according to the sine function, what we are doing is looking at a single point along the x-axis of a wave pattern.  With a little panache and a <span class="function">for</span> loop, we can place a whole bunch of these oscillating circles next to each other.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_09_wave/_3_09_wave.pde" class="screenshot">
@@ -1546,7 +1550,7 @@ void draw() {
 
 </div><div class="example">
   <a id="chapter03_exercise10" style="display: block;"></a>
-<h4 id="exercise-310">Exercise 3.10</h4><p>Encapsulate the above examples into a Wave class and create a sketch that displays two waves (with different amplitudes/periods) as in the screenshot below.  Move beyond plain circles and lines and try visualizing the wave in a more creative way.</p>
+<h4 id="exercise-310">Exercise 3.10</h4><p>Encapsulate the above examples into a <span class="klass">Wave</span> class and create a sketch that displays two waves (with different amplitudes/periods) as in the screenshot below.  Move beyond plain circles and lines and try visualizing the wave in a more creative way.</p>
 <div class="image-container " >
 
 	<canvas data-processing-sources="/book/processingjs/chapter03/Ex_3_10_OOPWave/Ex_3_10_OOPWave.pde /book/processingjs/chapter03/Ex_3_10_OOPWave/Wave.pde" >
@@ -1614,7 +1618,7 @@ void draw() {
 <p>This is a good time to remind ourselves that we’re Processing programmers and not physicists.   Yes, we know that the acceleration due to gravity on earth is 9.8 meters per second squared.  But this number isn’t relevant to us.  What we have here is just an arbitrary constant (we’ll call it <span class="var">gravity</span>), one that we can use to scale the acceleration to something that feels right.</p>
 <p><span class="formula">angular acceleration = gravity * sine (θ)</span></p>
 <p>Amazing.  After all that, the formula is so simple.  You might be wondering, why bother going through the derivation at all?  I mean, learning is great and all, but we could have easily just said: Hey, the angular acceleration of a pendulum is some constant times the sine of the angle.   This is just another moment in which we remind ourselves that the purpose of the book is not to learn how pendulums swing or gravity works.  The point is to think creatively about how things can move about the screen in a computationally based graphics system.  The pendulum is just a case study.   If you can understand the approach to programming a pendulum, then however you choose to design your onscreen world, you can apply the same techniques.</p>
-<p>Of course, we’re not finished yet.  We may be happy with our simple, elegant formula, but we still have to apply it in code.   This is most definitely a good time to practice our object-oriented programming skills and create a Pendulum class.  Let’s think about all the properties we’ve encountered in our pendulum discussion that the class will need:</p>
+<p>Of course, we’re not finished yet.  We may be happy with our simple, elegant formula, but we still have to apply it in code.   This is most definitely a good time to practice our object-oriented programming skills and create a <span class="klass">Pendulum</span> class.  Let’s think about all the properties we’ve encountered in our pendulum discussion that the class will need:</p>
 <div class="list">
 
 	<ul>
@@ -1708,7 +1712,7 @@ angular acceleration
 
 	<p class="caption">Figure 3.13</p>
 </div>
-<p>…as well as a function <span class="function">display()</span> to draw the pendulum in the window. This begs the question: “Um, where do we draw the pendulum?”  We know the angle and the arm length, but how do we know the <span class="var">x</span>,<span class="var">y</span> (Cartesian!) coordinates for both the pendulum’s pivot point (let’s call it origin) and bob location (let’s call it location)?  This may be getting a little tiring, but the answer, yet again, is trigonometry.</p>
+<p>…as well as a function <span class="function">display()</span> to draw the pendulum in the window. This begs the question: “Um, where do we draw the pendulum?”  We know the angle and the arm length, but how do we know the <em>x,y</em> (Cartesian!) coordinates for both the pendulum’s pivot point (let’s call it origin) and bob location (let’s call it location)?  This may be getting a little tiring, but the answer, yet again, is trigonometry.</p>
 <p>The origin is just something we make up, as is the arm length.  Let’s say:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1724,7 +1728,7 @@ float r = 125;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We’ve got the current angle stored in our variable <span class="var">angle</span>.   So relative to the origin, the pendulum’s location is a polar coordinate: (r,angle).  And we need it to be Cartesian.  Luckily for us, we just spent some time (Section 3.5) deriving the formula for converting from polar to Cartesian.  And so:</p>
+</div><p>We’ve got the current angle stored in our variable <span class="var">angle</span>.   So relative to the origin, the pendulum’s location is a polar coordinate: <em>(r,angle)</em>.  And we need it to be Cartesian.  Luckily for us, we just spent some time (Section 3.5) deriving the formula for converting from polar to Cartesian.  And so:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector location = new PVector(r*sin(angle),r*cos(angle));</textarea>
@@ -1737,7 +1741,7 @@ float r = 125;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Since the location is relative to wherever the origin happens to be, we can just add origin to the location PVector:</p>
+</div><p>Since the location is relative to wherever the origin happens to be, we can just add origin to the location <span class="klass">PVector</span>:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>location.add(origin);</textarea>
@@ -1999,7 +2003,7 @@ Polar to Cartesian coordinates will tell us!</div><code><pre><span class='one-li
 </div>
 <p>In <a href="#chapter03_section6">Section 3.6</a>
 , we looked at modeling simple harmonic motion by mapping the sine wave to a pixel range. <a href="#chapter03_exercise6">Exercise 3.6</a>
- asked you to use this technique to create a simulation of a spring hanging from a bob.  While using the <span class="function">sin()</span> function is a quick-and-dirty, one-line-of-code way of getting something up and running, it won’t do if what we really want is to have a bob hanging from a spring in a two-dimensional space that responds to other forces in the environment (wind, gravity, etc.)  To accomplish a simulation like this (one that is identical to the pendulum example, only now the arm is a springy connection), we need to model the forces of a spring using PVector.</p>
+ asked you to use this technique to create a simulation of a spring hanging from a bob.  While using the <span class="function">sin()</span> function is a quick-and-dirty, one-line-of-code way of getting something up and running, it won’t do if what we really want is to have a bob hanging from a spring in a two-dimensional space that responds to other forces in the environment (wind, gravity, etc.)  To accomplish a simulation like this (one that is identical to the pendulum example, only now the arm is a springy connection), we need to model the forces of a spring using <span class="klass">PVector</span>.</p>
 <p>The force of a spring is calculated according to Hooke’s law, named for Robert Hooke, a British physicist who developed the formula in 1660.  Hooke originally stated the law in Latin:  “Ut tensio, sic vis” or “As the extension, so the force” <span class="notetoself">[Cite wikipedia?]</span>.    Let’s think of it this way:</p>
 <p><span class="highlight">The force of the spring is directly proportional to the extension of the spring.</span></p>
 <a id="chapter03_figure15" style="display: block;"></a>
@@ -2090,7 +2094,7 @@ gives us the current length of the spring.</div><code><pre><span class='one-line
 
 	<p class="caption">Figure 3.17</p>
 </div>
-<p>In Figure 3.17, we can see that if we stretch the spring beyond its rest length, there should be a force pulling it back towards the anchor.  And if it shrinks below its rest length, the force should push it away from the anchor.   This reversal of direction is accounted for in the formula with the -1.  And so all we need to do is normalize the PVector we used for the distance calculation!  Let’s take a look at the code and rename that PVector variable as “force.”</p>
+<p>In Figure 3.17, we can see that if we stretch the spring beyond its rest length, there should be a force pulling it back towards the anchor.  And if it shrinks below its rest length, the force should push it away from the anchor.   This reversal of direction is accounted for in the formula with the -1.  And so all we need to do is normalize the <span class="klass">PVector</span> we used for the distance calculation!  Let’s take a look at the code and rename that <span class="klass">PVector</span> variable as “force.”</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Magnitude of spring force according to Hooke’s law
@@ -2122,7 +2126,7 @@ force.mult(-1 * k * x);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now that we have the algorithm worked out for computing the spring force vector, the question remains: what object-oriented programming structure should we use?   This, again, is one of those situations in which there is no “correct” answer.  There are several possibilities; which one we choose depends on the program’s goals and one’s own personal coding style.   Still, since we’ve been working all along with a Mover class, let’s keep going with this same framework.  Let’s think of our Mover class as the spring’s “bob.”  The bob needs <span class="var">location</span>, <span class="var">velocity</span>, and <span class="var">acceleration</span> vectors to move about the screen.  Perfect—we’ve got that already!  And perhaps the bob experiences a gravity force via the <span class="function">applyForce()</span> function.  Just one more step—we need to apply the spring force:</p>
+</div><p>Now that we have the algorithm worked out for computing the spring force vector, the question remains: what object-oriented programming structure should we use?   This, again, is one of those situations in which there is no “correct” answer.  There are several possibilities; which one we choose depends on the program’s goals and one’s own personal coding style.   Still, since we’ve been working all along with a <span class="klass">Mover</span> class, let’s keep going with this same framework.  Let’s think of our <span class="klass">Mover</span> class as the spring’s “bob.”  The bob needs <span class="var">location</span>, <span class="var">velocity</span>, and <span class="var">acceleration</span> vectors to move about the screen.  Perfect—we’ve got that already!  And perhaps the bob experiences a gravity force via the <span class="function">applyForce()</span> function.  Just one more step—we need to apply the spring force:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Bob bob;
@@ -2178,7 +2182,7 @@ void draw()  {
 
 	<p class="caption">Figure 3.18</p>
 </div>
-<p>One option would be to write out all of the spring force code in the main <span class="function">draw()</span> loop.  But thinking ahead to when you might have multiple bobs and multiple spring connections, it makes a good deal of sense to write an additional class, a Spring class.  As shown in Figure 3.18, the Bob object keeps track of the movements of the Bob; the Spring class keeps track of the Spring’s anchor and its rest length and calculates the Spring force on the Bob.</p>
+<p>One option would be to write out all of the spring force code in the main <span class="function">draw()</span> loop.  But thinking ahead to when you might have multiple bobs and multiple spring connections, it makes a good deal of sense to write an additional class, a <span class="klass">Spring</span> class.  As shown in Figure 3.18, the <span class="klass">Bob</span> class keeps track of the movements of the bob; the <span class="klass">Spring</span> class keeps track of the spring’s anchor and its rest length and calculates the spring force on the bob.</p>
 <p>This allows us to write a lovely main program as follows:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2233,7 +2237,7 @@ computing the force of the spring on the bob.</div><code><pre><span class='one-l
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>You may notice here that this is quite similar to what we did in <a href="#chapter02_example6">Example 2.6</a>
- with the Attractor.   There, we said something like:</p>
+ with an attractor.   There, we said something like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector force = attractor.attract(mover);
@@ -2303,8 +2307,8 @@ area.</div><code><pre><span class='one-line'>    <span class="n">b</span><span c
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Why do it one way with the Attractor and another way with the Spring?    When we were first learning about forces, it was a bit clearer to show all the forces being applied in the main <span class="function">draw()</span> loop, and hopefully this helped you learn about force accumulation.  Now that we’re more comfortable with that, perhaps it’s simpler to embed some of the details inside the objects themselves.</p>
-<p>Let’s take a look at the rest of the elements in the Spring class.</p>
+</div><p>Why do it one way with the <span class="klass">Attractor</span> class and another way with the <span class="klass">Spring</span> class?    When we were first learning about forces, it was a bit clearer to show all the forces being applied in the main <span class="function">draw()</span> loop, and hopefully this helped you learn about force accumulation.  Now that we’re more comfortable with that, perhaps it’s simpler to embed some of the details inside the objects themselves.</p>
+<p>Let’s take a look at the rest of the elements in the <span class="klass">Spring</span> class.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter03/_3_11_spring/_3_11_spring.pde /book/processingjs/chapter03/_3_11_spring/Mover.pde /book/processingjs/chapter03/_3_11_spring/Spring.pde" class="screenshot">
@@ -2431,7 +2435,7 @@ distance and rest length.</div><code><pre><span class='one-line'>    <strong><sp
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The full code for this example is included on the book web site, and the web version also incorporates two additional features: (1) Bob includes functions for mouse interactivity so that it can be dragged around the window, (2) the Spring object includes a function to constrain the connection’s length between a minimum and a maximum.</p>
+</div><p>The full code for this example is included on the book web site, and the web version also incorporates two additional features: (1) <span class="klass">Bob</span> class includes functions for mouse interactivity so that it can be dragged around the window, (2) the <span class="klass">Spring</span> object includes a function to constrain the connection’s length between a minimum and a maximum.</p>
 <div class="example">
   <a id="chapter03_exercise15" style="display: block;"></a>
 <h4 id="exercise-315">Exercise 3.15</h4><p>Exercise: Before running to see the example online, take a look at this constrain function and see if you can fill in the blanks.</p>
@@ -2494,7 +2498,7 @@ distance and rest length.</div><code><pre><span class='one-line'>    <strong><sp
 
 </div><div class="tip">
   <h4 id="the-ecosystem-project">The Ecosystem Project</h4><p>Step 3 Exercise:</p>
-<p>Take one of your creatures and incorporate oscillation into its motion.   You can use the Oscillator class from Example 3.x as a model.  The Oscillator object, however, oscillates around a single point (the middle of the window).   Try oscillating around a moving point.   In other words, design a creature that moves around the screen according to location, velocity, and acceleration.  But that creature isn’t just a static shape, it’s an oscillating body.  Consider tying the speed of oscillation to the speed of motion.  Think of a butterfly’s flapping wings or the legs of an insect.  Can you make it appear that the creature’s internal mechanics (oscillation) drive its locomotion?   For a sample, check out the “AttractionArrayWithOscillation” example with the code download.</p>
+<p>Take one of your creatures and incorporate oscillation into its motion.   You can use the <span class="klass">Oscillator</span> class from Example 3.x as a model.  The <span class="klass">Oscillator</span> object, however, oscillates around a single point (the middle of the window).   Try oscillating around a moving point.   In other words, design a creature that moves around the screen according to location, velocity, and acceleration.  But that creature isn’t just a static shape, it’s an oscillating body.  Consider tying the speed of oscillation to the speed of motion.  Think of a butterfly’s flapping wings or the legs of an insect.  Can you make it appear that the creature’s internal mechanics (oscillation) drive its locomotion?   For a sample, check out the “AttractionArrayWithOscillation” example with the code download.</p>
 
 </div></section>
   	</div>
@@ -2523,6 +2527,8 @@ distance and rest length.</div><code><pre><span class='one-line'>    <strong><sp
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

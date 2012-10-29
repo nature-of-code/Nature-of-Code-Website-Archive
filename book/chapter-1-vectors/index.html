@@ -1,27 +1,30 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Document</title>
+	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -59,13 +62,15 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/">Buy as a PDF</a>
+          <a id="purchase-link" href="/">Like this stuff? Support this project by buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
             <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
@@ -90,7 +95,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -674,7 +678,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The <span class="function">ellipse()</span> function does not allow for a <span class="klass">PVector</span> as an argument.  An ellipse can only be drawn with two scalar values, an <span class="var">x</span>-coordinate and a <span class="var">y</span>-coordinate.  And so we must dig into the <span class="klass">PVector</span> object and pull out the x and y components using object-oriented dot syntax.</p>
+</div><p>The <span class="function">ellipse()</span> function does not allow for a <span class="klass">PVector</span> as an argument.  An ellipse can only be drawn with two scalar values, an <span class="var">x</span>-coordinate and a <span class="var">y</span>-coordinate.  And so we must dig into the <span class="klass">PVector</span> object and pull out the <em>x</em> and <em>y</em> components using object-oriented dot syntax.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ellipse(location.x,location.y,16,16);</textarea>
@@ -687,7 +691,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The same issue arises when testing if the circle has reached the edge of the window, and we need to access the individual components of both vectors: location and velocity.</p>
+</div><p>The same issue arises when testing if the circle has reached the edge of the window, and we need to access the individual components of both vectors: <span class="var">location</span> and <span class="var">velocity</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>if ((location.x > width) || (location.x < 0)) {
@@ -706,11 +710,11 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
   <a id="chapter01_exercise1" style="display: block;"></a>
-<h4 id="exercise-11">Exercise 1.1</h4><p>Find something you’ve previously made in Processing using separate <span class="var">x</span> and <span class="var">y</span> variables and use [klass]*PVector*s instead.</p>
+<h4 id="exercise-11">Exercise 1.1</h4><p>Find something you’ve previously made in Processing using separate <span class="var">x</span> and <span class="var">y</span> variables and use <span class="klass">PVector</span>s instead.</p>
 
 </div><div class="example">
   <a id="chapter01_exercise2" style="display: block;"></a>
-<h4 id="exercise-12">Exercise 1.2</h4><p>Take any of the walker examples from the introduction and convert it to use [klass]*PVector*s.</p>
+<h4 id="exercise-12">Exercise 1.2</h4><p>Take any of the walker examples from the introduction and convert it to use <span class="klass">PVector</span>s.</p>
 
 </div><div class="example">
   <a id="chapter01_exercise3" style="display: block;"></a>
@@ -1326,19 +1330,19 @@ void draw() {
 </div><p>In the bouncing ball example, all of this code happened in Processing’s main tab, within <span class="function">setup()</span> and <span class="function">draw()</span>.   What we want to do now is move towards encapsulating all of the logic for motion inside of a <strong><em>class</em></strong>. This way, we can create a foundation for programming moving objects in Processing.    In <a href="#intro_section2">Introduction</a>
  Section  section I.2 of the introduction, “The Random Walker Class”, we briefly reviewed the basics of object-oriented-programming (“OOP”).   Beyond that short introduction, this book assumes experience with objects and classes in Processing.   If you need a refresher, I encourage you to check out the online OOP Processing tutorial: <a href="http://processing.org/learning/tutorials/objects/">Processing objects tutorial</a>
 .</p>
-<p>In this case, we’re going to create a generic <em>Mover</em> class, called <em>mover</em>, which will describe a thing moving around the screen.  And so we must consider the following two questions:</p>
+<p>In this case, we’re going to create a generic <span class="klass">Mover</span> class which will describe a thing moving around the screen.  And so we must consider the following two questions:</p>
 <div class="list">
 
 	<ol class="arabic">
 
-			<li><p><strong><em>What data does a Mover have?</em></strong></p>
+			<li><p><strong><em>What data does a mover have?</em></strong></p>
 </li>
 
-			<li><p><strong><em>What functionality does a Mover object have?</em></strong></p>
+			<li><p><strong><em>What functionality does a mover have?</em></strong></p>
 </li>
 
 	</ol>
-</div><p>Our Motion 101 algorithm tells us the answers to these questions.  A Mover object has two pieces of data: location and velocity, two <span class="klass">PVector</span> objects.</p>
+</div><p>Our Motion 101 algorithm tells us the answers to these questions.  A <span class="klass">Mover</span> object has two pieces of data: <span class="var">location</span> and [<span class="var">velocity</span>, two <span class="klass">PVector</span> objects.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Mover {
@@ -1357,7 +1361,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Its functionality is just about as simple.  The Mover needs to move and it needs to be seen.  We’ll implement these needs as functions named <span class="function">update()</span> and <span class="function">display()</span>.  <span class="function">update()</span> is where we’ll put all of our motion logic code and <span class="function">display()</span> is where we will draw the object.</p>
+</div><p>Its functionality is just about as simple.  The <span class="klass">Mover</span> needs to move and it needs to be seen.  We’ll implement these needs as functions named <span class="function">update()</span> and <span class="function">display()</span>.  <span class="function">update()</span> is where we’ll put all of our motion logic code and <span class="function">display()</span> is where we will draw the object.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void update() {
@@ -1407,7 +1411,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In our case, let’s arbitrarily decide to initialize our Mover object by giving it a random location and a random velocity.</p>
+</div><p>In our case, let’s arbitrarily decide to initialize our <span class="klass">Mover</span> object by giving it a random location and a random velocity.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  Mover() {
@@ -1426,9 +1430,9 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the <span class="klass">PVector</span> class.  The <span class="klass">PVector</span> class is the template for making the location object and the velocity xobject.  So what are they doing inside of yet another object, the Mover object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <a href="#chapter04_section1">Chapter 4</a>
- we’ll write a class to describe a system of particles.  That ParticleSystem object will have as its data a list of Particle objects. . .and each Particle object will have as its data several <span class="klass">PVector</span> objects!</p>
-<p>Let’s finish off the Mover class by incorporating a function to determine what the object should do when it reaches the edge of the window.  For now let’s do something simple, and just have it wrap around the edges.</p>
+</div><p>If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the <span class="klass">PVector</span> class.  The <span class="klass">PVector</span> class is the template for making the <span class="klass">location</span> object and the <span class="klass">velocity</span> object.  So what are they doing inside of yet another object, the <span class="klass">Mover</span> object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <a href="#chapter04_section1">Chapter 4</a>
+ we’ll write a class to describe a system of particles.  That <span class="klass">ParticleSystem</span> object will have as its data a list of <span class="klass">Particle</span> objects. . .and each <span class="klass">Particle</span> object will have as its data several <span class="klass">PVector</span> objects!</p>
+<p>Let’s finish off the <span class="klass">Mover</span> class by incorporating a function to determine what the object should do when it reaches the edge of the window.  For now let’s do something simple, and just have it wrap around the edges.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void checkEdges() {
@@ -1473,7 +1477,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now that the Mover class is finished, we can look at what we need to do in our main program.  We first declare a Mover object:</p>
+</div><p>Now that the <span class="klass">Mover</span> class is finished, we can look at what we need to do in our main program.  We first declare a <span class="klass">Mover</span> object:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Mover mover;</textarea>
@@ -1655,7 +1659,7 @@ class Mover {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div></section><section><a id="chapter01_section8" style="display: block;"></a>
-<h3 id="18-vector-motion-acceleration">1.8 Vector Motion: Acceleration</h3><p>OK. At this point, we should feel comfortable with two things: (1) what a <span class="klass">PVector</span> is and (2) how we use <span class="klass">PVector*s inside of an object to keep track of its location and movement.  This is an excellent first step and deserves a mild round of applause.   Before standing ovations and screaming fans, however, we need to make one more, somewhat bigger step forward.   After all, watching the Motion 101 example is fairly boring—the circle never speeds up, never slows down, and never turns.  For more interesting motion, for motion that appears in the real world around us, we need to add one more [klass]*PVector</span> to our class—<span class="var">acceleration</span>.</p>
+<h3 id="18-vector-motion-acceleration">1.8 Vector Motion: Acceleration</h3><p>OK. At this point, we should feel comfortable with two things: (1) what a <span class="klass">PVector</span> is and (2) how we use <span class="klass">PVector</span>s inside of an object to keep track of its location and movement.  This is an excellent first step and deserves a mild round of applause.   Before standing ovations and screaming fans, however, we need to make one more, somewhat bigger step forward.   After all, watching the Motion 101 example is fairly boring—the circle never speeds up, never slows down, and never turns.  For more interesting motion, for motion that appears in the real world around us, we need to add one more <span class="klass">PVector</span> to our class—<span class="var">acceleration</span>.</p>
 <p>The strict definition of <strong><em>acceleration</em></strong> we’re using here is: the rate of <em>change of velocity</em>.  Let’s think about that definition for a moment.  Is this a new concept?  Not really.  Velocity is defined as <em>the rate of change of location</em>.  In essence, we are developing a “trickle down” effect.  Acceleration affects velocity, which in turn affects location (for some brief foreshadowing, this point will become even more crucial in the next chapter, when we see how forces affect acceleration, which affects velocity, which affects location.)  In code, this reads:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1687,7 +1691,7 @@ location.add(velocity);</textarea>
 </li>
 
 	</ol>
-</div><p>Algorithm #1, <em>a constant acceleration</em>, is not particularly interesting, but it is the simplest and will help us begin incorporating acceleration into our code.   The first thing we need to do is add another <span class="klass">PVector</span> to the Mover class:</p>
+</div><p>Algorithm #1, <em>a constant acceleration</em>, is not particularly interesting, but it is the simplest and will help us begin incorporating acceleration into our code.   The first thing we need to do is add another <span class="klass">PVector</span> to the <span class="klass">Mover</span> class:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Mover {
@@ -1746,7 +1750,7 @@ location.add(velocity);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Let’s start the Mover object in the middle of the window…</p>
+</div><p>Let’s start the <span class="klass">Mover</span> object in the middle of the window…</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    location = new PVector(width/2,height/2);</textarea>
@@ -1829,7 +1833,7 @@ velocity.limit(10);</textarea>
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div>
-</div><p>Let’s take a look at the changes to the Mover class, complete with <span class="function">acceleration</span> and <span class="function">limit()</span>.</p>
+</div><p>Let’s take a look at the changes to the <span class="klass">Mover</span> class, complete with <span class="function">acceleration</span> and <span class="function">limit()</span>.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter01/_1_8_motion101_acceleration/_1_8_motion101_acceleration.pde /book/processingjs/chapter01/_1_8_motion101_acceleration/Mover.pde" class="screenshot">
@@ -2113,7 +2117,7 @@ v.add(u);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Since you can’t write static functions yourself in Processing, you might not have encountered them before.  <span class="klass">PVector</span> 's static functions allow us to perform generic mathematical operations on <span class="klass">PVector</span> objects without having to adjust the value of one of the input <span class="klass">PVector*s.  Let’s look at how we might write the static version of [function]*add()</span>:</p>
+</div><p>Since you can’t write static functions yourself in Processing, you might not have encountered them before.  <span class="klass">PVector</span>'s static functions allow us to perform generic mathematical operations on <span class="klass">PVector</span> objects without having to adjust the value of one of the input <span class="klass">PVector</span>s.  Let’s look at how we might write the static version of <span class="function">add()</span>:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  //[offset-up] The static version of add allows us to add two PVectors together and assign the result to a new PVector while leaving the original PVectors (v and u) intact.
@@ -2250,7 +2254,7 @@ ___________;</textarea>
 </li>
 
 	</ul>
-</div><p>Let’s rewrite the above using <span class="klass">PVector</span> syntax.   Assuming we are in the Mover class and thus have access to the object’s location <span class="klass">PVector</span>, we then have:</p>
+</div><p>Let’s rewrite the above using <span class="klass">PVector</span> syntax.   Assuming we are in the <span class="klass">Mover</span> class and thus have access to the object’s <span class="klass">PVector location</span>, we then have:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector mouse = new PVector(mouseX,mouseY);
@@ -2267,7 +2271,7 @@ PVector dir = PVector.sub(mouse,location);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We now have a <span class="klass">PVector</span> that points from the Mover’s location all the way to the mouse.  If the object were to actually accelerate using that vector, it would appear instantaneously at the mouse location.  This does not make for good animation, of course, and what we want to do now is decide how quickly that object should accelerate toward the mouse.</p>
+</div><p>We now have a <span class="klass">PVector</span> that points from the mover’s location all the way to the mouse.  If the object were to actually accelerate using that vector, it would appear instantaneously at the mouse location.  This does not make for good animation, of course, and what we want to do now is decide how quickly that object should accelerate toward the mouse.</p>
 <p>In order to set the magnitude (whatever it may be) of our acceleration <span class="klass">PVector</span>, we must first <em><em></em></em><em><em></em></em><em><em></em></em><em><em></em></em><em><em></em>___</em> that direction vector.  That’s right, you said it.  <em>Normalize</em>.   If we can shrink the vector down to its unit vector (of length one) then we have a vector that tells us the direction and can easily be scaled to any value.   One multiplied by anything equals anything.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2382,7 +2386,7 @@ Assign that vector to acceleration
   <a id="chapter01_exercise8" style="display: block;"></a>
 <h4 id="exercise-18">Exercise 1.8</h4><p>Try implementing the above example with a variable magnitude of acceleration, stronger when it is either closer or farther away.</p>
 
-</div><p>Let’s see what this example would look like with an array of mover objects (rather than just one).</p>
+</div><p>Let’s see what this example would look like with an array of movers (rather than just one).</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter01/_1_11_motion101_acceleration_array/_1_11_motion101_acceleration_array.pde /book/processingjs/chapter01/_1_11_motion101_acceleration_array/Mover.pde" class="screenshot">
@@ -2607,6 +2611,8 @@ Normalize.</div><code><pre><span class='one-line'>    <span class="n">dir</span>
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

@@ -1,27 +1,30 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Document</title>
+	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -59,13 +62,15 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/">Buy as a PDF</a>
+          <a id="purchase-link" href="/">Like this stuff? Support this project by buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
             <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
@@ -90,7 +95,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -116,7 +120,7 @@ Charlie Sheen
 	<p class="caption">Figure 10.1</p>
 </div>
 <p>The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book.   We can simply be inspired by the idea of brain function.</p>
-<p>In this chapter, we’ll begin with a conceptual overview of the properties and features of neural networks and build the simplest possible example of one (a network that consists of a single neuron).  Afterwards, we’ll examine strategies for creating a “Brain” object that can be inserted into our Vehicle class and used to determine steering.   Finally, we’ll also look at techniques for visualizing and animating a network of neurons.</p>
+<p>In this chapter, we’ll begin with a conceptual overview of the properties and features of neural networks and build the simplest possible example of one (a network that consists of a single neuron).  Afterwards, we’ll examine strategies for creating a “Brain” object that can be inserted into our <span class="klass">Vehicle</span> class and used to determine steering.   Finally, we’ll also look at techniques for visualizing and animating a network of neurons.</p>
 <section><a id="chapter10_section1" style="display: block;"></a>
 <h3 id="101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</h3><p>Computer scientists have long been inspired by the human brain.   In 1943, Warren S. McCulloch, a neuroscientist, and Walter Pitts, a logician, developed the first conceptual model of an artificial neural network.  In their paper, "A logical calculus of the ideas imminent in nervous activity,” they describe the concept of a neuron, a single cell living in a network of cells that receives inputs, processes those inputs, and generates an output.</p>
 <p>Their work, and the work of many scientists and researchers that followed, was not meant to accurately describe how the biological brain works.  Rather, an artificial neural network (which we will now simply refer to as a “neural network”) was designed as a computational model based on the brain to solve certain kinds of problems.</p>
@@ -338,7 +342,7 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 1 * weight for bias = weight for bias</span></p>
 <p>The output is the sum of the above three values, 0 plus 0 plus the bias’s weight.  The bias therefore, on its own, answers the question as to where (0,0) is in relation to the line.  If the bias’s weight is positive, (0,0) is above the line; negative, it is below.   It “biases” the perceptron’s understanding of the line’s position relative to (0,0).</p>
 </section><section><a id="chapter10_section4" style="display: block;"></a>
-<h3 id="104-coding-the-perceptron">10.4  Coding the Perceptron</h3><p>We’re now ready to assemble the code for a Perceptron class.  The only data the perceptron needs to track are the input weights, and we could use an array of floats to store these.</p>
+<h3 id="104-coding-the-perceptron">10.4  Coding the Perceptron</h3><p>We’re now ready to assemble the code for a <span class="klass">Perceptron</span> class.  The only data the perceptron needs to track are the input weights, and we could use an array of floats to store these.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Perceptron {
@@ -378,7 +382,7 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>A perceptron needs to be able to receive inputs and generate an output.  We can package these requirements into a function called <span class="function">feedforward()</span>.   In this example, we’ll have the perceptron receive its inputs as an array (which should be the same length as the array of weights) and return the output as an <span class="var">int</span>.</p>
+</div><p>A perceptron needs to be able to receive inputs and generate an output.  We can package these requirements into a function called <span class="function">feedforward()</span>.   In this example, we’ll have the perceptron receive its inputs as an array (which should be the same length as the array of weights) and return the output as an integer.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  int feedforward(float[] inputs) {
@@ -409,7 +413,7 @@ Is it on one side of the line or the other?</div><code><pre><span class='one-lin
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Presumably, we could now create a Perceptron object and ask it to make a guess for any given point.</p>
+</div><p>Presumably, we could now create a <span class="klass">Perceptron</span> object and ask it to make a guess for any given point.</p>
 <a id="chapter10_figure7" style="display: block;"></a>
 <div class="image-container " >
 
@@ -567,7 +571,7 @@ Return to Step 1 and repeat!
 <p>With steering, however, we had an additional variable that controlled the vehicle’s ability to steer: the <em>maximum force</em>.   With a high maximum force, the vehicle was able to accelerate and turn very quickly; with a lower force, the vehicle would take longer to adjust its velocity.  The neural network will employ a similar strategy with a variable called the “learning constant.”  We’ll add in the learning constant as follows:</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT</span></p>
 <p>Notice that a high learning constant means the weight will change more drastically.  This may help us arrive at a solution more quickly, but with such large changes in weight it’s possible we will overshoot the optimal weights.  With a small learning constant, the weights will be adjusted slowly, requiring more training time but allowing the network to make very small adjustments that could improve the network’s overall accuracy.</p>
-<p>Assuming the addition of a variable c for learning constant, we can now write a training function for the perceptron following the above steps.</p>
+<p>Assuming the addition of a variable <span class="var">c</span> for learning constant, we can now write a training function for the perceptron following the above steps.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// A new variable is introduced
@@ -621,7 +625,7 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We can now see the Perceptron class as a whole.</p>
+</div><p>We can now see the <span class="klass">Perceptron</span> class as a whole.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Perceptron {
@@ -799,7 +803,7 @@ float y = random(height);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>How do we know if this point is above or below the line?   The line function <span class="function">f(x)</span> gives us the y value on the line for that x position.  Let’s call that yline.</p>
+</div><p>How do we know if this point is above or below the line?   The line function <span class="function">f(x)</span> gives us the y value on the line for that <em>x</em> position.  Let’s call that <span class="var">yline</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// The y position on the line
@@ -813,7 +817,7 @@ float yline = f(x);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>If the y value we are examining is above the line, it will be less than yline.</p>
+</div><p>If the <span class="var">y</span> value we are examining is above the line, it will be less than <span class="var">yline</span>.</p>
 <a id="chapter10_figure8" style="display: block;"></a>
 <div class="image-container " >
 
@@ -843,7 +847,7 @@ float yline = f(x);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We can then make a Trainer object with the inputs and the correct answer.</p>
+</div><p>We can then make a <span class="klass">Trainer</span> object with the inputs and the correct answer.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Trainer t = new Trainer(x, y, answer);</textarea>
@@ -856,7 +860,7 @@ float yline = f(x);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Assuming we had a Perceptron object “ptron,” we could then train it by sending the inputs along with the known answer.</p>
+</div><p>Assuming we had a <span class="klass">Perceptron</span> object <span class="var">ptron</span>, we could then train it by sending the inputs along with the known answer.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ptron.train(t.inputs,t.answer);</textarea>
@@ -997,18 +1001,18 @@ void draw() {
 
 </div><div class="example">
   <a id="chapter10_exercise2" style="display: block;"></a>
-<h4 id="exercise-102">Exercise 10.2</h4><p>Visualize the Perceptron itself. Draw the inputs, the processing node, and the output.</p>
+<h4 id="exercise-102">Exercise 10.2</h4><p>Visualize the perceptron itself. Draw the inputs, the processing node, and the output.</p>
 
 </div></section><section><a id="chapter10_section5" style="display: block;"></a>
-<h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p>While classifying points according to their position above or below a line was a useful demonstration of the Perceptron in action, it doesn’t have much practical relevance to the other examples throughout this book.  In this section, we’ll take the concepts of a Perceptron (array of inputs, single output), apply it to steering behaviors, and demonstrate reinforcement learning along the way.</p>
+<h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p>While classifying points according to their position above or below a line was a useful demonstration of the perceptron in action, it doesn’t have much practical relevance to the other examples throughout this book.  In this section, we’ll take the concepts of a perceptron (array of inputs, single output), apply it to steering behaviors, and demonstrate reinforcement learning along the way.</p>
 <p>We are now going to take significant creative license with the concept of a neural network. This will allow us to stick with the basics and avoid some of the highly complex algorithms associated with more sophisticated neural networks.   Here we’re not so concerned with following rules outlined in artificial intelligence textbooks—we’re just hoping to make something interesting and brain-like.</p>
-<p>Remember our good friend the Vehicle?  You know, that object with a location, velocity, and acceleration?  That could obey Newton’s laws with an <span class="function">applyForce()</span> function and move around the window according to a variety of steering rules?</p>
-<p>What if we added one more variable to our Vehicle class?</p>
+<p>Remember our good friend the <span class="klass">Vehicle</span> class?  You know, that one for making objects with a location, velocity, and acceleration?  That could obey Newton’s laws with an <span class="function">applyForce()</span> function and move around the window according to a variety of steering rules?</p>
+<p>What if we added one more variable to our <span class="klass">Vehicle</span> class?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Vehicle {
 
-  // Giving the Vehicle a brain!
+  // Giving the vehicle a brain!
   Perceptron brain;
 
   PVector location;
@@ -1023,7 +1027,7 @@ void draw() {
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Vehicle</span> <span class="o">{</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>Giving the Vehicle a brain!</div><code><pre><span class='one-line'>  <span class="n">Perceptron</span> <span class="n">brain</span><span class="o">;</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>Giving the vehicle a brain!</div><code><pre><span class='one-line'>  <span class="n">Perceptron</span> <span class="n">brain</span><span class="o">;</span></span>
 <span class='one-line'> </span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">location</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">velocity</span><span class="o">;</span></span>
@@ -1032,7 +1036,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Here’s our scenario.  Let’s say we have a Processing sketch with an ArrayList of targets and a single Vehicle.</p>
+</div><p>Here’s our scenario.  Let’s say we have a Processing sketch with an <span class="klass">ArrayList</span> of targets and a single vehicle.</p>
 <a id="chapter10_figure09" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1040,7 +1044,7 @@ void draw() {
 
 	<p class="caption">Figure 10.9</p>
 </div>
-<p>Let’s say that the Vehicle seeks all of the targets.   According to the principles of Chapter 6, we would next write a function that calculates a steering force towards each target, applying each force one at a time to the object’s acceleration.   Assuming the targets are an ArrayList of PVector objects, it would look something like:</p>
+<p>Let’s say that the vehicle seeks all of the targets.   According to the principles of Chapter 6, we would next write a function that calculates a steering force towards each target, applying each force one at a time to the object’s acceleration.   Assuming the targets are an <span class="klass">ArrayList</span> of <span class="klass">PVector</span> objects, it would look something like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void seek(ArrayList<PVector> targets) {
@@ -1096,7 +1100,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>But what if instead we could ask our brain (i.e. Perceptron) to take in all the forces as an input, process them according to weights of the Perceptron inputs, and generate an output steering force?   What if we could instead say:</p>
+</div><p>But what if instead we could ask our brain (i.e. perceptron) to take in all the forces as an input, process them according to weights of the perceptron inputs, and generate an output steering force?   What if we could instead say:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void seek(ArrayList<PVector> targets) {
@@ -1139,8 +1143,8 @@ for each target.</div><code><pre><span class='one-line'>      <span class="n">fo
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In other words, instead of weighting and accumulating the forces inside our Vehicle object, we simply pass an array of forces to the Vehicle’s “brain” object and allow the brain to weight and sum the forces for us.  The output is then applied as a steering force.  This opens up a range of possibilities. A vehicle could make decisions as to how to steer on its own, learning from its mistakes, and responding to stimuli in its environment.  Let’s see how this works.</p>
-<p>We can use the line classification Perceptron as a model, with one important difference—the inputs are not single numbers, but vectors!     Let’s look at how the <span class="function">feedforward()</span> function works in our Vehicle’s perceptron, alongside the one from our previous example.</p>
+</div><p>In other words, instead of weighting and accumulating the forces inside our vehicle, we simply pass an array of forces to the vehicle’s “brain” object and allow the brain to weight and sum the forces for us.  The output is then applied as a steering force.  This opens up a range of possibilities. A vehicle could make decisions as to how to steer on its own, learning from its mistakes, and responding to stimuli in its environment.  Let’s see how this works.</p>
+<p>We can use the line classification perceptron as a model, with one important difference—the inputs are not single numbers, but vectors!     Let’s look at how the <span class="function">feedforward()</span> function works in our vehicle’s perceptron, alongside the one from our previous example.</p>
 <table class="code">
   <tr>
     <th>Vehicle PVector inputs</th>
@@ -1183,17 +1187,17 @@ int feedforward(float[] inputs) {
 
 	<ol class="arabic">
 
-			<li><p><strong><em>Summing PVectors.</em></strong>  Instead of a series of numbers added together, each input is a PVector and must be multiplied by the weight and added to a sum according to the mathematical PVector functions.
+			<li><p><strong><em>Summing PVectors.</em></strong>  Instead of a series of numbers added together, each input is a <span class="klass">PVector</span> and must be multiplied by the weight and added to a sum according to the mathematical <span class="klass">PVector</span> functions.
 </p>
 </li>
 
-			<li><p><strong><em>No activation function.</em></strong>   In this case, we’re taking the result and applying it directly as a steering force for the vehicle, so we’re not asking for a simple Boolean value that classifies it in one of two categories.  Rather, we’re asking for raw output itself, the resulting overall force.
+			<li><p><strong><em>No activation function.</em></strong>   In this case, we’re taking the result and applying it directly as a steering force for the vehicle, so we’re not asking for a simple boolean value that classifies it in one of two categories.  Rather, we’re asking for raw output itself, the resulting overall force.
 </p>
 </li>
 
 	</ol>
 </div><p>Once the resulting steering force has been applied, it’s time to give feedback to the brain, i.e. <em>reinforcement learning</em>.   Was the decision to steer in that particular direction a good one or a bad one?  Presumably if some of the targets were predators (resulting in being eaten) and some of the targets were food (resulting in greater health), the network would adjust its weights in order to steer away from the predators and towards the food.</p>
-<p>Let’s take a simpler example, where the Vehicle simply wants to stay close to the center of the window.    We’ll train the brain as follows:</p>
+<p>Let’s take a simpler example, where the vehicle simply wants to stay close to the center of the window.    We’ll train the brain as follows:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    PVector desired = new PVector(width/2,height/2);
@@ -1217,8 +1221,8 @@ int feedforward(float[] inputs) {
 
 	<p class="caption">Figure 10.10</p>
 </div>
-<p>Here we are passing the brain a copy of all the inputs (which it will need for error correction) as well as an observation about its environment: a PVector that points from its current location to where it desires to be.  This PVector essentially serves as the error—the longer the PVector, the worse the Vehicle is performing; the shorter, the better (see Figure 10.10).</p>
-<p>The brain can then apply this “error” vector (which has two error values, one for x and one for y) as a means for adjusting the weights, just as we did in the line classification example.</p>
+<p>Here we are passing the brain a copy of all the inputs (which it will need for error correction) as well as an observation about its environment: a <span class="klass">PVector</span> that points from its current location to where it desires to be.  This <span class="klass">PVector</span> essentially serves as the error—the longer the <span class="klass">PVector</span>, the worse the vehicle is performing; the shorter, the better (see Figure 10.10).</p>
+<p>The brain can then apply this “error” vector (which has two error values, one for <em>x</em> and one for <em>y</em>) as a means for adjusting the weights, just as we did in the line classification example.</p>
 <table class="code">
   <tr>
     <th>Training the Vehicle</th>
@@ -1254,7 +1258,7 @@ void train(float[] inputs, int desired) {
 </pre>
     </td>
   </tr>
-</table><p>Because the Vehicle observes its own error, there is no need to calculate one; we can simply receive the error as an argument.  Notice how the change in weight is processed twice, once for the error along the x-axis and once for the y-axis.</p>
+</table><p>Because the vehicle observes its own error, there is no need to calculate one; we can simply receive the error as an argument.  Notice how the change in weight is processed twice, once for the error along the x-axis and once for the y-axis.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>weights[i] += c*error.x*forces[i].x;
@@ -1269,7 +1273,7 @@ weights[i] += c*error.y*forces[i].y;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We can now look at the Vehicle class and see how the <strong><em>steer</em></strong> function uses a Perceptron to control the overall steering force.   The new content from this chapter is highlighted.</p>
+</div><p>We can now look at the <span class="klass">Vehicle</span> class and see how the <strong><em>steer</em></strong> function uses a perceptron to control the overall steering force.   The new content from this chapter is highlighted.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_02_SeekingNeural/_10_02_SeekingNeural.pde /book/processingjs/chapter10/_10_02_SeekingNeural/Perceptron.pde /book/processingjs/chapter10/_10_02_SeekingNeural/Vehicle.pde" class="screenshot">
@@ -1299,7 +1303,7 @@ weights[i] += c*error.y*forces[i].y;</textarea>
   float maxspeed;
   //[end]
 
-  // The Vehicle creates a Perceptron with n inputs and a learning constant.
+  // The Vehicle creates a perceptron with n inputs and a learning constant.
   Vehicle(int n, float x, float y) {
     brain = new Perceptron(n,0.001);
     acceleration = new PVector(0,0);
@@ -1376,7 +1380,7 @@ weights[i] += c*error.y*forces[i].y;</textarea>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>The Vehicle creates a Perceptron with n inputs and a learning constant.</div><code><pre><span class='one-line'>  <span class="n">Vehicle</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>The Vehicle creates a perceptron with n inputs and a learning constant.</div><code><pre><span class='one-line'>  <span class="n">Vehicle</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">brain</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Perceptron</span><span class="o">(</span><span class="n">n</span><span class="o">,</span><span class="mf">0.001</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">acceleration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">velocity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
@@ -1445,7 +1449,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 <h4 id="exercise-104">Exercise 10.4</h4><p>Try different rules for reinforcement learning.  What if some targets are desirable and some are undesirable?</p>
 
 </div></section><section><a id="chapter10_section6" style="display: block;"></a>
-<h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p>Yes, a perceptron can have multiple inputs, but it is still a lonely neuron.  The power of neural networks comes in the networking itself.   Perceptrons are, sadly, incredibly limited in their abilities.    If you read an AI textbook, it will say that a Perceptron can only solve <strong><em>linearly separable</em></strong> problems.  What’s a linearly separable problem?  Let’s take a look at our first example, which determined whether points were on one side of a line or the other.</p>
+<h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p>Yes, a perceptron can have multiple inputs, but it is still a lonely neuron.  The power of neural networks comes in the networking itself.   Perceptrons are, sadly, incredibly limited in their abilities.    If you read an AI textbook, it will say that a perceptron can only solve <strong><em>linearly separable</em></strong> problems.  What’s a linearly separable problem?  Let’s take a look at our first example, which determined whether points were on one side of a line or the other.</p>
 <a id="chapter10_figure11" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1454,7 +1458,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 	<p class="caption">Figure 10.11</p>
 </div>
 <p>On the left of Figure 10.11, we have classic linearly separable data.  Graph all of the possibilities; if you can classify the data with a straight line, then it is linearly separable.  On the right, however, is non-linearly separable data.  You can’t draw a straight line to separate the black dots from the gray ones.</p>
-<p>One of the simplest examples of a non-linearly separable problem is <em>XOR</em>, or “exclusive or.”  We’re all familiar with <em>AND</em>.  For <em>A</em> AND <em>B</em> to be true, both <em>A</em> and <em>B</em> must be true.  With <em>OR</em>, either <em>A</em> or <em>B</em> can be true for <em>A</em> <em>OR</em> <em>B</em> to evaluate as true. These are both linearly separable problems.  Let’s look at the solution space, a “truth table.”</p>
+<p>One of the simplest examples of a non-linearly separable problem is <em>XOR</em>, or “exclusive or.”  We’re all familiar with <em>AND</em>.  For <em>A</em> <em>AND</em> <em>B</em> to be true, both <em>A</em> and <em>B</em> must be true.  With <em>OR</em>, either <em>A</em> or <em>B</em> can be true for <em>A</em> <em>OR</em> <em>B</em> to evaluate as true. These are both linearly separable problems.  Let’s look at the solution space, a “truth table.”</p>
 <a id="chapter10_figure12" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1472,7 +1476,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 	<p class="caption">Figure 10.13</p>
 </div>
 <p>This is not linearly separable.  Try to draw a straight line to separate the true outputs from the false ones —you can’t!</p>
-<p>So perceptrons can’t even solve something as simple as <strong><em>XOR</em></strong>.  But what if we made a network out of two Perceptrons?  If one perceptron can solve <strong><em>OR</em></strong> and one perceptron can solve <strong><em>NOT AND</em></strong>, then two perceptrons combined can solve <strong><em>XOR</em></strong>.</p>
+<p>So perceptrons can’t even solve something as simple as <em>XOR</em>.  But what if we made a network out of two Perceptrons?  If one perceptron can solve <em>OR</em> and one perceptron can solve <em>NOT AND</em>, then two perceptrons combined can solve <em>XOR</em>.</p>
 <a id="chapter10_figure14" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1480,11 +1484,11 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 
 	<p class="caption">Figure 10.14</p>
 </div>
-<p>The above diagram is known as a multi-layered Perceptron, a network of many neurons.   Some are input neurons and receive the inputs; some are part of what’s called a “hidden” layer (as they are connected to neither the inputs or outputs of the network directly); and then there are the output neurons, from which we read the results.</p>
+<p>The above diagram is known as a multi-layered perceptron, a network of many neurons.   Some are input neurons and receive the inputs; some are part of what’s called a “hidden” layer (as they are connected to neither the inputs or outputs of the network directly); and then there are the output neurons, from which we read the results.</p>
 <p>Training these networks is much more complicated.  With the simple perceptron, we could easily evaluate how to change the weights according to the error. But here there are so many different connections, each in a different layer of the network. How does one know how much each neuron or connection contributed to the overall error of the network?</p>
-<p>The solution to optimizing weights of a multi-layered network is known as backpropagation.  The output of the network is generated in the same manner as a Perceptron.   The inputs multiplied by the weights are summed and fed forward through the network.  The difference here is that they pass through additional layers of neurons before reaching the output. Training the network (i.e. adjusting the weights) also involves taking the error (desired result - guess).  The error, however, must be fed backwards through the network. The final error ultimately adjusts the weights of all the connections.</p>
-<p>Backpropagation is a bit beyond the scope of this book and involves a fancier activation function (called the sigmoid function) as well as some basic calculus.  If you are interested in how backpropagation works, check the book website (and github repository) for an example that solves XOR using a multi-layered feed forward network with backpropagation.</p>
-<p>Instead, here we’ll focus on a code framework for building the visual architecture of a network.  We’ll make Neuron objects and Connection objects from which a Network object can be created and animated to show the feed forward process.   This will closely resemble some of the force-directed graph examples we examined in Chapter 5 (toxiclibs).</p>
+<p>The solution to optimizing weights of a multi-layered network is known as backpropagation.  The output of the network is generated in the same manner as a perceptron.   The inputs multiplied by the weights are summed and fed forward through the network.  The difference here is that they pass through additional layers of neurons before reaching the output. Training the network (i.e. adjusting the weights) also involves taking the error (desired result - guess).  The error, however, must be fed backwards through the network. The final error ultimately adjusts the weights of all the connections.</p>
+<p>Backpropagation is a bit beyond the scope of this book and involves a fancier activation function (called the sigmoid function) as well as some basic calculus.  If you are interested in how backpropagation works, check the book website (and github repository) for an example that solves <em>XOR</em> using a multi-layered feed forward network with backpropagation.</p>
+<p>Instead, here we’ll focus on a code framework for building the visual architecture of a network.  We’ll make <span class="klass">Neuron</span> objects and <span class="klass">Connection</span> objects from which a <span class="klass">Network</span> object can be created and animated to show the feed forward process.   This will closely resemble some of the force-directed graph examples we examined in Chapter 5 (toxiclibs).</p>
 </section><section><a id="chapter10_section7" style="display: block;"></a>
 <h3 id="107-neural-network-diagram">10.7  Neural Network Diagram</h3><p>Our goal will be to create the following simple network diagram:</p>
 <a id="chapter10_figure15" style="display: block;"></a>
@@ -1497,7 +1501,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 <p>The primary building block for the diagram is a neuron. A neuron is a simple object, an entity with an <em>(x,y)</em> location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
-  <textarea>// An incredibly simple neuron class stores and displays the location of a single Neuron.
+  <textarea>// An incredibly simple Neuron class stores and displays the location of a single neuron.
 class Neuron {
   PVector location;
 
@@ -1516,7 +1520,7 @@ class Neuron {
 
   <div class="code-block">
 
-  <div class='code-comment-pair '><div class='code-comment '>An incredibly simple neuron class stores and displays the location of a single Neuron.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span> <span class="o">{</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>An incredibly simple Neuron class stores and displays the location of a single neuron.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">location</span><span class="o">;</span></span>
 <span class='one-line'> </span>
 <span class='one-line'>  <span class="n">Neuron</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1532,7 +1536,7 @@ class Neuron {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The Network class can then manage an ArrayList of neurons, as well as have its own location (so that each Neuron is drawn relative to the Network’s center).  This is Particle Systems 101.  We have a single element (a Neuron) and a Network (a “system” of many Neurons).</p>
+</div><p>The <span class="klass">Network</span> class can then manage an <span class="klass">ArrayList</span> of neurons, as well as have its own location (so that each neuron is drawn relative to the network’s center).  This is particle systems 101.  We have a single element (a neuron) and a network (a “system” of many neurons).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>//[full] A Network is a list of neurons.
@@ -1670,7 +1674,7 @@ void draw() {
 
 
 </div>
-<p>What’s missing, of course, is the connection.   We can consider a Connection object to be made up of three elements, two Neurons (from Neuron <span class="var">a</span> to Neuron <span class="var">b</span>) and a weight.</p>
+<p>What’s missing, of course, is the connection.   We can consider a <span class="klass">Connection</span> object to be made up of three elements, two neurons (from <span class="klass">Neuron</span> <span class="var">a</span> to <span class="klass">Neuron</span> <span class="var">b</span>) and a weight.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Connection {
@@ -1723,7 +1727,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Once we have the idea of a Connection object, we can write a function (let’s put it inside the Network class) that connects two neurons together—the goal being that in addition to making the Neurons in <span class="function">setup()</span>, we can also connect them.</p>
+</div><p>Once we have the idea of a <span class="klass">Connection</span> object, we can write a function (let’s put it inside the <span class="klass">Network</span> class) that connects two neurons together—the goal being that in addition to making the neurons in <span class="function">setup()</span>, we can also connect them.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void setup() {
@@ -1735,7 +1739,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
   Neuron c = new Neuron(0,-100);
   Neuron d = new Neuron(200,0);
 
-  // Making connections between the Neurons
+  // Making connections between the neurons
   network.connect(a,b);
   network.connect(a,c);
   network.connect(b,d);
@@ -1761,7 +1765,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 <span class='one-line'>  <span class="n">Neuron</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>Making connections between the Neurons</div><code><pre><span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">);</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>Making connections between the neurons</div><code><pre><span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">c</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">b</span><span class="o">,</span><span class="n">d</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="n">d</span><span class="o">);</span></span>
@@ -1774,7 +1778,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The Network class therefore needs a new function called <span class="function">connect()</span>, which makes a Connection object between the two specified Neurons.</p>
+</div><p>The <span class="klass">Network</span> class therefore needs a new function called <span class="function">connect()</span>, which makes a Connection object between the two specified neurons.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void connect(Neuron a, Neuron b) {
@@ -1797,7 +1801,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Presumably, we might think that the Network should store an ArrayList of Connection objects, just like it stores an ArrayList of Neurons.  While useful, in this case such an ArrayList is not necessary and is missing an important feature that we need.  Ultimately we plan to “feed forward" the neurons through the network, so the Neuron objects themselves must know to which Neurons they are connected in the “forward” direction.  In other words, each Neuron should have its own list of Connection objects.   When <span class="var">a</span> connects to <span class="var">b</span>, we want <span class="var">a</span> to store a reference of that connection so that it can pass its output to <span class="var">b</span> when the time comes.</p>
+</div><p>Presumably, we might think that the Network should store an <span class="klass">ArrayList</span> of connections, just like it stores an <span class="klass">ArrayList</span> of neurons.  While useful, in this case such an <span class="klass">ArrayList</span> is not necessary and is missing an important feature that we need.  Ultimately we plan to “feed forward" the neurons through the network, so the <span class="klass">Neuron</span> objects themselves must know to which neurons they are connected in the “forward” direction.  In other words, each neuron should have its own list of <span class="klass">Connection</span> objects.   When <span class="var">a</span> connects to <span class="var">b</span>, we want <span class="var">a</span> to store a reference of that connection so that it can pass its output to <span class="var">b</span> when the time comes.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void connect(Neuron a, Neuron b) {
@@ -1816,8 +1820,8 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In some cases, we also might want Neuron <span class="var">b</span> to know about this Connection object, but in this particular example we are only going to pass information in one direction.</p>
-<p>For this to work, we have to add an ArrayList of Connection objects to the Neuron class. Then we implement the <span class="function">addConnection()</span> function that stores the Connection in that ArrayList.</p>
+</div><p>In some cases, we also might want <span class="klass">Neuron</span> <span class="var">b</span> to know about this connection, but in this particular example we are only going to pass information in one direction.</p>
+<p>For this to work, we have to add an <span class="klass">ArrayList</span> of connections to the <span class="klass">Neuron</span> class. Then we implement the <span class="function">addConnection()</span> function that stores the connection in that <span class="klass">ArrayList</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Neuron {
@@ -1861,7 +1865,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The Neuron’s <span class="function">display()</span> function can draw the connections as well.  And finally, we have our Network diagram.</p>
+</div><p>The neuron’s <span class="function">display()</span> function can draw the connections as well.  And finally, we have our network diagram.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_03_NetworkViz/_10_03_NetworkViz.pde /book/processingjs/chapter10/_10_03_NetworkViz/Connection.pde /book/processingjs/chapter10/_10_03_NetworkViz/Network.pde /book/processingjs/chapter10/_10_03_NetworkViz/Neuron.pde" class="screenshot">
@@ -1884,7 +1888,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     fill(0);
     ellipse(location.x, location.y, 16, 16);
 
-    //[full] Drawing all the Connections
+    //[full] Drawing all the connections
     for (Connection c : connections) {
       c.display();
     }
@@ -1903,7 +1907,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 <span class='one-line'>    <span class="n">ellipse</span><span class="o">(</span><span class="n">location</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">location</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair stretch'><div class='code-comment stretch'> Drawing all the Connections</div><code><pre><span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Connection</span> <span class="n">c</span> <span class="o">:</span> <span class="n">connections</span><span class="o">)</span> <span class="o">{</span></span>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'> Drawing all the connections</div><code><pre><span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Connection</span> <span class="n">c</span> <span class="o">:</span> <span class="n">connections</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">c</span><span class="o">.</span><span class="na">display</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="o">}</span></span></pre></code></div>
 
@@ -1939,12 +1943,12 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>The network, which manages all the neurons, can choose to which neurons it should apply that input.  In this case, we’ll do something simple and just feed a single input into the first neuron in the ArrayList, which happens to be the left-most one.</p>
+</div><p>The network, which manages all the neurons, can choose to which neurons it should apply that input.  In this case, we’ll do something simple and just feed a single input into the first neuron in the <span class="klass">ArrayList</span>, which happens to be the left-most one.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Network {
 
-  //[full] A new function to feed an input into the Neuron
+  //[full] A new function to feed an input into the neuron
   void feedforward(float input) {
     Neuron start = neurons.get(0);
     start.feedforward(input);
@@ -1958,7 +1962,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Network</span> <span class="o">{</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair stretch'><div class='code-comment stretch'> A new function to feed an input into the Neuron</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span></span>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'> A new function to feed an input into the neuron</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">Neuron</span> <span class="n">start</span> <span class="o">=</span> <span class="n">neurons</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">start</span><span class="o">.</span><span class="na">feedforward</span><span class="o">(</span><span class="n">input</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="o">}</span></span></pre></code></div>
@@ -1967,7 +1971,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>What did we do?  Well, we made it necessary to add a function called <span class="function">feedforward()</span> in the Neuron class that will receive the input and process it.</p>
+</div><p>What did we do?  Well, we made it necessary to add a function called <span class="function">feedforward()</span> in the <span class="klass">Neuron</span> class that will receive the input and process it.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Neuron
@@ -1990,7 +1994,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>If you recall from working with our Perceptron, the standard task that the processing unit performs is to sum up all of its inputs.  So if our neuron class adds a variable called sum, it can simply accumulate the inputs as they are received.</p>
+</div><p>If you recall from working with our perceptron, the standard task that the processing unit performs is to sum up all of its inputs.  So if our neuron class adds a variable called sum, it can simply accumulate the inputs as they are received.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Neuron
@@ -2048,7 +2052,7 @@ we can reset our sum to 0.</div><code><pre><span class='one-line'>      <span cl
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now, what do we do in the <span class="function">fire()</span> function?  If you recall, each neuron keeps track of its connections to other neurons.  So all we need to do is loop through those connections and <span class="function">feedforward()</span> the Neuron’s output.  For this simple example, we’ll just take the Neuron’s sum variable and make it the output.</p>
+</div><p>Now, what do we do in the <span class="function">fire()</span> function?  If you recall, each neuron keeps track of its connections to other neurons.  So all we need to do is loop through those connections and <span class="function">feedforward()</span> the neuron’s output.  For this simple example, we’ll just take the neuron’s sum variable and make it the output.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void fire() {
@@ -2073,7 +2077,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Here’s where things get a little tricky.  After all, our job here is not to actually make a functioning neural network, but to animate a simulation of one.  If the neural network were just continuing its work, it would instantly pass those inputs (multiplied by the connection’s weight) along to the connected Neurons.  We’d say something like:</p>
+</div><p>Here’s where things get a little tricky.  After all, our job here is not to actually make a functioning neural network, but to animate a simulation of one.  If the neural network were just continuing its work, it would instantly pass those inputs (multiplied by the connection’s weight) along to the connected neurons.  We’d say something like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Connection {
@@ -2094,8 +2098,8 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>But this is not what we want. What we want to do is draw something that we can see traveling along the connection from Neuron <span class="var">a</span> to Neuron <span class="var">b</span>.</p>
-<p>Let’s first think about how we might do that. We know the location of Neuron <span class="var">a</span>; it’s the PVector <span class="var">a.location</span>.  Neuron <span class="var">b</span> is located at <span class="var">b.location</span>.  We need to start something moving from Neuron <span class="var">a</span> by creating another PVector that will store the path of our traveling data.</p>
+</div><p>But this is not what we want. What we want to do is draw something that we can see traveling along the connection from <span class="klass">Neuron</span> <span class="var">a</span> to <span class="klass">Neuron</span> <span class="var">b</span>.</p>
+<p>Let’s first think about how we might do that. We know the location of <span class="klass">Neuron</span> <span class="var">a</span>; it’s the <span class="klass">PVector</span> <span class="var">a.location</span>.  <span class="klass">Neuron</span> <span class="var">b</span> is located at <span class="var">b.location</span>.  We need to start something moving from <span class="klass">Neuron</span> <span class="var">a</span> by creating another <span class="klass">PVector</span> that will store the path of our traveling data.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector sender = a.location.get();</textarea>
@@ -2150,7 +2154,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 	<p class="caption">Figure 10.16</p>
 </div>
-<p>Ok, so that’s how we might move something along the connection.  But how do we know when to do so?   We start this process the moment the Connection object receives the “feedforward” signal.   We can keep track of this process by employing a simple Boolean to know whether the connection is sending or not.    Before, we had:</p>
+<p>Ok, so that’s how we might move something along the connection.  But how do we know when to do so?   We start this process the moment the <span class="klass">Connection</span> object receives the “feedforward” signal.   We can keep track of this process by employing a simple <span class="klass">boolean</span> to know whether the connection is sending or not.    Before, we had:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void feedforward(float val) {
@@ -2206,8 +2210,8 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Notice how our connection class now needs three new variables.  We need a Boolean “sending” that starts as false and that will track whether or not the Connection is actively sending (i.e. animating).  We need a PVector “sender” for the location where we’ll draw the traveling dot.  And since we aren’t passing the output along this instant, we’ll need to store it in a variable that will do the job later.</p>
-<p>The <span class="function">feedforward()</span> function is called the moment the Connection becomes active.  Once it’s active, we’ll need to call another function continuously (each time through <span class="function">draw()</span>), one that will update the location of the traveling data.</p>
+</div><p>Notice how our connection class now needs three new variables.  We need a <span class="klass">boolean</span> “sending” that starts as false and that will track whether or not the connection is actively sending (i.e. animating).  We need a <span class="klass">PVector</span> “sender” for the location where we’ll draw the traveling dot.  And since we aren’t passing the output along this instant, we’ll need to store it in a variable that will do the job later.</p>
+<p>The <span class="function">feedforward()</span> function is called the moment the connection becomes active.  Once it’s active, we’ll need to call another function continuously (each time through <span class="function">draw()</span>), one that will update the location of the traveling data.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea> void update() {
@@ -2234,7 +2238,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We’re missing a key element, however.  We need to check if the sender has arrived at location b, and if it has, feed forward that output to the next Neuron.</p>
+</div><p>We’re missing a key element, however.  We need to check if the sender has arrived at location b, and if it has, feed forward that output to the next neuron.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void update() {
@@ -2242,7 +2246,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
       sender.x = lerp(sender.x, b.location.x, 0.1);
       sender.y = lerp(sender.y, b.location.y, 0.1);
 
-      // How far are we from Neuron b?
+      // How far are we from neuron b?
       float d = PVector.dist(sender, b.location); //[bold]
 
       // If we’re close enough (within one pixel) pass on the output. Turn off sending.
@@ -2263,7 +2267,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 <span class='one-line'>      <span class="n">sender</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">lerp</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>How far are we from Neuron b?</div><code><pre><span class='one-line'>      <strong><span class="kt">float</span> <span class="n">d</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">dist</span><span class="o">(</span><span class="n">sender</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">);</span></strong></span>
+  <div class='code-comment-pair '><div class='code-comment '>How far are we from neuron b?</div><code><pre><span class='one-line'>      <strong><span class="kt">float</span> <span class="n">d</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">dist</span><span class="o">(</span><span class="n">sender</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">);</span></strong></span>
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair '><div class='code-comment '>If we’re close enough (within one pixel) pass on the output. Turn off sending.</div><code><pre><span class='one-line'>      <strong><span class="k">if</span> <span class="o">(</span><span class="n">d</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span></strong></span>
@@ -2275,7 +2279,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Let’s look at the Connection class all together, as well as our new draw() function.</p>
+</div><p>Let’s look at the <span class="klass">Connection</span> class all together, as well as our new draw() function.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_04_NetworkAnimation/_10_04_NetworkAnimation.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Connection.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Network.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Neuron.pde" class="screenshot">
@@ -2426,7 +2430,7 @@ class Connection {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
   <a id="chapter10_exercise5" style="display: block;"></a>
-<h4 id="exercise-105">Exercise 10.5</h4><p>The Network in the above example was manually configured by setting the location of each Neuron and its connections with hard-coded values.  Rewrite this example to generate the network’s layout via an algorithm.  Can you make a circular network diagram? A random one? An example of a multi-layered network is below.</p>
+<h4 id="exercise-105">Exercise 10.5</h4><p>The network in the above example was manually configured by setting the location of each neuron and its connections with hard-coded values.  Rewrite this example to generate the network’s layout via an algorithm.  Can you make a circular network diagram? A random one? An example of a multi-layered network is below.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Ex_10_5_LayeredNetworkAnimation.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Connection.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Network.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Neuron.pde" class="screenshot">
@@ -2442,7 +2446,7 @@ class Connection {
 
 </div><div class="example">
   <a id="chapter10_exercise6" style="display: block;"></a>
-<h4 id="exercise-106">Exercise 10.6</h4><p>Rewrite the example so that each Neuron keeps track of its forward and backward connections.  Can you feed inputs through the network in any direction?</p>
+<h4 id="exercise-106">Exercise 10.6</h4><p>Rewrite the example so that each neuron keeps track of its forward and backward connections.  Can you feed inputs through the network in any direction?</p>
 
 </div><div class="example">
   <a id="chapter10_exercise7" style="display: block;"></a>
@@ -2499,6 +2503,8 @@ Can the ecosystem as a whole emulate the brain?  Can elements of the environment
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

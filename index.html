@@ -2,12 +2,13 @@
 <html>
 <head>
   <title>The Nature of Code</title>
-  <link rel="stylesheet" href="css/fonts.css"/>
-  <link rel="stylesheet" href="css/natureofcode.css" />
+  <link rel="stylesheet" href="http://natureofcode.com/css/fonts.css"/>
+  <link rel="stylesheet" href="http://natureofcode.com/css/natureofcode.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script src="/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
   <script src="/js/index.js"></script>
-  <script type = "text/javascript" src="core.js"></script>
+  <script type = "text/javascript" src="http://natureofcode.com/core.js"></script>
+
 
 <script type="text/javascript">
 
@@ -22,39 +23,71 @@
   })();
 
 </script>
-
-
+  
 </head>
 <body>
   <div id="top">
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Coming soon!)</span>
     </div>
   </div>
 
   <div id="middle">
     <div id="content">
-Can we capture the unpredictable evolutionary and emergent properties of nature in software? Can understanding the mathematical principles behind our physical world world help us to create digital worlds? This book focuses on the programming strategies and techniques behind computer simulations of natural systems using <a href="http://www.processing.org">Processing</a>.
+Can we capture the unpredictable evolutionary and emergent properties of nature in software? Can understanding the mathematical principles behind our physical world help us to create digital worlds? This book focuses on the programming strategies and techniques behind computer simulations of natural systems using <a href="http://www.processing.org">Processing</a>.
       <div id="purchase-options">
         <div id="purchase-pdf">
-            <p>If you are an educator and would like to preview a draft PDF for a course, please
-            <a href="mailto:daniel.shiffman@nyu.edu">contact me</a> for more information.</p>
+          <h3>Buy <strong>The Nature of Code</strong> PDF</h3>
 
-           <p>For updates about when the book will be ready for purchase:</p>
-           <p>
-           <a href="https://twitter.com/shiffman" class="twitter-follow-button" data-show-count="false">Follow @shiffman</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></p>
+          <p>Download the entire book directly from the author.</p>
 
+          <ul class="description">
+            <li>DRM-free</li>
+            <li>Delivered by email, no login necessary</li>
+            <li>Receive lifetime book updates for free</li>
+            <li>(Note the book is currently still in "draft" form!)</li>
+          </ul>
+
+          <form method="POST" action="https://natureofcode.herokuapp.com/order" id="slider-form">
+            <p>Name Your Price:</p>
+            <fieldset>
+            <div class="slider-holder">
+              <div id="slider"></div>
+            </div>
+            <input id="amount" type="hidden" name="amount" value="10.00">
+            <input type="text" id="display-amount" value="$10.00">
+            </fieldset>
+
+            <p>Donate a percentage to the <a href="http://processing.org">Processing Foundation</a>.</p>
+            <fieldset>
+              <div class="slider-holder">
+                <div id="percent-slider"></div>
+              </div>
+              <input type="hidden" id="percent" name="donation" value="10">
+              <input type="text" id="display-percent" name="percent" value="10%">
+            </fieldset>
+
+            <div id="breakdown">
+              Amount to Processing: <span id="donation-dollars">$0.50</span><br>
+              Amount to Author: <span id="author-dollars">$9.50</span>
+            </div>
+
+            <input type="submit" id="buy-now" value="Buy Now">
+          </form>
+
+        </div>
+
+        <div id="purchase-print">
+          <img src="http://farm9.staticflickr.com/8448/7749029626_04c08b4bed.jpg" style="max-width:100%;">
+          <h3>Print Coming Soon!</h3>
+
+              <p>
         <form name="form" id="form" method="post" onsubmit="return false" action="http://scripts.dreamhost.com/add_list.cgi">
-        <table cellspacing="0" cellpadding="0">
-          <tr>
-            <td>e-mail: </td>
-            <td><input name="email" type="text" id="email" size="50" /></td>
-            <td><input type="button" value="Get Updates" onclick="validate_application(this.form)" id="submitbtn" /></td>
-          </tr>
-        </table>
+        <span style="font-size: 14px;">e-mail:</span>
+        <input name="email" type="text" id="email" size="25" />
+        <input type="button" class="block-link" value="Sign up for an alert!" onclick="validate_application(this.form)" id="submitbtn" />
+
         <input type="hidden" name="list" value="list@learningprocessing.com" />
         <input type="hidden" name="domain" value="learningprocessing.com" />
         <input type="hidden" name="url" value="http://www.learningprocessing.com/noc" />
@@ -62,24 +95,22 @@ Can we capture the unpredictable evolutionary and emergent properties of nature 
         <input type="hidden" name="alreadyonurl" value="http://www.learningprocessing.com" />
         <input type="hidden" name="notonurl" value="http://www.learningprocessing.com" />
         <input type="hidden" name="invalidurl" value="http://www.learningprocessing.com" />
-
+        
         <input type="hidden" name="emailconfirmurl" value="thankyou.html" />
         <input type="hidden" name="emailit" value="1" />
 
-    </form>
+        </form> 
+      </p>
 
-        </div>
 
-
-        <div id="purchase-print">
-          <img src="http://farm9.staticflickr.com/8448/7749029626_04c08b4bed.jpg" style="max-width:100%;">
         </div>
       </div>
 
       <div class="row">
         <div class="half-box">
           <h3>Read the Entire Book Online for Free</h3>
-          <p>The complete book will be available as HTML with interactive Processing.js examples. Coming soon!</p>
+          <p>The complete book is available as HTML with interactive Processing.js examples.</p>
+          <a class="block-link" href="http://natureofcode.com/book">Read Now</a>
         </div>
 
         <div class="half-box">
@@ -117,6 +148,8 @@ Can we capture the unpredictable evolutionary and emergent properties of nature 
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
 
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 
         <p>Please report any mistakes in the book or bugs in the source with a <a href="https://github.com/shiffman/The-Nature-of-Code/issues?sort=created&state=open">github issue</a> or contact me at <span class="eml">daniel at shiffman dot net</span>.</p>
@@ -124,7 +157,7 @@ Can we capture the unpredictable evolutionary and emergent properties of nature 
 
       <div class="one-third">
         <h4>Author</h4>
-        <p>Daniel Shiffman teaches at the <a href="http://itp.nyu.edu/">Interactive Telecommunications Program</a> at New York University.</p>
+        <p>Daniel Shiffman is a professor of the <a href="http://itp.nyu.edu/">Interactive Telecommunications Program</a> at New York University.</p>
 
         <p>He is the author of <a href="http://www.learningprocessing.com/">Learning Processing</a>.</p>
 

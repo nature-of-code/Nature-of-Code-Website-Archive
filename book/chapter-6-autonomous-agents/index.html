@@ -1,27 +1,30 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Document</title>
+	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('span.c1').each(function(){ addStylesToCodeLines($(this)); });
-			// $('code').each(function(){ inlineComments($(this)); });
-			$('div.source-code').each(function(){ setRawCodeHeight($(this)); });
-			$('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
-		});
-	</script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
   <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
-	<script type="text/javascript" src="/book/javascripts/navigator.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
 	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
 	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -59,13 +62,15 @@
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
           <h2>by Daniel Shiffman</h2>
-          <a id="purchase-link" href="/">Buy as a PDF</a>
+          <a id="purchase-link" href="/">Like this stuff? Support this project by buying the PDF version.</a>
         </div>
       </div>
       <div id="toc-holder">
         <div id="toc-list">
           <ul>
+            <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
             <li><a href="/book/preface">Preface</a></li>
             <li><a href="/book/introduction">Introduction</a></li>
             <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
@@ -90,7 +95,6 @@
     <div id="header">
       <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
       <h2>Daniel Shiffman</h2>
-      <span style="font-style: italic; text-transform:none">(Beta! Contact me with questions.)</span>
     </div>
   </div>
 
@@ -131,7 +135,7 @@ Valentino Braitenberg
 </div><p>In the late 1980s, computer scientist <a href="http://www.red3d.com/cwr/">Craig Reynolds</a>
  developed algorithmic steering behaviors for animated characters. These behaviors allowed individual elements to navigate their digital environments in a “lifelike” manner with strategies for fleeing, wandering, arriving, pursuing, evading, etc. Used in the case of a single autonomous agent, these behaviors are fairly simple to understand and implement. In addition, by building a system of multiple characters that steer themselves according to simple, locally based rules, surprising levels of complexity emerge.  The most famous example is Reynolds’s “boids” model for “flocking/swarming” behavior.</p>
 </section><section><a id="chapter06_section2" style="display: block;"></a>
-<h3 id="62-vehicles-and-steering">6.2  Vehicles and Steering</h3><p>Now that we understand the core concepts behind autonomous agents, we can begin writing the code.  There are many places where  we could start. Artificial simulations of ant and termite colonies are fantastic demonstrations of systems of autonomous agents. (For more on this topic, I encourage you to read <em>Turtles, Termites, and Traffic Jams</em> by Mitchel Resnick.)  However, we want to begin by examining agent behaviors that build on the work we’ve done in the first five chapters of this book: modeling motion with vectors and driving motion with forces.  And so it’s time to rename our Mover class that became our Particle class once again.  This time we are going to call it <span class="class">Vehicle</span>.</p>
+<h3 id="62-vehicles-and-steering">6.2  Vehicles and Steering</h3><p>Now that we understand the core concepts behind autonomous agents, we can begin writing the code.  There are many places where  we could start. Artificial simulations of ant and termite colonies are fantastic demonstrations of systems of autonomous agents. (For more on this topic, I encourage you to read <em>Turtles, Termites, and Traffic Jams</em> by Mitchel Resnick.)  However, we want to begin by examining agent behaviors that build on the work we’ve done in the first five chapters of this book: modeling motion with vectors and driving motion with forces.  And so it’s time to rename our <span class="klass">Mover</span> class that became our <span class="klass">Particle</span> class once again.  This time we are going to call it <span class="klass">Vehicle</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Vehicle {
@@ -156,7 +160,7 @@ Valentino Braitenberg
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In his 1999 paper, “Steering Behaviors for Autonomous Characters,” Reynolds uses the word “Vehicle” to describe his autonomous agents, so we will follow suit.</p>
+</div><p>In his 1999 paper, “Steering Behaviors for Autonomous Characters,” Reynolds uses the word “vehicle” to describe his autonomous agents, so we will follow suit.</p>
 <div class="note">
   <h4 id="why-vehicle">Why Vehicle?</h4><p>In 1986, Italian neuroscientist and cyberneticist Valentino Braitenberg described a series of hypothetical vehicles with simple internal structures in his book <em>Vehicles: Experiments in Synthetic Psychology</em>.  Braitenberg argues that his extraordinarily simple mechanical vehicles manifest behaviors such as fear, aggression, love, foresight, and optimism.  Reynolds took his inspiration from Braitenberg, and we’ll take ours from Reynolds.</p>
 
@@ -165,7 +169,7 @@ Valentino Braitenberg
 
 	<ol class="arabic">
 
-			<li><p><strong><em>Action Selection.</em></strong>   A Vehicle has a goal (or goals) and can select an action (or a combination of actions) based on that goal.  This is essentially where we left off with autonomous agents.  The vehicle takes a look at its environment and calculates an action based on a desire: “I see a zombie marching towards me. Since I don’t want my brains to be eaten, I’m going to flee from the zombie.”   The goal is to keep one’s brains and the action is to flee.   Reynolds’s paper describes many goals and associated actions such as: seek a target, avoid an obstacle, and follow a path.  In a moment, we’ll start building these examples out with Processing code.
+			<li><p><strong><em>Action Selection.</em></strong>   A vehicle has a goal (or goals) and can select an action (or a combination of actions) based on that goal.  This is essentially where we left off with autonomous agents.  The vehicle takes a look at its environment and calculates an action based on a desire: “I see a zombie marching towards me. Since I don’t want my brains to be eaten, I’m going to flee from the zombie.”   The goal is to keep one’s brains and the action is to flee.   Reynolds’s paper describes many goals and associated actions such as: seek a target, avoid an obstacle, and follow a path.  In a moment, we’ll start building these examples out with Processing code.
 </p>
 </li>
 
@@ -180,7 +184,7 @@ Valentino Braitenberg
 	</ol>
 </div><p>Ultimately, the most important layer for you to consider is #1—<em>Action Selection</em>.  What are the elements of your system and what are their goals?  In this chapter, we are going to look at a series of steering behaviors (i.e. actions): seek, flee, follow a path, follow a flow field, flock with your neighbors, etc.   It’s important to realize, however, that the point of understanding how to write the code for these behaviors is not because you should use them in all of your projects.  Rather, these are a set of building blocks, a foundation from which you can design and develop vehicles with creative goals and new and exciting behaviors.   And even though we will think literally in this chapter (follow that pixel.), you should allow yourself to think more abstractly (like Braitenberg). What would it mean for your vehicle to have “love” or “fear” as its goal, its driving force?    Finally (and we’ll address this later in the chapter), you won’t get very far by developing simulations with only one action.  Yes, our first example will be “seek a target.”  But for you to be creative—to make these steering behaviors <em>your own</em>—it will all come down to mixing and matching multiple actions within the same vehicle.  So view these examples not as singular behaviors to be emulated, but as pieces of a larger puzzle that you will eventually assemble.</p>
 </section><section><a id="chapter06_section3" style="display: block;"></a>
-<h3 id="63-the-steering-force">6.3  The Steering Force</h3><p>We can entertain ourselves by discussing the theoretical principles behind autonomous agents and steering as much as we like, but we can’t get anywhere without first understanding the concept of a steering force. Consider the following scenario.  A Vehicle moving with velocity desires to seek a target.</p>
+<h3 id="63-the-steering-force">6.3  The Steering Force</h3><p>We can entertain ourselves by discussing the theoretical principles behind autonomous agents and steering as much as we like, but we can’t get anywhere without first understanding the concept of a steering force. Consider the following scenario.  A vehicle moving with velocity desires to seek a target.</p>
 <a id="chapter06_figure1" style="display: block;"></a>
 <div class="image-container half-width-right" >
 
@@ -188,7 +192,7 @@ Valentino Braitenberg
 
 	<p class="caption">Figure 6.1</p>
 </div>
-<p>Its goal and subsequent action is to seek the target in Figure 6.1.  If you think back to Chapter 2, you might begin by making the target an Attractor and apply a gravitational force that pulls the vehicle to the target.  This would be a perfectly reasonable solution, but conceptually it’s not what we’re looking for here.   We don’t want to simply calculate a force that pushes the Vehicle towards its target; rather, we are asking the Vehicle to make an intelligent decision to steer towards the target based on its perception of its state and environment (i.e. how fast and in what direction is it currently moving).   The vehicle should look at how it desires to move (a vector pointing to the target), compare that goal with how quickly it is currently moving (its velocity), and apply a force accordingly.</p>
+<p>Its goal and subsequent action is to seek the target in Figure 6.1.  If you think back to Chapter 2, you might begin by making the target an attractor and apply a gravitational force that pulls the vehicle to the target.  This would be a perfectly reasonable solution, but conceptually it’s not what we’re looking for here.   We don’t want to simply calculate a force that pushes the vehicle towards its target; rather, we are asking the vehicle to make an intelligent decision to steer towards the target based on its perception of its state and environment (i.e. how fast and in what direction is it currently moving).   The vehicle should look at how it desires to move (a vector pointing to the target), compare that goal with how quickly it is currently moving (its velocity), and apply a force accordingly.</p>
 <p><strong><em>steering force = desired velocity - current velocity</em></strong></p>
 <p>Or as we might write in Processing:</p>
 <div class="source-code">
@@ -211,7 +215,7 @@ Valentino Braitenberg
 
 	<p class="caption">Figure 6.2</p>
 </div>
-<p>Assuming a PVector target, we then have:</p>
+<p>Assuming a <span class="klass">PVector</span> target, we then have:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector desired = PVector.sub(target,location);</textarea>
@@ -226,7 +230,7 @@ Valentino Braitenberg
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>But this isn’t particularly realistic.  What if we have a very high-resolution window and the target is thousands of pixels away?  Sure, the vehicle might desire to teleport itself instantly to the target location with a massive velocity, but this won’t make for an effective animation.  What we really want to say is:</p>
 <p><em>The vehicle desires to move towards the target at maximum speed.</em></p>
-<p>In other words, the vector should point from location to target and with a magnitude equal to maximum speed (i.e. the fastest the vehicle can go).   So first, we need to make sure we add a variable to our Vehicle class that stores maximum speed.</p>
+<p>In other words, the vector should point from location to target and with a magnitude equal to maximum speed (i.e. the fastest the vehicle can go).   So first, we need to make sure we add a variable to our <span class="klass">Vehicle</span> class that stores maximum speed.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Vehicle {
@@ -321,7 +325,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
 	<p class="caption">Figure 6.4</p>
 </div>
 <p>Again, notice how this is not at all the same force as gravitational attraction.  Remember one of our principles of autonomous agents: An autonomous agent has a <em>limited</em> ability to perceive its environment.  Here is that ability, subtly embedded into Reynolds’s steering formula.  If the vehicle weren’t moving at all (zero velocity), desired minus velocity would be equal to desired.  But this is not the case.  The vehicle is aware of its own velocity and its steering force compensates accordingly.   This creates a more active simulation, as the way in which the vehicle moves towards the targets depends on the way it is moving in the first place.</p>
-<p>In all of this excitement, however, we’ve missed one last step.  What sort of vehicle is this?  Is it a super sleek race car with amazing handling?  Or a giant Mack truck that needs a lot of advance notice to turn?   A graceful panda, or a lumbering elephant?  Our example code, as it stands, has no feature to account for this variability in steering ability.   Steering ability can be controlled by limiting the magnitude of the steering force.  Let’s call that limit the “maximum force” (or maxforce for short).  And so finally, we have:</p>
+<p>In all of this excitement, however, we’ve missed one last step.  What sort of vehicle is this?  Is it a super sleek race car with amazing handling?  Or a giant Mack truck that needs a lot of advance notice to turn?   A graceful panda, or a lumbering elephant?  Our example code, as it stands, has no feature to account for this variability in steering ability.   Steering ability can be controlled by limiting the magnitude of the steering force.  Let’s call that limit the “maximum force” (or <span class="var">maxforce</span> for short).  And so finally, we have:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Vehicle {
@@ -381,7 +385,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Limiting the steering force brings up an important point.  We must always remember that it’s not actually our goal to get the Vehicle to the target as fast as possible.  If that were the case, we would just say “location equals target” and there the vehicle would be.  Our goal, as Reynolds puts it, is to move the vehicle in a “lifelike and improvisational manner.”  We’re trying to make it appear as if the vehicle is steering its way to the target, and so it’s up to us to play with the forces and variables of the system to simulate a given behavior.  For example, a large maximum steering force would result in a very different path than a small one.  One is not inherently better or worse than the other; it depends on your desired effect.  (And of course, these values need not be fixed and could change based on other conditions.  Perhaps a vehicle has health: the higher the health, the better it can steer.)</p>
+</div><p>Limiting the steering force brings up an important point.  We must always remember that it’s not actually our goal to get the vehicle to the target as fast as possible.  If that were the case, we would just say “location equals target” and there the vehicle would be.  Our goal, as Reynolds puts it, is to move the vehicle in a “lifelike and improvisational manner.”  We’re trying to make it appear as if the vehicle is steering its way to the target, and so it’s up to us to play with the forces and variables of the system to simulate a given behavior.  For example, a large maximum steering force would result in a very different path than a small one.  One is not inherently better or worse than the other; it depends on your desired effect.  (And of course, these values need not be fixed and could change based on other conditions.  Perhaps a vehicle has health: the higher the health, the better it can steer.)</p>
 <a id="chapter06_figure5" style="display: block;"></a>
 <div class="image-container " >
 
@@ -389,7 +393,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
 
 	<p class="caption">Figure 6.5</p>
 </div>
-<p>Here is the full Vehicle class, incorporating the rest of the elements from the Chapter 2 Mover object.</p>
+<p>Here is the full <span class="klass">Vehicle</span> class, incorporating the rest of the elements from the Chapter 2 <span class="klass">Mover</span> object.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter06/_6_01_Seek/_6_01_Seek.pde /book/processingjs/chapter06/_6_01_Seek/Vehicle.pde" class="screenshot">
@@ -544,11 +548,11 @@ pointing up, we rotate it an additional 90 degrees.</div><code><pre><span class=
 
 </div><div class="example">
   <a id="chapter06_exercise2" style="display: block;"></a>
-<h4 id="exercise-62">Exercise 6.2</h4><p>Implement seeking a moving target, often referred to as “pursuit.”  In this case, your desired vector won’t point towards the object’s current location, but rather its “future” location as extrapolated from its current velocity.   We’ll see this ability for a Vehicle to “predict the future” in later examples.</p>
+<h4 id="exercise-62">Exercise 6.2</h4><p>Implement seeking a moving target, often referred to as “pursuit.”  In this case, your desired vector won’t point towards the object’s current location, but rather its “future” location as extrapolated from its current velocity.   We’ll see this ability for a vehicle to “predict the future” in later examples.</p>
 
 </div><div class="example">
   <a id="chapter06_exercise3" style="display: block;"></a>
-<h4 id="exercise-63">Exercise 6.3</h4><p>Create a sketch where a Vehicle’s maximum force and maximum speed do not remain constant, but rather vary according to environmental factors.</p>
+<h4 id="exercise-63">Exercise 6.3</h4><p>Create a sketch where a vehicle’s maximum force and maximum speed do not remain constant, but rather vary according to environmental factors.</p>
 
 </div></section><section><a id="chapter06_section4" style="display: block;"></a>
 <h3 id="64-arriving-behavior">6.4  Arriving Behavior</h3><p>After working for a bit with the seeking behavior, you probably are asking yourself,  “What if I want my vehicle to slow down as it approaches the target?”   Before we can even begin to answer this question, we should look at the reasons behind why the seek behavior causes the vehicle to fly past the target so that it has to turn around and go back.  Let’s consider the brain of a seeking vehicle.  What is it thinking?</p>
@@ -558,7 +562,7 @@ Frame 3: I want to go as fast as possible towards the target!<br />
 Frame 4: I want to go as fast as possible towards the target!<br />
 Frame 5: I want to go as fast as possible towards the target!<br />
 etc.</p>
-<p>The Vehicle is so gosh darn excited about getting to the target that it doesn’t bother to make any intelligent decisions about its speed relative to the target’s proximity.  Whether it’s far away or very close, it always wants to go as fast as possible.</p>
+<p>The vehicle is so gosh darn excited about getting to the target that it doesn’t bother to make any intelligent decisions about its speed relative to the target’s proximity.  Whether it’s far away or very close, it always wants to go as fast as possible.</p>
 <a id="chapter06_figure6" style="display: block;"></a>
 <div class="image-container " >
 
@@ -566,7 +570,7 @@ etc.</p>
 
 	<p class="caption">Figure 6.6</p>
 </div>
-<p>In some cases, this is the desired behavior (if a missile is flying at a target, it should always travel at maximum speed.)  However, in many other cases (a car pulling into a parking spot, a bee landing on a flower), the Vehicle’s thought process needs to consider its speed relative to the distance from its target.  For example:</p>
+<p>In some cases, this is the desired behavior (if a missile is flying at a target, it should always travel at maximum speed.)  However, in many other cases (a car pulling into a parking spot, a bee landing on a flower), the vehicle’s thought process needs to consider its speed relative to the distance from its target.  For example:</p>
 <p>Frame 1: I’m very far away. I want to go as fast as possible towards the target!<br />
 Frame 2: I’m very far away. I want to go as fast as possible towards the target!<br />
 Frame 3: I’m somewhat far away. I want to go as fast as possible towards the target!<br />
@@ -642,7 +646,7 @@ Frame 6: I’m there. I want to stop!</p>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Reynolds describes a more sophisticated approach.  Let’s imagine a circle around the target with a given radius.  If the Vehicle is within that circle it slows down—at the edge of the circle its desired speed is maximum speed, and at the target itself its desired speed is 0.</p>
+</div><p>Reynolds describes a more sophisticated approach.  Let’s imagine a circle around the target with a given radius.  If the vehicle is within that circle it slows down—at the edge of the circle its desired speed is maximum speed, and at the target itself its desired speed is 0.</p>
 <a id="chapter06_figure10" style="display: block;"></a>
 <div class="image-container " >
 
@@ -738,9 +742,10 @@ according to how close we are</div><code><pre><span class='one-line'>      <span
 </section><section><a id="chapter06_section5" style="display: block;"></a>
 <h3 id="65-your-own-desires-desired-velocity">6.5 Your Own Desires: Desired Velocity</h3><p>The first two examples we’ve covered—seek and arrive—boil down to calculating a single vector for each behavior: the <em>desired</em> velocity.  And in fact, every single one of Reynolds’s steering behaviors follows this same pattern.  In this chapter, we’re going to walk through several more of Reynolds’s behaviors—flow field, path-following, flocking.  First, however, I want to emphasize again that these are <em>examples</em>—demonstrations of common steering behaviors that are useful in procedural animation.   They are not the be-all and end-all of what <em>you</em> can do.  As long as you can come up with a vector that describes a vehicle’s <em>desired</em> velocity, then you have created your own steering behavior.</p>
 <p>Let’s see how Reynolds defines the desired velocity for his wandering behavior.</p>
-<p><em>“Wandering is a type of random steering which has some long term order: the steering direction on one frame is related to the steering direction on the next frame. This produces more interesting motion than, for example, simply generating a random steering direction each frame.”</em>  —<a href="http://www.red3d.com/cwr/steer/Wander.html">Craig Reynolds</a>
-</p>
-<a id="chapter06_figure12" style="display: block;"></a>
+<blockquote>
+“Wandering is a type of random steering which has some long term order: the steering direction on one frame is related to the steering direction on the next frame. This produces more interesting motion than, for example, simply generating a random steering direction each frame.”
+<span class="attribution"><a href="http://www.red3d.com/cwr/steer/Wander.html">Craig Reynolds</a></span>
+</blockquote><a id="chapter06_figure12" style="display: block;"></a>
 <div class="image-container half-width-right" >
 
 	<img src="/book/imgs/chapter06/ch06_12.png" alt="Nature of Code Image" />
@@ -775,7 +780,7 @@ according to how close we are</div><code><pre><span class='one-line'>      <span
 
 	<p class="caption">Figure 6.13</p>
 </div>
-<p><strong><em>If a Vehicle comes within a distance</em></strong> d <strong><em>of a wall, it desires to move at maximum speed in the opposite direction of the wall.</em></strong></p>
+<p><strong><em>If a vehicle comes within a distance</em></strong> d <strong><em>of a wall, it desires to move at maximum speed in the opposite direction of the wall.</em></strong></p>
 <p>If we define the walls of the space as the edges of a Processing window and the distance <span class="var">d</span> as 25, the code is rather simple.</p>
 <div class="image-container screenshot" >
 
@@ -824,7 +829,7 @@ the window’s left edge.</div><code><pre><span class='one-line'>  <span class="
 <h4 id="exercise-65">Exercise 6.5</h4><p>Come up with your own arbitrary scheme for calculating a desired velocity.</p>
 
 </div></section><section><a id="chapter06_section6" style="display: block;"></a>
-<h3 id="66-flow-fields">6.6  Flow Fields</h3><p>Now back to the task at hand.  Let’s examine a couple more of Reynolds’s steering behaviors.  First, <strong><em>flow field following</em></strong>.  What is a flow field?   Think of your Processing window as a grid.  In each cell of the grid lives an arrow pointing in some direction—you know, a vector.   As a Vehicle moves around the screen, it asks, “Hey, what arrow is beneath me?  That’s my desired velocity!”</p>
+<h3 id="66-flow-fields">6.6  Flow Fields</h3><p>Now back to the task at hand.  Let’s examine a couple more of Reynolds’s steering behaviors.  First, <strong><em>flow field following</em></strong>.  What is a flow field?   Think of your Processing window as a grid.  In each cell of the grid lives an arrow pointing in some direction—you know, a vector.   As a vehicle moves around the screen, it asks, “Hey, what arrow is beneath me?  That’s my desired velocity!”</p>
 <a id="chapter06_figure14" style="display: block;"></a>
 <div class="image-container " >
 
@@ -832,8 +837,8 @@ the window’s left edge.</div><code><pre><span class='one-line'>  <span class="
 
 	<p class="caption">Figure 6.14</p>
 </div>
-<p>Reynolds’s flow field following example has the vehicle predicting its future location and following the vector at that spot, but for simplicity’s sake, we’ll have the Vehicle simply look to the vector at its current location.</p>
-<p>Before we can write the additional code for our Vehicle class, we’ll need to build a class that describes the flow field itself, the grid of vectors.   A two-dimensional array is a convenient data structure in which to store a grid of information. (If you are not familiar with 2D arrays, I suggest reviewing this online Processing tutorial: <a href="http://processing.org/learning/2darray/">2D array</a>
+<p>Reynolds’s flow field following example has the vehicle predicting its future location and following the vector at that spot, but for simplicity’s sake, we’ll have the vehicle simply look to the vector at its current location.</p>
+<p>Before we can write the additional code for our <span class="klass">Vehicle</span> class, we’ll need to build a class that describes the flow field itself, the grid of vectors.   A two-dimensional array is a convenient data structure in which to store a grid of information. (If you are not familiar with 2D arrays, I suggest reviewing this online Processing tutorial: <a href="http://processing.org/learning/2darray/">2D array</a>
 ).   The 2D array is convenient because we reference each element with two indices, which we can think of as columns and rows.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -863,7 +868,7 @@ width and height in pixels</div><code><pre><span class='one-line'>  <span class=
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Notice how we are defining a third variable called resolution above.   What is this variable?  Let’s say we have a Processing window that is 200 pixels wide by 200 pixels high.  We could make a flow field that has a PVector object for every single pixel, or 40,000 [klass]*PVector*s (200 * 200).  This isn’t terribly unreasonable, but in our case, it’s overkill.  We don’t need a PVector for every single pixel; we can achieve the same effect by having, say, one every ten pixels (20 * 20 = 400).   We use this resolution to define the number of columns and rows based on the size of the window divided by resolution:</p>
+</div><p>Notice how we are defining a third variable called <span class="var">resolution</span> above.   What is this variable?  Let’s say we have a Processing window that is 200 pixels wide by 200 pixels high.  We could make a flow field that has a <span class="klass">PVector</span> object for every single pixel, or 40,000 <span class="klass">PVector</span>s (200 * 200).  This isn’t terribly unreasonable, but in our case, it’s overkill.  We don’t need a <span class="klass">PVector</span> for every single pixel; we can achieve the same effect by having, say, one every ten pixels (20 * 20 = 400).   We use this resolution to define the number of columns and rows based on the size of the window divided by resolution:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  FlowField() {
@@ -1000,7 +1005,7 @@ for (int i = 0; i < cols; i++) {
 </div><p>Now we’re getting somewhere.   Flow fields can be used for simulating various effects, such as an irregular gust of wind or the meandering path of a river.  Calculating the direction of your vectors using Perlin noise is one way to achieve such an effect.  Of course, there’s no “correct” way to calculate the vectors of a flow field; it’s really up to you to decide what you’re looking to simulate.</p>
 <div class="example">
   <a id="chapter06_exercise6" style="display: block;"></a>
-<h4 id="exercise-66">Exercise 6.6</h4><p>Write the code to calculate a PVector at every location in the flow field that points towards the center of a window.</p>
+<h4 id="exercise-66">Exercise 6.6</h4><p>Write the code to calculate a <span class="klass">PVector</span> at every location in the flow field that points towards the center of a window.</p>
 <div class="image-container " >
 
 	<img src="/book/imgs/chapter06/ch06_exc6.png" alt="Nature of Code Image" />
@@ -1024,7 +1029,7 @@ field[i][j] = v;</textarea>
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div>
-</div><p>Now that we have a two-dimensional array storing all of the flow field vectors, we need a way for a Vehicle to look up its desired vector in the flow field.    Let’s say we have a vehicle that lives at a PVector: its location.  We first need to divide by the resolution of the grid.  For example, if the resolution is 10 and the vehicle is at (100,50), we need to look up column 10 and row 5.</p>
+</div><p>Now that we have a two-dimensional array storing all of the flow field vectors, we need a way for a vehicle to look up its desired vector in the flow field.    Let’s say we have a vehicle that lives at a <span class="klass">PVector</span>: its location.  We first need to divide by the resolution of the grid.  For example, if the resolution is 10 and the vehicle is at <em>(100,50)</em>, we need to look up column 10 and row 5.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>int column = int(location.x/resolution);
@@ -1039,7 +1044,7 @@ int row = int(location.y/resolution);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Because a vehicle could theoretically wander off the Processing window, it’s also useful for us to employ the <span class="function">constrain()</span> function to make sure we don’t look outside of the flow field array.  Here is a function we’ll call <span class="function">lookup()</span> that goes in the FlowField class—it receives a PVector (presumably the location of our vehicle) and returns the corresponding flow field PVector for that location.</p>
+</div><p>Because a vehicle could theoretically wander off the Processing window, it’s also useful for us to employ the <span class="function">constrain()</span> function to make sure we don’t look outside of the flow field array.  Here is a function we’ll call <span class="function">lookup()</span> that goes in the <span class="klass">FlowField</span> class—it receives a <span class="klass">PVector</span> (presumably the location of our vehicle) and returns the corresponding flow field <span class="klass">PVector</span> for that location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector lookup(PVector lookup) {
@@ -1066,7 +1071,7 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Before we move on to the Vehicle class, let’s take a look at the FlowField class all together.</p>
+</div><p>Before we move on to the <span class="klass">Vehicle</span> class, let’s take a look at the <span class="klass">FlowField</span> class all together.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class FlowField {
@@ -1159,7 +1164,7 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>So let’s assume we have a FlowField object called “flow”.  Using the <span class="function">lookup()</span> function above, our vehicle can then retrieve a desired vector from the FlowField object and use Reynolds’s rules (steering = desired - velocity) to calculate a steering force.</p>
+</div><p>So let’s assume we have a <span class="klass">FlowField</span> object called “flow”.  Using the <span class="function">lookup()</span> function above, our vehicle can then retrieve a desired vector from the flow field and use Reynolds’s rules (steering = desired - velocity) to calculate a steering force.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter06/_6_04_Flowfield/_6_04_Flowfield.pde /book/processingjs/chapter06/_6_04_Flowfield/Flowfield.pde /book/processingjs/chapter06/_6_04_Flowfield/Vehicle.pde" class="screenshot">
@@ -1210,11 +1215,11 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
   <a id="chapter06_exercise7" style="display: block;"></a>
-<h4 id="exercise-67">Exercise 6.7</h4><p>Adapt the flow field example so that the [klass]*PVector*s change over time (hint: try using the third dimension of Perlin noise!)</p>
+<h4 id="exercise-67">Exercise 6.7</h4><p>Adapt the flow field example so that the <span class="klass">PVector</span>s change over time (hint: try using the third dimension of Perlin noise!)</p>
 
 </div><div class="example">
   <a id="chapter06_exercise8" style="display: block;"></a>
-<h4 id="exercise-68">Exercise 6.8</h4><p>Can you seed a flow field from a PImage?  For example, try having the [klass]*PVector*s point from dark to light colors (or vice versa).</p>
+<h4 id="exercise-68">Exercise 6.8</h4><p>Can you seed a flow field from a <span class="klass">PImage</span>?  For example, try having the <span class="klass">PVector</span>s point from dark to light colors (or vice versa).</p>
 
 </div></section><section><a id="chapter06_section7" style="display: block;"></a>
 <h3 id="67-the-dot-product">6.7  The Dot Product</h3><p>In a moment, we’re going to work through the algorithm (along with accompanying mathematics) and code for another of Craig Reynolds’s steering behaviors: <a href="http://www.red3d.com/cwr/steer/PathFollow.html">Path Following</a>
@@ -1259,7 +1264,7 @@ function to calculate the dot product.</div><code><pre><span class='one-line'><s
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>And if we were to look in the guts of the PVector source, we’d find a pretty simple implementation of this function:</p>
+</div><p>And if we were to look in the guts of the <span class="klass">PVector</span> source, we’d find a pretty simple implementation of this function:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>public float dot(PVector v) {
@@ -1294,9 +1299,9 @@ function to calculate the dot product.</div><code><pre><span class='one-line'><s
 </div>
 <p>Now, let’s start with the following problem. We have the vectors A and B:</p>
 <p><span class="formula">A = (10,2)</span><br /><span class="formula">B = (4,-3)</span></p>
-<p>We now have a situation in which we know everything except for theta.   We know the components of the vector (ax,ay,bx,by) and we can calculate the magnitude of each vector as we did in Chapter 1 with the Pythagorean theorem.  We can therefore solve for cos(theta):</p>
+<p>We now have a situation in which we know everything except for theta.   We know the components of the vector and can calculate the magnitude of each vector.  We can therefore solve for cosine of theta:</p>
 <p><span class="formula">cos(theta) = A·B / |A| * |B|</span></p>
-<p>Once we’ve solved for cosine of theta, we can take the inverse cosine (often expressed as <em>arccosine</em>) to solve for theta.</p>
+<p>To solve for theta, we can take the inverse cosine (often expressed as <em>arccosine</em>).</p>
 <p><span class="formula">theta = arccos (A·B / |A| * |B|)</span></p>
 <p>Let’s now do the math with actual numbers:</p>
 <p><span class="formula">|A| = 10.2</span><br /><span class="formula">|B| = 5</span></p>
@@ -1349,7 +1354,7 @@ float theta = acos(a.dot(b) / (a.mag() * b.mag()));</textarea>
 
 
 </div>
-<p>Create a sketch that displays the angle between two PVector objects.</p>
+<p>Create a sketch that displays the angle between two <span class="klass">PVector</span> objects.</p>
 <div class="image-container " >
 
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
@@ -1470,7 +1475,7 @@ If two vectors are unit vectors, then the dot product is simply equal to cosine 
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now, let’s assume we have a Vehicle (as depicted below) outside of the path’s radius, moving with a velocity.</p>
+</div><p>Now, let’s assume we have a vehicle (as depicted below) outside of the path’s radius, moving with a velocity.</p>
 <a id="chapter06_figure23" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1761,7 +1766,7 @@ By adding b to normalPoint, we now move
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Putting it all together, we have the following steering function in our Vehicle class.</p>
+</div><p>Putting it all together, we have the following steering function in our <span class="klass">Vehicle</span> class.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter06/_6_05_PathFollowingSimple/_6_05_PathFollowingSimple.pde /book/processingjs/chapter06/_6_05_PathFollowingSimple/Path.pde /book/processingjs/chapter06/_6_05_PathFollowingSimple/Vehicle.pde" class="screenshot">
@@ -1844,7 +1849,7 @@ seek that target in order to stay on the path.</div><code><pre><span class='one-
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now, you may notice above that instead of using all that dot product/scalar projection code to find the normal point, we instead call a function: <span class="function">getNormalPoint()</span>.   In cases like this, it’s useful to break out the code that performs a specific task (finding a normal point) into a function that it can be used generically in any case where it is required.  The function takes three PVectors: the first defines a point in Cartesian space and the second and third arguments define a line segment.</p>
+</div><p>Now, you may notice above that instead of using all that dot product/scalar projection code to find the normal point, we instead call a function: <span class="function">getNormalPoint()</span>.   In cases like this, it’s useful to break out the code that performs a specific task (finding a normal point) into a function that it can be used generically in any case where it is required.  The function takes three <span class="klass">PVector</span>s: the first defines a point in Cartesian space and the second and third arguments define a line segment.</p>
 <a id="chapter06_figure29" style="display: block;"></a>
 <div class="image-container " >
 
@@ -1892,7 +1897,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>What do we have so far?  We have a Path class that defines a path as a line between two points.  We have a Vehicle class that defines a vehicle that can follow the path (using a steering behavior to seek a target along the path).  What is missing?</p>
+</div><p>What do we have so far?  We have a <span class="klass">Path</span> class that defines a path as a line between two points.  We have a <span class="klass">Vehicle</span> class that defines a vehicle that can follow the path (using a steering behavior to seek a target along the path).  What is missing?</p>
 <p>Take a deep breath.  We’re almost there.</p>
 </section><section><a id="chapter06_section9" style="display: block;"></a>
 <h3 id="69-path-following-with-multiple-segments">6.9 Path Following with Multiple Segments</h3><a id="chapter06_figure30" style="display: block;"></a>
@@ -1922,7 +1927,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 	<p class="caption">Figure 6.32</p>
 </div>
 <p>If we have a point and an infinitely long line, we’ll always have a normal.  But, as in the path-following example, if we have a point and a line segment, we won’t necessarily find a normal that is on the line segment itself.  So if this happens for any of the segments, we can disqualify those normals.  Once we are left with normals that are on the path itself (only two in the above diagram), we simply pick the one that is closest to our vehicle’s location.</p>
-<p>In order to write the code for this, we’ll have to expand our Path class to have an ArrayList of points (rather than just two, a start and an end).</p>
+<p>In order to write the code for this, we’ll have to expand our <span class="klass">Path</span> class to have an <span class="klass">ArrayList</span> of points (rather than just two, a start and an end).</p>
 <div class="image-container screenshot" >
 
 	<img src="/book/imgs/chapter06/ch06_ex6_a.png" alt="Nature of Code Image" />
@@ -1999,7 +2004,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now that we have the Path defined, it’s the vehicle’s turn to deal with multiple line segments.  All we did before was find the normal for one line segment.  We can now find the normals for all the line segments in a loop.</p>
+</div><p>Now that we have the <span class="klass">Path</span> class defined, it’s the vehicle’s turn to deal with multiple line segments.  All we did before was find the normal for one line segment.  We can now find the normals for all the line segments in a loop.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>for (int i = 0; i < p.points.size()-1; i++) {
@@ -2020,7 +2025,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Then we should make sure the normalPoint is actually between points a and b.  Since we know our path goes from left to right in this example, we can test if the x location of normalPoint is outside the x locations of a and b.</p>
+</div><p>Then we should make sure the normal point is actually between points <span class="var">a</span> and <span class="var">b</span>.  Since we know our path goes from left to right in this example, we can test if the <em>x</em> component of <span class="var">normalPoint</span> is outside the <em>x</em> components of <span class="var">a</span> and <span class="var">b</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>   if (normalPoint.x < a.x || normalPoint.x > b.x) {
@@ -2042,7 +2047,7 @@ as our normal point if we can’t find one.</div><code><pre><span class='one-lin
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>As a little trick, we’ll say that if it’s not within the line segment, let’s just pretend the end point of that line segment is the normal.  This will ensure that our vehicle always stays on the path, even if it strays out of the bounds of our line segments.</p>
-<p>Finally, we’ll need to make sure we find the normal point that is closest to our vehicle.  To accomplish this, we start with a very high “world record” distance and iterate through each normal point to see if it beats the record (i.e. is less than).  Each time a normal point beats the record, the world record is updated and the winning point is stored in a variable named target.  At the end of the loop, we’ll have the closest normal point in that variable.</p>
+<p>Finally, we’ll need to make sure we find the normal point that is closest to our vehicle.  To accomplish this, we start with a very high “world record” distance and iterate through each normal point to see if it beats the record (i.e. is less than).  Each time a normal point beats the record, the world record is updated and the winning point is stored in a variable named <span class="var">target</span>.  At the end of the loop, we’ll have the closest normal point in that variable.</p>
 <div class="image-container screenshot" >
 
 	<canvas data-processing-sources="/book/processingjs/chapter06/_6_06_PathFollowing/_6_06_PathFollowing.pde /book/processingjs/chapter06/_6_06_PathFollowing/Path.pde /book/processingjs/chapter06/_6_06_PathFollowing/Vehicle.pde" class="screenshot">
@@ -2177,9 +2182,9 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 </li>
 
 	</ul>
-</div><p>Complexity will serve as a theme for the remaining content in this book. In this chapter, we’ll begin by adding one more feature to our Vehicle class: an ability to look at neighboring vehicles.</p>
+</div><p>Complexity will serve as a theme for the remaining content in this book. In this chapter, we’ll begin by adding one more feature to our <span class="klass">Vehicle</span> class: an ability to look at neighboring vehicles.</p>
 </section><section><a id="chapter06_section11" style="display: block;"></a>
-<h3 id="611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</h3><p>A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a ParticleSystem class.   There, we stored a list of particles in an ArrayList.  We’ll do the same thing here: store a bunch of Vehicle objects in an ArrayList.</p>
+<h3 id="611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</h3><p>A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a <span class="klass">ParticleSystem</span> class.   There, we stored a list of particles in an <span class="klass">ArrayList</span>.  We’ll do the same thing here: store a bunch of <span class="klass">Vehicle</span> objects in an <span class="klass">ArrayList</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Declare an ArrayList of Vehicle objects.
@@ -2273,7 +2278,7 @@ with a bunch of Vehicles.</div><code><pre><span class='one-line'>  <span class="
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>This is the big leap beyond what we did before with particle systems.  Instead of having each element (particle or vehicle) operate on its own, we’re now saying, “Hey you, the vehicle! When it comes time for you to operate, you need to operate with an awareness of everyone else. So I’m going to go ahead and pass you the ArrayList of everyone else.”</p>
+</div><p>This is the big leap beyond what we did before with particle systems.  Instead of having each element (particle or vehicle) operate on its own, we’re now saying, “Hey you, the vehicle! When it comes time for you to operate, you need to operate with an awareness of everyone else. So I’m going to go ahead and pass you the <span class="klass">ArrayList</span> of everyone else.”</p>
 <p>This is how we’ve mapped out <span class="function">setup()</span> and <span class="function">draw()</span> to deal with a group behavior.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2345,7 +2350,7 @@ separation force.</div><code><pre><span class='one-line'>    <strong><span class
 	<p class="caption">Figure 6.34</p>
 </div>
 <p>But what if more than one vehicle is too close?  In this case, we’ll define separation as the average of all the vectors pointing away from any close vehicles.</p>
-<p>Let’s begin to write the code.  As we just worked out, we’re writing a function called <span class="function">separate()</span> that receives an ArrayList of Vehicle objects as an argument.</p>
+<p>Let’s begin to write the code.  As we just worked out, we’re writing a function called <span class="function">separate()</span> that receives an <span class="klass">ArrayList</span> of Vehicle objects as an argument.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void separate (ArrayList<Vehicle> vehicles) {
@@ -2398,7 +2403,7 @@ separation force.</div><code><pre><span class='one-line'>    <strong><span class
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Notice how in the above code, we are not only checking if the distance is less than a desired separation (i.e. too close!), but also if the distance is greater than zero.  This is a little trick that makes sure we don’t ask a vehicle to separate from itself.   Remember, all the vehicles are in the ArrayList, so if you aren’t careful you’ll be comparing each vehicle to itself!</p>
+</div><p>Notice how in the above code, we are not only checking if the distance is less than a desired separation (i.e. too close!), but also if the distance is greater than zero.  This is a little trick that makes sure we don’t ask a vehicle to separate from itself.   Remember, all the vehicles are in the <span class="klass">ArrayList</span>, so if you aren’t careful you’ll be comparing each vehicle to itself!</p>
 <p>Once we know that two vehicles are too close, we need to make a vector that points away from the offending vehicle.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2476,7 +2481,7 @@ divide by zero!)</div><code><pre><span class='one-line'>  <strong><span class="k
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Once we have the average vector (stored in the PVector object “sum”), that PVector can be scaled to maximum speed and become our desired velocity—we <em>desire</em> to move in that direction at maximum speed!   And once we have the desired velocity, it’s the same old Reynolds story: steering equals desired minus velocity.</p>
+</div><p>Once we have the average vector (stored in the <span class="klass">PVector</span> object “sum”), that <span class="klass">PVector</span> can be scaled to maximum speed and become our desired velocity—we <em>desire</em> to move in that direction at maximum speed!   And once we have the desired velocity, it’s the same old Reynolds story: steering equals desired minus velocity.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  if (count > 0) {
@@ -2649,7 +2654,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Here we have a Mover object that responds to two forces.  This all works nicely because of the way we designed the Mover object to accumulate the force vectors into its acceleration vector.  In this chapter, however, our forces stem from internal desires of the Mover objects (now called “Vehicles” themselves).   And those desires can be weighted.    Let’s consider a sketch where all vehicles have two desires:</p>
+</div><p>Here we have a mover that responds to two forces.  This all works nicely because of the way we designed the <span class="klass">Mover</span> class to accumulate the force vectors into its acceleration vector.  In this chapter, however, our forces stem from internal desires of the movers (now called vehicles). And those desires can be weighted. Let’s consider a sketch where all vehicles have two desires:</p>
 <div class="list">
 
 	<ul>
@@ -2661,7 +2666,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 </li>
 
 	</ul>
-</div><p>We might begin by adding a function to the Vehicle class that manages all of the behaviors.  Let’s call it <span class="function">applyBehaviors()</span>.</p>
+</div><p>We might begin by adding a function to the <span class="klass">Vehicle</span> class that manages all of the behaviors.  Let’s call it <span class="function">applyBehaviors()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void applyBehaviors(ArrayList<Vehicle> vehicles) {
@@ -2680,7 +2685,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Here we see how a single function takes care of calling the other functions that apply the forces—<span class="function">separate()</span> and <span class="function">seek()</span>.    We could start mucking around with those functions and see if we can adjust the strength of the forces they are calculating.  But it would be easier for us to ask those functions to return the forces so that we can adjust their strength before applying them to the Vehicle’s acceleration.</p>
+</div><p>Here we see how a single function takes care of calling the other functions that apply the forces—<span class="function">separate()</span> and <span class="function">seek()</span>.    We could start mucking around with those functions and see if we can adjust the strength of the forces they are calculating.  But it would be easier for us to ask those functions to return the forces so that we can adjust their strength before applying them to the vehicle’s acceleration.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void applyBehaviors(ArrayList<Vehicle> vehicles) {
@@ -2819,7 +2824,7 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
 
 	</ol>
 </div><p>The good news is, we’ve already done items 1 through 3 in this chapter, so this section will be about just putting it all together and seeing the result.</p>
-<p>Before we begin, I should mention that we’re going to change the name of our Vehicle class (yet again).  Reynolds uses the term “boid” (a made-up word that refers to a bird-like object) to describe the elements of a flocking system and we will do the same.</p>
+<p>Before we begin, I should mention that we’re going to change the name of our <span class="klass">Vehicle</span> class (yet again).  Reynolds uses the term “boid” (a made-up word that refers to a bird-like object) to describe the elements of a flocking system and we will do the same.</p>
 <p>Let’s take an overview of the three rules of flocking.</p>
 <div class="list">
 
@@ -2845,7 +2850,7 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
 
 	<p class="caption">Figure 6.35</p>
 </div>
-<p>Just as we did with our separate and seek example, we’ll want our Boid objects to have a single function that manages all the above behaviors.  We’ll call this function <span class="function">flock()</span>.</p>
+<p>Just as we did with our separate and seek example, we’ll want our <span class="klass">Boid</span> objects to have a single function that manages all the above behaviors.  We’ll call this function <span class="function">flock()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void flock(ArrayList<Boid> boids) {
@@ -3030,14 +3035,13 @@ the steering force is zero.</div><code><pre><span class='one-line'>    <span cla
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
   <a id="chapter06_exercise15" style="display: block;"></a>
-<h4 id="exercise-615">Exercise 6.15</h4><a id="chapter06_figure37" style="display: block;"></a>
-<div class="image-container half-width-right" >
+<h4 id="exercise-615">Exercise 6.15</h4><div class="image-container half-width-right" >
 
-	<img src="/book/imgs/chapter06/ch06_37.png" alt="Nature of Code Image" />
+	<img src="/book/imgs/chapter06/ch06_exc15.png" alt="Nature of Code Image" />
 
-	<p class="caption">Figure 6.37</p>
+
 </div>
-<p>Can you write the above code so that boids can only see other boids that are actually within their “peripheral” vision (as if they had eyes)?  This is depicted in Figure 6.37.</p>
+<p>Can you write the above code so that boids can only see other boids that are actually within their “peripheral” vision (as if they had eyes)?</p>
 <div class="image-container " >
 
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
@@ -3102,7 +3106,7 @@ our neighbors.</div><code><pre><span class='one-line'>      <strong><span class=
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>It’s also worth taking the time to write a class called Flock, which will be virtually identical to the ParticleSystem class we wrote in Chapter 4 with only one tiny change:  When we call <span class="function">run()</span> on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire ArrayList of boids.</p>
+</div><p>It’s also worth taking the time to write a class called <span class="klass">Flock</span>, which will be virtually identical to the <span class="klass">ParticleSystem</span> class we wrote in Chapter 4 with only one tiny change:  When we call <span class="function">run()</span> on each <span class="klass">Boid</span> object (as we did to each <span class="klass">Particle</span> object), we’ll pass in a reference to the entire <span class="klass">ArrayList</span> of boids.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Flock {
@@ -3215,14 +3219,13 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 
 </div><div class="example">
   <a id="chapter06_exercise17" style="display: block;"></a>
-<h4 id="exercise-617">Exercise 6.17</h4><a id="chapter06_figure38" style="display: block;"></a>
-<div class="image-container half-width-right" >
+<h4 id="exercise-617">Exercise 6.17</h4><div class="image-container half-width-right" >
 
-	<img src="/book/imgs/chapter06/ch06_38.png" alt="Nature of Code Image" />
+	<img src="/book/imgs/chapter06/ch06_ex17.png" alt="Nature of Code Image" />
 
-	<p class="caption">Figure 6.38</p>
+
 </div>
-<p>In his book The <em>Computational Beauty of Nature</em> (MIT Press, 2000), Gary Flake describes a fourth rule for flocking: “View: move laterally away from any boid that blocks the view.”  Implement this rule as depicted in Figure 6.38.</p>
+<p>In his book The <em>Computational Beauty of Nature</em> (MIT Press, 2000), Gary Flake describes a fourth rule for flocking: “View: move laterally away from any boid that blocks the view.”</p>
 <div class="image-container " >
 
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
@@ -3232,7 +3235,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 
 </div><div class="example">
   <a id="chapter06_exercise18" style="display: block;"></a>
-<h4 id="exercise-618">Exercise 6.18</h4><p>Create a flocking simulation where all of the parameters (separation weight, cohesion weight, alignment weight, maximum force, maximum speed) change over time.  They could be controlled by Perlin noise or by user interaction. (For example, you could use a library such as <a href="http://www.sojamo.de/libraries/controlP5/">controlp5</a>
+<h4 id="exercise-618">Exercise 6.18</h4><p>Create a flocking simulation where all of the parameters (<em>separation weight</em>, <em>cohesion weight</em>, <em>alignment weight</em>, <em>maximum force</em>, <em>maximum speed</em>) change over time.  They could be controlled by Perlin noise or by user interaction. (For example, you could use a library such as <a href="http://www.sojamo.de/libraries/controlP5/">controlp5</a>
  to tie the values to slider positions.)</p>
 
 </div><div class="example">
@@ -3242,7 +3245,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 </div></section><section><a id="chapter06_section14" style="display: block;"></a>
 <h3 id="614-algorithmic-efficiency-or-why-does-my-run-so-slowly">6.14  Algorithmic Efficiency (or: Why does my $@(*%! run so slowly?)</h3><p>I would like to hide the dark truth behind we’ve just done, because I would like you to be happy and live a fulfilling and meaningful life.  But I also would like to be able to sleep at night without worrying about you so much.  So it is with a heavy heart that I must bring up this topic.  Group behaviors are wonderful.  But they can be slow, and the more elements in the group, the slower they can be.  Usually, when we talk about Processing sketches running slowly, it’s because drawing to the screen can be slow—the more you draw, the slower your sketch runs.  This is actually a case, however, where the slowness derives from the algorithm itself.  Let’s discuss.</p>
 <p>Computer scientists classify algorithms with something called “Big O notation,” which describes the efficiency of an algorithm: how many computational cycles does it require to complete?  Let’s consider a simple analog search problem.  You have a basket full of one hundred chocolate treats, only one of which is pure dark chocolate. That’s the one you want to eat.  To find it, you pick the chocolates out of the basket one by one.  Sure, you might be lucky and find it on the first try, but in the worst-case scenario you have to check all one hundred before you find the dark chocolate.   To find one thing in one hundred, you have to check one hundred things (or to find one thing in N things, you have to check N times.)  Your Big O Notation is N.  This, incidentally, is the Big O Notation that describes our simple particle system.  If we have N particles, we have to run and display those particles N times.</p>
-<p>Now, let’s think about a group behavior (such as flocking).   For every Boid object, we have to check every other Boid object (for its velocity and location).  Let’s say we have one hundred boids.  For Boid #1, we need to check one hundred boids; for Boid #1, we need to check one hundred boids, and so on and so forth.   For one hundred boids, we need to perform one hundred times one hundred checks, or ten thousand.   No problem: computers are fast and can do things ten thousand times pretty easily.  Let’s try one thousand.</p>
+<p>Now, let’s think about a group behavior (such as flocking).   For every <span class="klass">Boid</span> object, we have to check every other <span class="klass">Boid</span> object (for its velocity and location).  Let’s say we have one hundred boids.  For boid #1, we need to check one hundred boids; for boid #2, we need to check one hundred boids, and so on and so forth.   For one hundred boids, we need to perform one hundred times one hundred checks, or ten thousand.   No problem: computers are fast and can do things ten thousand times pretty easily.  Let’s try one thousand.</p>
 <p>1,000 x 1,000 = 1,000,000 cycles.</p>
 <p>OK, this is rather slow, but still somewhat manageable.   Let’s try 10,000 elements:</p>
 <p>10,000 x 10,000 elements = 100,000,000 cycles.</p>
@@ -3252,15 +3255,15 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 <p>Or is there another way?</p>
 <p>Let’s take a number that we might actually want to use, but would still run too slowly: 2,000 (4,000,000 cycles required).</p>
 <p>What if we could divide the screen into a grid?  We would take all 2,000 boids and assign each boid to a cell within that grid.   We would then be able to look at each boid and compare it to its neighbors within that cell at any given moment. Imagine a 10 x 10 grid. In a system of 2,000 elements, on average, approximately 20 elements would be found in each cell (20 x 10 x 10 = 2,000).  Each cell would then require 20 x 20 = 400 cycles. With 100 cells, we’d have 100 x 400 = 40,000 cycles, a massive savings over 4,000,000.</p>
-<a id="chapter06_figure39" style="display: block;"></a>
+<a id="chapter06_figure37" style="display: block;"></a>
 <div class="image-container " >
 
-	<img src="/book/imgs/chapter06/ch06_39.png" alt="Nature of Code Image" />
+	<img src="/book/imgs/chapter06/ch06_37.png" alt="Nature of Code Image" />
 
-	<p class="caption">Figure 6.39</p>
+	<p class="caption">Figure 6.37</p>
 </div>
 <p>This technique is known as “bin-lattice spatial subdivision” and is outlined in more detail in (surprise, surprise) Reynolds’s 2000 paper, “Interaction with Groups of Autonomous Characters” (see: <a href="http://www.red3d.com/cwr/papers/2000/pip.pdf">Reynolds’s 2000 Paper</a>
-).   How do we implement such an algorithm in Processing?  One way is to keep multiple ArrayLists.  One ArrayList would keep track of all the boids, just like in our flocking example.</p>
+).   How do we implement such an algorithm in Processing?  One way is to keep multiple <span class="klass">ArrayList*s.  One [klass]*ArrayList</span> would keep track of all the boids, just like in our flocking example.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ArrayList<Boid> boids;</textarea>
@@ -3273,7 +3276,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In addition to that ArrayList, we store an additional reference to each Boid object in a two-dimensional ArrayList.  For each cell in the grid, there is an ArrayList that tracks the objects in that cell.</p>
+</div><p>In addition to that <span class="klass">ArrayList</span>, we store an additional reference to each <span class="klass">Boid</span> object in a two-dimensional <span class="klass">ArrayList</span>.  For each cell in the grid, there is an <span class="klass">ArrayList</span> that tracks the objects in that cell.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ArrayList<Boid>[][] grid;</textarea>
@@ -3286,7 +3289,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>In the main <span class="function">draw()</span> loop, each Boid object then registers itself in the appropriate cell according to its location.</p>
+</div><p>In the main <span class="function">draw()</span> loop, each <span class="klass">Boid</span> object then registers itself in the appropriate cell according to its location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>int column = int(boid.x) / resolution;
@@ -3352,7 +3355,7 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Magnitude requires the square root operation.  And it should.  After all, if you want the magnitude of a vector then you’ve got to look up the Pythagorean theorem and compute it (we did this in Chapter 1).  However, if you could somehow skip using the square root, your code would run faster.   Let’s consider a situation where you just want to know the relative magnitude of a vector.  For example, is the magnitude greater than ten?  (Assume a PVector v.)</p>
+</div><p>Magnitude requires the square root operation.  And it should.  After all, if you want the magnitude of a vector then you’ve got to look up the Pythagorean theorem and compute it (we did this in Chapter 1).  However, if you could somehow skip using the square root, your code would run faster.   Let’s consider a situation where you just want to know the relative magnitude of a vector.  For example, is the magnitude greater than ten?  (Assume a <span class="klass">PVector</span> v.)</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>if (v.mag() > 10) {
@@ -3386,7 +3389,7 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>And how is magSquared calculated?</p>
+</div><p>And how is magnitude squared calculated?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float magSq() {
@@ -3403,7 +3406,7 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Same as magnitude, but without the square root.  In the case of a single PVector object, this will never make a significant difference on a Processing sketch.  However, if you are computing the magnitude of thousands of PVector objects each time through <span class="function">draw()</span>, using <span class="function">magSq()</span> instead of <span class="function">mag()</span> could help your code run a wee bit faster.  (Note: magSq() is only available in Processing 2.0a1 or later.)</p>
+</div><p>Same as magnitude, but without the square root.  In the case of a single <span class="klass">PVector</span> object, this will never make a significant difference on a Processing sketch.  However, if you are computing the magnitude of thousands of <span class="klass">PVector</span> objects each time through <span class="function">draw()</span>, using <span class="function">magSq()</span> instead of <span class="function">mag()</span> could help your code run a wee bit faster.  (Note: magSq() is only available in Processing 2.0a1 or later.)</p>
 </section><section><a id="_2_sine_and_cosine_lookup_tables" style="display: block;"></a>
 <h4 id="2-sine-and-cosine-lookup-tables">2) Sine and cosine lookup tables</h4><p>There’s a pattern here.  What kinds of functions are slow to compute? Square root. Sine. Cosine.  Tangent.  Again, if you just need a sine or cosine value here or there in your code, you are never going to run into a problem.  But what if you had something like this?</p>
 <div class="source-code">
@@ -3426,7 +3429,7 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to TWO_PI and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.</p>
+</div><p>Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to <span class="var">TWO_PI</span> and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float sinvalues[] = new float[360];
@@ -3467,7 +3470,7 @@ float answer = sinvalues[angle];</textarea>
 </div><p>A more sophisticated example of this technique is available on the <a href="http://wiki.processing.org/w/Sin/Cos_look-up_table">Processing wiki</a>
 .</p>
 </section><section><a id="_3_making_gajillions_of_unnecessary_pvector_objects" style="display: block;"></a>
-<h4 id="3-making-gajillions-of-unnecessary-pvector-objects">3) Making gajillions of unnecessary PVector objects</h4><p>I have to admit, I am perhaps the biggest culprit of this last note.  In fact, in the interest of writing clear and understandable examples, I often choose to make extra PVector objects when I absolutely do not need to.  For the most part, this is not a problem at all.   But sometimes, it can be.  Let’s take a look at an example.</p>
+<h4 id="3-making-gajillions-of-unnecessary-pvector-objects">3) Making gajillions of unnecessary PVector objects</h4><p>I have to admit, I am perhaps the biggest culprit of this last note.  In fact, in the interest of writing clear and understandable examples, I often choose to make extra <span class="klass">PVector</span> objects when I absolutely do not need to.  For the most part, this is not a problem at all.   But sometimes, it can be.  Let’s take a look at an example.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void draw() {
@@ -3490,8 +3493,8 @@ float answer = sinvalues[angle];</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Let’s say our ArrayList of vehicles has one thousand vehicles in it.  We just made one thousand new PVector objects every single time through <span class="function">draw()</span>.  Now, on any ol’ laptop or desktop computer you’ve purchased in recent times, your sketch will likely not register a complaint, run slowly, or have any problems.  After all, you’ve got tons of RAM, and Java will be able to handle making a thousand or so temporary objects and dispose of them without much of a problem.</p>
-<p>If your numbers grow larger (and they easily could) or perhaps more likely, if you are working with Processing on Android, you will almost certainly run into a problem.  In cases like this you want to look for ways to reduce the number of PVector objects you make.  An obvious fix for the above code is:</p>
+</div><p>Let’s say our <span class="klass">ArrayList</span> of vehicles has one thousand vehicles in it.  We just made one thousand new <span class="klass">PVector</span> objects every single time through <span class="function">draw()</span>.  Now, on any ol’ laptop or desktop computer you’ve purchased in recent times, your sketch will likely not register a complaint, run slowly, or have any problems.  After all, you’ve got tons of RAM, and Java will be able to handle making a thousand or so temporary objects and dispose of them without much of a problem.</p>
+<p>If your numbers grow larger (and they easily could) or perhaps more likely, if you are working with Processing on Android, you will almost certainly run into a problem.  In cases like this you want to look for ways to reduce the number of <span class="klass">PVector</span> objects you make.  An obvious fix for the above code is:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void draw() {
@@ -3514,7 +3517,7 @@ float answer = sinvalues[angle];</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now you’ve made just one PVector instead of one thousand.  Even better, you could turn the PVector into a global variable and just assign the x and y value:</p>
+</div><p>Now you’ve made just one <span class="klass">PVector</span> instead of one thousand.  Even better, you could turn the <span class="klass">PVector</span> into a global variable and just assign the x and y value:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector mouse = new PVector();
@@ -3543,7 +3546,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Now you never make a new PVector; you use just one over the length of your sketch!</p>
+</div><p>Now you never make a new <span class="klass">PVector</span>; you use just one over the length of your sketch!</p>
 <p>Throughout the book’s examples, you can find lots of opportunities to reduce the number of temporary objects.  Let’s look at one more.  Here is a snippet from our <span class="function">seek()</span> function.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3571,7 +3574,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>See how we’ve made two PVector objects?  First, we figure out the desired vector, then we calculate the steering force.  Notice how we could rewrite this to create only one PVector.</p>
+</div><p>See how we’ve made two <span class="klass">PVector</span> objects?  First, we figure out the desired vector, then we calculate the steering force.  Notice how we could rewrite this to create only one <span class="klass">PVector</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    PVector desired = PVector.sub(target, location);
@@ -3598,10 +3601,10 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We don’t actually need a second PVector called <span class="var">steer</span>.  We could just use the desired PVector object and turn it into the steering force by subtracting velocity.  I didn’t do this in my example because it is more confusing to read.  But in some cases, it may be greatly more efficient.</p>
+</div><p>We don’t actually need a second <span class="klass">PVector</span> called <span class="var">steer</span>.  We could just use the desired <span class="klass">PVector</span> object and turn it into the steering force by subtracting velocity.  I didn’t do this in my example because it is more confusing to read.  But in some cases, it may be greatly more efficient.</p>
 <div class="example">
   <a id="chapter06_exercise20" style="display: block;"></a>
-<h5 id="exercise-620">Exercise 6.20</h5><p>Eliminate as many temporary PVector objects from the flocking example as possible.  Also use <span class="function">magSquared()</span> where possible.</p>
+<h5 id="exercise-620">Exercise 6.20</h5><p>Eliminate as many temporary <span class="klass">PVector</span> objects from the flocking example as possible.  Also use <span class="function">magSq()</span> where possible.</p>
 
 </div><div class="example">
   <a id="chapter06_exercise21" style="display: block;"></a>
@@ -3673,6 +3676,8 @@ Complex systems can have memory (and be adaptive).  Can the history of your ecos
         <h4>Colophon</h4>
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 
