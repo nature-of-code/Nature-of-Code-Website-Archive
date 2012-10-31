@@ -4,7 +4,7 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
@@ -105,18 +105,18 @@
 <h2 id="chapter-10-neural-networks">Chapter 10.  Neural Networks</h2>
 <blockquote >
   “You can’t process me with a normal brain.”
-  
+
     <span class="attribution">
 Charlie Sheen
 </span>
-  
+
 </blockquote><p>We’re at the end of our story.   This is the last official chapter of this book (though I envision additional supplemental material for the web site and perhaps new chapters in the future).    We began with inanimate objects living in a world of forces and gave those objects desires, autonomy, and the ability to take action according to a system of rules.  Next, we allowed those objects to live in a population and evolve over time.  Now we ask: What is each object’s decision-making process?  How can it adjust its choices by learning over time?  Can a computational entity process its environment and generate a decision?</p>
 <p>The human brain can be described as a biological neural network—an interconnected web of neurons transmitting elaborate patterns of electrical signals.   Dendrites receive input signals and, based on those inputs, fire an output signal via an axon.  Or something like that.  How the human brain actually works is an elaborate and complex mystery, one that we certainly are not going to attempt to tackle in rigorous detail in this chapter.</p>
 <a id="chapter10_figure1" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.1</p>
 </div>
 <p>The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book.   We can simply be inspired by the idea of brain function.</p>
@@ -128,9 +128,9 @@ Charlie Sheen
 <p>The most common application of neural networks in computing today is to perform one of these “easy-for-a-human, difficult-for-a-machine” tasks, often referred to as pattern recognition.   Applications range from optical character recognition (turning printed or handwritten scans into digital text) to facial recognition.  We don’t have the time or need to use some of these more elaborate artificial intelligence algorithms here, but if you are interested in researching neural networks, I’d recommend the books <em>Artificial Intelligence: A Modern Approach</em> by Stuart J. Russell and Peter Norvig and <em>AI for Game Developers</em> by David M. Bourg and Glenn Seemann.</p>
 <a id="chapter10_figure2" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter10/ch10_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.2</p>
 </div>
 <p>A neural network is a “connectionist” computational system.   The computational systems we write are procedural; a program starts at the first line of code, executes it, and goes onto the next, following instructions in a linear fashion.   A true neural network does not follow a linear path.  Rather, information is processed collectively, in parallel throughout a network of nodes (the nodes, in this case, being neurons).</p>
@@ -138,51 +138,51 @@ Charlie Sheen
 <p>One of the key elements of a neural network is its ability to <em>learn</em>.  A neural network is not just a complex system, but a complex <strong><em>adaptive</em></strong> system, meaning it can change its internal structure based on the information flowing through it.  Typically, this is achieved through the adjusting of <strong><em>weights</em></strong>.  In the diagram above, each line represents a connection between two neurons and indicates the pathway for the flow of information.    Each connection has a weight, a number that controls the signal between the two neurons.   If the network generates a “good” output (which we’ll define later), there is no need to adjust the weights. However, if the network generates a “poor” output—an error, so to speak—then the system adapts, altering the weights in order to improve subsequent results.</p>
 <p>There are several strategies for learning, and we’ll examine two of them in this chapter.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>Supervised Learning</em></strong> —Essentially, a strategy that involves a teacher that is smarter than the network itself.  For example, let’s take the facial recognition example.  The teacher shows the network a bunch of faces, and the teacher already knows the name associated with each face.  The network makes its guesses, then the teacher provides the network with the answers.   The network can then compare its answers to the known “correct” ones and make adjustments according to its errors.  Our first neural network in the next section will follow this model.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Unsupervised Learning</em></strong> —Required when there isn’t an example data set with known answers.    Imagine searching for a hidden pattern in a data set.   An application of this is clustering, i.e. dividing a set of elements into groups according to some unknown pattern.   We won’t be looking at any examples of unsupervised learning in this chapter, as this strategy is less relevant for our examples.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Reinforcement Learning</em></strong> —A strategy built on observation.   Think of a little mouse running through a maze. If it turns left, it gets a piece of cheese; if it turns right, it receives a little shock. (Don’t worry, this is just a pretend mouse.)   Presumably, the mouse will learn over time to turn left.  Its neural network makes a decision with an outcome (turn left or right) and observes its environment (yum or ouch).   If the observation is negative, the network can adjust its weights in order to make a different decision the next time.    Reinforcement learning is common in robotics.  At time t, the robot performs a task and observes the results.   Did it crash into a wall or fall off a table?  Or is it unharmed?  We’ll look at reinforcement learning in the context of our simulated steering vehicles.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>This ability of a neural network to learn, to make adjustments to its structure over time, is what makes it so useful in the field of artificial intelligence.  Here are some standard uses of neural networks in software today.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>Pattern Recognition</em></strong> —We’ve mentioned this several times already and it’s probably the most common application.   Examples are facial recognition, optical character recognition, etc.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Time Series Prediction</em></strong> —Neural networks can be used to make predictions.  Will the stock rise or fall tomorrow?  Will it rain or be sunny?
 </p>
 </li>
-		
+
 			<li><p><strong><em>Signal Processing</em></strong> —Cochlear implants and hearing aids need to filter out unnecessary noise and amplify the important sounds.   Neural networks can be trained to process an audio signal and filter it appropriately.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Control</em></strong> —You may have read about recent research advances in self-driving cars.   Neural networks are often used to manage steering decisions of physical vehicles (or simulated ones).
 </p>
 </li>
-		
+
 			<li><p><strong><em>Soft Sensors</em></strong> —A soft sensor refers to the process of analyzing a collection of many measurements.   A thermometer can tell you the temperature of the air, but what if you also knew the humidity, barometric pressure, dew point, air quality, air density, etc.?  Neural networks can be employed to process the input data from many individual sensors and evaluate them as a whole.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Anomaly Detection</em></strong> —Because neural networks are so good at recognizing patterns, they can also be trained to generate an output when something occurs that doesn’t fit the pattern.  Think of a neural network monitoring your daily routine over a long period of time.  After learning the patterns of your behavior, it could alert you when something is amiss.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>This is by no means a comprehensive list of applications of neural networks.   But hopefully it gives you an overall sense of the features and possibilities.   The thing is, neural networks are complicated and difficult.  They involve all sorts of fancy mathematics.   While this is all fascinating (and incredibly important to scientific research), a lot of the techniques are not very practical in the world of building interactive, animated Processing sketches.   Not to mention that in order to cover all this material, we would need another book—or more likely, a series of books.</p>
 <p>So instead, we’ll begin our last hurrah in the nature of code with the simplest of all neural networks, in an effort to understand the how the overall concepts are applied in code.  Then we’ll look at some Processing sketches that generate visual results inspired by these concepts.</p>
@@ -190,9 +190,9 @@ Charlie Sheen
 <h3 id="102-the-perceptron">10.2  The Perceptron</h3><p>Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.</p>
 <a id="chapter10_figure3" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.3: The Perceptron</p>
 </div>
 <p>A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output.  In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.</p>
@@ -218,33 +218,33 @@ Weight 1: -1</span></p>
 <p>Let’s review and condense these steps so we can implement them with a code snippet.</p>
 <p><strong><em>The Perceptron Algorithm:</em></strong></p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 For every input, multiply that input by its weight.
 </p>
 </li>
-		
+
 			<li><p>
 Sum all of the weighted inputs.
 </p>
 </li>
-		
+
 			<li><p>
 Compute the output of the perceptron based on that sum passed through an activation function (the sign of the sum).
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Let’s assume we have two arrays of numbers, the inputs and the weights.   For example:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float[] inputs  = {12 , 4};
 float[] weights = {0.5,-1};</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span><span class="o">[]</span> <span class="n">inputs</span>  <span class="o">=</span> <span class="o">{</span><span class="mi">12</span> <span class="o">,</span> <span class="mi">4</span><span class="o">};</span></span>
@@ -261,9 +261,9 @@ for (int i = 0; i < inputs.length; i++) {
   sum += inputs[i]*weights[i];
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Steps 1 and 2: Add up all the weighted inputs.</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
@@ -289,9 +289,9 @@ int activate(float sum) {
   else return -1;
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Step 3: Passing the sum
@@ -311,9 +311,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 <h3 id="103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</h3><p>Now that we understand the computational process of a perceptron, we can look at an example of one in action.   We stated that neural networks are often used for pattern recognition applications, such as facial recognition.   Even simple perceptrons can demonstrate the basics of classification, as in the following example.</p>
 <a id="chapter10_figure4" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter10/ch10_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.4</p>
 </div>
 <p>Consider a line in two-dimensional space. Points in that space can be classified as living on either one side of the line or the other. While this is a somewhat silly example (since there is clearly no need for a neural network; we can determine on which side a point lies with some simple algebra), it shows how a perceptron can be trained to recognize points on one side versus another.</p>
@@ -321,9 +321,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 <p>The perceptron itself can be diagrammed as follows:</p>
 <a id="chapter10_figure5" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.5</p>
 </div>
 <p>We can see how there are two inputs (<em>x</em> and <em>y</em>), a weight for each input (<em>weight<sub>x</sub></em> and <em>weight<sub>y</sub></em>), as well as a processing neuron that generates the output.</p>
@@ -331,9 +331,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 <p>To avoid this dilemma, our perceptron will require a third input, typically referred to as a <strong><em>bias</em></strong> input.   A bias input always has the value of 1 and is also weighted.  Here is our perceptron with the addition of the bias:</p>
 <a id="chapter10_figure6" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_06.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.6</p>
 </div>
 <p>Let’s go back to the point (0,0).   Here are our inputs:</p>
@@ -347,9 +347,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Perceptron {
   float[] weights;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Perceptron</span> <span class="o">{</span></span>
@@ -367,9 +367,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
       weights[i] = random(-1,1);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Perceptron</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span></span>
@@ -395,9 +395,9 @@ through an activation function</div><code><pre><span class='one-line'><span clas
     // Is it on one side of the line or the other?
     return activate(sum);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">inputs</span><span class="o">)</span> <span class="o">{</span></span>
@@ -416,9 +416,9 @@ Is it on one side of the line or the other?</div><code><pre><span class='one-lin
 </div><p>Presumably, we could now create a <span class="klass">Perceptron</span> object and ask it to make a guess for any given point.</p>
 <a id="chapter10_figure7" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_07.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.7</p>
 </div>
 <div class="source-code">
@@ -429,9 +429,9 @@ Perceptron p = new Perceptron(3);
 float[] point = {50,-12,1};
 // The answer!
 int result = p.feedforward(point);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Create the Perceptron.</div><code><pre><span class='one-line'><span class="n">Perceptron</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Perceptron</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span></span></pre></code></div>
@@ -447,34 +447,34 @@ int result = p.feedforward(point);</textarea>
 .</p>
 <p>With this method, the network is provided with inputs for which there is a known answer.  This way the network can find out if it has made a correct guess.  If it’s incorrect, the network can learn from its mistake and adjust its weights.  The process is as follows:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Provide the perceptron with inputs for which there is a known answer.
 </p>
 </li>
-		
+
 			<li><p>
 Ask the perceptron to guess an answer.
 </p>
 </li>
-		
+
 			<li><p>
 Compute the error.  (Did it get the answer right or wrong?)
 </p>
 </li>
-		
+
 			<li><p>
 Adjust all the weights according to the error.
 </p>
 </li>
-		
+
 			<li><p>
 Return to Step 1 and repeat!
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Steps 1 through 4 can be packaged into a function.  Before we can write the entire function, however, we need to examine Steps 3 and 4 in more detail.  How do we define the perceptron’s error?  And how should we adjust the weights according to this error?</p>
 <p>The perceptron’s error can be defined as the difference between the desired answer and its guess.</p>
@@ -486,78 +486,78 @@ Return to Step 1 and repeat!
 <p>In the case of the perceptron, the output has only two possible values: <strong><em>+1</em></strong> or <strong><em>-1</em></strong>.   This means there are only three possible errors.</p>
 <p>If the perceptron guesses the correct answer, then the guess equals the desired output and the error is 0.  If the correct answer is -1 and we’ve guessed +1, then the error is -2.  If the correct answer is +1 and we’ve guessed -1, then the error is +2.</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Desired        </th>
-					
+
 						<th>Guess  </th>
-					
+
 						<th>Error</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>-1</p>
 </td>
-				
+
 					<td><p>-1</p>
 </td>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>-1</p>
 </td>
-				
+
 					<td><p>+1</p>
 </td>
-				
+
 					<td><p>-2</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>+1</p>
 </td>
-				
+
 					<td><p>-1</p>
 </td>
-				
+
 					<td><p>+2</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>+1</p>
 </td>
-				
+
 					<td><p>+1</p>
 </td>
-				
+
 					<td><p>0</p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><p>The error is the determining factor in how the perceptron’s weights should be adjusted.   For any given weight, what we are looking to calculate is the change in weight, often called <em>Δweight</em> (or “delta” weight, delta being the Greek letter Δ).</p>
@@ -596,9 +596,9 @@ void train(float[] inputs, int desired) {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A new variable is introduced
@@ -670,9 +670,9 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Perceptron</span> <span class="o">{</span></span></pre></code></div>
@@ -738,9 +738,9 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
     answer = a;
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Trainer</span> <span class="o">{</span></span>
@@ -775,9 +775,9 @@ float f(float x) {
   return 2*x+1;
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A function to calculate y based on x along a line</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="nf">f</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span></span>
@@ -793,9 +793,9 @@ float f(float x) {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float x = random(width);
 float y = random(height);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="n">width</span><span class="o">);</span></span>
@@ -808,9 +808,9 @@ float y = random(height);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// The y position on the line
 float yline = f(x);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The y position on the line</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">yline</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">);</span></span></pre></code></div>
@@ -820,9 +820,9 @@ float yline = f(x);</textarea>
 </div><p>If the <span class="var">y</span> value we are examining is above the line, it will be less than <span class="var">yline</span>.</p>
 <a id="chapter10_figure8" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_08.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.8</p>
 </div>
 <div class="source-code">
@@ -833,9 +833,9 @@ float yline = f(x);</textarea>
 } else {
   answer = 1;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">yline</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -851,9 +851,9 @@ float yline = f(x);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Trainer t = new Trainer(x, y, answer);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Trainer</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trainer</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">answer</span><span class="o">);</span></span></pre></code></div>
@@ -864,9 +864,9 @@ float yline = f(x);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ptron.train(t.inputs,t.answer);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ptron</span><span class="o">.</span><span class="na">train</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">inputs</span><span class="o">,</span><span class="n">t</span><span class="o">.</span><span class="na">answer</span><span class="o">);</span></span></pre></code></div>
@@ -877,7 +877,7 @@ float yline = f(x);</textarea>
 ?  We asked our genetic algorithm to solve for “to be or not to be”—an answer we already knew.  We did this to make sure our genetic algorithm worked properly.  The same reasoning applies to this example.  We don’t need a perceptron to tell us whether a point is above or below a line, we can do that with simple math.   We are using this scenario, one that we can easily solve without a perceptron, to demonstrate the perceptron’s algorithm as well as easily confirm that it is working properly.</p>
 <p>Let’s look at how the perceptron works with an array of many training points.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_01_SimplePerceptron/_10_01_SimplePerceptron.pde /book/processingjs/chapter10/_10_01_SimplePerceptron/Perceptron.pde /book/processingjs/chapter10/_10_01_SimplePerceptron/Trainer.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -885,8 +885,8 @@ float yline = f(x);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter10_example1" style="display: block;"></a>
 <span class="example">Example 10.1: The Perceptron</span></p>
@@ -940,9 +940,9 @@ void draw() {
     ellipse(training[i].inputs[0], training[i].inputs[1], 8, 8);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The Perceptron</div><code><pre><span class='one-line'><span class="n">Perceptron</span> <span class="n">ptron</span><span class="o">;</span></span></pre></code></div>
@@ -1019,9 +1019,9 @@ void draw() {
   PVector velocity;
   PVector acceleration;
   //etc...</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Vehicle</span> <span class="o">{</span></span>
@@ -1039,9 +1039,9 @@ void draw() {
 </div><p>Here’s our scenario.  Let’s say we have a Processing sketch with an <span class="klass">ArrayList</span> of targets and a single vehicle.</p>
 <a id="chapter10_figure09" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_09.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.9</p>
 </div>
 <p>Let’s say that the vehicle seeks all of the targets.   According to the principles of Chapter 6, we would next write a function that calculates a steering force towards each target, applying each force one at a time to the object’s acceleration.   Assuming the targets are an <span class="klass">ArrayList</span> of <span class="klass">PVector</span> objects, it would look something like:</p>
@@ -1054,9 +1054,9 @@ void draw() {
       applyForce(force);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">seek</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PVector</span><span class="o">&gt;</span> <span class="n">targets</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1082,9 +1082,9 @@ void draw() {
       applyForce(force);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">seek</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PVector</span><span class="o">&gt;</span> <span class="n">targets</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1119,9 +1119,9 @@ void draw() {
     applyForce(output);
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">seek</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PVector</span><span class="o">&gt;</span> <span class="n">targets</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1184,17 +1184,17 @@ int feedforward(float[] inputs) {
   </tr>
 </table><p>Note how these two functions implement nearly identical algorithms, with two differences:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p><strong><em>Summing PVectors.</em></strong>  Instead of a series of numbers added together, each input is a <span class="klass">PVector</span> and must be multiplied by the weight and added to a sum according to the mathematical <span class="klass">PVector</span> functions.
 </p>
 </li>
-		
+
 			<li><p><strong><em>No activation function.</em></strong>   In this case, we’re taking the result and applying it directly as a steering force for the vehicle, so we’re not asking for a simple boolean value that classifies it in one of two categories.  Rather, we’re asking for raw output itself, the resulting overall force.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Once the resulting steering force has been applied, it’s time to give feedback to the brain, i.e. <em>reinforcement learning</em>.   Was the decision to steer in that particular direction a good one or a bad one?  Presumably if some of the targets were predators (resulting in being eaten) and some of the targets were food (resulting in greater health), the network would adjust its weights in order to steer away from the predators and towards the food.</p>
 <p>Let’s take a simpler example, where the vehicle simply wants to stay close to the center of the window.    We’ll train the brain as follows:</p>
@@ -1203,9 +1203,9 @@ int feedforward(float[] inputs) {
   <textarea>    PVector desired = new PVector(width/2,height/2);
     PVector error = PVector.sub(desired, location);
     brain.train(forces,error);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">desired</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span>
@@ -1216,9 +1216,9 @@ int feedforward(float[] inputs) {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><a id="chapter10_figure10" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter10/ch10_10.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.10</p>
 </div>
 <p>Here we are passing the brain a copy of all the inputs (which it will need for error correction) as well as an observation about its environment: a <span class="klass">PVector</span> that points from its current location to where it desires to be.  This <span class="klass">PVector</span> essentially serves as the error—the longer the <span class="klass">PVector</span>, the worse the vehicle is performing; the shorter, the better (see Figure 10.10).</p>
@@ -1263,9 +1263,9 @@ void train(float[] inputs, int desired) {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>weights[i] += c*error.x*forces[i].x;
 weights[i] += c*error.y*forces[i].y;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+=</span> <span class="n">c</span><span class="o">*</span><span class="n">error</span><span class="o">.</span><span class="na">x</span><span class="o">*</span><span class="n">forces</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">x</span><span class="o">;</span></span>
@@ -1275,7 +1275,7 @@ weights[i] += c*error.y*forces[i].y;</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We can now look at the <span class="klass">Vehicle</span> class and see how the <strong><em>steer</em></strong> function uses a perceptron to control the overall steering force.   The new content from this chapter is highlighted.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_02_SeekingNeural/_10_02_SeekingNeural.pde /book/processingjs/chapter10/_10_02_SeekingNeural/Perceptron.pde /book/processingjs/chapter10/_10_02_SeekingNeural/Vehicle.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1283,8 +1283,8 @@ weights[i] += c*error.y*forces[i].y;</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter10_example2" style="display: block;"></a>
 <span class="example">Example 10.2: Perceptron steering</span></p>
@@ -1361,9 +1361,9 @@ weights[i] += c*error.y*forces[i].y;</textarea>
   //[end]
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Vehicle</span> <span class="o">{</span></span>
@@ -1452,36 +1452,36 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 <h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p>Yes, a perceptron can have multiple inputs, but it is still a lonely neuron.  The power of neural networks comes in the networking itself.   Perceptrons are, sadly, incredibly limited in their abilities.    If you read an AI textbook, it will say that a perceptron can only solve <strong><em>linearly separable</em></strong> problems.  What’s a linearly separable problem?  Let’s take a look at our first example, which determined whether points were on one side of a line or the other.</p>
 <a id="chapter10_figure11" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_11.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.11</p>
 </div>
 <p>On the left of Figure 10.11, we have classic linearly separable data.  Graph all of the possibilities; if you can classify the data with a straight line, then it is linearly separable.  On the right, however, is non-linearly separable data.  You can’t draw a straight line to separate the black dots from the gray ones.</p>
 <p>One of the simplest examples of a non-linearly separable problem is <em>XOR</em>, or “exclusive or.”  We’re all familiar with <em>AND</em>.  For <em>A</em> <em>AND</em> <em>B</em> to be true, both <em>A</em> and <em>B</em> must be true.  With <em>OR</em>, either <em>A</em> or <em>B</em> can be true for <em>A</em> <em>OR</em> <em>B</em> to evaluate as true. These are both linearly separable problems.  Let’s look at the solution space, a “truth table.”</p>
 <a id="chapter10_figure12" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_12.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.12</p>
 </div>
 <p>See how you can draw a line to separate the true outputs from the false ones?</p>
 <p><em>XOR</em> is the equivalent of <em>OR</em> and <em>NOT AND</em>.  In other words, <em>A</em> <em>XOR</em> <em>B</em> only evaluates to true if one of them is true.  If both are false or both are true, then we get false.  Take a look at the following truth table.</p>
 <a id="chapter10_figure13" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_13.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.13</p>
 </div>
 <p>This is not linearly separable.  Try to draw a straight line to separate the true outputs from the false ones —you can’t!</p>
 <p>So perceptrons can’t even solve something as simple as <em>XOR</em>.  But what if we made a network out of two Perceptrons?  If one perceptron can solve <em>OR</em> and one perceptron can solve <em>NOT AND</em>, then two perceptrons combined can solve <em>XOR</em>.</p>
 <a id="chapter10_figure14" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_14.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.14</p>
 </div>
 <p>The above diagram is known as a multi-layered perceptron, a network of many neurons.   Some are input neurons and receive the inputs; some are part of what’s called a “hidden” layer (as they are connected to neither the inputs or outputs of the network directly); and then there are the output neurons, from which we read the results.</p>
@@ -1493,9 +1493,9 @@ the distance to the center.</div><code><pre><span class='one-line'>    <span cla
 <h3 id="107-neural-network-diagram">10.7  Neural Network Diagram</h3><p>Our goal will be to create the following simple network diagram:</p>
 <a id="chapter10_figure15" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_15.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.15</p>
 </div>
 <p>The primary building block for the diagram is a neuron. A neuron is a simple object, an entity with an <em>(x,y)</em> location.</p>
@@ -1515,9 +1515,9 @@ class Neuron {
     ellipse(location.x, location.y, 16, 16);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>An incredibly simple Neuron class stores and displays the location of a single neuron.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span> <span class="o">{</span></span>
@@ -1567,9 +1567,9 @@ class Network {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A Network is a list of neurons.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Network</span> <span class="o">{</span></span>
@@ -1632,9 +1632,9 @@ void draw() {
   // Show the network.
   network.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Network</span> <span class="n">network</span><span class="o">;</span></span>
@@ -1669,10 +1669,10 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The above yields:</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter10/ch10_ex03a.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>What’s missing, of course, is the connection.   We can consider a <span class="klass">Connection</span> object to be made up of three elements, two neurons (from <span class="klass">Neuron</span> <span class="var">a</span> to <span class="klass">Neuron</span> <span class="var">b</span>) and a weight.</p>
 <div class="source-code">
@@ -1698,9 +1698,9 @@ void draw() {
     line(a.location.x, a.location.y, b.location.x, b.location.y);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Connection</span> <span class="o">{</span></span></pre></code></div>
@@ -1750,9 +1750,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
   network.addNeuron(c);
   network.addNeuron(d);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1787,9 +1787,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
 
     // But what do we do with the Connection object?
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">Neuron</span> <span class="n">a</span><span class="o">,</span> <span class="n">Neuron</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -1808,9 +1808,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     Connection c = new Connection(a, b, random(1));
     a.addConnection(c);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">Neuron</span> <span class="n">a</span><span class="o">,</span> <span class="n">Neuron</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1840,9 +1840,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     connections.add(c);
   }
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span> <span class="o">{</span></span>
@@ -1867,7 +1867,7 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The neuron’s <span class="function">display()</span> function can draw the connections as well.  And finally, we have our network diagram.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_03_NetworkViz/_10_03_NetworkViz.pde /book/processingjs/chapter10/_10_03_NetworkViz/Connection.pde /book/processingjs/chapter10/_10_03_NetworkViz/Network.pde /book/processingjs/chapter10/_10_03_NetworkViz/Neuron.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1875,8 +1875,8 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter10_example3" style="display: block;"></a>
 <span class="example">Example 10.3: Neural network diagram</span></p>
@@ -1895,9 +1895,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     //[end]
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1928,9 +1928,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
   // A new function to send in an input
   network.feedforward(random(1));
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -1954,9 +1954,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     start.feedforward(input);
   }
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Network</span> <span class="o">{</span></span>
@@ -1980,9 +1980,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
      // What do we do with the input?
 
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span></span>
@@ -2005,9 +2005,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
     // Accumulate the sums.
     sum += input; //[bold]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Neuron</span></span>
@@ -2034,9 +2034,9 @@ The Connection has a weight.</div><code><pre><span class='one-line'>  <span clas
       sum = 0;
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2062,9 +2062,9 @@ we can reset our sum to 0.</div><code><pre><span class='one-line'>      <span cl
       c.feedforward(sum);
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">fire</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2085,9 +2085,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
   void feedforward(float val) {
     b.feedforward(val*weight);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Connection</span> <span class="o">{</span></span>
@@ -2103,9 +2103,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector sender = a.location.get();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">sender</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">get</span><span class="o">();</span></span></pre></code></div>
@@ -2117,9 +2117,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  sender.x = lerp(sender.x, b.location.x, 0.1);
   sender.y = lerp(sender.y, b.location.y, 0.1);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">sender</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">lerp</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">);</span></span>
@@ -2134,9 +2134,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
   line(a.location.x, a.location.y, b.location.x, b.location.y);
   fill(0);
   ellipse(sender.x, sender.y, 8, 8); //[bold]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
@@ -2149,9 +2149,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 </div><p>This resembles the following:</p>
 <a id="chapter10_figure16" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter10/ch10_16.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 10.16</p>
 </div>
 <p>Ok, so that’s how we might move something along the connection.  But how do we know when to do so?   We start this process the moment the <span class="klass">Connection</span> object receives the “feedforward” signal.   We can keep track of this process by employing a simple <span class="klass">boolean</span> to know whether the connection is sending or not.    Before, we had:</p>
@@ -2160,9 +2160,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
   <textarea>  void feedforward(float val) {
     b.feedforward(val*weight);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2188,9 +2188,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
     // Store the output for when it is actually time to feed it forward.
     output = val*weight;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Connection</span> <span class="o">{</span></span>
@@ -2222,9 +2222,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
       //[end]
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2256,9 +2256,9 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
       }
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2281,7 +2281,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Let’s look at the <span class="klass">Connection</span> class all together, as well as our new draw() function.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter10/_10_04_NetworkAnimation/_10_04_NetworkAnimation.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Connection.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Network.pde /book/processingjs/chapter10/_10_04_NetworkAnimation/Neuron.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2289,8 +2289,8 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter10_example4" style="display: block;"></a>
 <span class="example">Example 10.4: Animating Neural network diagram</span></p>
@@ -2358,9 +2358,9 @@ class Connection {
     }
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2432,7 +2432,7 @@ class Connection {
   <a id="chapter10_exercise5" style="display: block;"></a>
 <h4 id="exercise-105">Exercise 10.5</h4><p>The network in the above example was manually configured by setting the location of each neuron and its connections with hard-coded values.  Rewrite this example to generate the network’s layout via an algorithm.  Can you make a circular network diagram? A random one? An example of a multi-layered network is below.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Ex_10_5_LayeredNetworkAnimation.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Connection.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Network.pde /book/processingjs/chapter10/Ex_10_5_LayeredNetworkAnimation/Neuron.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2440,8 +2440,8 @@ class Connection {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 
 </div><div class="example">
@@ -2456,24 +2456,24 @@ class Connection {
   <h4 id="the-ecosystem-project">The Ecosystem Project</h4><p>Step 10 Exercise:</p>
 <p>Try incorporating the concept of a “brain” into your creatures.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 Use reinforcement learning in the creatures’ decision-making process.
 </p>
 </li>
-		
+
 			<li><p>
 Create a creature that features a visualization of its brain as part of its design (even if the brain itself is not functional).
 </p>
 </li>
-		
+
 			<li><p>
 Can the ecosystem as a whole emulate the brain?  Can elements of the environment be neurons and the creatures act as inputs and outputs?
 </p>
 </li>
-		
+
 	</ul>
 </div>
 </div></section>
@@ -2504,7 +2504,7 @@ Can the ecosystem as a whole emulate the brain?  Can elements of the environment
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
 
-        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

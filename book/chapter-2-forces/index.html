@@ -4,7 +4,7 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
@@ -105,11 +105,11 @@
 <h2 id="chapter-2-forces">Chapter 2.  Forces</h2>
 <blockquote >
   “Don’t underestimate the Force.”
-  
+
     <span class="attribution">
 Darth Vader
 </span>
-  
+
 </blockquote><p>In the final example of Chapter 1, we saw how we could calculate a dynamic acceleration based on a vector pointing from a circle on the screen to the mouse location.   The resulting motion resembled a magnetic attraction between circle and mouse, as if some <em>force</em> were pulling the circle in towards the mouse.  In this chapter we will formalize our understanding of the concept of a force and its relationship to acceleration.    Our goal, by the end of this chapter, is to understand how to make multiple objects move around the screen and respond to a variety of environmental forces.</p>
 <section><a id="chapter02_section1" style="display: block;"></a>
 <h3 id="21-forces-and-newtons-laws-of-motion">2.1 Forces and Newton’s Laws of Motion</h3><p>Before we begin examining the practical realities of simulating forces in code, let’s take a conceptual look at what it means to be a force in the real world.   Just like the word “vector,” “force” is often used to mean a variety of things.  It can indicate a powerful intensity, as in “She pushed the boulder with great force” or “He spoke forcefully.”   The definition of <strong><em>force</em></strong> that we care about is much more formal and comes from Isaac Newton’s laws of motion:</p>
@@ -125,9 +125,9 @@ Darth Vader
 <p>This, of course, is not true.   In the absence of any forces, no force is required to keep an object moving.  An object (such as a ball) tossed in the earth’s atmosphere slows down because of air resistance (a force).    An object’s velocity will only remain constant in the absence of any forces or if the forces that act on it cancel each other out, i.e. the net force adds up to zero.  This is often referred to as <strong><em>equilibrium</em></strong>.  The falling ball will reach a terminal velocity (that stays constant) once the force of air resistance equals the force of gravity.</p>
 <a id="chapter02_figure1" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter02/ch02_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.1: The pendulum doesn't move because all the forces cancel each other out (add up to a net force of zero).</p>
 </div>
 <p>In our Processing world, we could restate Newton’s first law as follows:</p>
@@ -145,9 +145,9 @@ Darth Vader
 <p>And if you are wearing roller skates when you push on that truck?</p>
 <a id="chapter02_figure2" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter02/ch02_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.2</p>
 </div>
 <p>You’ll accelerate away from the truck, sliding along the road while the truck stays put.   Why do you slide but not the truck?  For one, the truck has a much larger mass (which we’ll get into with Newton’s second law).  There are other forces at work too, namely the friction of the truck’s tires and your roller skates against the road.</p>
@@ -167,22 +167,22 @@ Darth Vader
 <p>Acceleration is directly proportional to force and inversely proportional to mass.  This means that if you get pushed, the harder you are pushed, the faster you’ll move (accelerate).  The bigger you are, the slower you’ll move.</p>
 <div class="note">
   <h5 id="weight-vs-mass">Weight vs. Mass</h5><div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 The <strong><em>mass</em></strong> of an object is a measure of the amount of matter in the object (measured in kilograms).
 </p>
 </li>
-		
+
 			<li><p><strong><em>Weight</em></strong>, though often mistaken for mass, is technically the force of gravity on an object. From Newton’s second law, we can calculate it as mass times the acceleration of gravity (<span class="var">w</span> = <span class="var">m</span> * <span class="var">g</span>). Weight is measured in newtons.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Density</em></strong> is defined as the amount of mass per unit of volume (grams per cubic centimeter, for example).
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Note that an object that has a mass of one kilogram on earth would have a mass of one kilogram on the moon. However, it would weigh only one-sixth as much.</p>
 
@@ -197,9 +197,9 @@ The <strong><em>mass</em></strong> of an object is a measure of the amount of ma
   PVector velocity;
   PVector acceleration;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Mover</span> <span class="o">{</span></span>
@@ -214,9 +214,9 @@ The <strong><em>mass</em></strong> of an object is a measure of the amount of ma
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>mover.applyForce(wind);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">mover</span><span class="o">.</span><span class="na">applyForce</span><span class="o">(</span><span class="n">wind</span><span class="o">);</span></span></pre></code></div>
@@ -227,9 +227,9 @@ The <strong><em>mass</em></strong> of an object is a measure of the amount of ma
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>mover.applyForce(gravity);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">mover</span><span class="o">.</span><span class="na">applyForce</span><span class="o">(</span><span class="n">gravity</span><span class="o">);</span></span></pre></code></div>
@@ -243,9 +243,9 @@ The <strong><em>mass</em></strong> of an object is a measure of the amount of ma
   // Newton’s second law at its simplest.
   acceleration = force;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -263,9 +263,9 @@ The <strong><em>mass</em></strong> of an object is a measure of the amount of ma
 mover.applyForce(gravity);
 mover.update();
 mover.display();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">mover</span><span class="o">.</span><span class="na">applyForce</span><span class="o">(</span><span class="n">wind</span><span class="o">);</span></span>
@@ -279,9 +279,9 @@ mover.display();</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>velocity.add(acceleration);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">velocity</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">acceleration</span><span class="o">);</span></span></pre></code></div>
@@ -297,9 +297,9 @@ mover.display();</textarea>
   // We now add each force to acceleration, one at a time.
     acceleration.add(force);
  }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -317,9 +317,9 @@ We now add each force to acceleration, one at a time.</div><code><pre><span clas
   PVector wind = new PVector(0.5,0);
   mover.applyForce(wind);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span></span>
@@ -338,9 +338,9 @@ We now add each force to acceleration, one at a time.</div><code><pre><span clas
     location.add(velocity);
     acceleration.mult(0);
  }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span></span>
@@ -366,9 +366,9 @@ We now add each force to acceleration, one at a time.</div><code><pre><span clas
   PVector acceleration;
   // Adding mass as a float
   float mass;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Mover</span> <span class="o">{</span></span>
@@ -392,9 +392,9 @@ We now add each force to acceleration, one at a time.</div><code><pre><span clas
     acceleration = new PVector(0,0);
     mass = 10.0;
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="n">Mover</span><span class="o">()</span> <span class="o">{</span></span>
@@ -415,9 +415,9 @@ We now add each force to acceleration, one at a time.</div><code><pre><span clas
    acceleration.add(force);
    //[end]
  }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -439,9 +439,9 @@ PVector wind = new PVector(1,0);
 
 m1.applyForce(wind);
 m2.applyForce(wind);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span> <span class="n">m1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">();</span></span>
@@ -465,9 +465,9 @@ m2.applyForce(wind);</textarea>
   f.div(mass);
   acceleration.add(f);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -490,9 +490,9 @@ m2.applyForce(wind);</textarea>
   PVector f = _______.___(_____,____);
   acceleration.add(f);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span>
@@ -507,26 +507,26 @@ m2.applyForce(wind);</textarea>
 <h3 id="25-creating-forces">2.5 Creating Forces</h3><p>Let’s take a moment to remind ourselves where we are.  We know what a force is (a vector), and we know how to apply a force to an object (divide it by mass, add it to the object’s acceleration vector).   What are we missing?  Well, we have yet to figure out how we get a force in the first place.  Where do forces come from?</p>
 <p>In this chapter, we’ll look at two methods for creating forces in our Processing world.</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p><strong>Make up a force!</strong>  After all, you are the programmer, the creator of your world. There’s no reason why you can’t just make up a force and apply it.
 </p>
 </li>
-		
+
 			<li><p><strong>Model a force!</strong>  Yes, forces exist in the real world.  And physics textbooks often contain formulas for these forces.  We can take these formulas, translate them into source code, and model real-world forces in Processing.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>The easiest way to make up a force is just to just pick a number.  Let’s start with the idea of simulating wind.  How about a wind force that points to the right and is fairly weak?  Assuming a <span class="klass">Mover</span> object m, our code would look like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector wind = new PVector(0.01,0);
   m.applyForce(wind);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">wind</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mf">0.01</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
@@ -536,7 +536,7 @@ m2.applyForce(wind);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The result isn’t terribly interesting, but it is a good place to start.  We create a <span class="klass">PVector</span> object, initialize it, and pass it into an object (which in turn will apply it to its own acceleration).  If we wanted to have two forces, perhaps wind and gravity (a bit stronger, pointing down), we might say:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_1_forces/_2_1_forces.pde /book/processingjs/chapter02/_2_1_forces/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -544,8 +544,8 @@ m2.applyForce(wind);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example1" style="display: block;"></a>
 <span class="example">Example 2.1</span></p>
@@ -555,9 +555,9 @@ m2.applyForce(wind);</textarea>
   PVector gravity = new PVector(0,0.1);
   m.applyForce(wind);
   m.applyForce(gravity);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">wind</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mf">0.01</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
@@ -630,9 +630,9 @@ m2.applyForce(wind);</textarea>
     }
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Mover</span> <span class="o">{</span></span>
@@ -700,9 +700,9 @@ Here we are doing so as a quick and easy way to reverse the direction of our obj
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Mover[] movers = new Mover[100];</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span><span class="o">[]</span> <span class="n">movers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span></span></pre></code></div>
@@ -717,9 +717,9 @@ Here we are doing so as a quick and easy way to reverse the direction of our obj
     movers[i] = new Mover();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -741,9 +741,9 @@ Here we are doing so as a quick and easy way to reverse the direction of our obj
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Mover</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -768,9 +768,9 @@ Here we are doing so as a quick and easy way to reverse the direction of our obj
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Mover</span><span class="o">(</span><span class="kt">float</span> <span class="n">m</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span> <span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -791,9 +791,9 @@ Here we are doing so as a quick and easy way to reverse the direction of our obj
 Mover m1 = new Mover(10,0,height/2);
 // A small Mover on the right side of the window
 Mover m1 = new Mover(0.1,width,height/2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A big Mover on the left side of the window</div><code><pre><span class='one-line'><span class="n">Mover</span> <span class="n">m1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
@@ -811,9 +811,9 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
     movers[i] = new Mover(random(0.1,5),0,0);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -828,7 +828,7 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
 </div><p>For each mover created, the mass is set to a random value between 0.1 and 5, the starting x-location is set to 0, and the starting y-location is set to 0.  Certainly, there are all sorts of ways we might choose to initialize the objects; this is just a demonstration of one possibility.</p>
 <p>Once the array of objects is declared, created, and initialized, the rest of the code is simple.  We run through every object, hand them each the forces in the environment, and enjoy the show.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_2_forces_many/_2_2_forces_many.pde /book/processingjs/chapter02/_2_2_forces_many/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -836,8 +836,8 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example2" style="display: block;"></a>
 <span class="example">Example 2.2</span></p>
@@ -860,9 +860,9 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
     movers[i].checkEdges();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -893,7 +893,7 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
 </div></section><section><a id="chapter02_section6" style="display: block;"></a>
 <h3 id="26-gravity-on-earth-and-modeling-a-force">2.6 Gravity on Earth and Modeling a Force</h3><p>You may have noticed something woefully inaccurate about this last example.  The smaller the circle, the faster it falls.   There is a logic to this; after all, we just stated (according to Newton’s second law) that the smaller the mass, the higher the acceleration.  But this is not what happens in the real world.  If you were to climb to the top of the Leaning Tower of Pisa and drop two balls of different masses, which one will hit the ground first?  According to legend, Galileo performed this exact test in 1589, discovering that they fell with the same acceleration, hitting the ground at the same exact time.  Why is this?   As we will see later in this chapter, the force of gravity is calculated relative to an object’s mass.  The bigger the object, the stronger the force.  So if the force is scaled according to mass, it is canceled out when acceleration is divided by mass.   We can implement this in our sketch rather easily by multiplying our made-up gravity force by mass.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_3_forces_many_realgravity/_2_3_forces_many_realgravity.pde /book/processingjs/chapter02/_2_3_forces_many_realgravity/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -901,8 +901,8 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example3" style="display: block;"></a>
 <span class="example">Example 2.3</span></p>
@@ -921,9 +921,9 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
     movers[i].display();
     movers[i].checkEdges();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">movers</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
@@ -946,39 +946,39 @@ Mover m1 = new Mover(0.1,width,height/2);</textarea>
 <p>Making up forces will actually get us quite far.  The world of Processing is a pretend world of pixels and you are its master.  So whatever you deem appropriate to be a force, well by golly, that’s the force it should be.  Nevertheless, there may come a time where you find yourself wondering: “But how does it really all work?”</p>
 <p>Open up any high school physics textbook and you will find some diagrams and formulas describing many different forces—gravity, electromagnetism, friction, tension, elasticity, and more.  In this chapter we’re going to look at two forces—friction and gravity.  The point we’re making here is not that friction and gravity are fundamental forces that you always need to have in your Processing sketches.  Rather, we want to evaluate these two forces as case studies for the following process:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 Understanding the concept behind a force
 </p>
 </li>
-		
+
 			<li><p>
 Deconstructing the force’s formula into two parts:
 </p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 How do we compute the force’s direction?
 </p>
 </li>
-		
+
 			<li><p>
 How do we compute the force’s magnitude?
 </p>
 </li>
-		
+
 	</ul>
 </div></li>
-		
+
 			<li><p>
 Translating that formula into Processing code that calculates a <span class="klass">PVector</span> to be sent through our <span class="klass">Mover*’s [function]*applyForce()</span> function
 </p>
 </li>
-		
+
 	</ul>
 </div><p>If we can follow the above steps with two forces, then hopefully if you ever find yourself Googling “atomic nuclei weak nuclear force” at 3 a.m., you will have the skills to take what you find and adapt it for Processing.</p>
 <div class="note">
@@ -989,21 +989,21 @@ Translating that formula into Processing code that calculates a <span class="kla
 <p><div style="font-size: 1.5em;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> F </mi><mi> r </mi><mi> i </mi><mi> c </mi><mi> t </mi><mi> i </mi><mi> o </mi><mi> n </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> = </mo><mo> - </mo><mi> µ </mi><mi> N </mi><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math></div></p>
 <p>If it’s been a while since you’ve looked at a formula from a math or physics textbook, there are three key points that are important to cover before we move on.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>Evaluate the right side, assign to the left side.</em></strong>  This is just like in code!  What we’re doing here is evaluating the right side of the equation and assigning it to the left.  In the case above, we want to calculate the force of friction—the left side tells us what we want to calculate and the right side tells us how to do it.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Are we talking about a vector or a scalar?</em></strong>  It’s important for us to realize that in some cases, we’ll be looking at a vector; in others, a scalar.   For example, in this case the force of friction is a vector.  We can see that by the arrow above the word “friction.” It has a magnitude and direction.  The right side of the equation also has a vector, as indicated by the symbol <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math>, which is this case stands for the velocity unit vector.
 </p>
 </li>
-		
+
 			<li><p><strong><em>When symbols are placed next to each other, we mean for them to be multiplied.</em></strong>  The formula above actually has four elements:  -1, -μ, N, and <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math>.  We want to multiply them together and read the formula as: <div style="font-size: 1.0em;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> F </mi><mi> r </mi><mi> i </mi><mi> c </mi><mi> t </mi><mi> i </mi><mi> o </mi><mi> n </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> = </mo> <mo> - </mo><mn> 1 </mn><mo> * </mo><mi> µ </mi><mo> * </mo><mi> N </mi><mo> * </mo><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math></div>
 </p>
 </li>
-		
+
 	</ul>
 </div>
 </div></section><section><a id="chapter02_section7" style="display: block;"></a>
@@ -1012,9 +1012,9 @@ Translating that formula into Processing code that calculates a <span class="kla
 <p>Here’s the formula for friction:</p>
 <a id="chapter02_figure3" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter02/ch02_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.3</p>
 </div>
 <p>It’s now up to us to separate this formula into two components that determine the direction of friction as well as the magnitude.  Based on the diagram above, we can see that <em>friction points in the opposite direction of velocity.</em>   In fact, that’s the part of the formula that says -1 * <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math>, or -1 times the velocity unit vector.  In Processing, this would mean taking the velocity vector, normalizing it, and multiplying by -1.</p>
@@ -1025,9 +1025,9 @@ friction.normalize();
 // Let’s figure out the direction of the friction force
 // (a unit vector in the opposite direction of velocity).
 friction.mult(-1);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">friction</span> <span class="o">=</span> <span class="n">velocity</span><span class="o">.</span><span class="na">get</span><span class="o">();</span></span>
@@ -1043,9 +1043,9 @@ friction.mult(-1);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float c = 0.01;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code></div>
@@ -1057,9 +1057,9 @@ friction.mult(-1);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float normal = 1;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">normal</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span></pre></code></div>
@@ -1082,9 +1082,9 @@ friction.normalize();
 // Take the unit vector and multiply it by magnitude
 // and we have our force vector!
 friction.mult(frictionMag);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span></span>
@@ -1105,7 +1105,7 @@ and we have our force vector!</div><code><pre><span class='one-line'><span class
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>…and add it to our “forces” example, where many objects experience wind, gravity, and now friction:</p>
 <div class="image-container two-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_4_forces_nofriction/_2_4_forces_nofriction.pde /book/processingjs/chapter02/_2_4_forces_nofriction/Mover.pde" class="two-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1113,11 +1113,11 @@ and we have our force vector!</div><code><pre><span class='one-line'><span class
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">No friction</p>
 </div>
 <div class="image-container two-col" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_4_forces_friction/_2_4_forces_friction.pde /book/processingjs/chapter02/_2_4_forces_friction/Mover.pde" class="two-col">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1125,7 +1125,7 @@ and we have our force vector!</div><code><pre><span class='one-line'><span class
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
+
 	<p class="caption">With friction</p>
 </div>
 <p><a id="chapter02_example4" style="display: block;"></a>
@@ -1158,9 +1158,9 @@ and we have our force vector!</div><code><pre><span class='one-line'><span class
   }
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1200,57 +1200,57 @@ and we have our force vector!</div><code><pre><span class='one-line'><span class
 </div></section><section><a id="chapter02_section8" style="display: block;"></a>
 <h3 id="28-air-and-fluid-resistance">2.8 Air and Fluid Resistance</h3><a id="chapter02_figure4" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter02/ch02_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.4</p>
 </div>
 <p>Friction also occurs when a body passes through a liquid or gas.  This force has many different names, all really meaning the same thing: <em>viscous force</em>, <em>drag force</em>, <em>fluid resistance</em>.  While the result is ultimately the same as our previous friction examples (the object slows down), the way in which we calculate a drag force will be slightly different.  Let’s look at the formula:</p>
 <p><div style="font-size: 2.0em;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msub><mrow><mi> F </mi></mrow><mrow><mi> d </mi></mrow></msub><mo> = </mo><mo> - </mo><mfrac><mrow><mn> 1 </mn></mrow><mrow><mn> 2 </mn></mrow></mfrac><mi> ρ </mi><msup><mrow><mi> v </mi></mrow><mrow><mn> 2 </mn></mrow></msup><mi> A </mi><msub><mrow><mi> C </mi></mrow><mrow><mi> d </mi></mrow></msub><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math></div></p>
 <p>Now let’s break this down and see what we really need for an effective simulation in Processing, making ourselves a much simpler formula in the process.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><span class="var">F<sub>d</sub></span> refers to <em>Drag Force</em>, the vector we ultimately want to compute and pass into our <span class="function">applyForce()</span> function.
 </p>
 </li>
-		
+
 			<li><p>
 - 1/2 is a constant: -0.5.   This is fairly irrelevant in terms of our Processing world, as we will be making up values for other constants anyway.   However, the fact that it is negative is important, as it tells us that the force is in the opposite direction of velocity (just as with friction).
 </p>
 </li>
-		
+
 			<li><p>
 ρ is the Greek letter <em>rho</em>, and refers to the density of the liquid, something we don’t need to worry about.  We can simplify the problem and consider this to have a constant value of 1.
 </p>
 </li>
-		
+
 			<li><p><span class="var">v</span> refers to the speed of the object moving.  OK, we’ve got this one!  The object’s speed is the magnitude of the velocity vector:  velocity.magnitude().  And <span class="var">v</span><sup>2</sup> just means <span class="var">v</span> squared or <span class="var">v</span> * <span class="var">v</span>.
 </p>
 </li>
-		
+
 			<li><p>
 A refers to the frontal area of the object that is pushing through the liquid (or gas).  An aerodynamic Lamborghini, for example, will experience less air resistance than a boxy Volvo.   Nevertheless, for a basic simulation, we can consider our object to be spherical and ignore this element.
 </p>
 </li>
-		
+
 			<li><p><span class="var">C<sub>d</sub></span> is the coefficient of drag, exactly the same as the coefficient of friction (<span class="var">μ</span>).  This is a constant we’ll determine based on whether we want the drag force to be strong or weak.
 </p>
 </li>
-		
+
 			<li><p>
 <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> v </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math> Look familiar?  It should.  This refers to the velocity unit vector, i.e. velocity.normalize().  Just like with friction, drag is a force that points in the opposite direction of velocity.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Now that we’ve analyzed each of these components and determined what we need for a simple simulation, we can reduce our formula to:</p>
 <a id="chapter02_figure5" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter02/ch02_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.5: Our simplified drag force formula</p>
 </div>
 <p>or:</p>
@@ -1267,9 +1267,9 @@ drag.mult(-1);
 drag.normalize();
 // Magnitude and direction together!
 drag.mult(dragMagnitude);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span></span>
@@ -1310,9 +1310,9 @@ drag.mult(dragMagnitude);</textarea>
   }
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Liquid</span> <span class="o">{</span></span></pre></code></div>
@@ -1348,9 +1348,9 @@ void setup() {
   //[offset-up] Initialize a Liquid object.  Note that the coefficient value is low (0.1). Otherwise, the object would come to a halt fairly quickly (which may someday be the effect you want).
   liquid = new Liquid(0, height/2, width, height/2, 0.1);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Liquid</span> <span class="n">liquid</span><span class="o">;</span></span>
@@ -1371,9 +1371,9 @@ void setup() {
   // If a Mover is inside a Liquid, apply the drag force.
   movers[i].drag(liquid);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">movers</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">isInside</span><span class="o">(</span><span class="n">liquid</span><span class="o">))</span> <span class="o">{</span></span></pre></code></div>
@@ -1395,9 +1395,9 @@ void setup() {
     return false;
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">boolean</span> <span class="nf">isInside</span><span class="o">(</span><span class="n">Liquid</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -1431,9 +1431,9 @@ void setup() {
     // Apply the force
     applyForce(drag);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="kt">void</span> <span class="nf">drag</span><span class="o">(</span><span class="n">Liquid</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1458,7 +1458,7 @@ void setup() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>And with these two functions added to the <span class="klass">Mover</span> class, we’re ready to put it all together in the main tab:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_5_fluidresistance/_2_5_fluidresistance.pde /book/processingjs/chapter02/_2_5_fluidresistance/Liquid.pde /book/processingjs/chapter02/_2_5_fluidresistance/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -1466,8 +1466,8 @@ void setup() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example5" style="display: block;"></a>
 <span class="example">Example 2.5: Fluid Resistance</span></p>
@@ -1507,9 +1507,9 @@ void draw() {
     movers[i].checkEdges();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span><span class="o">[]</span> <span class="n">movers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span></span>
@@ -1565,67 +1565,67 @@ void draw() {
 </div></section><section><a id="chapter02_section9" style="display: block;"></a>
 <h3 id="29-gravitational-attraction">2.9 Gravitational Attraction</h3><a id="chapter02_figure6" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter02/ch02_06.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.6</p>
 </div>
 <p>Probably the most famous force of all is gravity.   We humans on earth think of gravity as an apple hitting Isaac Newton on the head.    Gravity means that stuff falls down.  But this is only our experience of gravity.   In truth, just as the earth pulls the apple towards it due to a gravitational force, the apple pulls the earth as well.   The thing is, the earth is just so freaking big that it overwhelms all the other gravity interactions.  Every object with mass exerts a gravitational force on every other object.   And there is a formula for calculating the strengths of these forces, as depicted in Figure 2.6.</p>
 <p>Let’s examine this formula a bit more closely:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><span class="var">F</span> refers to the gravitational force, the vector we ultimately want to compute and pass into our applyForce() function.
 </p>
 </li>
-		
+
 			<li><p><span class="var">G</span> is the “Universal Gravitational Constant” and in our world equals 6.67428 x 10<sup>-11</sup> meters cubed per kilogram per second squared.   This is a pretty important number if your name is Isaac Newton or Albert Einstein.  It’s not an important number if you are a Processing programmer.  Again, it’s a constant that we can use to make the forces in our world weaker or stronger.  Just making it equal to one and ignoring it isn’t such a terrible choice either.
 </p>
 </li>
-		
+
 			<li><p><span class="var">m<sub>1</sub></span> and <span class="var">m<sub>2</sub></span> are the masses of objects 1 and 2.   As we saw with Newton’s second law (F = M*A), mass is also something we could choose to ignore.  After all, shapes drawn on the screen don’t actually have a physical mass.  However, if we keep these values, we can create more interesting simulations where “bigger” objects exert a stronger gravitational force than smaller ones.
 </p>
 </li>
-		
+
 			<li><p>
 <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> r </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math> refers to the unit vector pointing from object 1 to object 2.  As we’ll see in a moment, we can compute this direction vector by subtracting the location of one object from the other.
 </p>
 </li>
-		
+
 			<li><p><span class="var">r</span><sup>2</sup> refers to the distance between the two objects squared.  Let’s take a moment to think about this a bit more.  With everything on the top of the formula—<span class="var">G</span>, <span class="var">m<sub>1</sub></span>, <span class="var">m<sub>2</sub></span>—the bigger its value, the stronger the force.  Big mass, big force.  Big <span class="var">G</span>, big force.  Now, when we divide by something we have the opposite.  The strength of the force is inversely proportional to the distance squared.  The <em>further</em> away an object is, the <em>weaker</em> the force; the <em>closer</em>, the <em>stronger</em>.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>Hopefully by now the formula makes some sense to us.  We’ve looked at a diagram and dissected the individual components of the formula.  Now it’s time to figure out how we translate the math into Processing code.  Let’s make the following assumptions.</p>
 <p>We have two objects and:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Each object has a location: <span class="var">PVector location1</span> and <span class="var">PVector location2</span>.
 </p>
 </li>
-		
+
 			<li><p>
 Each object has a mass: <span class="var">float mass1</span> and <span class="var">float mass2</span>.
 </p>
 </li>
-		
+
 			<li><p>
 There is a variable <span class="var">float G</span> for the universal gravitational constant.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Given these assumptions, we want to compute <span class="var">PVector force</span>, the force of gravity.  We’ll do it in two parts.  First, we’ll compute the direction of the force <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> r </mi></mrow><mrow><mo> ∧ </mo></mrow></mover></mstyle></math> in the formula above).  Second, we’ll calculate the strength of the force according to the masses and distance.</p>
 <a id="chapter02_figure7" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter02/ch02_07.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.7</p>
 </div>
 <p>Remember in Chapter 1, when we figured out how to have an object accelerate towards the mouse? (See <a href="#chapter01_section10">Chapter 1 Section 10</a>
@@ -1634,9 +1634,9 @@ There is a variable <span class="var">float G</span> for the universal gravitati
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector dir = PVector.sub(mouse,location);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="n">mouse</span><span class="o">,</span><span class="n">location</span><span class="o">);</span></span></pre></code></div>
@@ -1648,9 +1648,9 @@ There is a variable <span class="var">float G</span> for the universal gravitati
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector dir = PVector.sub(location1,location2);
 dir.normalize();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="n">location1</span><span class="o">,</span><span class="n">location2</span><span class="o">);</span></span>
@@ -1664,9 +1664,9 @@ dir.normalize();</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float m = (G * mass1 * mass2) / (distance * distance);
 dir.mult(m);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">m</span> <span class="o">=</span> <span class="o">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">mass1</span> <span class="o">*</span> <span class="n">mass2</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">distance</span><span class="o">);</span></span>
@@ -1676,9 +1676,9 @@ dir.mult(m);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><a id="chapter02_figure8" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter02/ch02_08.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.8</p>
 </div>
 <p>The only problem is that we don’t know the distance.  <span class="var">G</span>, <span class="var">mass1</span>, and <span class="var">mass2</span> were all givens, but we’ll need to actually compute distance before the above code will work.   Didn’t we just make a vector that points all the way from one location to another?   Wouldn’t the length of that vector be the distance between two objects?</p>
@@ -1698,9 +1698,9 @@ float m = (G * mass1 * mass2) / (distance * distance);
 // to the appropriate magnitude.
 force.normalize();
 force.mult(m);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The vector that points from one object to another</div><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">force</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="n">location1</span><span class="o">,</span><span class="n">location2</span><span class="o">);</span></span>
@@ -1722,25 +1722,25 @@ to the appropriate magnitude.</div><code><pre><span class='one-line'><span class
 <p>Now that we’ve worked out the math and the code for calculating an attractive force (emulating gravity), we need to turn our attention to applying this technique in the context of an actual Processing sketch.   In Example 2.1, you may recall how we created a simple <span class="klass">Mover</span> object—a class with <span class="klass">PVector*’s location, velocity, and acceleration as well as an [function]*applyForce()</span>.  Let’s take this exact class and put it in a sketch with:</p>
 <a id="chapter02_figure9" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter02/ch02_09.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 2.9</p>
 </div>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 A single <span class="klass">Mover</span> object.
 </p>
 </li>
-		
+
 			<li><p>
 A single <span class="klass">Attractor</span> object (a new class that will have a fixed location).
 </p>
 </li>
-		
+
 	</ul>
 </div><p>The <span class="klass">Mover</span> object will experience a gravitational pull towards the <span class="klass">Attractor</span> object, as illustrated in Figure 2.9.</p>
 <p>We can start by making the new <span class="klass">Attractor</span> class very simple—giving it a location and a mass, along with a function to display itself (tying mass to size).</p>
@@ -1763,9 +1763,9 @@ A single <span class="klass">Attractor</span> object (a new class that will have
     ellipse(location.x,location.y,mass*2,mass*2);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Attractor</span> <span class="o">{</span></span></pre></code></div>
@@ -1810,9 +1810,9 @@ void draw() {
   m.update();
   m.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span> <span class="n">m</span><span class="o">;</span></span>
@@ -1879,9 +1879,9 @@ m.applyForce(f);
   <textarea>// Made-up force
 PVector f = new PVector(0.1,0);
 m.applyForce(f);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Made-up force</div><code><pre><span class='one-line'><span class="n">PVector</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mf">0.1</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
@@ -1895,9 +1895,9 @@ m.applyForce(f);</textarea>
   <textarea>// Attraction force between two objects
 PVector f = a.attract(m); //[bold]
 m.applyForce(f);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Attraction force between two objects</div><code><pre><span class='one-line'><strong><span class="n">PVector</span> <span class="n">f</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">attract</span><span class="o">(</span><span class="n">m</span><span class="o">);</span></strong></span>
@@ -1922,9 +1922,9 @@ m.applyForce(f);</textarea>
   m.display();
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1950,9 +1950,9 @@ m.applyForce(f);</textarea>
   <textarea>PVector attract(Mover m) {
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="nf">attract</span><span class="o">(</span><span class="n">Mover</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1977,9 +1977,9 @@ m.applyForce(f);</textarea>
   // Return the force so that it can be applied!
   return force;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="nf">attract</span><span class="o">(</span><span class="n">Mover</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2002,9 +2002,9 @@ m.applyForce(f);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  distance = constrain(distance,5,25);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">distance</span> <span class="o">=</span> <span class="n">constrain</span><span class="o">(</span><span class="n">distance</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">25</span><span class="o">);</span></span></pre></code></div>
@@ -2015,7 +2015,7 @@ m.applyForce(f);</textarea>
 <p>Now, it’s really up to you to decide what behaviors you want.  But in the case of, “I want reasonable-looking attraction that is never absurdly weak or strong,” then constraining the distance is a good technique.</p>
 <p>Our <span class="klass">Mover</span> class hasn’t changed at all, so let’s just look at the main program and <span class="klass">Attractor</span> class as a whole, adding a variable g for the universal gravitational constant.  (On the website, you’ll find that this example also has code that allows you to move the <span class="klass">Attractor</span> object with the mouse):</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_6_attraction/_2_6_attraction.pde /book/processingjs/chapter02/_2_6_attraction/Attractor.pde /book/processingjs/chapter02/_2_6_attraction/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2023,8 +2023,8 @@ m.applyForce(f);</textarea>
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example6" style="display: block;"></a>
 <span class="example">Example 2.6: Attraction</span></p>
@@ -2083,9 +2083,9 @@ class Attractor {
     ellipse(location.x,location.y,mass*2,mass*2);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A Mover and an Attractor</div><code><pre><span class='one-line'><span class="n">Mover</span> <span class="n">m</span><span class="o">;</span></span>
@@ -2145,7 +2145,7 @@ so that our circle doesn’t spin out of control.</div><code><pre><span class='o
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>And we could, of course, expand this example using an array to include many <span class="klass">Mover</span> objects, just as we did with friction and drag:</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_7_attraction_many/_2_7_attraction_many.pde /book/processingjs/chapter02/_2_7_attraction_many/Attractor.pde /book/processingjs/chapter02/_2_7_attraction_many/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2153,8 +2153,8 @@ so that our circle doesn’t spin out of control.</div><code><pre><span class='o
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example7" style="display: block;"></a>
 <span class="example">Example 2.7: Attraction with many Movers</span></p>
@@ -2189,9 +2189,9 @@ void draw() {
   }
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Now we have 10 Movers!</div><code><pre><span class='one-line'><span class="n">Mover</span><span class="o">[]</span> <span class="n">movers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span></span>
@@ -2255,9 +2255,9 @@ void draw() {
     movers[i].display();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span><span class="o">[]</span> <span class="n">movers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span></span>
@@ -2292,9 +2292,9 @@ void draw() {
     movers[i].update();
     movers[i].display();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">movers</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
@@ -2329,9 +2329,9 @@ void draw() {
     return force;
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Mover</span> <span class="o">{</span></span>
@@ -2356,7 +2356,7 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Of course, there’s one small problem. When we are looking at every mover <span class="var">i</span> and every mover <span class="var">j</span> , are we OK with the times that <span class="var">i</span> equals <span class="var">j</span>?  For example, should [klass]mover #3 attract mover #3?   The answer, of course, is no.   If there are five objects, we only want mover #3 to attract 0, 1, 2, and 4, skipping itself.   And so, we finish this example by adding a simple conditional statement to skip applying the force when i equals j.</p>
 <div class="image-container screenshot" >
-	
+
 	<canvas data-processing-sources="/book/processingjs/chapter02/_2_8_mutual_attraction/_2_8_mutual_attraction.pde /book/processingjs/chapter02/_2_8_mutual_attraction/Mover.pde" class="screenshot">
 		<p>Your browser does not support the canvas tag.</p>
 	</canvas>
@@ -2364,8 +2364,8 @@ void draw() {
     <button class="reset">RESET</button>
     <button class="pause">PAUSE</button>
   </div>
-	
-	
+
+
 </div>
 <p><a id="chapter02_example8" style="display: block;"></a>
 <span class="example">Example 2.8: Mutual Attraction</span></p>
@@ -2397,9 +2397,9 @@ void draw() {
     movers[i].display();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Mover</span><span class="o">[]</span> <span class="n">movers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mover</span><span class="o">[</span><span class="mi">20</span><span class="o">];</span></span>
@@ -2467,7 +2467,7 @@ void draw() {
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
 
-        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 

@@ -4,7 +4,7 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
@@ -105,31 +105,31 @@
 <h2 id="chapter-5-physics-libraries">Chapter 5.  Physics Libraries</h2>
 <blockquote >
   “A library implies an act of faith/Which generations still in darkness hid/Sign in their night in witness of the dawn.”
-  
+
     <span class="attribution">
 Victor Hugo
 </span>
-  
+
 </blockquote><p>Before we move on to anything else, let’s revisit some of the things we’ve done in the first four chapters. We have:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Learned about concepts from the world of physics — What is a vector? What is a force? What is a wave? etc.
 </p>
 </li>
-		
+
 			<li><p>
 Understood the math and algorithms behind such concepts.
 </p>
 </li>
-		
+
 			<li><p>
 Implemented the algorithms in Processing with an object-oriented approach.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>These activities have yielded a set of motion simulation examples, allowing us to creatively define the physics of the worlds we build (whether realistic or fantastical).  Of course, we aren’t the first to try this. The world of computer graphics and programming is full of source code dedicated to simulation. Just try Googling “open-source physics engine” and you could spend the rest of your day pouring over rich and complex code.    And so we must ask the question: If a code library will take care of physics simulation, why should we bother learning how to write any of the algorithms ourselves?</p>
 <p>Here is where the philosophy behind this book comes into play.  While many of the libraries out there give us physics (and super awesome advanced physics at that) for free, there are significant reasons for learning the fundamentals from scratch before diving into libraries. First, without an understanding of vectors, forces, and trigonometry, we’d be completely lost just reading the documentation of a library.   Second, even though a library may take care of the math for us, it won’t necessarily simplify our code.  As we’ll see in a moment, there can be a great deal of overhead in simply understanding how a library works and what it expects from you code-wise.  Finally, as wonderful as a physics engine might be, if you look deep down into your hearts, it’s likely that you seek to create worlds and visualizations that stretch the limits of imagination. A library is great, but it provides a limited set of features. It’s important to know both when to live within limitations in the pursuit of a Processing project and when those limits prove to be confining.</p>
@@ -140,26 +140,26 @@ Implemented the algorithms in Processing with an object-oriented approach.
 <p>So when is it worth it to have this additional overhead?  If I just want to simulate a circle falling down a Processing window with gravity, do I really need to write all the extra Box2D code just to get that effect?  Certainly, the answer is no.  We saw how to do this rather easily in the first chapter of this book.    Let’s consider another scenario.  What if I want to have a hundred of those circles falling?  And what if those circles aren’t circles at all—rather, irregularly shaped polygons?  And what if I want these polygons to bounce off each other in a realistic manner when they collide?</p>
 <p>You may have noticed that the first four chapters of this book, while covering motion and forces in detail, has skipped over a rather important aspect of physics simulation—<em>collisions</em>.   Let’s pretend for a moment that you aren’t reading a chapter about libraries and that we decided right now to cover how to handle collisions in a particle system.   We’d have to evaluate and learn two distinct algorithms that address these questions:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 How do I determine if two shapes are colliding (i.e. intersecting)?
 </p>
 </li>
-		
+
 			<li><p>
 How do I determine the shapes’ velocity after the collision?
 </p>
 </li>
-		
+
 	</ol>
 </div><p>If we’re thinking about shapes like rectangles or circles, question #1 isn’t too tough.  You’ve likely encountered this before.  For example, we know two circles are intersecting if the distance between them is less than the sum of their radii.</p>
 <a id="chapter05_figure1" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_01.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.1</p>
 </div>
 <p>OK. Now that we know how to determine if two circles are colliding, how do we calculate their velocities after the collision?   This is where we’re going to stop our discussion.   Why, you ask?  It’s not that understanding the math behind collisions isn’t important or valuable.  (In fact, I’m including additional examples on the web site related to collisions without a physics library.)  The reason for stopping is that life is short (let this also be a reason for you to consider going outside and frolicking instead of programming altogether.)  We can’t expect to master every detail of physics simulation.  And while we could continue this discussion for circles, it’s only going to lead us to wanting to work with rectangles.  And strangely shaped polygons.  And curved surfaces.  And swinging pendulums colliding with springy springs.  And and and and and.</p>
@@ -170,29 +170,29 @@ How do I determine the shapes’ velocity after the collision?
 <p>The good news is that Box2D is such an amazing and useful library that everyone wants to use it—Flash, Javascript, Python, Ruby programmers.  Oh, and Java programmers.  There is something called JBox2D, a Java port of Box2D.  And because Processing is built on top of Java, JBox2D can be used directly in Processing!</p>
 <p>So here’s where we are so far.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><a href="http://www.box2d.org/">Box2D Site</a>
  for reference.
 </p>
 </li>
-		
+
 			<li><p><a href="http://www.jbox2d.org/">JBox2D Site</a>
  for Processing compatibility.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>This is all you need to get started writing Box2D code in Processing.  However, as we are going to see in a moment, there are several pieces of functionality we’ll repeatedly need in our Processing code, and so it’s worth having one additional layer between our sketches and JBox2D.  I’m calling this PBox2D—a Processing Box2D “helper” library included as part of this book’s code example downloads.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><a href="http://github.com/shiffman/PBox2D">PBox2D Github Repository</a>
 </p>
 </li>
-		
+
 	</ul>
 </div><p>It’s important to realize that PBox2D is not a Processing wrapper for all of Box2D.   After all, Box2D is a thoughtfully organized and well-structured API and there’s no reason to take it apart and re-implement it.  However, it’s useful to have a small set of functions that help you get your Box2D world set up, as well as help you figure out where to draw your Box2D shapes.  And this is what PBox2D will provide.</p>
 <p>I should also mention before we move forward that there are other Processing libraries that wrap Box2D for you. One I would recommend taking a look at is <a href="http://www.ricardmarxer.com/fisica/">Fisica</a>
@@ -201,133 +201,133 @@ How do I determine the shapes’ velocity after the collision?
 <h3 id="53-box2d-basics">5.3 Box2D Basics</h3><p>Do not despair! We really are going to get to the code very soon, and in some ways we’ll blow our previous work out of the water.  But before we’re ready to do that, it’s important to walk through the overall process of using Box2D in Processing.   Let’s begin by writing a pseudocode generalization of all of our examples in Chapters 1 through 4.</p>
 <p><strong><em>SETUP:</em></strong></p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Create all the objects in our world.
 </p>
 </li>
-		
+
 	</ol>
 </div><p><strong><em>DRAW:</em></strong></p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Calculate all the forces in our world.
 </p>
 </li>
-		
+
 			<li><p>
 Apply all the forces to our objects (F = M * A).
 </p>
 </li>
-		
+
 			<li><p>
 Update the locations of all the objects based on their acceleration.
 </p>
 </li>
-		
+
 			<li><p>
 Draw all of our objects.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Great.  Let’s rewrite this pseudocode as it will appear in our Box2D examples.</p>
 <p><strong><em>SETUP:</em></strong></p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Create all the objects in our world.
 </p>
 </li>
-		
+
 	</ol>
 </div><p><strong><em>DRAW:</em></strong></p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Draw all of our objects.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>This, of course, is the fantasy of Box2D.  We’ve eliminated all of those painful steps of figuring out how the objects are moving according to velocity and acceleration.  Box2D is going to take care of this for us!   The good news is that this does accurately reflect the overall process.  Let’s imagine Box2D as a magic box.</p>
 <p>In <span class="function">setup()</span>, we’re going to say to Box2D: “Hello there. Here are all of the things I want in my world.”  In <span class="function">draw()</span>, we’re going to politely ask Box2D: “Oh, hello again. If it’s not too much trouble, I’d like to draw all of those things in my world.  Could you tell me where they are?”</p>
 <p>The bad news: it’s not as simple as the above explanation would lead you to believe.   For one, making the stuff that goes in the Box2D world involves wading through the documentation for how different kinds of shapes are built and configured.  Second, we have to remember that we can’t tell Box2D anything about pixels, as it will simply get confused and fall apart.  Before we tell Box2D what we want in our world, we have to convert our pixel units to Box2D “world” units.  And the same is true when it comes time to draw our stuff. Box2D is going to tell us the location of the things in its world, which we then have to translate for the pixel world.</p>
 <div class="list">
-	
+
 		<h4>SETUP</h4>
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Create everything that lives in our pixel world.
 </p>
 </li>
-		
+
 			<li><p>
 Translate the pixel world into the Box2D world.
 </p>
 </li>
-		
+
 	</ol>
 </div><div class="list">
-	
+
 		<h4>DRAW</h4>
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Ask Box2D where everything is.
 </p>
 </li>
-		
+
 			<li><p>
 Translate Box2D’s answer into the pixel world.
 </p>
 </li>
-		
+
 			<li><p>
 Draw everything.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Now that we understand that anything we create in our Processing sketch has to be placed into the Box2D world, let’s look at an overview of the elements that make up that world.</p>
 <div class="list">
-	
+
 		<h4>Core Elements of a Box2D World:</h4>
-	
+
 	<ol class="arabic">
-		
+
 			<li><p><strong><em>World</em></strong>: Manages the physics simulation.  It knows everything about the overall coordinate space and also stores lists of every element in the world (see 2-4 below).
 </p>
 </li>
-		
+
 			<li><p><strong><em>Body</em></strong>: Serves as the primary element in the Box2D world. It has a location. It has a velocity. Sound familiar? The <span class="klass">Body</span> is essentially the class we’ve been writing on our own in our vectors and forces examples.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Shape</em></strong>: Keeps track of all the necessary collision geometry attached to a body.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Fixture</em></strong>:  Attaches a shape to a body and sets properties such as density, friction, and restitution.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Joint</em></strong>: Acts as connection between two bodies (or between one body and the world itself).
 </p>
 </li>
-		
+
 	</ol>
 </div><p>In the next four sections, we are going to walk through each of the above elements in detail, building several examples along the way.   But first there is one other important element we should briefly discuss.</p>
 <p>          6.   <strong><em>Vec2</em></strong>: Describes a vector in the Box2D world.</p>
@@ -446,9 +446,9 @@ void setup() {
   // Initializes a Box2D world with default settings
   box2d.createWorld();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PBox2D</span> <span class="n">box2d</span><span class="o">;</span></span>
@@ -465,9 +465,9 @@ void setup() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  box2d.setGravity(0, -10);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">box2d</span><span class="o">.</span><span class="na">setGravity</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">10</span><span class="o">);</span></span></pre></code></div>
@@ -478,18 +478,18 @@ void setup() {
 <p>So, what are those numbers 0 and -10?   This should remind us of one of the most important details of using Box2D: the Box2D coordinate system is not your pixel coordinate system!   Let’s look at how Box2D and a Processing window think differently of their worlds.</p>
 <a id="chapter05_figure2" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_02.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.2</p>
 </div>
 <p>Notice how in Box2D <em>(0,0)</em> is in the center and up is the positive direction along the y-axis!   Box2D’s coordinate system is just like that lovely old-fashioned Cartesian one with <em>(0,0)</em> in the center and up pointing in a positive direction.  Processing, on the other hand, uses a traditional computer graphics coordinate system where <em>(0,0)</em> is in the top left corner and down is the positive direction along the y-axis.  This is why if we want objects to fall down with gravity, we need to give Box2D a gravity force with a negative y-value.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Vec2 gravity = new Vec2(0, -10);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">gravity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">10</span><span class="o">);</span></span></pre></code></div>
@@ -503,9 +503,9 @@ void setup() {
   <textarea>// Convert mouseX,mouseY to
 // coordinate in Box2D world
 Vec2 mouseWorld = box2d.coordPixelsToWorld(mouseX,mouseY);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Convert mouseX,mouseY to
@@ -524,9 +524,9 @@ Vec2 worldPos = new Vec2(-10,25);
 // are going to want to draw the elements in our window
 Vec2 pixelPos = box2d.coordWorldToPixels(worldPos);
 ellipse(pixelPos.x, pixelPos.y,16,16);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>To demonstrate, let’s just make up a world position.</div><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">worldPos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">(-</span><span class="mi">10</span><span class="o">,</span><span class="mi">25</span><span class="o">);</span></span>
@@ -591,9 +591,9 @@ are going to want to draw the elements in our window</div><code><pre><span class
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Make a Body Definition before making a Body.
 BodyDef bd = new BodyDef();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Make a Body Definition before making a Body.</div><code><pre><span class='one-line'><span class="n">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BodyDef</span><span class="o">();</span></span></pre></code></div>
@@ -606,9 +606,9 @@ BodyDef bd = new BodyDef();</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// A Vec2 in the center of the Processing window
 Vec2 center = new Vec2(width/2,height/2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A Vec2 in the center of the Processing window</div><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">center</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
@@ -623,9 +623,9 @@ Vec2 center = new Vec2(width/2,height/2);</textarea>
 Vec2 center = box2d.coordPixelsToWorld(width/2,height/2));
 // Setting the position attribute of the Box2D Body Definition
 bd.position.set(center);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A Vec2 in the center of the
@@ -637,29 +637,29 @@ Processing window converted to Box2D World coordinates!</div><code><pre><span cl
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The body definition must also specify the “type” of body we want to make.  There are three possibilities:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>Dynamic.</em></strong>  This is what we will use most often—a “fully simulated” body.  A dynamic body moves around the world, collides with other bodies, and responds to the forces in its environment.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Static.</em></strong> A static body is one that cannot move (as if it had an infinite mass).  We’ll use static bodies for fixed platforms and boundaries.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Kinematic.</em></strong>  A kinematic body can be moved manually by setting its velocity directly.  If you have a user-controlled object in your world, you can use a kinematic body.   Note that kinematic bodies collide only with dynamic bodies and not other static or kinematic ones.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>There are several other properties you can set in the body definition.  For example, if you want your body to have a fixed rotation (i.e. never rotate) you can say:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>bd.fixedRotation = true;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">bd</span><span class="o">.</span><span class="na">fixedRotation</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span></span></pre></code></div>
@@ -671,9 +671,9 @@ Processing window converted to Box2D World coordinates!</div><code><pre><span cl
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>bd.linearDamping = 0.8;
 bd.angularDamping = 0.9;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">bd</span><span class="o">.</span><span class="na">linearDamping</span> <span class="o">=</span> <span class="mf">0.8</span><span class="o">;</span></span>
@@ -685,9 +685,9 @@ bd.angularDamping = 0.9;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>bd.bullet = true;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">bd</span><span class="o">.</span><span class="na">bullet</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span></span></pre></code></div>
@@ -702,9 +702,9 @@ bd.angularDamping = 0.9;</textarea>
 // Definition. (This allows for making multiple bodies from
 // one definition.)
 Body body = box2d.createBody(bd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The Body object is created by passing in the Body
@@ -721,9 +721,9 @@ one definition.)</div><code><pre><span class='one-line'><span class="n">Body</sp
 body.setLinearVelocity(new Vec2(0,3));
 // Setting an arbitrary initial angular velocity
 body.setAngularVelocity(1.2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Setting an arbitrary initial velocity</div><code><pre><span class='one-line'><span class="n">body</span><span class="o">.</span><span class="na">setLinearVelocity</span><span class="o">(</span><span class="k">new</span> <span class="n">Vec2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">));</span></span></pre></code></div>
@@ -741,9 +741,9 @@ body.setAngularVelocity(1.2);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Define the shape: a polygon.
 PolygonShape ps = new PolygonShape();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Define the shape: a polygon.</div><code><pre><span class='one-line'><span class="n">PolygonShape</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PolygonShape</span><span class="o">();</span></span></pre></code></div>
@@ -760,9 +760,9 @@ float box2Dh = box2d.scalarPixelsToWorld(100);
 
 // Use setAsBox() function to define shape as a rectangle.
 ps.setAsBox(box2Dw, box2Dh);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Scale dimensions from pixels to Box2D world.</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">box2Dw</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">scalarPixelsToWorld</span><span class="o">(</span><span class="mi">150</span><span class="o">);</span></span>
@@ -781,9 +781,9 @@ ps.setAsBox(box2Dw, box2Dh);</textarea>
   <textarea>FixtureDef fd = new FixtureDef();
 // The fixture is assigned the PolygonShape we just made.
 fd.shape = ps;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">FixtureDef</span> <span class="n">fd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FixtureDef</span><span class="o">();</span></span></pre></code></div>
@@ -804,9 +804,9 @@ fd.restitution = 0.5;
 // The Shape’s density, measured in
 // kilograms per meter squared
 fd.density = 1.0;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The coefficient of friction for the
@@ -826,9 +826,9 @@ kilograms per meter squared</div><code><pre><span class='one-line'><span class="
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Creates the Fixture and attaches the Shape to the Body object
 body.createFixture(fd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Creates the Fixture and attaches the Shape to the Body object</div><code><pre><span class='one-line'><span class="n">body</span><span class="o">.</span><span class="na">createFixture</span><span class="o">(</span><span class="n">fd</span><span class="o">);</span></span></pre></code></div>
@@ -840,9 +840,9 @@ body.createFixture(fd);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Creates the Fixture and attaches the Shape with a density of 1
 body.createFixture(ps,1);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Creates the Fixture and attaches the Shape with a density of 1</div><code><pre><span class='one-line'><span class="n">body</span><span class="o">.</span><span class="na">createFixture</span><span class="o">(</span><span class="n">ps</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span></span></pre></code></div>
@@ -852,34 +852,34 @@ body.createFixture(ps,1);</textarea>
 </div><p>While most of our examples will take care of attaching shapes only once when the body is first built, this is not a limitation of Box2D.   Box2D allows for shapes to be created and destroyed on the fly.</p>
 <p>Before we put any of this code we’ve been writing into a Processing sketch, let’s review all the steps we took to construct a Body.</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Define a body using a <span class="klass">BodyDef</span> object (set any properties, such as location).
 </p>
 </li>
-		
+
 			<li><p>
 Create the <span class="klass">Body</span> object from the body definition.
 </p>
 </li>
-		
+
 			<li><p>
 Define a <span class="klass">Shape</span> object using <span class="klass">PolygonShape</span>, <span class="klass">CircleShape</span>, or any other shape class.
 </p>
 </li>
-		
+
 			<li><p>
 Define a fixture using <span class="klass">FixtureDef</span> and assign the fixture a shape (set any properties, such as friction, density, and restitution).
 </p>
 </li>
-		
+
 			<li><p>
 Attach the shape to the body.
 </p>
 </li>
-		
+
 	</ol>
 </div><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -905,9 +905,9 @@ fd.restitution = 0.5;
 
 // Step 5. Attach the shape to the body with the Fixture.
 body.createFixture(fd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Step 1. Define the body.</div><code><pre><span class='one-line'><span class="n">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BodyDef</span><span class="o">();</span></span>
@@ -949,9 +949,9 @@ fd.friction = 0.1;
 fd.restitution = 0.3;
 
 body.createFixture(fd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">CircleShape</span> <span class="n">cs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CircleShape</span><span class="o">();</span></span>
@@ -973,9 +973,9 @@ body.createFixture(fd);</textarea>
 <p>Now, Box2D will keep a list of all the Bodies that exist in the world. This can be accessed by calling the World object’s <span class="function">getBodyList()</span> function. Nevertheless, what I’m going to demonstrate here is a technique for keeping your own body lists. Yes, this may be a bit redundant and we perhaps sacrifice a bit of efficiency. But we more than make up for that with ease of use. This methodology will allow us to program like we’re used to in Processing, and we can easily keep track of which Bodies are which and render them appropriately. Let’s consider the structure of the following Processing sketch:</p>
 <a id="chapter05_figure3" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_03.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.3</p>
 </div>
 <p>This looks like any ol’ Processing sketch. We have a main tab called “Boxes” and a “Boundary” and a “Box” tab. Let’s think about the Box tab for a moment. The Box tab is where we will write a simple class to describe a <span class="klass">Box</span> object, a rectangular body in our world.</p>
@@ -1005,9 +1005,9 @@ body.createFixture(fd);</textarea>
     rect(x,y,w,h);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Box</span>  <span class="o">{</span></span>
@@ -1039,10 +1039,10 @@ body.createFixture(fd);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Let’s write a main tab that creates a new Box whenever the mouse is pressed and stores all the Box objects in an <span class="klass">ArrayList</span>.  (This is very similar to our approach in the particle system examples from Chapter 4.)</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex01.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example1" style="display: block;"></a>
 <span class="example">Example 5.1: A Comfortable and cozy processing sketch that needs a little Box2D</span></p>
@@ -1072,9 +1072,9 @@ void draw() {
   }
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>A list to store all Box objects</div><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Box</span><span class="o">&gt;</span> <span class="n">boxes</span><span class="o">;</span></span>
@@ -1117,9 +1117,9 @@ void setup() {
   box2d.createWorld();
   //[end]
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PBox2D</span> <span class="n">box2d</span><span class="o">;</span></span>
@@ -1140,9 +1140,9 @@ void setup() {
   // We must always step through time!
   box2d.step();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -1164,9 +1164,9 @@ void setup() {
   Body body;
   float w;
   float h;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Box</span>  <span class="o">{</span></span>
@@ -1211,9 +1211,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
     // Attach the Shape to the Body with the Fixture.
     body.createFixture(fd);
  }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Box</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1258,9 +1258,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
     rect(x,y,w,h);
   }
   //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Drawing the object using rect()</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1278,9 +1278,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Vec2 pos = box2d.getBodyPixelCoord(body);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">getBodyPixelCoord</span><span class="o">(</span><span class="n">body</span><span class="o">);</span></span></pre></code></div>
@@ -1291,9 +1291,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float a = body.getAngle();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">a</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="na">getAngle</span><span class="o">();</span></span></pre></code></div>
@@ -1303,9 +1303,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 </div><p>Once we have the location and angle, it’s easy to display the object using <span class="function">translate()</span> and <span class="function">rotate()</span>.  Note, however, that the Box2D coordinate system considers rotation in the opposite direction from Processing, so we need to multiply the angle by -1.</p>
 <a id="chapter05_figure4" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_04.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.4</p>
 </div>
 <div class="source-code">
@@ -1327,9 +1327,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
     rect(0,0,w,h);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -1359,9 +1359,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
   void killBody() {
     box2d.destroyBody(body);
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>This function removes a body from the Box2D world.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">killBody</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1373,10 +1373,10 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 </div><div class="example">
   <a id="chapter05_exercise2" style="display: block;"></a>
 <h5 id="exercise-52">Exercise 5.2</h5><div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc02.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>In this chapter’s code downloads, find the sketch named “box2d_exercise.”  Using the methodology outlined in this chapter, add the necessary code to the main and Box tabs to implement Box2D physics.  The result should appear as in the screenshot above.   Be more creative in how you render the boxes.</p>
 
@@ -1389,9 +1389,9 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
  // When BodyDef type = STATIC, the
  // Body is locked in place.
  bd.type = BodyType.STATIC;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> <span class="n">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BodyDef</span><span class="o">();</span></span></pre></code></div>
@@ -1403,10 +1403,10 @@ Body is locked in place.</div><code><pre><span class='one-line'> <span class="n"
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We can add this feature to our Boxes example by writing a <span class="klass">Boundary</span> class and having each boundary create a fixed Box2D body.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex02.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example2" style="display: block;"></a>
 <span class="example">Example 5.2: Falling boxes hitting boundaries</span></p>
@@ -1452,9 +1452,9 @@ Body is locked in place.</div><code><pre><span class='one-line'> <span class="n"
   }
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Boundary</span> <span class="o">{</span></span>
@@ -1512,9 +1512,9 @@ variables. No need to query Box2D.</div><code><pre><span class='one-line'>  <spa
 // by default.
 BodyDef bd = new BodyDef();
 Body body = box2d.world.createBody(bd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The body does not need a position; the
@@ -1529,9 +1529,9 @@ by default.</div><code><pre><span class='one-line'><span class="n">BodyDef</span
 <h4 id="step-2-define-the-shape">Step 2: Define the Shape.</h4><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ChainShape chain = new ChainShape();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ChainShape</span> <span class="n">chain</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ChainShape</span><span class="o">();</span></span></pre></code></div>
@@ -1547,9 +1547,9 @@ by default.</div><code><pre><span class='one-line'><span class="n">BodyDef</span
 vertices[0] = box2d.coordPixelsToWorld(0,150);
 // Adding a vertex on the left side of window
 vertices[1] = box2d.coordPixelsToWorld(width,150);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span><span class="o">[]</span> <span class="n">vertices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span></span></pre></code></div>
@@ -1566,9 +1566,9 @@ vertices[1] = box2d.coordPixelsToWorld(width,150);</textarea>
   <textarea>// If you don’t want to use the entire array,
 // you can specify a value less than length.
 chain.createChain(vertices, vertices.length);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>If you don’t want to use the entire array,
@@ -1577,10 +1577,10 @@ you can specify a value less than length.</div><code><pre><span class='one-line'
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex03.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 </section><section><a id="_step_4_attach_the_shape_to_the_body_with_a_fixture" style="display: block;"></a>
 <h4 id="step-4-attach-the-shape-to-the-body-with-a-fixture">Step 4: Attach the shape to the body with a fixture.</h4><p>A Ssape is not part of Box2D unless it is attached to a body.  Even if it is a fixed boundary and never moves, it must still be attached.  Just as with other shapes, a <span class="klass">ChainShape</span> object can be given properties like restitution and friction with a Fixture.</p>
@@ -1594,9 +1594,9 @@ fd.friction = 0.3;
 fd.restitution = 0.5;
 
 body.createFixture(fd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">FixtureDef</span> <span class="n">fd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FixtureDef</span><span class="o">();</span></span></pre></code></div>
@@ -1612,10 +1612,10 @@ body.createFixture(fd);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Now, if we want to include a <span class="klass">ChainShape</span> object in our sketch, we can follow the same strategy as we did with a fixed boundary.  Let’s write a class called <span class="klass">Surface</span>:</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex04.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example3" style="display: block;"></a>
 <span class="example">Example 5.3: ChainShape with three hard-coded vertices</span></p>
@@ -1651,9 +1651,9 @@ body.createFixture(fd);</textarea>
     body.createFixture(chain, 1);
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Surface</span> <span class="o">{</span></span>
@@ -1705,9 +1705,9 @@ body.createFixture(fd);</textarea>
     endShape();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1749,9 +1749,9 @@ void draw() {
   // Draw the Surface.
   surface.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PBox2D</span> <span class="n">box2d</span><span class="o">;</span></span>
@@ -1782,30 +1782,30 @@ void draw() {
 <h5 id="exercise-53">Exercise 5.3</h5><p>Review how we learned to draw a wave pattern in Chapter 3.  Create a <span class="klass">ChainShape</span> object out of a sine wave.  Try using Perlin noise (see <a href="#intro_section6">Introduction</a>
 ) as well.</p>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc03a.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">sine wave</p>
 </div>
 <div class="image-container two-col" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc03b.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Perlin noise</p>
 </div>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div></section></section><section><a id="chapter05_section10" style="display: block;"></a>
 <h3 id="510-complex-forms">5.10  Complex Forms</h3><a id="chapter05_figure5" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_05.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.5</p>
 </div>
 <p>Now that we’ve seen how easy it is to make simple geometric forms in Box2D, let’s imagine that you want to have a more complex form, such as a little alien stick figure.</p>
@@ -1814,9 +1814,9 @@ void draw() {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PolygonShape ps = new PolygonShape();
   ps.setAsBox(box2dW, box2dH);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PolygonShape</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PolygonShape</span><span class="o">();</span></span>
@@ -1826,10 +1826,10 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This was a good way to start because of the inherent simplicity of working with rectangles.  However, a <span class="klass">PolygonShape</span> object can also be generated from an array of vectors, which allows you to build a completely custom shape as a series of connected vertices.  This works very similarly to the <span class="klass">ChainShape</span> class.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex05.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example4" style="display: block;"></a>
 <span class="example">Example 5.4: Polygon shapes</span></p>
@@ -1845,9 +1845,9 @@ vertices[3] = box2d.vectorPixelsToWorld(new Vec2(-10, -10));
 PolygonShape ps = new PolygonShape();
 ps.set(vertices, vertices.length);
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span><span class="o">[]</span> <span class="n">vertices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>  <span class="c1">// An array of 4 vectors</span></span>
@@ -1867,31 +1867,31 @@ ps.set(vertices, vertices.length);
 </div><p>When building your own polygon in Box2D, you must remember two important details.</p>
 <a id="chapter05_figure6" style="display: block;"></a>
 <div class="image-container half-width-left" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_06.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.6</p>
 </div>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 Order of vertices!  If you are thinking in terms of pixels (as above) the vertices should be defined in counterclockwise order.  (When they are translated to Box2D World vectors, they will actually be in clockwise order since the vertical axis is flipped.)
 </p>
 </li>
-		
+
 			<li><p>
 Convex shapes only!  A concave shape is one where the surface curves inward. Convex is the opposite (see illustration below).  Note how in a concave shape every internal angle must be 180 degrees or less.  Box2D is not capable of handling collisions for concave shapes.  If you need a concave shape, you will have to build one out of multiple convex shapes (more about that in a moment).
 </p>
 </li>
-		
+
 	</ol>
 </div><a id="chapter05_figure7" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_07.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.7: A concave shape can be drawn with multiple convex shapes.</p>
 </div>
 <p>Now, when it comes time to display the shape in Processing, we can no longer just use <span class="function">rect()</span> or <span class="function">ellipse()</span>.  Since the shape is built out of custom vertices, we’ll want to use Processing’s <span class="function">beginShape()</span>, <span class="function">endShape()</span>, and <span class="function">vertex()</span> functions.   As we saw with the ChainShape, we could choose to store the pixel locations of the vertices in our own <span class="klass">ArrayList</span> for drawing.  However, it’s also useful to see how we can ask Box2D to report back to use the vertex locations.</p>
@@ -1921,9 +1921,9 @@ Convex shapes only!  A concave shape is one where the surface curves inward. Con
     endShape(CLOSE);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -1957,10 +1957,10 @@ Convex shapes only!  A concave shape is one where the surface curves inward. Con
   <a id="chapter05_exercise4" style="display: block;"></a>
 <h4 id="exercise-54">Exercise 5.4</h4><p>Using the <span class="klass">PolygonShape</span> class, create your own polygon design (remember, it must be concave).  Some possibilities below.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc04.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><p>A polygon shape will get us pretty far in Box2D.  Nevertheless, the convex shape requirement will severely limit the range of possibilities.  The good news is that we can completely eliminate this limit by creating a single Box2D body out of multiple shapes!  Let’s return to our little alien creature and simplify the shape to be a thin rectangle with a circle on top.</p>
@@ -1994,9 +1994,9 @@ cs.m_radius = box2d.scalarPixelsToWorld(r);
 body.createFixture(ps,1.0);
 body.createFixture(cs, 1.0);
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Making the body</div><code><pre><span class='one-line'><span class="n">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BodyDef</span><span class="o">();</span></span>
@@ -2028,17 +2028,17 @@ body.createFixture(cs, 1.0);
 </div><p>The above looks pretty good, but sadly, if we run it, we’ll get the following result:</p>
 <a id="chapter05_figure8" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_08.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.8</p>
 </div>
 <p>When you attach a shape to a body, by default, the center of the shape will be located at the center of the body.  But in our case, if we take the center of the rectangle to be the center of the body, we want the center of the circle to be offset along the y-axis from the body’s center.</p>
 <a id="chapter05_figure9" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_09.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.9</p>
 </div>
 <p>This is achieved by using the local position of a shape, accessed via a <span class="klass">Vec2</span> variable called <span class="var">m_p</span>.</p>
@@ -2050,9 +2050,9 @@ Vec2 offset = new Vec2(0,-h/2);
 offset = box2d.vectorPixelsToWorld(offset);
 // Setting the local position of the circle
 circle.m_p.set(offset.x,offset.y);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Our offset in pixels</div><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">offset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">(</span><span class="mi">0</span><span class="o">,-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
@@ -2065,10 +2065,10 @@ circle.m_p.set(offset.x,offset.y);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Then when we go to draw the body, we use both <span class="function">rect()</span> and <span class="function">ellipse()</span> with the circle offset the same way.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex06.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example5" style="display: block;"></a>
 <span class="example">Example 5.5: Multiple Shapes on one Body</span></p>
@@ -2090,9 +2090,9 @@ circle.m_p.set(offset.x,offset.y);</textarea>
     ellipse(0,-h/2,r*2,r*2);
     popMatrix();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
@@ -2118,9 +2118,9 @@ circle.m_p.set(offset.x,offset.y);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Vec2 offset = new Vec2(0,-h/2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">offset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vec2</span><span class="o">(</span><span class="mi">0</span><span class="o">,-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
@@ -2131,9 +2131,9 @@ circle.m_p.set(offset.x,offset.y);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ellipse(0,h/2,r*2,r*2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ellipse</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">r</span><span class="o">*</span><span class="mi">2</span><span class="o">,</span><span class="n">r</span><span class="o">*</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
@@ -2142,10 +2142,10 @@ circle.m_p.set(offset.x,offset.y);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>when it came time to display the shape?</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex07.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>The results would look like the image above, where clearly, the collisions are not functioning as expected.  This is not because the physics is broken; it’s because we did not communicate properly with Box2D, either when we put stuff in the magic world or queried the world for locations.</p>
 <div class="example">
@@ -2155,9 +2155,9 @@ circle.m_p.set(offset.x,offset.y);</textarea>
 </div></section><section><a id="chapter05_section11" style="display: block;"></a>
 <h3 id="511-feeling-attachedbox2d-joints">5.11 Feeling Attached—Box2D Joints</h3><a id="chapter05_figure10" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_10.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.10</p>
 </div>
 <p>Box2D joints allow you to connect one body to another, enabling more advanced simulations of swinging pendulums, elastic bridges, squishy characters, wheels spinning on an axle, etc.  There are many different kinds of Box2D joints. In this chapter we’re going to look at three: distance joints, revolute joints, and “mouse” joints.</p>
@@ -2168,9 +2168,9 @@ circle.m_p.set(offset.x,offset.y);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Particle p1 = new Particle();
 Particle p2 = new Particle();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Particle</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Particle</span><span class="o">();</span></span>
@@ -2182,9 +2182,9 @@ Particle p2 = new Particle();</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>DistanceJointDef djd = new DistanceJointDef();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">DistanceJointDef</span> <span class="n">djd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DistanceJointDef</span><span class="o">();</span></span></pre></code></div>
@@ -2196,9 +2196,9 @@ Particle p2 = new Particle();</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>djd.bodyA = p1.body;
 djd.bodyB = p2.body;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">djd</span><span class="o">.</span><span class="na">bodyA</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="na">body</span><span class="o">;</span></span>
@@ -2210,9 +2210,9 @@ djd.bodyB = p2.body;</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>djd.length = box2d.scalarPixelsToWorld(10);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">djd</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">scalarPixelsToWorld</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span></span></pre></code></div>
@@ -2227,9 +2227,9 @@ djd.bodyB = p2.body;</textarea>
   djd.frequencyHz  = ___;
   // Dampens the spring; typically a number between 0 and 1
   djd.dampingRatio = ___;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Measured in Hz, like the frequency of harmonic
@@ -2243,9 +2243,9 @@ oscillation; try values between 1 and 5</div><code><pre><span class='one-line'> 
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>DistanceJoint dj = (DistanceJoint) box2d.world.createJoint(djd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">DistanceJoint</span> <span class="n">dj</span> <span class="o">=</span> <span class="o">(</span><span class="n">DistanceJoint</span><span class="o">)</span> <span class="n">box2d</span><span class="o">.</span><span class="na">world</span><span class="o">.</span><span class="na">createJoint</span><span class="o">(</span><span class="n">djd</span><span class="o">);</span></span></pre></code></div>
@@ -2255,10 +2255,10 @@ oscillation; try values between 1 and 5</div><code><pre><span class='one-line'> 
 </div><p>Box2D won’t keep track of what kind of joint we are making, so we have to cast it as a <span class="klass">DistanceJoint</span> upon creation.</p>
 <p>We can create Box2D joints anywhere in our Processing sketch.  Here’s an example of how we might write a class to describe two Box2D bodies connected with a single joint.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex08.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example6" style="display: block;"></a>
 <span class="example">Example 5.6: DistanceJoint</span></p>
@@ -2301,9 +2301,9 @@ oscillation; try values between 1 and 5</div><code><pre><span class='one-line'> 
     p2.display();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Pair</span> <span class="o">{</span></span>
@@ -2350,17 +2350,17 @@ Arbitrary rest length</div><code><pre><span class='one-line'>  <span class="kt">
   <a id="chapter05_exercise6" style="display: block;"></a>
 <h4 id="exercise-56">Exercise 5.6</h4><p>Create a simulation of a bridge by using distance joints to connect a sequence of circles (or rectangles) as illustrated to the right.  Assign a density of zero to lock the endpoints in place.  Experiment with different values to make the bridge more or less “springy.”   It should also be noted that the joints themselves have no physical geometry, so in order for your bridge not to have holes, spacing between the nodes will be important.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc06.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><a id="chapter05_figure11" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_11.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.11</p>
 </div>
 <p>Another joint you can create in Box2D is a <em>revolute joint</em>.</p>
@@ -2371,9 +2371,9 @@ Arbitrary rest length</div><code><pre><span class='one-line'>  <span class="kt">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Box box1 = new Box();
 Box box2 = new Box();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Box</span> <span class="n">box1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Box</span><span class="o">();</span></span>
@@ -2386,9 +2386,9 @@ Box box2 = new Box();</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>RevoluteJointDef rjd = new RevoluteJointDef();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">RevoluteJointDef</span> <span class="n">rjd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RevoluteJointDef</span><span class="o">();</span></span></pre></code></div>
@@ -2400,9 +2400,9 @@ Box box2 = new Box();</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>rjd.initialize(box1.body, box2.body, box1.body.getWorldCenter());</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">rjd</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">box1</span><span class="o">.</span><span class="na">body</span><span class="o">,</span> <span class="n">box2</span><span class="o">.</span><span class="na">body</span><span class="o">,</span> <span class="n">box1</span><span class="o">.</span><span class="na">body</span><span class="o">.</span><span class="na">getWorldCenter</span><span class="o">());</span></span></pre></code></div>
@@ -2419,9 +2419,9 @@ rjd.enableMotor = true;
 rjd.motorSpeed = PI*2;
 // How powerful is the motor?
 rjd.maxMotorTorque = 1000.0;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Turn on the motor.</div><code><pre><span class='one-line'><span class="n">rjd</span><span class="o">.</span><span class="na">enableMotor</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span></span></pre></code></div>
@@ -2439,9 +2439,9 @@ rjd.maxMotorTorque = 1000.0;</textarea>
   <textarea>rjd.enableLimit = true;
 rjd.lowerAngle = -PI/8;
 rjd.upperAngle = PI/8;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">rjd</span><span class="o">.</span><span class="na">enableLimit</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span></span>
@@ -2454,9 +2454,9 @@ rjd.upperAngle = PI/8;</textarea>
 <h4 id="step-4-create-the-joint">Step 4: Create the joint</h4><div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>RevoluteJoint joint = (RevoluteJoint) box2d.world.createJoint(rjd);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">RevoluteJoint</span> <span class="n">joint</span> <span class="o">=</span> <span class="o">(</span><span class="n">RevoluteJoint</span><span class="o">)</span> <span class="n">box2d</span><span class="o">.</span><span class="na">world</span><span class="o">.</span><span class="na">createJoint</span><span class="o">(</span><span class="n">rjd</span><span class="o">);</span></span></pre></code></div>
@@ -2465,10 +2465,10 @@ rjd.upperAngle = PI/8;</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Let’s take a look at all of these steps together in a class called <span class="klass">Windmill</span>, which connects two boxes with a revolute joint.  In this case, <span class="var">box1</span> has a density of zero, so only <span class="var">box2</span> spins around a fixed point.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex09.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example7" style="display: block;"></a>
 <span class="example">Example 5.7: Spinning Windmill</span></p>
@@ -2513,9 +2513,9 @@ rjd.upperAngle = PI/8;</textarea>
     box2.display();
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Windmill</span> <span class="o">{</span></span>
@@ -2563,17 +2563,17 @@ rjd.upperAngle = PI/8;</textarea>
 </div><div class="example">
   <a id="chapter05_exercise7" style="display: block;"></a>
 <h5 id="exercise-57">Exercise 5.7</h5><div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc07.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>Use a revolute joint for the wheels of a car.  Use motors so that the car drives autonomously.  Try using a chain shape for the road’s surface.</p>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/blank.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div><p>The last joint we’ll look at is a mouse joint.  A mouse joint is typically used for moving a body with the mouse.  However, it can also be used to drag an object around the screen according to some arbitrary <em>x</em> and <em>y</em>.   The joint functions by pulling the body towards a “target” position.</p>
@@ -2582,9 +2582,9 @@ rjd.upperAngle = PI/8;</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Vec2 mouse = box2d.screenToWorld(x,y);
 body.setTransform(mouse,0);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">mouse</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">screenToWorld</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">);</span></span>
@@ -2611,9 +2611,9 @@ md.dampingRatio = 0.9;
 
 // Create the Joint
 MouseJoint mouseJoint = (MouseJoint) box2d.world.createJoint(md);.</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Just like before, define the Joint.</div><code><pre><span class='one-line'><span class="n">MouseJointDef</span> <span class="n">md</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MouseJointDef</span><span class="o">();</span></span>
@@ -2637,9 +2637,9 @@ MouseJoint mouseJoint = (MouseJoint) box2d.world.createJoint(md);.</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>md.bodyA = box2d.getGroundBody(); //[bold]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><strong><span class="n">md</span><span class="o">.</span><span class="na">bodyA</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">getGroundBody</span><span class="o">();</span></strong></span></pre></code></div>
@@ -2652,9 +2652,9 @@ MouseJoint mouseJoint = (MouseJoint) box2d.world.createJoint(md);.</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Vec2 mouseWorld = box2d.coordPixelsToWorld(mouseX,mouseY);
 mouseJoint.setTarget(mouseWorld);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">mouseWorld</span> <span class="o">=</span> <span class="n">box2d</span><span class="o">.</span><span class="na">coordPixelsToWorld</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span><span class="n">mouseY</span><span class="o">);</span></span>
@@ -2664,29 +2664,29 @@ mouseJoint.setTarget(mouseWorld);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>To make this work in an actual Processing sketch, we’ll want to have the following:</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p>
 *<em>Box class</em>*—An object that references a Box2D body.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Spring class</em>*—An object that manages the mouse joint that drags the [klass]*Box</strong> object around.
 </p>
 </li>
-		
+
 			<li><p><strong><em>Main tab</em>*—Whenever [function]*mousePressed()</strong> is called, the mouse joint is created; whenever <span class="function">mouseReleased()</span> is called, the mouse joint is destroyed.  This allows us to interact with a body only when the mouse is pressed.
 </p>
 </li>
-		
+
 	</ol>
 </div><p>Let’s take a look at the main tab.  You can find the rest of the code for the <span class="klass">Box</span> and <span class="klass">Spring</span> classes via the book web site.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex10.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example8" style="display: block;"></a>
 <span class="example">Example 5.8: MouseJoint demonstration</span></p>
@@ -2733,9 +2733,9 @@ void draw() {
   box.display();
   spring.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PBox2D</span> <span class="n">box2d</span><span class="o">;</span></span>
@@ -2793,9 +2793,9 @@ void draw() {
   <textarea>BodyDef bd = new BodyDef();
 // Setting the body type to Kinematic
 bd.type = BodyType.KINEMATIC;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BodyDef</span><span class="o">();</span></span></pre></code></div>
@@ -2806,9 +2806,9 @@ bd.type = BodyType.KINEMATIC;</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><a id="chapter05_figure12" style="display: block;"></a>
 <div class="image-container half-width-right" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_12.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.12</p>
 </div>
 <p>Kinematic bodies can be controlled by the user through setting their velocity directly.    For example, let’s say you want an object to follow a target (like your mouse).  You could create a vector that points from a body’s location to a target.</p>
@@ -2818,9 +2818,9 @@ bd.type = BodyType.KINEMATIC;</textarea>
 Vec2 target = box2d.coordPixelsToWorld(mouseX,mouseY);
 // A vector pointing from the Body position to the Mouse
 Vec2 v = target.sub(pos);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="na">getWorldCenter</span><span class="o">();</span></span>
@@ -2835,9 +2835,9 @@ Vec2 v = target.sub(pos);</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Assigning a body’s velocity directly, overriding physics!
 body.setLinearVelocity(v);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Assigning a body’s velocity directly, overriding physics!</div><code><pre><span class='one-line'><span class="n">body</span><span class="o">.</span><span class="na">setLinearVelocity</span><span class="o">(</span><span class="n">v</span><span class="o">);</span></span></pre></code></div>
@@ -2858,9 +2858,9 @@ body.setLinearVelocity(v);</textarea>
   box2d.createWorld();
   // Setting the global gravity force
   box2d.setGravity(0, -20);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">box2d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PBox2D</span><span class="o">(</span><span class="k">this</span><span class="o">);</span></span>
@@ -2882,9 +2882,9 @@ body.setLinearVelocity(v);</textarea>
     body.applyForce(force, pos);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Box</span> <span class="o">{</span></span>
@@ -2912,9 +2912,9 @@ body.setLinearVelocity(v);</textarea>
   force.mult(strength);
   return force;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">PVector</span> <span class="nf">attract</span><span class="o">(</span><span class="n">Mover</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span></span>
@@ -2945,9 +2945,9 @@ body.setLinearVelocity(v);</textarea>
   force.mulLocal(strength);
   return force;
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Vec2</span> <span class="nf">attract</span><span class="o">(</span><span class="n">Mover</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -2970,10 +2970,10 @@ body.setLinearVelocity(v);</textarea>
   <a id="chapter05_exercise10" style="display: block;"></a>
 <h4 id="exercise-510">Exercise 5.10</h4><p>Exercise: Take any example you made previously using a force calculation and bring that force calculation into Box2D.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc10.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter05_section13" style="display: block;"></a>
@@ -2995,9 +2995,9 @@ void mousePressed() {
 void beginContact(Contact cp) {
   println("Something collided in the Box2D World!");
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The mousePressed event with which we are comfortable.</div><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span></span>
@@ -3020,9 +3020,9 @@ void beginContact(Contact cp) {
   // Add this line if you want to listen for collisions.
   box2d.listenForCollisions();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
@@ -3036,25 +3036,25 @@ void beginContact(Contact cp) {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>There are four collision event callbacks.</p>
 <div class="list">
-	
+
 	<ol class="arabic">
-		
+
 			<li><p><span class="function">beginContact()</span> —Triggered whenever two shapes first come into contact with each other.
 </p>
 </li>
-		
+
 			<li><p><span class="function">endContact()</span> —Triggered over and over again as long as shapes continue to be in contact.
 </p>
 </li>
-		
+
 			<li><p><span class="function">preSolve()</span> —Triggered before Box2D solves the outcome of the collision (i.e. before <span class="function">beginContact()</span>).  It can be used to disable a collision if necessary.
 </p>
 </li>
-		
+
 			<li><p><span class="function">postContact()</span> —Triggered after the outcome of the collision is solved. It allows you to gather information about that “solution” (known as an “impulse”).
 </p>
 </li>
-		
+
 	</ol>
 </div><p>The details behind <span class="function">preSolve()</span> and <span class="function">postSolve()</span> are beyond the scope of this book; however, we are going to take a close look at <span class="function">beginContact()</span>, which will cover the majority of conventional cases in which you want to trigger an action when a collision occurs.  <span class="function">endContact()</span> works identically to <span class="function">beginContact()</span>, the only difference being that it occurs the moment bodies separate.</p>
 <p><span class="function">beginContact()</span> is written as follows:</p>
@@ -3063,9 +3063,9 @@ void beginContact(Contact cp) {
   <textarea>void beginContact(Contact cp) {
 
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">beginContact</span><span class="o">(</span><span class="n">Contact</span> <span class="n">cp</span><span class="o">)</span> <span class="o">{</span></span>
@@ -3083,9 +3083,9 @@ void beginContact(Contact cp) {
 Fixture f1 = cp.getFixtureA();
 Fixture f2 = cp.getFixtureB();
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> The contact stores the fixtures as A and B.</div><code><pre><span class='one-line'><span class="n">Fixture</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="na">getFixtureA</span><span class="o">();</span></span>
@@ -3102,9 +3102,9 @@ Fixture f2 = cp.getFixtureB();
 Body b1 = f1.getBody();
 Body b2 = f2.getBody();
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> getBody() gives us the body to which the Fixture is attached.</div><code><pre><span class='one-line'><span class="n">Body</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span></span>
@@ -3137,9 +3137,9 @@ Body b2 = f2.getBody();
     // access later.
     body.setUserData(this);  //[bold]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span>
@@ -3165,10 +3165,10 @@ access later.</div><code><pre><span class='one-line'>    <strong><span class="n"
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Later, in our <span class="function">addContact()</span> function, once we know the body, we can access the <span class="klass">Particle</span> object with <span class="function">getUserData()</span>.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex11.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example9" style="display: block;"></a>
 <span class="example">Example 5.9: CollisionListening</span></p>
@@ -3191,9 +3191,9 @@ access later.</div><code><pre><span class='one-line'>    <strong><span class="n"
   // just call a function that changes their color.
   p2.change();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">beginContact</span><span class="o">(</span><span class="n">Contact</span> <span class="n">cp</span><span class="o">)</span> <span class="o">{</span></span>
@@ -3226,9 +3226,9 @@ just call a function that changes their color.</div><code><pre><span class='one-
     Particle p = (Particle) o1;
     p.change();
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Getting a generic object</div><code><pre><span class='one-line'>  <span class="n">Object</span> <span class="n">o1</span> <span class="o">=</span> <span class="n">b1</span><span class="o">.</span><span class="na">getUserData</span><span class="o">();</span></span></pre></code></div>
@@ -3259,9 +3259,9 @@ just call a function that changes their color.</div><code><pre><span class='one-
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>velocity.add(acceleration);
 location.add(velocity);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">velocity</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">acceleration</span><span class="o">);</span></span>
@@ -3272,9 +3272,9 @@ location.add(velocity);</textarea>
 </div><p>The above methodology is known as Euler integration (named for the mathematician Leonhard Euler, pronounced “Oiler”) or the Euler method.    It’s essentially the simplest form of integration and very easy to implement in our code (see the two lines above!)  However, it is not necessarily the most efficient form, nor is it close to being the most accurate.    Why is Euler inaccurate?  Let’s think about it this way.  When you drive a car down the road pressing the gas pedal with your foot and accelerating, does the car sit in one location at time equals one second, then disappear and suddenly reappear in a new location at time equals two seconds, and do the same thing for three seconds, and four, and five?  No, of course not.  The car moves continuously down the road.  But what’s happening in our Processing sketch?  A circle is at one location at frame 0, another at frame 1, another at frame 2.  Sure, at thirty frames per second, we’re seeing the illusion of motion.  But we only calculate a new location every N units of time, whereas the real world is perfectly continuous.   This results in some inaccuracies, as shown in the diagram below:</p>
 <a id="chapter05_figure13" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_13.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.13</p>
 </div>
 <p>The “real world” is the curve; Euler simulation is the series of line segments.</p>
@@ -3300,117 +3300,117 @@ location.add(velocity);</textarea>
 <p>In this case, toxiclibs is likely your best choice.  It is simpler to use than Box2D and particularly well suited to connected systems of particles.  toxiclibs is also very high performance, due to the speed of the Verlet integration algorithm (not to mention the fact that the program gets to ignore all of the collision geometry).</p>
 <p>Here is a little chart that covers some of the features for each physics library.</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Feature </th>
-					
+
 						<th>Box2D </th>
-					
+
 						<th> toxiclibs VerletPhysics</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>Collision geometry</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>3D physics</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Particle attraction / repulsion forces</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Spring connections</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Other connections: revolute, pulley, gear, prismatic</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Motors</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Friction</p>
 </td>
-				
+
 					<td><p>Yes</p>
 </td>
-				
+
 					<td><p>No</p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div><section><a id="_getting_toxiclibs" style="display: block;"></a>
@@ -3423,74 +3423,74 @@ location.add(velocity);</textarea>
 </section><section><a id="_core_elements_of_verletphysics" style="display: block;"></a>
 <h4 id="core-elements-of-verletphysics">Core Elements of VerletPhysics</h4><p>We spent a lot of time working through the core elements of a Box2D world: world, body, shape, joint.   This gives us a head start on understanding toxiclibs, since it follows a similar structure.</p>
 <div class="table">
-	
+
 	<table>
-		
+
 			<thead>
 				<tr>
-					
+
 						<th>Box2D  </th>
-					
+
 						<th>toxiclibs VerletPhysics</th>
-					
+
 				</tr>
 			</thead>
-		
-	
-		
-	
+
+
+
+
 		<tbody>
-		
+
 			<tr>
-				
+
 					<td><p>World</p>
 </td>
-				
+
 					<td><p>VerletPhysics</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Body</p>
 </td>
-				
+
 					<td><p>VerletParticle</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Shape</p>
 </td>
-				
+
 					<td><p>Nothing!  toxiclibs does not handle shape geometry</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Fixture</p>
 </td>
-				
+
 					<td><p>Nothing!  toxiclibs does not handle shape geometry</p>
 </td>
-				
+
 			</tr>
-		
+
 			<tr>
-				
+
 					<td><p>Joint</p>
 </td>
-				
+
 					<td><p>VerletSpring</p>
 </td>
-				
+
 			</tr>
-		
+
 		</tbody>
 	</table>
 </div></section><section><a id="_vectors_with_toxiclibs" style="display: block;"></a>
@@ -3562,9 +3562,9 @@ import toxi.physics2d.*;
 import toxi.physics2d.behaviors.*;
 import toxi.geom.*;
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Importing the libraries</div><code><pre><span class='one-line'><span class="kn">import</span> <span class="nn">toxi.physics2d.*</span><span class="o">;</span></span>
@@ -3583,9 +3583,9 @@ import toxi.geom.*;
 void setup() {
   // Creating a toxiclibs Verlet physics world
   physics=new VerletPhysics2D();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">VerletPhysics2D</span> <span class="n">physics</span><span class="o">;</span></span>
@@ -3600,9 +3600,9 @@ void setup() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  physics.setWorldBounds(new Rect(0,0,width,height));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">physics</span><span class="o">.</span><span class="na">setWorldBounds</span><span class="o">(</span><span class="k">new</span> <span class="n">Rect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">width</span><span class="o">,</span><span class="n">height</span><span class="o">));</span></span></pre></code></div>
@@ -3614,9 +3614,9 @@ void setup() {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  physics.addBehavior(new GravityBehavior(new Vec2D(0,0.5)));
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">physics</span><span class="o">.</span><span class="na">addBehavior</span><span class="o">(</span><span class="k">new</span> <span class="n">GravityBehavior</span><span class="o">(</span><span class="k">new</span> <span class="n">Vec2D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mf">0.5</span><span class="o">)));</span></span>
@@ -3631,9 +3631,9 @@ void setup() {
   // This is the same as Box2D’s “step()” function
   physics.update();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
@@ -3649,9 +3649,9 @@ void setup() {
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Particle {
   Body body;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span>
@@ -3680,9 +3680,9 @@ void setup() {
     ellipse(p.x,p.y,16,16);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="o">{</span></span></pre></code></div>
@@ -3724,9 +3724,9 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
     ellipse(x,y,16,16);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="kd">extends</span> <span class="n">VerletParticle2D</span> <span class="o">{</span></span>
@@ -3754,9 +3754,9 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  Particle p1 = new Particle(new Vec2D(100,20));
   Particle p2 = new Particle(new Vec2D(100,180));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">Particle</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Particle</span><span class="o">(</span><span class="k">new</span> <span class="n">Vec2D</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">20</span><span class="o">));</span></span>
@@ -3769,9 +3769,9 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  physics.addParticle(p1);
   physics.addParticle(p2);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">physics</span><span class="o">.</span><span class="na">addParticle</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span></span>
@@ -3784,21 +3784,21 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
 <p>And how can we then pass into the function our own <span class="klass">Particle</span> object?   Remember that other tenet of object-oriented programming—polymorphism? Here, because our <span class="klass">Particle</span> class <span class="klass">extends VerletParticle2D</span>, we can choose to treat our particle in two different ways—as a <span class="klass">Particle</span> or as a <span class="klass">VerletParticle2D</span>.   This is an incredibly powerful feature of object-oriented programming.  If we build our custom classes based on classes from toxiclibs, we can use our objects in conjunction with all of the functions toxiclibs has to offer.</p>
 <p>In addition to the <span class="klass">VerletParticle</span> class, toxiclibs has a set of classes that allow you to connect particles with spring forces.  There are three types of springs in toxiclibs:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><span class="klass">VerletSpring</span>: This class creates a springy connection between two particles in space. A spring’s properties can be configured in such a way as to create a stiff stick-like connection or a highly elastic stretchy connection. A particle can also be locked so that only one end of the spring can move.
 </p>
 </li>
-		
+
 			<li><p><span class="klass">VerletConstrainedSpring</span>: A <span class="klass">VerletConstrainedSpring</span> object is a spring whose maximum distance can be limited. This can help the whole spring system achieve better stability.
 </p>
 </li>
-		
+
 			<li><p><span class="klass">VerletMinDistanceSpring</span>: A <span class="klass">VerletMinDistanceSpring</span> object is a spring that only enforces its rest length if the current distance is less than its rest length. This is handy if you want to ensure objects are at least a certain distance from each other, but don’t care if the distance is bigger than the enforced minimum.
 </p>
 </li>
-		
+
 	</ul>
 </div><p>The inheritance and polymorphism technique we employed in the previous section also proves to be useful when creating springs. A spring expects two particles when it is created. And again, because our <span class="klass">Particle</span> class <span class="klass">extends VerletParticle</span>, a <span class="klass">VerletSpring</span> object will accept our <span class="klass">Particle</span> objects passed into the constructor.  Let’s take a look at some example code that assumes the existence of our two previous particles <span class="var">p1</span> and <span class="var">p2</span> and creates a connection between them with a given rest length and strength.</p>
 <div class="source-code">
@@ -3808,9 +3808,9 @@ float len = 80;
 // How strong is the spring?
 float strength = 0.01;
 VerletSpring2D spring=new VerletSpring2D(p1,p2,len,strength);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>What is the rest length of the spring?</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">80</span><span class="o">;</span></span></pre></code></div>
@@ -3824,9 +3824,9 @@ VerletSpring2D spring=new VerletSpring2D(p1,p2,len,strength);</textarea>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>physics.addSpring(spring);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">physics</span><span class="o">.</span><span class="na">addSpring</span><span class="o">(</span><span class="n">spring</span><span class="o">);</span></span></pre></code></div>
@@ -3847,9 +3847,9 @@ VerletSpring2D spring=new VerletSpring2D(p1,p2,len,strength);</textarea>
     p2.unlock();
     //[end]
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -3866,10 +3866,10 @@ VerletSpring2D spring=new VerletSpring2D(p1,p2,len,strength);</textarea>
 </div><p>And now we’re ready to put all of these elements together in a simple example that connects two particles with a spring.  One particle is locked in place, and the other can be moved by dragging the mouse.  Note that this example is virtually identical to <a href="#chapter03_example11">Example 3.11</a>
 .</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex12.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example10" style="display: block;"></a>
 <span class="example">Example 5.10: Simple Spring with toxiclibs</span></p>
@@ -3941,9 +3941,9 @@ class Particle extends VerletParticle2D {
   }
 }
 //[end]</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kn">import</span> <span class="nn">toxi.physics2d.*</span><span class="o">;</span></span>
@@ -4020,9 +4020,9 @@ class Particle extends VerletParticle2D {
 <h3 id="518-connected-systems-part-i-string">5.18 Connected Systems Part I: String</h3><p>The above example, two particles connected with a single spring, is the core building block for what toxiclibs’ physics is particularly well suited for: soft body simulations.  For example, a string can be simulated by connecting a line of particles with springs.  A blanket can be simulated by connecting a grid of particles with springs.  And a cute, cuddly, squishy cartoon character can be simulated by a custom layout of particles connected with springs.</p>
 <a id="chapter05_figure14" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_14.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.14</p>
 </div>
 <p>Let’s begin by simulating a “soft pendulum”—a bob hanging from a string, instead of a rigid arm like we had in <a href="#chapter03_example10">Chapter 3</a>
@@ -4032,9 +4032,9 @@ in Figure 5.14 above as our model.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>ArrayList<Particle> particles = new ArrayList<Particle>();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Particle</span><span class="o">&gt;</span> <span class="n">particles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Particle</span><span class="o">&gt;();</span></span></pre></code></div>
@@ -4044,18 +4044,18 @@ in Figure 5.14 above as our model.</p>
 </div><p>Now, let’s say we want to have 20 particles, all spaced 10 pixels apart.</p>
 <a id="chapter05_figure15" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_15.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.15</p>
 </div>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float len = 10;
 float numParticles = 20;</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span></span>
@@ -4074,9 +4074,9 @@ float numParticles = 20;</textarea>
   // Add particle to the physics world.
   particles.add(particle);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numPoints</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
@@ -4094,9 +4094,9 @@ float numParticles = 20;</textarea>
 <p>Now for the fun part: It’s time to connect all the particles.  Particle 1 will be connected to particle 0, particle 2 to particle 1, 3 to 2, 4 to 3, etc.</p>
 <a id="chapter05_figure16" style="display: block;"></a>
 <div class="image-container " >
-	
+
 	<img src="/book/imgs/chapter05/ch05_16.png" alt="Nature of Code Image" />
-	
+
 	<p class="caption">Figure 5.16</p>
 </div>
 <p>In other words, particle <span class="var">i</span> needs to be connected to particle <span class="var">i-1</span> (except for when <span class="var">i</span> equals zero).</p>
@@ -4112,9 +4112,9 @@ float numParticles = 20;</textarea>
   // We must not forget to add the spring to the physics world.
   physics.addSpring(spring);
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
@@ -4135,9 +4135,9 @@ float numParticles = 20;</textarea>
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Particle head=particles.get(0);
 head.lock();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Particle</span> <span class="n">head</span><span class="o">=</span><span class="n">particles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
@@ -4147,10 +4147,10 @@ head.lock();</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>And if we want to draw all the particles as being connected with a line, along with a circle for the last particle, we can use <span class="function">beginShape()</span>, <span class="function">endShape()</span>, and <span class="function">vertex()</span>, accessing the particle locations from our <span class="klass">ArrayList</span>.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex13.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example11" style="display: block;"></a>
 <span class="example">Example 5.11: Soft swinging pendulum</span></p>
@@ -4167,9 +4167,9 @@ endShape();
 Particle tail = particles.get(numPoints-1);
 // This draws the last particle as a circle.
 tail.display();</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
@@ -4191,10 +4191,10 @@ tail.display();</textarea>
   <a id="chapter05_exercise13" style="display: block;"></a>
 <h4 id="exercise-513">Exercise 5.13</h4><p>Exercise: Create a hanging cloth simulation using the technique above, but connect all the particles with a grid as demonstrated in the screenshot below.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc13.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter05_section19" style="display: block;"></a>
@@ -4202,22 +4202,22 @@ tail.display();</textarea>
 <p>“I have a whole bunch of stuff I want to draw on the screen and I want all that stuff to be spaced out evenly in a nice, neat, organized manner.  Otherwise I have trouble sleeping at night.”</p>
 <p>This is not an uncommon problem in computational design. One solution is typically referred to as a “force-directed graph.”  A force-directed graph is a visualization of elements—let’s call them “nodes”—in which the positions of those nodes are not manually assigned. Rather, the nodes arrange themselves according to a set of forces.  While any forces can be used, a typical example involves spring forces.  And so toxiclibs is perfect for this scenario.</p>
 <div class="image-container three-col" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex14.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <div class="image-container three-col" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex15.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <div class="image-container three-col" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex16.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p>How do we implement the above?</p>
 <p>First, we’ll need a <span class="klass">Node</span> class.  This is the easy part; it can <span class="klass">extend VerletParticle2D</span>.  Really, this is just what we did before, only we’re calling it <span class="klass">Node</span> now instead of <span class="klass">Particle</span>.</p>
@@ -4234,9 +4234,9 @@ tail.display();</textarea>
     ellipse(x,y,16,16);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Node</span> <span class="kd">extends</span> <span class="n">VerletParticle2D</span> <span class="o">{</span></span>
@@ -4277,9 +4277,9 @@ tail.display();</textarea>
 
     }
   }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Cluster</span> <span class="o">{</span></span>
@@ -4315,17 +4315,17 @@ Node is slightly offset.</div><code><pre><span class='one-line'>      <span clas
 2 connected to 3</span></p>
 <p>Notice two important details about our connection list.</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p><strong><em>No node is connected to itself.</em></strong>  We don’t have 0 connected to 0 or 1 connected to 1.
 </p>
 </li>
-		
+
 			<li><p><strong><em>We don’t need to repeat connections in reverse.</em></strong>  In other words, if we’ve already said 0 is connected to 1, we don’t need to say 1 is connected to 0 because, well, it already is!
 </p>
 </li>
-		
+
 	</ul>
 </div><p>So how do we write code to make these connections for <em>N</em> number of nodes?</p>
 <p>Look at the left column. It reads: 000 11 22.  So we know we need to access each node in the list from 0 to <em>N</em>-1.</p>
@@ -4333,9 +4333,9 @@ Node is slightly offset.</div><code><pre><span class='one-line'>      <span clas
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    for (int i = 0; i < nodes.size()-1; i++) {
       VerletParticle2D ni = nodes.get(i);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nodes</span><span class="o">.</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
@@ -4349,9 +4349,9 @@ Node is slightly offset.</div><code><pre><span class='one-line'>      <span clas
   <textarea>      // Look how we start j at i + 1.
       for (int j = i+1; j < nodes.size(); j++) { //[bold]
         VerletParticle2D nj = nodes.get(j);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>Look how we start j at i + 1.</div><code><pre><span class='one-line'>      <strong><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nodes</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span></strong></span>
@@ -4366,9 +4366,9 @@ Node is slightly offset.</div><code><pre><span class='one-line'>      <span clas
         physics.addSpring(new VerletSpring2D(ni,nj,diameter,0.01));
       }
     }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair '><div class='code-comment '>The Spring connects Nodes “ni” and “nj”.</div><code><pre><span class='one-line'>        <span class="n">physics</span><span class="o">.</span><span class="na">addSpring</span><span class="o">(</span><span class="k">new</span> <span class="n">VerletSpring2D</span><span class="o">(</span><span class="n">ni</span><span class="o">,</span><span class="n">nj</span><span class="o">,</span><span class="n">diameter</span><span class="o">,</span><span class="mf">0.01</span><span class="o">));</span></span>
@@ -4379,10 +4379,10 @@ Node is slightly offset.</div><code><pre><span class='one-line'>      <span clas
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Assuming those connections are made in the <span class="klass">Cluster</span> constructor, we can now create a cluster in our main tab and see the results!</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex17.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example12" style="display: block;"></a>
 <span class="example">Example 5.12: Cluster</span></p>
@@ -4407,9 +4407,9 @@ void draw() {
   // Draw the cluster.
   cluster.display();
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kn">import</span> <span class="nn">toxi.geom.*</span><span class="o">;</span></span>
@@ -4442,10 +4442,10 @@ void draw() {
   <a id="chapter05_exercise15" style="display: block;"></a>
 <h4 id="exercise-515">Exercise 5.15</h4><p>Exercise: Expand the force-directed graph to have more than one <span class="klass">Cluster</span> object.  Use a <span class="klass">VerletMinDistanceSpring2D</span> object to connect cluster to cluster.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_exc15.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 
 </div></section><section><a id="chapter05_section20" style="display: block;"></a>
@@ -4455,9 +4455,9 @@ void draw() {
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>Particle p = new Particle(new Vec2D(200,200));</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">Particle</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Particle</span><span class="o">(</span><span class="k">new</span> <span class="n">Vec2D</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">));</span></span></pre></code></div>
@@ -4470,9 +4470,9 @@ void draw() {
   <textarea>float distance = 20;
 float strength = 0.1;
 AttractionBehavior behavior = new AttractionBehavior(p, distance, strength);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span></span>
@@ -4486,9 +4486,9 @@ AttractionBehavior behavior = new AttractionBehavior(p, distance, strength);</te
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>physics.addBehavior(behavior);</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">physics</span><span class="o">.</span><span class="na">addBehavior</span><span class="o">(</span><span class="n">behavior</span><span class="o">);</span></span></pre></code></div>
@@ -4520,9 +4520,9 @@ AttractionBehavior behavior = new AttractionBehavior(p, distance, strength);</te
     ellipse (x, y, r*2, r*2);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Particle</span> <span class="kd">extends</span> <span class="n">VerletParticle2D</span> <span class="o">{</span></span>
@@ -4551,10 +4551,10 @@ is negative, it’s a repulsive force!</div><code><pre><span class='one-line'>  
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We could now recreate our attraction example by having a single <span class="klass">Attractor</span> object that exerts an attraction behavior over the entire window.</p>
 <div class="image-container screenshot" >
-	
+
 	<img src="/book/imgs/chapter05/ch05_ex18.png" alt="Nature of Code Image" />
-	
-	
+
+
 </div>
 <p><a id="chapter05_example13" style="display: block;"></a>
 <span class="example">Example 5.13: Attraction/Repulsion</span></p>
@@ -4577,9 +4577,9 @@ is negative, it’s a repulsive force!</div><code><pre><span class='one-line'>  
     ellipse (x, y, r*2, r*2);
   }
 }</textarea>
-  
-  
-  
+
+
+
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Attractor</span> <span class="kd">extends</span> <span class="n">VerletParticle2D</span> <span class="o">{</span></span>
@@ -4614,34 +4614,34 @@ the width so that it covers the entire window.</div><code><pre><span class='one-
   <h4 id="the-ecosystem-project">The Ecosystem Project</h4><p>Step 5 Exercise:</p>
 <p>Take your system of creatures from Step 4 and use a physics engine to drive their motion and behaviors.  Some possibilities:</p>
 <div class="list">
-	
+
 	<ul>
-		
+
 			<li><p>
 Use Box2D to allow collisions between creatures.  Consider triggering events when creatures collide.
 </p>
 </li>
-		
+
 			<li><p>
 Use Box2D to augment the design of your creatures.  Build a skeleton with distance joints or make appendages with revolute joints.
 </p>
 </li>
-		
+
 			<li><p>
 Use toxiclibs to augment the design of your creature. Use a chain of toxiclibs particles for tentacles or a mesh of springs as a skeleton.
 </p>
 </li>
-		
+
 			<li><p>
 Use toxiclibs to add attraction and repulsion behaviors to your creatures.
 </p>
 </li>
-		
+
 			<li><p>
 Use spring (or joint) connections between objects to control their interactions.  Create and delete these springs on the fly.  Consider making these connections visible or invisible to the viewer.
 </p>
 </li>
-		
+
 	</ul>
 </div>
 </div></section>
@@ -4672,7 +4672,7 @@ Use spring (or joint) connections between objects to control their interactions.
 
         <p>This book was generated with <a href="http://magicbookproject.com">The Magic Book Project</a>.
 
-        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
 
         <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
 
