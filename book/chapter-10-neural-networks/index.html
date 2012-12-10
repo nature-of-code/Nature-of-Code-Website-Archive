@@ -4,7 +4,7 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
@@ -109,7 +109,7 @@
 — Charlie Sheen
 </span>
   
-</blockquote><p><a id="artificial-intelligence-df9f73b0-2533-0130-b9cd-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-df9f82b0-2533-0130-b9ce-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="artificial-intelligence-83082b80-253f-0130-bddf-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-830839c0-253f-0130-bde0-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We’re at the end of our story.   This is the last official chapter of this book (though I envision additional supplemental material for the website and perhaps new chapters in the future).    We began with inanimate objects living in a world of forces and gave those objects desires, autonomy, and the ability to take action according to a system of rules.  Next, we allowed those objects to live in a population and evolve over time.  Now we ask: What is each object’s decision-making process?  How can it adjust its choices by learning over time?  Can a computational entity process its environment and generate a decision?</p>
 <p>The human brain can be described as a biological neural network—an interconnected web of neurons transmitting elaborate patterns of electrical signals.   Dendrites receive input signals and, based on those inputs, fire an output signal via an axon.  Or something like that.  How the human brain actually works is an elaborate and complex mystery, one that we certainly are not going to attempt to tackle in rigorous detail in this chapter.</p>
 <a id="chapter10_figure1" style="display: block;"></a><div class="image-container " >
@@ -120,12 +120,12 @@
 </div>
 <p>The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book.   We can simply be inspired by the idea of brain function.</p>
 <p>In this chapter, we’ll begin with a conceptual overview of the properties and features of neural networks and build the simplest possible example of one (a network that consists of a single neuron).  Afterwards, we’ll examine strategies for creating a “Brain” object that can be inserted into our <span class="klass">Vehicle</span> class and used to determine steering.   Finally, we’ll also look at techniques for visualizing and animating a network of neurons.</p>
-<section><a id="chapter10_section1" style="display: block;"></a><h3 id="101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</h3><p><a id="logical-calculus-of-the-ideas-imminent-in-nervous-activity-a-mccullochpitts-df9fc7a0-2533-0130-b9cf-7cd1c3f718ad" style="display: block;"></a></p>
-<p><a id="mcculloch-warren-s-df9fdd10-2533-0130-b9d0-7cd1c3f718ad" style="display: block;"></a><a id="pitts-walter-df9ff030-2533-0130-b9d1-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter10_section1" style="display: block;"></a><h3 id="101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</h3><p><a id="logical-calculus-of-the-ideas-imminent-in-nervous-activity-a-mccullochpitts-830875c0-253f-0130-bde1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mcculloch-warren-s-83088510-253f-0130-bde2-7cd1c3f718ad" style="display: block;"></a><a id="pitts-walter-83089480-253f-0130-bde3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Computer scientists have long been inspired by the human brain.   In 1943, Warren S. McCulloch, a neuroscientist, and Walter Pitts, a logician, developed the first conceptual model of an artificial neural network.  In their paper, "A logical calculus of the ideas imminent in nervous activity,” they describe the concept of a neuron, a single cell living in a network of cells that receives inputs, processes those inputs, and generates an output.</p>
 <p>Their work, and the work of many scientists and researchers that followed, was not meant to accurately describe how the biological brain works.  Rather, an artificial neural network (which we will now simply refer to as a “neural network”) was designed as a computational model based on the brain to solve certain kinds of problems.</p>
 <p>It’s probably pretty obvious to you that there are problems that are incredibly simple for a computer to solve, but difficult for you.  Take the square root of 964,324, for example.  A quick line of code produces the value 982, a number Processing computed in less than a millisecond.   There are, on the other hand, problems that are incredibly simple for you or me to solve, but not so easy for a computer.   Show any toddler a picture of a kitten or puppy and they’ll be able to tell you very quickly which one is which.   Say hello and shake my hand one morning and you should be able to pick me out of a crowd of people the next day.  But need a machine to perform one of these tasks?  Scientists have already spent entire careers researching and implementing complex solutions.</p>
-<p><a id="ai-for-game-developers-bourgseemann-dfa00a90-2533-0130-b9d2-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligence-a-modern-approach-russellnorvig-dfa01ee0-2533-0130-b9d3-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligencepattern-recognition-dfa03110-2533-0130-b9d4-7cd1c3f718ad" style="display: block;"></a><a id="bourg-david-m-dfa04260-2533-0130-b9d5-7cd1c3f718ad" style="display: block;"></a><a id="neural-networkspattern-recognition-dfa050e0-2533-0130-b9d6-7cd1c3f718ad" style="display: block;"></a><a id="norvig-peter-dfa063b0-2533-0130-b9d7-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognition-dfa078b0-2533-0130-b9d8-7cd1c3f718ad" style="display: block;"></a><a id="russell-stuart-j-dfa08850-2533-0130-b9d9-7cd1c3f718ad" style="display: block;"></a><a id="seemann-glenn-dfa09bb0-2533-0130-b9da-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="ai-for-game-developers-bourgseemann-8308ac00-253f-0130-bde4-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligence-a-modern-approach-russellnorvig-8308bfc0-253f-0130-bde5-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligencepattern-recognition-8308d380-253f-0130-bde6-7cd1c3f718ad" style="display: block;"></a><a id="bourg-david-m-8308e460-253f-0130-bde7-7cd1c3f718ad" style="display: block;"></a><a id="neural-networkspattern-recognition-8308f710-253f-0130-bde8-7cd1c3f718ad" style="display: block;"></a><a id="norvig-peter-83090870-253f-0130-bde9-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognition-83092170-253f-0130-bdea-7cd1c3f718ad" style="display: block;"></a><a id="russell-stuart-j-830938b0-253f-0130-bdeb-7cd1c3f718ad" style="display: block;"></a><a id="seemann-glenn-83094860-253f-0130-bdec-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The most common application of neural networks in computing today is to perform one of these “easy-for-a-human, difficult-for-a-machine” tasks, often referred to as pattern recognition.   Applications range from optical character recognition (turning printed or handwritten scans into digital text) to facial recognition.  We don’t have the time or need to use some of these more elaborate artificial intelligence algorithms here, but if you are interested in researching neural networks, I’d recommend the books <em>Artificial Intelligence: A Modern Approach</em> by Stuart J. Russell and Peter Norvig and <em>AI for Game Developers</em> by David M. Bourg and Glenn Seemann.</p>
 <a id="chapter10_figure2" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -133,13 +133,13 @@
 	
 	<p class="caption">Figure 10.2</p>
 </div>
-<p><a id="complex-systemsconnectionist-computational-system-dfa0bfd0-2533-0130-b9db-7cd1c3f718ad" style="display: block;"></a><a id="connectionist-computational-system-dfa0d140-2533-0130-b9dc-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksconnectionist-computational-system-dfa0e000-2533-0130-b9dd-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="complex-systemsconnectionist-computational-system-83097bb0-253f-0130-bded-7cd1c3f718ad" style="display: block;"></a><a id="connectionist-computational-system-83098d20-253f-0130-bdee-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksconnectionist-computational-system-83099c70-253f-0130-bdef-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A neural network is a “connectionist” computational system.   The computational systems we write are procedural; a program starts at the first line of code, executes it, and goes on to the next, following instructions in a linear fashion.   A true neural network does not follow a linear path.  Rather, information is processed collectively, in parallel throughout a network of nodes (the nodes, in this case, being neurons).</p>
 <p>Here we have yet another example of a complex system, much like the ones we examined in Chapters 6, 7, and 8.   The individual elements of the network, the neurons, are simple.  They read an input, process it, and generate an output.   A network of many neurons, however, can exhibit incredibly rich and intelligent behaviors.</p>
-<p><a id="neural-networkslearning-and-dfa0f880-2533-0130-b9de-7cd1c3f718ad" style="display: block;"></a><a id="weightneural-networks-and-dfa10a60-2533-0130-b9df-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networkslearning-and-8309b5a0-253f-0130-bdf0-7cd1c3f718ad" style="display: block;"></a><a id="weightneural-networks-and-8309c840-253f-0130-bdf1-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the key elements of a neural network is its ability to <em>learn</em>.  A neural network is not just a complex system, but a complex <strong><em>adaptive</em></strong> system, meaning it can change its internal structure based on the information flowing through it.  Typically, this is achieved through the adjusting of <em>weights</em>.  In the diagram above, each line represents a connection between two neurons and indicates the pathway for the flow of information.    Each connection has a <strong><em>weight</em></strong>, a number that controls the signal between the two neurons.   If the network generates a “good” output (which we’ll define later), there is no need to adjust the weights. However, if the network generates a “poor” output—an error, so to speak—then the system adapts, altering the weights in order to improve subsequent results.</p>
 <p>There are several strategies for learning, and we’ll examine two of them in this chapter.</p>
-<p><a id="neural-networkssupervised-learning-dfa140b0-2533-0130-b9e0-7cd1c3f718ad" style="display: block;"></a><a id="supervised-learning-neural-networks-dfa157f0-2533-0130-b9e1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networkssupervised-learning-8309fc90-253f-0130-bdf2-7cd1c3f718ad" style="display: block;"></a><a id="supervised-learning-neural-networks-830a1500-253f-0130-bdf3-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -149,7 +149,7 @@
 </li>
 		
 	</ul>
-</div><p><a id="neural-networksunsupervised-learning-dfa17db0-2533-0130-b9e2-7cd1c3f718ad" style="display: block;"></a><a id="unsupervised-learning-neural-networks-dfa18f50-2533-0130-b9e3-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksunsupervised-learning-830a3470-253f-0130-bdf4-7cd1c3f718ad" style="display: block;"></a><a id="unsupervised-learning-neural-networks-830a4660-253f-0130-bdf5-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -159,7 +159,7 @@
 </li>
 		
 	</ul>
-</div><p><a id="neural-networksreinforcement-learning-dfa1b210-2533-0130-b9e4-7cd1c3f718ad" style="display: block;"></a><a id="reinforcement-learning-neural-networks-dfa1c310-2533-0130-b9e5-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksreinforcement-learning-830a64e0-253f-0130-bdf6-7cd1c3f718ad" style="display: block;"></a><a id="reinforcement-learning-neural-networks-830a7750-253f-0130-bdf7-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -170,7 +170,7 @@
 		
 	</ul>
 </div><p>This ability of a neural network to learn, to make adjustments to its structure over time, is what makes it so useful in the field of artificial intelligence.  Here are some standard uses of neural networks in software today.</p>
-<p><a id="anomaly-detection-dfa1efc0-2533-0130-b9e6-7cd1c3f718ad" style="display: block;"></a><a id="control-of-physical-objects-dfa1fe90-2533-0130-b9e7-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksuses-of-dfa20e10-2533-0130-b9e8-7cd1c3f718ad" style="display: block;"></a><a id="signal-processing-dfa22170-2533-0130-b9e9-7cd1c3f718ad" style="display: block;"></a><a id="soft-sensors-dfa234f0-2533-0130-b9ea-7cd1c3f718ad" style="display: block;"></a><a id="time-series-prediction-dfa24ca0-2533-0130-b9eb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="anomaly-detection-830a9f80-253f-0130-bdf8-7cd1c3f718ad" style="display: block;"></a><a id="control-of-physical-objects-830aae10-253f-0130-bdf9-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksuses-of-830acd50-253f-0130-bdfa-7cd1c3f718ad" style="display: block;"></a><a id="signal-processing-830ae810-253f-0130-bdfb-7cd1c3f718ad" style="display: block;"></a><a id="soft-sensors-830af820-253f-0130-bdfc-7cd1c3f718ad" style="display: block;"></a><a id="time-series-prediction-830b0730-253f-0130-bdfd-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -202,7 +202,7 @@
 	</ul>
 </div><p>This is by no means a comprehensive list of applications of neural networks.   But hopefully it gives you an overall sense of the features and possibilities.   The thing is, neural networks are complicated and difficult.  They involve all sorts of fancy mathematics.   While this is all fascinating (and incredibly important to scientific research), a lot of the techniques are not very practical in the world of building interactive, animated Processing sketches.   Not to mention that in order to cover all this material, we would need another book—or more likely, a series of books.</p>
 <p>So instead, we’ll begin our last hurrah in the nature of code with the simplest of all neural networks, in an effort to understand how the overall concepts are applied in code.  Then we’ll look at some Processing sketches that generate visual results inspired by these concepts.</p>
-</section><section><a id="chapter10_section2" style="display: block;"></a><h3 id="102-the-perceptron">10.2  The Perceptron</h3><p><a id="cornell-aeronautical-laboratory-dfa2c990-2533-0130-b9ec-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksperceptron-dfa2da00-2533-0130-b9ed-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-dfa2ec60-2533-0130-b9ee-7cd1c3f718ad" style="display: block;"></a><a id="perceptronimplementing-dfa2fce0-2533-0130-b9ef-7cd1c3f718ad" style="display: block;"></a><a id="rosenblatt-frank-dfa31120-2533-0130-b9f0-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter10_section2" style="display: block;"></a><h3 id="102-the-perceptron">10.2  The Perceptron</h3><p><a id="cornell-aeronautical-laboratory-830b6a40-253f-0130-bdfe-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksperceptron-830b7980-253f-0130-bdff-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-830b8a30-253f-0130-be00-7cd1c3f718ad" style="display: block;"></a><a id="perceptronimplementing-830b9920-253f-0130-be01-7cd1c3f718ad" style="display: block;"></a><a id="rosenblatt-frank-830bac00-253f-0130-be02-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.</p>
 <a id="chapter10_figure3" style="display: block;"></a><div class="image-container " >
 	
@@ -210,7 +210,7 @@
 	
 	<p class="caption">Figure 10.3: The perceptron</p>
 </div>
-<p><a id="feed-forward-model-neural-networks-dfa33220-2533-0130-b9f1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="feed-forward-model-neural-networks-830bce60-253f-0130-be03-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output.  In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.</p>
 <p>Let’s follow each of these steps in more detail.</p>
 <p><span class="highlight">Step 1: Receive inputs.</span></p>
@@ -228,7 +228,7 @@ Weight 1: -1</span></p>
 <p>The weighted inputs are then summed.</p>
 <p><span class="mono">Sum = 6 + -4 = 2</span></p>
 <p><span class="highlight">Step 4: Generate output.</span></p>
-<p><a id="activation-functions-of-neural-networks-dfa3bd40-2533-0130-b9f2-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksactivation-functions-of-dfa3ce70-2533-0130-b9f3-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="activation-functions-of-neural-networks-830c67e0-253f-0130-be04-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksactivation-functions-of-830c7d50-253f-0130-be05-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The output of a perceptron is generated by passing that sum through an activation function.    In the case of a simple binary output, the activation function is what tells the perceptron whether to “fire” or not.   You can envision an LED connected to the output signal: if it fires, the light goes on; if not, it stays off.</p>
 <p>Activation functions can get a little bit hairy.   If you start reading one of those artificial intelligence textbooks looking for more info about activation functions, you may soon find yourself reaching for a calculus textbook.    However, with our friend the simple perceptron, we’re going to do something really easy.  Let’s make the activation function the sign of the sum.   In other words, if the sum is a positive number, the output is 1; if it is negative, the output is -1.</p>
 <p><span class="mono">Output = sign(sum) ⇒ sign(2) ⇒ +1</span></p>
@@ -324,7 +324,7 @@ through an activation function</div><code><pre><span class='one-line'><span clas
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter10_section3" style="display: block;"></a><h3 id="103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</h3><p><a id="bias-input-perceptron-dfa42470-2533-0130-b9f4-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognitionperceptron-and-dfa436a0-2533-0130-b9f5-7cd1c3f718ad" style="display: block;"></a><a id="perceptronbias-input-dfa44d30-2533-0130-b9f6-7cd1c3f718ad" style="display: block;"></a><a id="perceptronerror-calculations-and-dfa46020-2533-0130-b9f7-7cd1c3f718ad" style="display: block;"></a><a id="perceptronpattern-recognition-with-dfa472e0-2533-0130-b9f8-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section3" style="display: block;"></a><h3 id="103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</h3><p><a id="bias-input-perceptron-830ce3e0-253f-0130-be06-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognitionperceptron-and-830cf5f0-253f-0130-be07-7cd1c3f718ad" style="display: block;"></a><a id="perceptronbias-input-830d0850-253f-0130-be08-7cd1c3f718ad" style="display: block;"></a><a id="perceptronerror-calculations-and-830d1c00-253f-0130-be09-7cd1c3f718ad" style="display: block;"></a><a id="perceptronpattern-recognition-with-830d2d90-253f-0130-be0a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we understand the computational process of a perceptron, we can look at an example of one in action.   We stated that neural networks are often used for pattern recognition applications, such as facial recognition.   Even simple perceptrons can demonstrate the basics of classification, as in the following example.</p>
 <a id="chapter10_figure4" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -570,7 +570,7 @@ Return to Step 1 and repeat!
 		
 		</tbody>
 	</table>
-</div><p><a id="delta-weight-dfa93a10-2533-0130-b9f9-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="delta-weight-83133980-253f-0130-be0b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The error is the determining factor in how the perceptron’s weights should be adjusted.   For any given weight, what we are looking to calculate is the change in weight, often called <em>Δweight</em> (or “delta” weight, delta being the Greek letter Δ).</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ΔWEIGHT</span></p>
 <p>Δweight is calculated as the error multiplied by the input.</p>
@@ -578,7 +578,7 @@ Return to Step 1 and repeat!
 <p>Therefore:</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ERROR * INPUT</span></p>
 <p>To understand why this works, we can again return to <a href="#chapter06_section3">steering</a>.  A steering force is essentially an error in velocity.  If we apply that force as our acceleration (Δvelocity), then we adjust our velocity to move in the correct direction.  This is what we want to do with our neural network’s weights.  We want to adjust them in the right direction, as defined by the error.</p>
-<p><a id="learning-constant-dfa97c60-2533-0130-b9fa-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlearning-constant-dfa98bf0-2533-0130-b9fb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="learning-constant-8313c5a0-253f-0130-be0c-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlearning-constant-8313eec0-253f-0130-be0d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>With steering, however, we had an additional variable that controlled the vehicle’s ability to steer: the <em>maximum force</em>.   With a high maximum force, the vehicle was able to accelerate and turn very quickly; with a lower force, the vehicle would take longer to adjust its velocity.  The neural network will employ a similar strategy with a variable called the “learning constant.”  We’ll add in the learning constant as follows:</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT</span></p>
 <p>Notice that a high learning constant means the weight will change more drastically.  This may help us arrive at a solution more quickly, but with such large changes in weight it’s possible we will overshoot the optimal weights.  With a small learning constant, the weights will be adjusted slowly, requiring more training time but allowing the network to make very small adjustments that could improve the network’s overall accuracy.</p>
@@ -731,7 +731,7 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="perceptrontraining-dfa9e200-2533-0130-b9fc-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="perceptrontraining-83146cd0-253f-0130-be0e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>To train the perceptron, we need a set of inputs with a known answer.   We could package this up in a class like so:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1010,7 +1010,7 @@ void draw() {
 </div><div class="example">
   <a id="chapter10_exercise2" style="display: block;"></a><h4 id="exercise-102">Exercise 10.2</h4><p>Visualize the perceptron itself. Draw the inputs, the processing node, and the output.</p>
 
-</div></section><section><a id="chapter10_section5" style="display: block;"></a><h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p><a id="perceptronsteering-and-dfaac470-2533-0130-b9fd-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviorsperceptron-for-dfaad5c0-2533-0130-b9fe-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptron-dfaaecd0-2533-0130-b9ff-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section5" style="display: block;"></a><h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p><a id="perceptronsteering-and-83158e00-253f-0130-be0f-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviorsperceptron-for-8315a010-253f-0130-be10-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptron-8315baf0-253f-0130-be11-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While classifying points according to their position above or below a line was a useful demonstration of the perceptron in action, it doesn’t have much practical relevance to the other examples throughout this book.  In this section, we’ll take the concepts of a perceptron (array of inputs, single output), apply it to steering behaviors, and demonstrate reinforcement learning along the way.</p>
 <p>We are now going to take significant creative license with the concept of a neural network. This will allow us to stick with the basics and avoid some of the highly complex algorithms associated with more sophisticated neural networks.   Here we’re not so concerned with following rules outlined in artificial intelligence textbooks—we’re just hoping to make something interesting and brain-like.</p>
 <p>Remember our good friend the <span class="klass">Vehicle</span> class?  You know, that one for making objects with a location, velocity, and acceleration?  That could obey Newton’s laws with an <span class="function">applyForce()</span> function and move around the window according to a variety of steering rules?</p>
@@ -1203,7 +1203,7 @@ int feedforward(float[] inputs) {
 </li>
 		
 	</ol>
-</div><p><a id="reinforcement-learningneural-networks-dfaba2d0-2533-0130-ba00-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptronreinforcement-learningneural-networks-dfabb2d0-2533-0130-ba01-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="reinforcement-learningneural-networks-83166420-253f-0130-be12-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptronreinforcement-learningneural-networks-831673c0-253f-0130-be13-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once the resulting steering force has been applied, it’s time to give feedback to the brain, i.e. <em>reinforcement learning</em>.   Was the decision to steer in that particular direction a good one or a bad one?  Presumably if some of the targets were predators (resulting in being eaten) and some of the targets were food (resulting in greater health), the network would adjust its weights in order to steer away from the predators and towards the food.</p>
 <p>Let’s take a simpler example, where the vehicle simply wants to stay close to the center of the window.    We’ll train the brain as follows:</p>
 <div class="source-code">
@@ -1453,7 +1453,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 </div><div class="example">
   <a id="chapter10_exercise4" style="display: block;"></a><h4 id="exercise-104">Exercise 10.4</h4><p>Try different rules for reinforcement learning.  What if some targets are desirable and some are undesirable?</p>
 
-</div></section><section><a id="chapter10_section6" style="display: block;"></a><h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p><a id="linearly-separable-problems-dfac4190-2533-0130-ba02-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlinearly-separable-problems-and-dfac52d0-2533-0130-ba03-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section6" style="display: block;"></a><h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p><a id="linearly-separable-problems-8316fd10-253f-0130-be14-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlinearly-separable-problems-and-83170cb0-253f-0130-be15-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Yes, a perceptron can have multiple inputs, but it is still a lonely neuron.  The power of neural networks comes in the networking itself.   Perceptrons are, sadly, incredibly limited in their abilities.    If you read an AI textbook, it will say that a perceptron can only solve <strong><em>linearly separable</em></strong> problems.  What’s a linearly separable problem?  Let’s take a look at our first example, which determined whether points were on one side of a line or the other.</p>
 <a id="chapter10_figure11" style="display: block;"></a><div class="image-container " >
 	
@@ -1462,7 +1462,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 	<p class="caption">Figure 10.11</p>
 </div>
 <p>On the left of Figure 10.11, we have classic linearly separable data.  Graph all of the possibilities; if you can classify the data with a straight line, then it is linearly separable.  On the right, however, is non-linearly separable data.  You can’t draw a straight line to separate the black dots from the gray ones.</p>
-<p><a id="exclusive-or-xor-dfac84a0-2533-0130-ba04-7cd1c3f718ad" style="display: block;"></a><a id="non-linearly-separable-problems-dfac92d0-2533-0130-ba05-7cd1c3f718ad" style="display: block;"></a><a id="xor-exclusive-or-dfaca150-2533-0130-ba06-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="exclusive-or-xor-831733e0-253f-0130-be16-7cd1c3f718ad" style="display: block;"></a><a id="non-linearly-separable-problems-83174430-253f-0130-be17-7cd1c3f718ad" style="display: block;"></a><a id="xor-exclusive-or-831753f0-253f-0130-be18-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the simplest examples of a non-linearly separable problem is <em>XOR</em>, or “exclusive or.”  We’re all familiar with <em>AND</em>.  For <em>A</em> <em>AND</em> <em>B</em> to be true, both <em>A</em> and <em>B</em> must be true.  With <em>OR</em>, either <em>A</em> or <em>B</em> can be true for <em>A</em> <em>OR</em> <em>B</em> to evaluate as true. These are both linearly separable problems.  Let’s look at the solution space, a “truth table.”</p>
 <a id="chapter10_figure12" style="display: block;"></a><div class="image-container " >
 	
@@ -1479,7 +1479,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 	<p class="caption">Figure 10.13</p>
 </div>
 <p>This is not linearly separable.  Try to draw a straight line to separate the true outputs from the false ones—you can’t!</p>
-<p><a id="neural-networksnetworks-of-perceptrons-dfad2ee0-2533-0130-ba07-7cd1c3f718ad" style="display: block;"></a><a id="perceptronnetworks-of-dfad41b0-2533-0130-ba08-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networksnetworks-of-perceptrons-8317dc90-253f-0130-be19-7cd1c3f718ad" style="display: block;"></a><a id="perceptronnetworks-of-8317f010-253f-0130-be1a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>So perceptrons can’t even solve something as simple as <em>XOR</em>.  But what if we made a network out of two perceptrons?  If one perceptron can solve <em>OR</em> and one perceptron can solve <em>NOT AND</em>, then two perceptrons combined can solve <em>XOR</em>.</p>
 <a id="chapter10_figure14" style="display: block;"></a><div class="image-container " >
 	
@@ -1489,11 +1489,11 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 </div>
 <p>The above diagram is known as a <em>multi-layered perceptron</em>, a network of many neurons.   Some are input neurons and receive the inputs, some are part of what’s called a “hidden” layer (as they are connected to neither the inputs nor the outputs of the network directly), and then there are the output neurons, from which we read the results.</p>
 <p>Training these networks is much more complicated.  With the simple perceptron, we could easily evaluate how to change the weights according to the error. But here there are so many different connections, each in a different layer of the network. How does one know how much each neuron or connection contributed to the overall error of the network?</p>
-<p><a id="backpropagation-dfad7b10-2533-0130-ba09-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksbackpropagation-dfad8970-2533-0130-ba0a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="backpropagation-83183aa0-253f-0130-be1b-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksbackpropagation-831849c0-253f-0130-be1c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The solution to optimizing weights of a multi-layered network is known as <strong><em>backpropagation</em></strong>.  The output of the network is generated in the same manner as a perceptron.   The inputs multiplied by the weights are summed and fed forward through the network.  The difference here is that they pass through additional layers of neurons before reaching the output. Training the network (i.e. adjusting the weights) also involves taking the error (desired result - guess).  The error, however, must be fed backwards through the network. The final error ultimately adjusts the weights of all the connections.</p>
 <p>Backpropagation is a bit beyond the scope of this book and involves a fancier activation function (called the sigmoid function) as well as some basic calculus.  If you are interested in how backpropagation works, check the book website (and GitHub repository) for an example that solves <em>XOR</em> using a multi-layered feed forward network with backpropagation.</p>
 <p>Instead, here we’ll focus on a code framework for building the visual architecture of a network.  We’ll make <span class="klass">Neuron</span> objects and <span class="klass">Connection</span> objects from which a <span class="klass">Network</span> object can be created and animated to show the feed forward process.   This will closely resemble some of the force-directed graph examples we examined in Chapter 5 (toxiclibs).</p>
-</section><section><a id="chapter10_section7" style="display: block;"></a><h3 id="107-neural-network-diagrams">10.7  Neural Network Diagrams</h3><p><a id="neural-networksdiagramming-dfadca40-2533-0130-ba0b-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter10_section7" style="display: block;"></a><h3 id="107-neural-network-diagrams">10.7  Neural Network Diagrams</h3><p><a id="neural-networksdiagramming-831890e0-253f-0130-be1d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Our goal will be to create the following simple network diagram:</p>
 <a id="chapter10_figure15" style="display: block;"></a><div class="image-container " >
 	
@@ -1918,7 +1918,7 @@ A connection has a weight.</div><code><pre><span class='one-line'>  <span class=
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter10_section8" style="display: block;"></a><h3 id="108-animating-feed-forward">10.8  Animating Feed Forward</h3><p><a id="feed-forward-model-neural-networksanimating-dfaf5520-2533-0130-ba0c-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksanimating-dfaf67d0-2533-0130-ba0d-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section8" style="display: block;"></a><h3 id="108-animating-feed-forward">10.8  Animating Feed Forward</h3><p><a id="feed-forward-model-neural-networksanimating-8319f010-253f-0130-be1e-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksanimating-831a0340-253f-0130-be1f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>An interesting problem to consider is how to visualize the flow of information as it travels throughout a neural network.    Our network is built on the feed forward model, meaning that an input arrives at the first neuron (drawn on the lefthand side of the window) and the output of that neuron flows across the connections to the right until it exits as output from the network itself.</p>
 <p>Our first step is to add a function to the network to receive this input, which we’ll make a random number between 0 and 1.</p>
 <div class="source-code">
@@ -2079,7 +2079,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="neural-networksreal-vs-simulated-dfafd830-2533-0130-ba0e-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksreal-vs-simulated-831a8e70-253f-0130-be20-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here’s where things get a little tricky.  After all, our job here is not to actually make a functioning neural network, but to animate a simulation of one.  If the neural network were just continuing its work, it would instantly pass those inputs (multiplied by the connection’s weight) along to the connected neurons.  We’d say something like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>

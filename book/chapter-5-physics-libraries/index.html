@@ -4,7 +4,7 @@
 	<title>The Nature of Code</title>
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
 	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
   <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
   <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
@@ -109,7 +109,7 @@
 — Victor Hugo
 </span>
   
-</blockquote><p><a id="physicsopen-source-libraries-for-df0775c0-2533-0130-b7b2-7cd1c3f718ad" style="display: block;"></a><a id="physics-libraries-df078680-2533-0130-b7b3-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="physicsopen-source-libraries-for-8268cb90-253f-0130-bbc4-7cd1c3f718ad" style="display: block;"></a><a id="physics-libraries-8268dc30-253f-0130-bbc5-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we move on to anything else, let’s revisit some of the things we’ve done in the first four chapters. We have:</p>
 <div class="list">
 	
@@ -134,12 +134,12 @@ Implemented the algorithms in Processing with an object-oriented approach.
 </div><p>These activities have yielded a set of motion simulation examples, allowing us to creatively define the physics of the worlds we build (whether realistic or fantastical).  Of course, we aren’t the first to try this. The world of computer graphics and programming is full of source code dedicated to simulation. Just try Googling “open-source physics engine” and you could spend the rest of your day pouring over rich and complex code.    And so we must ask the question: If a code library will take care of physics simulation, why should we bother learning how to write any of the algorithms ourselves?</p>
 <p>Here is where the philosophy behind this book comes into play.  While many of the libraries out there give us physics (and super awesome advanced physics at that) for free, there are significant reasons for learning the fundamentals from scratch before diving into libraries. First, without an understanding of vectors, forces, and trigonometry, we’d be completely lost just reading the documentation of a library.   Second, even though a library may take care of the math for us, it won’t necessarily simplify our code.  As we’ll see in a moment, there can be a great deal of overhead in simply understanding how a library works and what it expects from you code-wise.  Finally, as wonderful as a physics engine might be, if you look deep down into your hearts, it’s likely that you seek to create worlds and visualizations that stretch the limits of imagination. A library is great, but it provides a limited set of features. It’s important to know both when to live within limitations in the pursuit of a Processing project and when those limits prove to be confining.</p>
 <p>This chapter is dedicated to examining two open-source physics libraries—Box2D and toxiclibs’ VerletPhysics engine.   With each library, we’ll evaluate its pros and cons and look at reasons why you might choose one of these libraries for a given project.</p>
-<section><a id="chapter05_section1" style="display: block;"></a><h3 id="51-what-is-box2d-and-when-is-it-useful">5.1 What Is Box2D and When Is It Useful?</h3><p><a id="angry-birds-df07b450-2533-0130-b7b4-7cd1c3f718ad" style="display: block;"></a><a id="box2d-df07c2d0-2533-0130-b7b5-7cd1c3f718ad" style="display: block;"></a><a id="catto-erin-df07d0a0-2533-0130-b7b6-7cd1c3f718ad" style="display: block;"></a><a id="crayon-physics-df07ded0-2533-0130-b7b7-7cd1c3f718ad" style="display: block;"></a><a id="physics-librariesbox2d-df07ee10-2533-0130-b7b8-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter05_section1" style="display: block;"></a><h3 id="51-what-is-box2d-and-when-is-it-useful">5.1 What Is Box2D and When Is It Useful?</h3><p><a id="angry-birds-82690c20-253f-0130-bbc6-7cd1c3f718ad" style="display: block;"></a><a id="box2d-82691ab0-253f-0130-bbc7-7cd1c3f718ad" style="display: block;"></a><a id="catto-erin-82692870-253f-0130-bbc8-7cd1c3f718ad" style="display: block;"></a><a id="crayon-physics-826937a0-253f-0130-bbc9-7cd1c3f718ad" style="display: block;"></a><a id="physics-librariesbox2d-82695110-253f-0130-bbca-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Box2D began as a set of physics tutorials written in C++ by Erin Catto for the Game Developer’s Conference in 2006. Over the last five years it has evolved into an rich and elaborate open-source physics engine.   It’s been used for countless projects, most notably highly successful games such as the award-winning puzzle game Crayon Physics and the runaway mobile and tablet hit Angry Birds.</p>
-<p><a id="box2doverhead-with-df080700-2533-0130-b7b9-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2doverhead-with-826974f0-253f-0130-bbcb-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the key things to realize about Box2D is that it is a true physics engine.  Box2D knows nothing about computer graphics and the world of pixels; it is simply a library that takes in numbers and spits out more numbers. And what are those numbers?  Meters, kilograms, seconds, etc.  All of Box2D’s measurements and calculations are for real-world measurements—only its “world” is a two-dimensional plane with top, bottom, left, and right edges.  You tell it things like: “The gravity of our world is 9.81 newtons per kilogram, and a circle with a radius of four meters and a mass of fifty kilograms is located ten meters above the world’s bottom.”   Box2D will then tell you things like: “One second later, the rectangle is at five meters from the bottom; two seconds later, it is ten meters below,” etc.  While this provides for an amazing and realistic physics engine, it also necessitates lots of complicated code in order to translate back and forth between the physics “world” (a key term in Box2D) and the world we want to draw on —the “pixel” world of Processing.</p>
 <p>So when is it worth it to have this additional overhead?  If I just want to simulate a circle falling down a Processing window with gravity, do I really need to write all the extra Box2D code just to get that effect?  Certainly, the answer is no.  We saw how to do this rather easily in the first chapter of this book.    Let’s consider another scenario.  What if I want to have a hundred of those circles falling?  And what if those circles aren’t circles at all, but irregularly shaped polygons?  And what if I want these polygons to bounce off each other in a realistic manner when they collide?</p>
-<p><a id="collisions-df083080-2533-0130-b7ba-7cd1c3f718ad" style="display: block;"></a><a id="physicscollisions-df084510-2533-0130-b7bb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="collisions-82699080-253f-0130-bbcc-7cd1c3f718ad" style="display: block;"></a><a id="physicscollisions-8269a500-253f-0130-bbcd-7cd1c3f718ad" style="display: block;"></a></p>
 <p>You may have noticed that the first four chapters of this book, while covering motion and forces in detail, has skipped over a rather important aspect of physics simulation—<em>collisions</em>.   Let’s pretend for a moment that you aren’t reading a chapter about libraries and that we decided right now to cover how to handle collisions in a particle system.   We’d have to evaluate and learn two distinct algorithms that address these questions:</p>
 <div class="list">
 	
@@ -166,9 +166,9 @@ How do I determine the shapes’ velocity after the collision?
 <p>OK. Now that we know how to determine if two circles are colliding, how do we calculate their velocities after the collision?   This is where we’re going to stop our discussion.   Why, you ask?  It’s not that understanding the math behind collisions isn’t important or valuable.  (In fact, I’m including additional examples on the website related to collisions without a physics library.)  The reason for stopping is that life is short (let this also be a reason for you to consider going outside and frolicking instead of programming altogether).  We can’t expect to master every detail of physics simulation.  And while we could continue this discussion for circles, it’s only going to lead us to wanting to work with rectangles.  And strangely shaped polygons.  And curved surfaces.  And swinging pendulums colliding with springy springs.  And and and and and.</p>
 <p>Working with collisions in our Processing sketch while still having time to spend with our friends and family—that’s the reason for this chapter.   Erin Catto spent years developing solutions to these kinds of problems so you don’t need to engineer them yourselves, at least for now.</p>
 <p>In conclusion, if you find yourself describing an idea for a Processing sketch and the word “collisions” comes up, then it’s likely time to learn Box2D.   (We’ll also encounter other words that might lead you down this path to Box2D, such as “joint,” “hinge,” “pulley,” “motor,” etc.)</p>
-</section><section><a id="chapter05_section2" style="display: block;"></a><h3 id="52-getting-box2d-in-processing">5.2 Getting Box2D in Processing</h3><p><a id="box2dprocessing-and-df088270-2533-0130-b7bc-7cd1c3f718ad" style="display: block;"></a><a id="processingbox2d-and-df0893f0-2533-0130-b7bd-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter05_section2" style="display: block;"></a><h3 id="52-getting-box2d-in-processing">5.2 Getting Box2D in Processing</h3><p><a id="box2dprocessing-and-8269e750-253f-0130-bbce-7cd1c3f718ad" style="display: block;"></a><a id="processingbox2d-and-8269fa30-253f-0130-bbcf-7cd1c3f718ad" style="display: block;"></a></p>
 <p>So, if Box2D is a physics engine that knows nothing about pixel-based computer graphics and is written in C++, how are we supposed to use it in Processing?</p>
-<p><a id="box2djbox2d-and-df08ab60-2533-0130-b7be-7cd1c3f718ad" style="display: block;"></a><a id="java-df08c160-2533-0130-b7bf-7cd1c3f718ad" style="display: block;"></a><a id="jbox2d-df08d150-2533-0130-b7c0-7cd1c3f718ad" style="display: block;"></a><a id="processingjbox2d-df08e0f0-2533-0130-b7c1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2djbox2d-and-826a10d0-253f-0130-bbd0-7cd1c3f718ad" style="display: block;"></a><a id="java-826a2370-253f-0130-bbd1-7cd1c3f718ad" style="display: block;"></a><a id="jbox2d-826a3110-253f-0130-bbd2-7cd1c3f718ad" style="display: block;"></a><a id="processingjbox2d-826a4000-253f-0130-bbd3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The good news is that Box2D is such an amazing and useful library that everyone wants to use it—Flash, Javascript, Python, Ruby programmers.  Oh, and Java programmers.  There is something called JBox2D, a Java port of Box2D.  And because Processing is built on top of Java, JBox2D can be used directly in Processing!</p>
 <p>So here’s where we are so far.</p>
 <div class="list">
@@ -184,7 +184,7 @@ How do I determine the shapes’ velocity after the collision?
 </li>
 		
 	</ul>
-</div><p><a id="box2dpbox2d-helper-class-df090d30-2533-0130-b7c2-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-class-df092040-2533-0130-b7c3-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="box2dpbox2d-helper-class-826a6c90-253f-0130-bbd4-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-class-826a8d00-253f-0130-bbd5-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This is all you need to get started writing Box2D code in Processing.  However, as we are going to see in a moment, there are several pieces of functionality we’ll repeatedly need in our Processing code, and so it’s worth having one additional layer between our sketches and JBox2D.  I’m calling this PBox2D—a Processing Box2D “helper” library included as part of this book’s code example downloads.</p>
 <div class="list">
 	
@@ -195,9 +195,9 @@ How do I determine the shapes’ velocity after the collision?
 		
 	</ul>
 </div><p>It’s important to realize that PBox2D is not a Processing wrapper for all of Box2D.   After all, Box2D is a thoughtfully organized and well-structured API and there’s no reason to take it apart and re-implement it.  However, it’s useful to have a small set of functions that help you get your Box2D world set up, as well as help you figure out where to draw your Box2D shapes.  And this is what PBox2D will provide.</p>
-<p><a id="box2dfisica-df094340-2533-0130-b7c4-7cd1c3f718ad" style="display: block;"></a><a id="fisica-df095620-2533-0130-b7c5-7cd1c3f718ad" style="display: block;"></a><a id="marxer-ricard-df096790-2533-0130-b7c6-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2dfisica-826ab9c0-253f-0130-bbd6-7cd1c3f718ad" style="display: block;"></a><a id="fisica-826acc40-253f-0130-bbd7-7cd1c3f718ad" style="display: block;"></a><a id="marxer-ricard-826ae230-253f-0130-bbd8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>I should also mention before we move forward that there are other Processing libraries that wrap Box2D for you. One I would recommend taking a look at is <a href="http://www.ricardmarxer.com/fisica/">Fisica</a> by Ricard Marxer.</p>
-</section><section><a id="chapter05_section3" style="display: block;"></a><h3 id="53-box2d-basics">5.3 Box2D Basics</h3><p><a id="box2dusage-df099810-2533-0130-b7c7-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter05_section3" style="display: block;"></a><h3 id="53-box2d-basics">5.3 Box2D Basics</h3><p><a id="box2dusage-826b0900-253f-0130-bbd9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Do not despair! We really are going to get to the code very soon, and in some ways we’ll blow our previous work out of the water.  But before we’re ready to do that, it’s important to walk through the overall process of using Box2D in Processing.   Let’s begin by writing a pseudocode generalization of all of our examples in Chapters 1 through 4.</p>
 <p><strong><em>SETUP:</em></strong></p>
 <div class="list">
@@ -302,7 +302,7 @@ Draw everything.
 		
 	</ol>
 </div><p>Now that we understand that anything we create in our Processing sketch has to be placed into the Box2D world, let’s look at an overview of the elements that make up that world.</p>
-<p><a id="body-box2d-element-df0c79d0-2533-0130-b7c8-7cd1c3f718ad" style="display: block;"></a><a id="box2dcore-elements-df0c88a0-2533-0130-b7c9-7cd1c3f718ad" style="display: block;"></a><a id="fixture-box2d-element-df0c9a90-2533-0130-b7ca-7cd1c3f718ad" style="display: block;"></a><a id="joint-box2d-element-df0ca950-2533-0130-b7cb-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-element-df0cb930-2533-0130-b7cc-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-element-df0cc7b0-2533-0130-b7cd-7cd1c3f718ad" style="display: block;"></a><a id="vectorsvec2-box2d-element-df0cd860-2533-0130-b7ce-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2d-df0ce920-2533-0130-b7cf-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="body-box2d-element-826e6100-253f-0130-bbda-7cd1c3f718ad" style="display: block;"></a><a id="box2dcore-elements-826e7140-253f-0130-bbdb-7cd1c3f718ad" style="display: block;"></a><a id="fixture-box2d-element-826e84a0-253f-0130-bbdc-7cd1c3f718ad" style="display: block;"></a><a id="joint-box2d-element-826e9530-253f-0130-bbdd-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-element-826ea740-253f-0130-bbde-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-element-826eb690-253f-0130-bbdf-7cd1c3f718ad" style="display: block;"></a><a id="vectorsvec2-box2d-element-826ec6c0-253f-0130-bbe0-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2d-826ed920-253f-0130-bbe1-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 		<h4>Core elements of a Box2D world:</h4>
@@ -333,10 +333,10 @@ Draw everything.
 </div><p>In the next four sections, we are going to walk through each of the above elements in detail, building several examples along the way.   But first there is one other important element we should briefly discuss.</p>
 <p>          6.   <strong><em>Vec2</em></strong>: Describes a vector in the Box2D world.</p>
 <p>And so here we are, arriving with trepidation at an unfortunate truth in the world of using physics libraries.   Any physics simulation is going to involve the concept of a vector.  This is the good part.  After all, we just spent several chapters familiarizing ourselves with what it means to describe motion and forces with vectors.   We don’t have to learn anything new conceptually.</p>
-<p><a id="box2dpvector-vs-df0d5350-2533-0130-b7d0-7cd1c3f718ad" style="display: block;"></a><a id="pvector-class-processingbox2d-vs-df0d7480-2533-0130-b7d1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2dpvector-vs-826f4c00-253f-0130-bbe2-7cd1c3f718ad" style="display: block;"></a><a id="pvector-class-processingbox2d-vs-826f6b60-253f-0130-bbe3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now for the part that makes the single tear fall from my eye: we don’t get to use <span class="klass">PVector</span>. It’s nice that Processing has <span class="klass">PVector</span> for us, but anytime you use a physics library you will probably discover that the library includes its own vector implementation.  This makes sense, after all; why should Box2D be expected to know about <span class="klass">PVector</span>?   And in many cases, the physics engine will want to implement a vector class in a specific way so that it is especially compatible with the rest of the library’s code.   So while we don’t have to learn anything new conceptually, we do have to get used to some new naming conventions and syntax.  Let’s quickly demonstrate a few of the basics in <span class="klass">Vec2</span> as compared to those in <span class="klass">PVector</span>.</p>
 <p>Let’s say we want to add two vectors together.</p>
-<p><a id="add-function-vec2-class-df0dbf80-2533-0130-b7d2-7cd1c3f718ad" style="display: block;"></a><a id="addlocal-function-vec2-df0dce80-2533-0130-b7d3-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementadding-vectors-with-df0dddf0-2533-0130-b7d4-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="add-function-vec2-class-826fb220-253f-0130-bbe4-7cd1c3f718ad" style="display: block;"></a><a id="addlocal-function-vec2-826fc050-253f-0130-bbe5-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementadding-vectors-with-826fcf70-253f-0130-bbe6-7cd1c3f718ad" style="display: block;"></a></p>
 <table class="code">
 <tr>
 <th>PVector</th>
@@ -374,7 +374,7 @@ Vec2 c = a.add(b);
 </pre>
 </td>
 </tr>
-</table><p><a id="vec2-box2d-elementmultiplying-vectors-with-df0df5b0-2533-0130-b7d5-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementscaling-vectors-with-df0e0e40-2533-0130-b7d6-7cd1c3f718ad" style="display: block;"></a></p>
+</table><p><a id="vec2-box2d-elementmultiplying-vectors-with-826fe4d0-253f-0130-bbe7-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementscaling-vectors-with-826ff720-253f-0130-bbe8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>How about if we want to multiply and scale them?</p>
 <table class="code">
 <tr>
@@ -414,7 +414,7 @@ Vec2 c = a.mul(n);
 </td>
 </tr>
 </table><p>Magnitude and normalize?</p>
-<p><a id="vec2-box2d-elementmanitude-finding-df0e3520-2533-0130-b7d7-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementnormalizing-vectors-df0e47b0-2533-0130-b7d8-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="vec2-box2d-elementmanitude-finding-82701a80-253f-0130-bbe9-7cd1c3f718ad" style="display: block;"></a><a id="vec2-box2d-elementnormalizing-vectors-82702ee0-253f-0130-bbea-7cd1c3f718ad" style="display: block;"></a></p>
 <table class="code">
 <tr>
 <th>PVector</th>
@@ -436,12 +436,12 @@ a.normalize();
 </pre>
 </td>
 </tr>
-</table><p><a id="jbox2dfull-documentation-for-df0e5d40-2533-0130-b7d9-7cd1c3f718ad" style="display: block;"></a></p>
+</table><p><a id="jbox2dfull-documentation-for-82704600-253f-0130-bbeb-7cd1c3f718ad" style="display: block;"></a></p>
 <p>As you can see, the concepts are the same, but the function names and the arguments are slightly different.  For example, instead of static and non-static <span class="function">add()</span> and <span class="function">mult()</span>, if a <span class="klass">Vec2</span> is altered, the word “local” is included in the function name—<span class="function">addLocal()</span>, <span class="function">multLocal()</span>.</p>
 <p>We’ll cover the basics of what you need to know here, but if you are looking for more, full documentation of <span class="klass">Vec2</span> can be found by downloading the <a href="http://code.google.com/p/jbox2d/">JBox2D source code</a>.</p>
-</section><section><a id="chapter05_section4" style="display: block;"></a><h3 id="54-living-in-a-box2d-world">5.4 Living in a Box2D World</h3><p><a id="world-class-box2d-df0ea8c0-2533-0130-b7da-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter05_section4" style="display: block;"></a><h3 id="54-living-in-a-box2d-world">5.4 Living in a Box2D World</h3><p><a id="world-class-box2d-82709ac0-253f-0130-bbec-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The Box2D <span class="klass">World</span> object is in charge of everything. It manages the coordinate space of the world, all of the stuff that lives in the world, and decides when time moves forward in the world.</p>
-<p><a id="pbox2d-helper-classcreateworld-function-df0ec500-2533-0130-b7db-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2dcreateworld-function-pbox2d-df0edaf0-2533-0130-b7dc-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="pbox2d-helper-classcreateworld-function-8270b760-253f-0130-bbed-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2dcreateworld-function-pbox2d-8270cca0-253f-0130-bbee-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In order to have Box2D as part of our Processing sketches, the <span class="klass">World</span> is the very first thing that needs to be set up.  Here is where PBox2D comes in handy and takes care of making the world for us.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -468,7 +468,7 @@ void setup() {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>When you call <span class="function">createWorld()</span>, PBox2D will set up a default gravity for you (pointing down); however, you can always alter the gravity of your world by saying:</p>
-<p><a id="setgravity-function-world-class-df0f0ba0-2533-0130-b7dd-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="setgravity-function-world-class-8270fbe0-253f-0130-bbef-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  box2d.setGravity(0, -10);</textarea>
@@ -483,7 +483,7 @@ void setup() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>It’s worth noting that gravity doesn’t have to be fixed, nor does it always have to point downwards; you can adjust the gravity vector while your program is running.  Gravity can be turned off by setting it to a (0,0) vector.</p>
 <p>So, what are those numbers 0 and -10?   This should remind us of one of the most important details of using Box2D: the Box2D coordinate system is not your pixel coordinate system!   Let’s look at how Box2D and a Processing window think differently of their worlds.</p>
-<p><a id="box2dcoordinate-system-vs-processing-df0f2720-2533-0130-b7de-7cd1c3f718ad" style="display: block;"></a><a id="coordinate-systemsbox2d-vs-processing-df0f4350-2533-0130-b7df-7cd1c3f718ad" style="display: block;"></a><a id="processingcoordinate-systems-vs-box2d-df0f5d30-2533-0130-b7e0-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2dcoordinate-system-vs-processing-827115b0-253f-0130-bbf0-7cd1c3f718ad" style="display: block;"></a><a id="coordinate-systemsbox2d-vs-processing-82712f10-253f-0130-bbf1-7cd1c3f718ad" style="display: block;"></a><a id="processingcoordinate-systems-vs-box2d-82714910-253f-0130-bbf2-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter05_figure2" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/chapter05/ch05_02.png" alt="Nature of Code Image" />
@@ -504,7 +504,7 @@ void setup() {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Luckily for us, if we prefer to think in terms of pixel coordinates (which as Processing programmers, we are likely to do), PBox2D offers a series of helper functions that convert between pixel space and Box2D space.  Before we move onto the next section and begin creating Box2D bodies, let’s take a look at how these helper functions work.</p>
-<p><a id="coordpixelstoworld-function-pbox2d-df0fa090-2533-0130-b7e1-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-classcoordinate-systems-converting-between-df0fbba0-2533-0130-b7e2-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="coordpixelstoworld-function-pbox2d-82718df0-253f-0130-bbf3-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-classcoordinate-systems-converting-between-82719de0-253f-0130-bbf4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s say we want to tell Box2D where the mouse is in its world.  We know the mouse is located at <span class="var">(mouseX,mouseY)</span> in Processing.  To convert it, we say we want to convert a “coordinate” from “pixels” to “world”—<span class="function">coordPixelsToWorld()</span>.  Or:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -548,7 +548,7 @@ are going to want to draw the elements in our window.</div><code><pre><span clas
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>PBox2D has a set of functions to take care of translating back and forth between the Box2D world and pixels.  It’s probably easier to learn about all of these functions during the course of actually implementing our examples, but let’s quickly look over the list of the possibilities.</p>
-<p><a id="coordworldtopixels-function-pbox2d-df0fec60-2533-0130-b7e3-7cd1c3f718ad" style="display: block;"></a><a id="scalarpixelstoworld-function-pbox2d-df0ffc20-2533-0130-b7e4-7cd1c3f718ad" style="display: block;"></a><a id="scalarworldtopixels-function-pbox2d-df100af0-2533-0130-b7e5-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="coordworldtopixels-function-pbox2d-8271d900-253f-0130-bbf5-7cd1c3f718ad" style="display: block;"></a><a id="scalarpixelstoworld-function-pbox2d-8271e8b0-253f-0130-bbf6-7cd1c3f718ad" style="display: block;"></a><a id="scalarworldtopixels-function-pbox2d-8271f6a0-253f-0130-bbf7-7cd1c3f718ad" style="display: block;"></a></p>
 <table class="code">
 <tr>
 <th>Task</th>
@@ -583,9 +583,9 @@ are going to want to draw the elements in our window.</div><code><pre><span clas
 
 </table><p>There are also additional functions that allow you to pass or receive a <span class="klass">PVector</span> when translating back and forth, but since we are only working with Box2D in the examples in this chapter, it’s easiest to stick with the <span class="klass">Vec2</span> class for all vectors.</p>
 <p>Once the world is initialized, we are ready to actually put stuff in the world—Box2D bodies.</p>
-</section><section><a id="chapter05_section5" style="display: block;"></a><h3 id="55-building-a-box2d-body">5.5 Building a Box2D Body</h3><p><a id="body-box2d-elementbuilding-df103a70-2533-0130-b7e6-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter05_section5" style="display: block;"></a><h3 id="55-building-a-box2d-body">5.5 Building a Box2D Body</h3><p><a id="body-box2d-elementbuilding-82723670-253f-0130-bbf8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A Box2D body is the primary element in the Box2D world.  It’s the equivalent to the <span class="klass">Mover</span> class we built on our own in previous chapters—the thing that moves around the space and experiences forces. It can also be static (meaning fixed and not moving). It’s important to note, however, that a body has no geometry; it isn’t anything physical.   Rather, bodies have Box2D shapes attached to them. (This way, a body can be a single rectangle or a rectangle attached to a circle, etc.) We’ll look at shapes in a moment; first, let’s build a body.</p>
-<section><a id="_step_1_define_a_body" style="display: block;"></a><h4 id="step-1-define-a-body">Step 1:  Define a body.</h4><p><a id="body-box2d-elementbodydef-type-df105d40-2533-0130-b7e7-7cd1c3f718ad" style="display: block;"></a><a id="bodydef-type-body-element-df1084a0-2533-0130-b7e8-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="_step_1_define_a_body" style="display: block;"></a><h4 id="step-1-define-a-body">Step 1:  Define a body.</h4><p><a id="body-box2d-elementbodydef-type-82725b00-253f-0130-bbf9-7cd1c3f718ad" style="display: block;"></a><a id="bodydef-type-body-element-82726cb0-253f-0130-bbfa-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The first thing we have to do is create a “body definition.” This will let us define the properties of the body we intend to make.  This may seem a bit awkward at first, but it’s how Box2D is structured.  Anytime you want to make a “thing,” you have to make a “thing definition” first.  This will hold true for bodies, shapes, and joints.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -600,7 +600,7 @@ BodyDef bd = new BodyDef();</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_2_configure_the_body_definition" style="display: block;"></a><h4 id="step-2-configure-the-body-definition">Step 2:  Configure the body definition.</h4><p><a id="bodydef-type-body-elementconfiguring-df10b990-2533-0130-b7e9-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_2_configure_the_body_definition" style="display: block;"></a><h4 id="step-2-configure-the-body-definition">Step 2:  Configure the body definition.</h4><p><a id="bodydef-type-body-elementconfiguring-82728830-253f-0130-bbfb-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The body definition is where we can set specific properties or attributes of the body we intend to make.  One attribute of a body, for example, is its starting location.  Let’s say we want to position the body in the center of the Processing window.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -635,7 +635,7 @@ Processing window converted to Box2D World coordinates!</div><code><pre><span cl
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="body-box2d-elementtypes-of-df10efc0-2533-0130-b7ea-7cd1c3f718ad" style="display: block;"></a><a id="dynamic-body-type-df110870-2533-0130-b7eb-7cd1c3f718ad" style="display: block;"></a><a id="kinematic-body-type-df111650-2533-0130-b7ec-7cd1c3f718ad" style="display: block;"></a><a id="static-body-type-df112930-2533-0130-b7ed-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="body-box2d-elementtypes-of-8272a540-253f-0130-bbfc-7cd1c3f718ad" style="display: block;"></a><a id="dynamic-body-type-8272b700-253f-0130-bbfd-7cd1c3f718ad" style="display: block;"></a><a id="kinematic-body-type-8272cde0-253f-0130-bbfe-7cd1c3f718ad" style="display: block;"></a><a id="static-body-type-8272dda0-253f-0130-bbff-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The body definition must also specify the “type” of body we want to make.  There are three possibilities:</p>
 <div class="list">
 	
@@ -682,7 +682,7 @@ bd.angularDamping = 0.9;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="body-box2d-elementbullet-setting-for-df116a70-2533-0130-b7ee-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="body-box2d-elementbullet-setting-for-82731d10-253f-0130-bc00-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In addition, fast-moving objects in Box2D should be set as bullets.  This tells the Box2D engine that the object may move very quickly and to check its collisions more carefully so that it doesn’t accidentally jump over another body.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -696,7 +696,7 @@ bd.angularDamping = 0.9;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_3_create_the_body" style="display: block;"></a><h4 id="step-3-create-the-body">Step 3:  Create the body.</h4><p><a id="body-box2d-elementobject-creating-df118f50-2533-0130-b7ef-7cd1c3f718ad" style="display: block;"></a><a id="createbody-function-pbox2d-df11a190-2533-0130-b7f0-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_3_create_the_body" style="display: block;"></a><h4 id="step-3-create-the-body">Step 3:  Create the body.</h4><p><a id="body-box2d-elementobject-creating-827345f0-253f-0130-bc01-7cd1c3f718ad" style="display: block;"></a><a id="createbody-function-pbox2d-82735a10-253f-0130-bc02-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once we’re done with the definition (<span class="klass">BodyDef</span>), we can create the <span class="klass">Body</span> object itself.  PBox2D provides a helper function for this—<span class="function">createBody</span>().</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -715,7 +715,7 @@ one definition.)</div><code><pre><span class='one-line'><span class="n">Body</sp
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_4_set_any_other_conditions_for_the_body_s_starting_state" style="display: block;"></a><h4 id="step-4-set-any-other-conditions-for-the-bodys-starting-state">Step 4:  Set any other conditions for the body’s starting state.</h4><p><a id="body-box2d-elementinitial-settings-for-df11e550-2533-0130-b7f1-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_4_set_any_other_conditions_for_the_body_s_starting_state" style="display: block;"></a><h4 id="step-4-set-any-other-conditions-for-the-bodys-starting-state">Step 4:  Set any other conditions for the body’s starting state.</h4><p><a id="body-box2d-elementinitial-settings-for-8273a5b0-253f-0130-bc03-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Finally, though not required, if you want to set any other initial conditions for the body, such as linear or angular velocity, you can do so with the newly created <span class="klass">Body</span> object.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -734,12 +734,12 @@ body.setAngularVelocity(1.2);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section></section><section><a id="chapter05_section6" style="display: block;"></a><h3 id="56-threes-company-bodies-and-shapes-and-fixtures">5.6 Three’s Company: Bodies and Shapes and Fixtures</h3><p><a id="shape-box2d-element-df1209e0-2533-0130-b7f2-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter05_section6" style="display: block;"></a><h3 id="56-threes-company-bodies-and-shapes-and-fixtures">5.6 Three’s Company: Bodies and Shapes and Fixtures</h3><p><a id="shape-box2d-element-8273d5a0-253f-0130-bc04-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A body on its own doesn’t physically exist in the world. It’s like a soul with no human form to inhabit. For a body to have mass, we must first define a shape and attach that shape to the body with something known as a fixture.</p>
-<p><a id="shape-box2d-elementfriction-attribute-df121f00-2533-0130-b7f3-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-elementrestitution-attribute-df1230f0-2533-0130-b7f4-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="shape-box2d-elementfriction-attribute-8273ec00-253f-0130-bc05-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-elementrestitution-attribute-82740720-253f-0130-bc06-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The job of the Box2D <span class="klass">Shape</span> class is to keep track of all the necessary collision geometry attached to a body.  A shape also has several important properties that affect the body’s motion.  There is density, which ultimately determines that body’s mass.  Shapes also have <em>friction</em> and <em>restitution</em> (“bounciness”) which will be defined through a fixture. One of the nice things about Box2D’s methodology, which separates the concepts of bodies and shapes into two separate objects, is that you can attach multiple shapes to a single body in order to create more complex forms.  We’ll see this in a future example.</p>
 <p>To create a shape, we need to first decide what kind of shape we want to make.  For most non-circular shapes, a <span class="klass">PolygonShape</span> object will work just fine. For example, let’s look at how we define a rectangle.</p>
-<section><a id="_step_1_define_a_shape" style="display: block;"></a><h4 id="step-1-define-a-shape">Step 1:  Define a shape.</h4><p><a id="shape-box2d-elementdefining-df1269e0-2533-0130-b7f5-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="_step_1_define_a_shape" style="display: block;"></a><h4 id="step-1-define-a-shape">Step 1:  Define a shape.</h4><p><a id="shape-box2d-elementdefining-82745830-253f-0130-bc07-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// Define the shape: a polygon.
@@ -777,7 +777,7 @@ ps.setAsBox(box2Dw, box2Dh);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_2_create_a_fixture" style="display: block;"></a><h4 id="step-2-create-a-fixture">Step 2:  Create a fixture.</h4><p><a id="fixture-box2d-elementcreating-df128b40-2533-0130-b7f6-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_2_create_a_fixture" style="display: block;"></a><h4 id="step-2-create-a-fixture">Step 2:  Create a fixture.</h4><p><a id="fixture-box2d-elementcreating-82748120-253f-0130-bc08-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The shape and body are made as two separate entities.  In order to attach a shape to a body, we must make a fixture.   A fixture is created, just as with the body, via a fixture definition (i.e. <span class="klass">FixtureDef</span> class) and assigned a shape.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -823,7 +823,7 @@ kilograms per meter squared</div><code><pre><span class='one-line'><span class="
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_3_attach_the_shape_to_the_body_with_the_fixture" style="display: block;"></a><h4 id="step-3-attach-the-shape-to-the-body-with-the-fixture">Step 3:  Attach the shape to the body with the fixture.</h4><p><a id="body-box2d-elementattaching-fixture-element-to-df12bb90-2533-0130-b7f7-7cd1c3f718ad" style="display: block;"></a><a id="createfixture-function-pbox2d-df12d4c0-2533-0130-b7f8-7cd1c3f718ad" style="display: block;"></a><a id="fixture-box2d-elementattaching-to-body-element-df12e4a0-2533-0130-b7f9-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_3_attach_the_shape_to_the_body_with_the_fixture" style="display: block;"></a><h4 id="step-3-attach-the-shape-to-the-body-with-the-fixture">Step 3:  Attach the shape to the body with the fixture.</h4><p><a id="body-box2d-elementattaching-fixture-element-to-8274afc0-253f-0130-bc09-7cd1c3f718ad" style="display: block;"></a><a id="createfixture-function-pbox2d-8274c1b0-253f-0130-bc0a-7cd1c3f718ad" style="display: block;"></a><a id="fixture-box2d-elementattaching-to-body-element-8274d3d0-253f-0130-bc0b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once the fixture is defined, all we have left to do is attach the shape to the body with the fixture by calling the <span class="function">createFixture()</span> function.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -971,7 +971,7 @@ body.createFixture(fd);</textarea>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div>
 </div></section></section><section><a id="chapter05_section7" style="display: block;"></a><h3 id="57-box2d-and-processing-reunited-and-it-feels-so-good">5.7  Box2D and Processing: Reunited and It Feels So Good</h3><p>Once a body is made, it lives in the Box2D physics world. Box2D will always know it’s there, check it for collisions, move it appropriately according to the forces, etc. It’ll do all that for you without you having to lift a finger! What it won’t do, however, is display the body for you. This is a good thing. This is your time to shine. When working with Box2D, what we’re essentially saying is, “I want to be the designer of my world, and I want you, Box2D, to compute all the physics.”</p>
-<p><a id="body-lists-maintaining-in-processing-df137ee0-2533-0130-b7fa-7cd1c3f718ad" style="display: block;"></a><a id="getbodylist-function-world-class-df138ef0-2533-0130-b7fb-7cd1c3f718ad" style="display: block;"></a><a id="processingbody-lists-maintaining-df13a050-2533-0130-b7fc-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2dgetbodylist-function-df13b4d0-2533-0130-b7fd-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="body-lists-maintaining-in-processing-827570e0-253f-0130-bc0c-7cd1c3f718ad" style="display: block;"></a><a id="getbodylist-function-world-class-827580d0-253f-0130-bc0d-7cd1c3f718ad" style="display: block;"></a><a id="processingbody-lists-maintaining-82759190-253f-0130-bc0e-7cd1c3f718ad" style="display: block;"></a><a id="world-class-box2dgetbodylist-function-8275a680-253f-0130-bc0f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now, Box2D will keep a list of all the bodies that exist in the world. This can be accessed by calling the World object’s <span class="function">getBodyList()</span> function. Nevertheless, what I’m going to demonstrate here is a technique for keeping your own body lists. Yes, this may be a bit redundant and we perhaps sacrifice a bit of efficiency. But we more than make up for that with ease of use. This methodology will allow us to program like we’re used to in Processing, and we can easily keep track of which bodies are which and render them appropriately. Let’s consider the structure of the following Processing sketch:</p>
 <a id="chapter05_figure3" style="display: block;"></a><div class="image-container " >
 	
@@ -1105,7 +1105,7 @@ void draw() {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Now, here’s our assignment. Take the above example verbatim, but instead of drawing fixed boxes on the screen, draw boxes that experience physics (via Box2D) as soon as they appear.</p>
 <p>We’ll need two major steps to accomplish our goal.</p>
-<section><a id="_step_1_add_box2d_to_our_main_program_i_e_setup_and_draw" style="display: block;"></a><h4 id="step-1-add-box2d-to-our-main-program-ie-setup-and-draw">Step 1: Add Box2D to our main program (i.e. setup() and draw()).</h4><p><a id="processingbox2d-objects-adding-to-projects-df163210-2533-0130-b7fe-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="_step_1_add_box2d_to_our_main_program_i_e_setup_and_draw" style="display: block;"></a><h4 id="step-1-add-box2d-to-our-main-program-ie-setup-and-draw">Step 1: Add Box2D to our main program (i.e. setup() and draw()).</h4><p><a id="processingbox2d-objects-adding-to-projects-82783660-253f-0130-bc10-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This part is not too tough.  We saw this already in our discussion of building a Box2D world.  This is taken care of for us by the PBox2D helper class.  We can create a PBox2D object and initialize it in <span class="function">setup()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1133,7 +1133,7 @@ void setup() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="step-function-box2d-df165160-2533-0130-b7ff-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="step-function-box2d-827855f0-253f-0130-bc11-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Then in <span class="function">draw()</span>, we need to make sure we call one very important function: <span class="function">step()</span>. Without this function, nothing would ever happen! <span class="function">step()</span> advances the Box2D world a step further in time. Internally, Box2D sweeps through and looks at all of the Bodies and figures out what to do with them. Just calling <span class="function">step()</span> on its own moves the Box2D world forward with default settings; however, it is customizable (and this is documented in the PBox2D source).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1274,7 +1274,7 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="getbodypixelcoord-function-pbox2d-df16d790-2533-0130-b800-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-classgetbodypixelcoord-function-pbox2d-df16e840-2533-0130-b801-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="getbodypixelcoord-function-pbox2d-8278d470-253f-0130-bc12-7cd1c3f718ad" style="display: block;"></a><a id="pbox2d-helper-classgetbodypixelcoord-function-pbox2d-8278e470-253f-0130-bc13-7cd1c3f718ad" style="display: block;"></a></p>
 <p>But now Box2D manages the object’s motion, so we can no longer use our own variables to display the shape. Not to fear! Our <span class="klass">Box</span> object has a reference to the Box2D body associated with it. So all we need to do is politely ask the body, “Pardon me, where are you located?” Since this is a task we’ll need to do quite often, PBox2D includes a helper function: <span class="function">getBodyPixelCoord()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1289,7 +1289,7 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Just knowing the location of a body isn’t enough; we also need to know its angle of rotation.</p>
-<p><a id="getangle-function-pbox2d-df171290-2533-0130-b802-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="getangle-function-pbox2d-827911e0-253f-0130-bc14-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float a = body.getAngle();</textarea>
@@ -1302,7 +1302,7 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="rotate-function-pbox2d-df172480-2533-0130-b803-7cd1c3f718ad" style="display: block;"></a><a id="translate-function-pbox2d-df173350-2533-0130-b804-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="rotate-function-pbox2d-827923b0-253f-0130-bc15-7cd1c3f718ad" style="display: block;"></a><a id="translate-function-pbox2d-82793240-253f-0130-bc16-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once we have the location and angle, it’s easy to display the object using <span class="function">translate()</span> and <span class="function">rotate()</span>.  Note, however, that the Box2D coordinate system considers rotation in the opposite direction from Processing, so we need to multiply the angle by -1.</p>
 <a id="chapter05_figure4" style="display: block;"></a><div class="image-container " >
 	
@@ -1355,7 +1355,7 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>In case we want to have objects that can be removed from the Box2D world, it’s also useful to include a function to destroy a body, such as:</p>
-<p><a id="destroybody-function-pbox2d-df176070-2533-0130-b805-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="destroybody-function-pbox2d-82796250-253f-0130-bc17-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  // This function removes a body from the Box2D world.
@@ -1382,7 +1382,7 @@ we will store a reference to a Box2D body.</div><code><pre><span class='one-line
 </div>
 <p>In this chapter’s code downloads, find the sketch named “box2d_exercise.”  Using the methodology outlined in this chapter, add the necessary code to the main and Box tabs to implement Box2D physics.  The result should appear as in the screenshot above.   Be more creative in how you render the boxes.</p>
 
-</div></section></section><section><a id="chapter05_section8" style="display: block;"></a><h3 id="58-fixed-box2d-objects">5.8  Fixed Box2D Objects</h3><p><a id="bodydef-type-body-elementstatic-type-df178790-2533-0130-b806-7cd1c3f718ad" style="display: block;"></a><a id="boundariesfixed-df17a4f0-2533-0130-b807-7cd1c3f718ad" style="display: block;"></a><a id="box2dfixed-objects-in-df17c330-2533-0130-b808-7cd1c3f718ad" style="display: block;"></a><a id="static-body-type-df17d4e0-2533-0130-b809-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter05_section8" style="display: block;"></a><h3 id="58-fixed-box2d-objects">5.8  Fixed Box2D Objects</h3><p><a id="bodydef-type-body-elementstatic-type-82798cb0-253f-0130-bc18-7cd1c3f718ad" style="display: block;"></a><a id="boundariesfixed-8279a880-253f-0130-bc19-7cd1c3f718ad" style="display: block;"></a><a id="box2dfixed-objects-in-8279bb30-253f-0130-bc1a-7cd1c3f718ad" style="display: block;"></a><a id="static-body-type-8279d140-253f-0130-bc1b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the example we just created, the <span class="klass">Box</span> objects appear at the mouse location and fall downwards due to Box2D’s default gravity force.  What if we wanted to install some immovable boundaries in the Box2D world that would block the path of the <span class="klass">Box</span> objects (as in the illustration below)?</p>
 <p>Box2D makes this easy for us by providing a means to lock a body (and any associated shapes) in place.   Just set the <span class="klass">BodyDef</span> object’s type to <span class="var">STATIC</span>.</p>
 <div class="source-code">
@@ -1505,7 +1505,7 @@ variables. No need to query Box2D.</div><code><pre><span class='one-line'>  <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter05_section9" style="display: block;"></a><h3 id="59-a-curvy-boundary">5.9  A Curvy Boundary</h3><p><a id="boundariescurvy-df182f30-2533-0130-b80a-7cd1c3f718ad" style="display: block;"></a><a id="chainshape-class-df184480-2533-0130-b80b-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section9" style="display: block;"></a><h3 id="59-a-curvy-boundary">5.9  A Curvy Boundary</h3><p><a id="boundariescurvy-827a38f0-253f-0130-bc1c-7cd1c3f718ad" style="display: block;"></a><a id="chainshape-class-827a4bb0-253f-0130-bc1d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If you want a fixed boundary that is a curved surface (as opposed to a polygon), this can be achieved with the shape <span class="klass">ChainShape</span>.</p>
 <p>The <span class="klass">ChainShape</span> class is another shape like <span class="klass">PolygonShape</span> or <span class="klass">CircleShape</span>, so to include one in our system, we follow the same steps.</p>
 <section><a id="_step_1_define_a_body_2" style="display: block;"></a><h4 id="step-1-define-a-body">Step 1: Define a body.</h4><div class="source-code">
@@ -1541,7 +1541,7 @@ by default.</div><code><pre><span class='one-line'><span class="n">BodyDef</span
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_3_configure_the_shape" style="display: block;"></a><h4 id="step-3-configure-the-shape">Step 3: Configure the Shape.</h4><p><a id="chainshape-classconfiguring-df18a020-2533-0130-b80c-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_3_configure_the_shape" style="display: block;"></a><h4 id="step-3-configure-the-shape">Step 3: Configure the Shape.</h4><p><a id="chainshape-classconfiguring-827a9540-253f-0130-bc1e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The <span class="klass">ChainShape</span> object is a series of connected vertices.  To create the chain, we must first specify an array of vertices (each as a <span class="klass">Vec2</span> object).  For example, if we wanted a straight line from the left-hand side of our window to the right-hand side, we would just need an array of two vertices: (0,150) and (width,150).  (Note that if you want to create a loop where the first vertex connects to the last vertex in a loop, you can use the <span class="klass">ChainLoop</span> class instead.)</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1803,7 +1803,7 @@ void draw() {
 	
 </div>
 
-</div></section></section><section><a id="chapter05_section10" style="display: block;"></a><h3 id="510-complex-forms">5.10  Complex Forms</h3><p><a id="box2dcomplex-forms-in-df199ac0-2533-0130-b80d-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter05_section10" style="display: block;"></a><h3 id="510-complex-forms">5.10  Complex Forms</h3><p><a id="box2dcomplex-forms-in-827b9dd0-253f-0130-bc1f-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter05_figure5" style="display: block;"></a><div class="image-container half-width-right" >
 	
 	<img src="/book/imgs/chapter05/ch05_05.png" alt="Nature of Code Image" />
@@ -1826,7 +1826,7 @@ void draw() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="polygonshape-classas-list-of-vectors-df19d530-2533-0130-b80e-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="polygonshape-classas-list-of-vectors-827bda10-253f-0130-bc20-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This was a good way to start because of the inherent simplicity of working with rectangles.  However, a <span class="klass">PolygonShape</span> object can also be generated from an array of vectors, which allows you to build a completely custom shape as a series of connected vertices.  This works very similarly to the <span class="klass">ChainShape</span> class.</p>
 <div class="image-container screenshot" >
 	
@@ -1873,7 +1873,7 @@ ps.set(vertices, vertices.length);
 	
 	<p class="caption">Figure 5.6</p>
 </div>
-<p><a id="box2dorder-of-vertices-df1a1540-2533-0130-b80f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2dorder-of-vertices-827c1a40-253f-0130-bc21-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -1887,14 +1887,14 @@ ps.set(vertices, vertices.length);
 </li>
 		
 	</ol>
-</div><p><a id="box2dconcave-shapes-and-df1a3d40-2533-0130-b810-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="box2dconcave-shapes-and-827c4240-253f-0130-bc22-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter05_figure7" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/chapter05/ch05_07.png" alt="Nature of Code Image" />
 	
 	<p class="caption">Figure 5.7: A concave shape can be drawn with multiple convex shapes.</p>
 </div>
-<p><a id="beginshape-function-processing-df1a5860-2533-0130-b811-7cd1c3f718ad" style="display: block;"></a><a id="endshape-function-processing-df1a6810-2533-0130-b812-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="beginshape-function-processing-827c5bd0-253f-0130-bc23-7cd1c3f718ad" style="display: block;"></a><a id="endshape-function-processing-827c6fe0-253f-0130-bc24-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now, when it comes time to display the shape in Processing, we can no longer just use <span class="function">rect()</span> or <span class="function">ellipse()</span>.  Since the shape is built out of custom vertices, we’ll want to use Processing’s <span class="function">beginShape()</span>, <span class="function">endShape()</span>, and <span class="function">vertex()</span> functions.   As we saw with the <span class="klass">ChainShape</span>, we could choose to store the pixel locations of the vertices in our own <span class="klass">ArrayList</span> for drawing.  However, it’s also useful to see how we can ask Box2D to report back to use the vertex locations.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1963,7 +1963,7 @@ ps.set(vertices, vertices.length);
 	
 </div>
 
-</div><p><a id="body-box2d-elementmultiple-shapes-and-df1ac6b0-2533-0130-b813-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="body-box2d-elementmultiple-shapes-and-827d0250-253f-0130-bc25-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A polygon shape will get us pretty far in Box2D.  Nevertheless, the convex shape requirement will severely limit the range of possibilities.  The good news is that we can completely eliminate this restriction by creating a single Box2D body out of multiple shapes!  Let’s return to our little alien creature and simplify the shape to be a thin rectangle with a circle on top.</p>
 <p>How can we build a single body with two shapes?  Let’s first review how we built a single body with one shape.</p>
 <p><em>Step 1:  Define the body.</em><br /><em>Step 2: Create the body.</em><br /><strong><em>Step 3: Define the shape.</em></strong><br /><strong><em>Step 4: Attach the shape to the body.</em></strong><br /><em>Step 5: Finalize the body’s mass.</em></p>
@@ -2041,7 +2041,7 @@ body.createFixture(cs, 1.0);
 	
 	<p class="caption">Figure 5.9</p>
 </div>
-<p><a id="m_p-variable-vec2-class-df1b6620-2533-0130-b814-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-elementlocal-position-for-df1b7740-2533-0130-b815-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="m_p-variable-vec2-class-827dbe60-253f-0130-bc26-7cd1c3f718ad" style="display: block;"></a><a id="shape-box2d-elementlocal-position-for-827dcfb0-253f-0130-bc27-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This is achieved by using the local position of a shape, accessed via a <span class="klass">Vec2</span> variable called <span class="var">m_p</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2151,7 +2151,7 @@ circle.m_p.set(offset.x,offset.y);</textarea>
 <div class="example">
   <a id="chapter05_exercise5" style="display: block;"></a><h4 id="exercise-55">Exercise 5.5</h4><p>Make your own little alien being using multiple shapes attached to a single body.  Try using more than one polygon to make a concave shape.   Remember, you aren’t limited to using the shape drawing functions in Processing; you can use images, colors, add hair with lines, etc.  Think of the Box2D shapes only as skeletons for your creative and fantastical design!</p>
 
-</div></section><section><a id="chapter05_section11" style="display: block;"></a><h3 id="511-feeling-attachedbox2d-joints">5.11 Feeling Attached—Box2D Joints</h3><p><a id="joint-box2d-element-df1e4530-2533-0130-b816-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section11" style="display: block;"></a><h3 id="511-feeling-attachedbox2d-joints">5.11 Feeling Attached—Box2D Joints</h3><p><a id="joint-box2d-element-8280de20-253f-0130-bc28-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter05_figure10" style="display: block;"></a><div class="image-container half-width-right" >
 	
 	<img src="/book/imgs/chapter05/ch05_10.png" alt="Nature of Code Image" />
@@ -2159,7 +2159,7 @@ circle.m_p.set(offset.x,offset.y);</textarea>
 	<p class="caption">Figure 5.10</p>
 </div>
 <p>Box2D joints allow you to connect one body to another, enabling more advanced simulations of swinging pendulums, elastic bridges, squishy characters, wheels spinning on an axle, etc.  There are many different kinds of Box2D joints. In this chapter we’re going to look at three: distance joints, revolute joints, and “mouse” joints.</p>
-<p><a id="distance-joints-df1e61a0-2533-0130-b817-7cd1c3f718ad" style="display: block;"></a><a id="joint-box2d-elementdistance-df1e70b0-2533-0130-b818-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="distance-joints-82810890-253f-0130-bc29-7cd1c3f718ad" style="display: block;"></a><a id="joint-box2d-elementdistance-82811c70-253f-0130-bc2a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s begin with a distance joint, a joint that connects two bodies with a fixed length.  The joint is attached to each body at a specified anchor point (a point relative to the body’s center).  For any Box2D joint, we need to follow these steps.  This, of course, is similar to the methodology we used to build bodies and shapes, with some quirks.</p>
 <p><strong><em>Step 1. Make sure you have two bodies ready to go.</em></strong><br /><strong><em>Step 2. Define the joint.</em></strong><br /><strong><em>Step 3. Configure the joint’s properties (What are the bodies? Where are the anchors? What is its rest length? Is it elastic or rigid?)</em></strong><br /><strong><em>Step 4. Create the joint.</em></strong><br /></p>
 <p>Let’s assume we have two <span class="klass">Particle</span> objects that each store a reference to a Box2D <span class="klass">Body</span> object.  We’ll call them particles <span class="var">p1</span> and <span class="var">p2</span>.</p>
@@ -2177,7 +2177,7 @@ Particle p2 = new Particle();</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="distancejointdef-box2d-joint-type-df1eca10-2533-0130-b819-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="distancejointdef-box2d-joint-type-82818c60-253f-0130-bc2b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>OK, onto Step 2.  Let’s define the joint.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2206,7 +2206,7 @@ djd.bodyB = p2.body;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="rest-length-box2d-joint-element-df1ee2d0-2533-0130-b81a-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="rest-length-box2d-joint-element-8281acc0-253f-0130-bc2c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Then we set up a rest length.  Remember, if our rest length is in pixels, we need to convert it!</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2220,7 +2220,7 @@ djd.bodyB = p2.body;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="dampingratio-setting-box2d-joint-element-df1ef6d0-2533-0130-b81b-7cd1c3f718ad" style="display: block;"></a><a id="frequencyhz-setting-box2d-joint-element-df1f05a0-2533-0130-b81c-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="dampingratio-setting-box2d-joint-element-8281c270-253f-0130-bc2d-7cd1c3f718ad" style="display: block;"></a><a id="frequencyhz-setting-box2d-joint-element-8281d450-253f-0130-bc2e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A distance joint also includes two optional settings that can make the joint soft, like a spring connection: <span class="var">frequencyHz</span> and <span class="var">dampingRatio</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2368,7 +2368,7 @@ Problems can result if the bodies are initialized at the same location.</div><co
 	
 	<p class="caption">Figure 5.11</p>
 </div>
-<p><a id="joint-box2d-elementrevolute-type-df1f62c0-2533-0130-b81d-7cd1c3f718ad" style="display: block;"></a><a id="revolute-joint-type-box2d-df1f74c0-2533-0130-b81e-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="joint-box2d-elementrevolute-type-828235f0-253f-0130-bc2f-7cd1c3f718ad" style="display: block;"></a><a id="revolute-joint-type-box2d-82824830-253f-0130-bc30-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Another joint you can create in Box2D is a <em>revolute joint</em>. A revolute joint connects two Box2D bodies at a common anchor point, which can also be referred to as a “hinge.”   The joint has an “angle” that describes the relative rotation of each body.   To use a revolute joint, we follow the same steps we did with the distance joint.</p>
 <section><a id="_step_1_make_sure_you_have_two_bodies_ready_to_go" style="display: block;"></a><h4 id="step-1-make-sure-you-have-two-bodies-ready-to-go">Step 1: Make sure you have two bodies ready to go.</h4><p>Let’s assume we have two <span class="klass">Box</span> objects, each of which stores a reference to a Box2D body.</p>
 <div class="source-code">
@@ -2385,7 +2385,7 @@ Box box2 = new Box();</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_2_define_the_joint" style="display: block;"></a><h4 id="step-2-define-the-joint">Step 2: Define the joint.</h4><p><a id="revolutejointdef-object-box2d-joint-element-df1faec0-2533-0130-b81f-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_2_define_the_joint" style="display: block;"></a><h4 id="step-2-define-the-joint">Step 2: Define the joint.</h4><p><a id="revolutejointdef-object-box2d-joint-element-82828ca0-253f-0130-bc31-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now we want a <span class="klass">RevoluteJointDef</span> object.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2399,7 +2399,7 @@ Box box2 = new Box();</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_step_3_configure_the_joint_s_properties" style="display: block;"></a><h4 id="step-3-configure-the-joints-properties">Step 3: Configure the joint’s properties.</h4><p><a id="revolute-joint-type-box2dproperties-configuring-df1fd1e0-2533-0130-b820-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_3_configure_the_joint_s_properties" style="display: block;"></a><h4 id="step-3-configure-the-joints-properties">Step 3: Configure the joint’s properties.</h4><p><a id="revolute-joint-type-box2dproperties-configuring-8282b980-253f-0130-bc32-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The most important properties of a revolute joint are the two bodies it connects as well as their mutual anchor point (i.e. where they are connected).   They are set with the function <span class="function">initialize()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2585,9 +2585,9 @@ rjd.upperAngle = PI/8;</textarea>
 	
 </div>
 
-</div><p><a id="joint-box2d-elementmouse-type-df206b70-2533-0130-b821-7cd1c3f718ad" style="display: block;"></a><a id="mouse-joint-box2d-joint-type-df208000-2533-0130-b822-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="joint-box2d-elementmouse-type-828396c0-253f-0130-bc33-7cd1c3f718ad" style="display: block;"></a><a id="mouse-joint-box2d-joint-type-8283b2b0-253f-0130-bc34-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The last joint we’ll look at is a mouse joint.  A mouse joint is typically used for moving a body with the mouse.  However, it can also be used to drag an object around the screen according to some arbitrary <em>x</em> and <em>y</em>.   The joint functions by pulling the body towards a “target” position.</p>
-<p><a id="mouse-joint-box2d-joint-typesettransform-function-df209f30-2533-0130-b823-7cd1c3f718ad" style="display: block;"></a><a id="settransform-function-box2d-df20b220-2533-0130-b824-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mouse-joint-box2d-joint-typesettransform-function-8283e340-253f-0130-bc35-7cd1c3f718ad" style="display: block;"></a><a id="settransform-function-box2d-8283fbd0-253f-0130-bc36-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we look at the <span class="klass">MouseJoint</span> object itself, let’s ask ourselves why we even need it in the first place.  If you look at the Box2D documentation, there is a function called <span class="function">setTransform()</span> that specifically “sets the position of the body’s origin and rotation (radians).”  If a body has a position, can’t we just assign the body’s position to the mouse?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2644,7 +2644,7 @@ MouseJoint mouseJoint = (MouseJoint) box2d.world.createJoint(md);.</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="getgroundbody-function-box2d-joint-element-df20f160-2533-0130-b825-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="getgroundbody-function-box2d-joint-element-82845610-253f-0130-bc37-7cd1c3f718ad" style="display: block;"></a></p>
 <p>So, what’s this line of code all about?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2795,7 +2795,7 @@ void draw() {
 </div><div class="example">
   <a id="chapter05_exercise8" style="display: block;"></a><h5 id="exercise-58">Exercise 5.8</h5><p>Use a mouse joint to move a Box2D body around the screen according to an algorithm or input other than the mouse.  For example, assign it a location according to Perlin noise or key presses.  Or build your own controller using an <a href="http://www.arduino.cc/">Arduino</a>.</p>
 
-</div><p><a id="kinematic-body-typemousejoints-and-df218b90-2533-0130-b826-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="kinematic-body-typemousejoints-and-82852370-253f-0130-bc38-7cd1c3f718ad" style="display: block;"></a></p>
 <p>It’s worth noting that while the technique for dragging an object around using a <span class="klass">MouseJoint</span> is useful, Box2D also allows a body to have a <span class="var">KINEMATIC</span> type.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2876,7 +2876,7 @@ body.setLinearVelocity(v);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="applyforce-function-box2d-df21e170-2533-0130-b827-7cd1c3f718ad" style="display: block;"></a><a id="forcesapplyforce-function-df21f150-2533-0130-b828-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="applyforce-function-box2d-82857d60-253f-0130-bc39-7cd1c3f718ad" style="display: block;"></a><a id="forcesapplyforce-function-82858d30-253f-0130-bc3a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If we want to use any of our Chapter 2 techniques with Box2D, we need look no further than our trusty <span class="function">applyForce()</span> function.   In our <span class="klass">Mover</span> class we wrote a function called <span class="function">applyForce()</span>, which received a vector, divided it by mass, and accumulated it into the mover’s acceleration.  With Box2D, the same function exists, but we don’t need to write it ourselves.  Instead, we can call the Box2D body’s <span class="function">applyForce()</span> function!</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2982,14 +2982,14 @@ body.setLinearVelocity(v);</textarea>
 	
 </div>
 
-</div></section><section><a id="chapter05_section13" style="display: block;"></a><h3 id="513-collision-events">5.13 Collision Events</h3><p><a id="collisionsbox2d-and-df226c20-2533-0130-b829-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section13" style="display: block;"></a><h3 id="513-collision-events">5.13 Collision Events</h3><p><a id="collisionsbox2d-and-82861d40-253f-0130-bc3b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now we’ve seen a survey of what can be done with Box2D.   Since this book is not called “The Nature of Box2D,” it’s not my intention to cover every single possible feature of the Box2D engine.  But hopefully by looking at the basics of building bodies, shapes, and joints, when it comes time to use an aspect of Box2D that we haven’t covered, the skills we’ve gained here will make that process considerably less painful.  There is one more feature of Box2D, however, that I do think is worth covering.</p>
 <p>Let’s ask a question you’ve likely been wondering about:</p>
 <p><em>What if I want something to happen when two Box2D bodies collide?   I mean, don’t get me wrong—I’m thrilled that Box2D is handling all of the collisions for me. But if it takes care of everything for me, how am I supposed to know when things are happening?</em></p>
 <p>Your first thoughts when considering an event during which two objects collide might be as follows:  Well, if I know all the bodies in the system, and I know where they are all located, then I can just start comparing the locations, see which ones are intersecting, and determine that they’ve collided.  That’s a nice thought, but hello??!?  The whole point of using Box2D is that Box2D will take care of that for us.  If we are going to do the geometry to test for intersection ourselves, then all we’re doing is re-implementing Box2D.</p>
-<p><a id="contactlistener-class-jbox2d-df228c70-2533-0130-b82a-7cd1c3f718ad" style="display: block;"></a><a id="interfaces-df229c60-2533-0130-b82b-7cd1c3f718ad" style="display: block;"></a><a id="jbox2dcontactlistener-class-df22ab20-2533-0130-b82c-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="contactlistener-class-jbox2d-82865940-253f-0130-bc3c-7cd1c3f718ad" style="display: block;"></a><a id="interfaces-82867280-253f-0130-bc3d-7cd1c3f718ad" style="display: block;"></a><a id="jbox2dcontactlistener-class-82868cc0-253f-0130-bc3e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Of course, Box2D has thought of this problem before.  It’s a pretty common one.  After all, if you intend to make a bajillion dollars selling some game called Angry Birds, you better well make something happen when an ill-tempered pigeon smashes into a cardboard box.   Box2D alerts you to moments of collision with something called an “interface.”  It’s worth learning about interfaces, an advanced feature of object-oriented programming. You can take a look at the <a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">Java Interface Tutorial</a> as well as the JBox2D <span class="klass">ContactListener</span> class. (I have also included an example on the website that demonstrates using the interface directly.)</p>
-<p><a id="begincontact-function-pbox2d-df22ccb0-2533-0130-b82d-7cd1c3f718ad" style="display: block;"></a><a id="collisionsbegincontact-function-pbox2d-df22dfe0-2533-0130-b82e-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="begincontact-function-pbox2d-8286c8f0-253f-0130-bc3f-7cd1c3f718ad" style="display: block;"></a><a id="collisionsbegincontact-function-pbox2d-8286e580-253f-0130-bc40-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If you are using PBox2D, as we are here, you don’t need to implement your own interface.  Detecting collision events is done through a callback function.  Much like <span class="function">mousePressed()</span> is triggered when the mouse is pressed, <span class="function">beginContact()</span> is triggered when two shapes collide.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3042,7 +3042,7 @@ void beginContact(Contact cp) {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>There are four collision event callbacks.</p>
-<p><a id="endcontact-function-pbox2d-df231030-2533-0130-b82f-7cd1c3f718ad" style="display: block;"></a><a id="postsolve-function-pbox2d-df231f20-2533-0130-b830-7cd1c3f718ad" style="display: block;"></a><a id="presolve-function-pbox2d-df232f70-2533-0130-b831-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="endcontact-function-pbox2d-82873ec0-253f-0130-bc41-7cd1c3f718ad" style="display: block;"></a><a id="postsolve-function-pbox2d-82875720-253f-0130-bc42-7cd1c3f718ad" style="display: block;"></a><a id="presolve-function-pbox2d-82876f90-253f-0130-bc43-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -3082,7 +3082,7 @@ void beginContact(Contact cp) {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="contact-objects-pbox2d-df23bf80-2533-0130-b832-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="contact-objects-pbox2d-82884440-253f-0130-bc44-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Notice that the function above includes an argument of type <span class="klass">Contact</span>.  A <span class="klass">Contact</span> object includes all the data associated with a collision—the geometry and the forces.  Let’s say we have a Processing sketch with <span class="klass">Particle</span> objects that store a reference to a Box2D body.    Here is the process we are going to follow.</p>
 <section><a id="_step_1_contact_could_you_tell_me_what_two_things_collided" style="display: block;"></a><h4 id="step-1-contact-could-you-tell-me-what-two-things-collided">Step 1: Contact, could you tell me what two things collided?</h4><p>Now, what has collided here?  Is it the bodies?  The shapes? The fixtures?   Box2D detects collisions between shapes; after all, these are the entities that have geometry.  However, because shapes are attached to bodies with fixtures, what we really want to ask Box2D is: “Could you tell me which two fixtures collided?”</p>
 <div class="source-code">
@@ -3260,10 +3260,10 @@ just call a function that changes their color.</div><code><pre><span class='one-
 </div><div class="example">
   <a id="chapter05_exercise12" style="display: block;"></a><h5 id="exercise-512">Exercise 5.12</h5><p>Create a simulation in which <span class="klass">Particle</span> objects disappear when they collide with one another.  Use the methodology I just described.</p>
 
-</div></section></section><section><a id="chapter05_section14" style="display: block;"></a><h3 id="514-a-brief-interludeintegration-methods">5.14 A Brief Interlude—Integration Methods</h3><p><a id="integration-df272780-2533-0130-b833-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter05_section14" style="display: block;"></a><h3 id="514-a-brief-interludeintegration-methods">5.14 A Brief Interlude—Integration Methods</h3><p><a id="integration-828c3f20-253f-0130-bc45-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Has the following ever happened to you?  You’re at a fancy cocktail party regaling your friends with tall tales of software physics simulations.   Someone pipes up: “Enchanting! But what integration method are you using?”  “What?!” you think to yourself.  “Integration?”</p>
 <p>Maybe you’ve heard the term before.  Along with “differentiation,” it’s one of the two main operations in calculus.  Right, calculus.  The good news is, we’ve gotten through about 90% of the material in this book related to physics simulation and we haven’t really needed to dive into calculus.  But as we’re coming close to finishing this topic, it’s worth taking a moment to examine the calculus behind what we have been doing and how it relates to the methodology in certain physics libraries (like Box2D and the upcoming toxiclibs).</p>
-<p><a id="derivatives-df273da0-2533-0130-b834-7cd1c3f718ad" style="display: block;"></a><a id="differentiation-df274cc0-2533-0130-b835-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="derivatives-828c5f40-253f-0130-bc46-7cd1c3f718ad" style="display: block;"></a><a id="differentiation-828c7050-253f-0130-bc47-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s begin by answering the question: “What does integration have to do with location, velocity, and acceleration?”   Well, first let’s define <strong><em>differentiation</em></strong>, the process of finding a “derivative.”  The derivative of a function is a measure of how a function changes over time.  Consider location and its derivative.  Location is a point in space, while velocity is change in location over time.  Therefore, velocity can be described as the “derivative” of location.   What is acceleration?  The change in velocity over time—i.e. the “derivative” of velocity.</p>
 <p>Now that we understand the derivative (differentiation), we can define the integral (integration) as the inverse of the derivative.  In other words, the integral of an object’s velocity over time tells us the object’s new location when that time period ends.   Location is the integral of velocity, and velocity is the integral of acceleration.  Since our physics simulation is founded upon the process of calculating acceleration based on forces, we need integration to figure out where the object is after a certain period of time (like one frame of animation!)</p>
 <p>So we’ve been doing integration all along!  It looks like this:</p>
@@ -3281,7 +3281,7 @@ location.add(velocity);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="euler-integration-df276d70-2533-0130-b836-7cd1c3f718ad" style="display: block;"></a><a id="euler-leonhard-df277be0-2533-0130-b837-7cd1c3f718ad" style="display: block;"></a><a id="integrationeuler-integration-df278e10-2533-0130-b838-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="euler-integration-828ca410-253f-0130-bc48-7cd1c3f718ad" style="display: block;"></a><a id="euler-leonhard-828cb4c0-253f-0130-bc49-7cd1c3f718ad" style="display: block;"></a><a id="integrationeuler-integration-828cc890-253f-0130-bc4a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The above methodology is known as Euler integration (named for the mathematician Leonhard Euler, pronounced “Oiler”) or the Euler method.    It’s essentially the simplest form of integration and very easy to implement in our code (see the two lines above!)  However, it is not necessarily the most efficient form, nor is it close to being the most accurate.    Why is Euler inaccurate?  Let’s think about it this way.  When you drive a car down the road pressing the gas pedal with your foot and accelerating, does the car sit in one location at time equals one second, then disappear and suddenly reappear in a new location at time equals two seconds, and do the same thing for three seconds, and four, and five?  No, of course not.  The car moves continuously down the road.  But what’s happening in our Processing sketch?  A circle is at one location at frame 0, another at frame 1, another at frame 2.  Sure, at thirty frames per second, we’re seeing the illusion of motion.  But we only calculate a new location every <span class="var">N</span> units of time, whereas the real world is perfectly continuous.   This results in some inaccuracies, as shown in the diagram below:</p>
 <a id="chapter05_figure13" style="display: block;"></a><div class="image-container " >
 	
@@ -3291,18 +3291,18 @@ location.add(velocity);</textarea>
 </div>
 <p>The “real world” is the curve; Euler simulation is the series of line segments.</p>
 <p>One option to improve on Euler is to use smaller timesteps—instead of once per frame, we could recalculate an object’s location twenty times per frame.  But this isn’t practical; our sketch would then run too slowly.</p>
-<p><a id="euler-integrationsymplectic-euler-box2d-df27b920-2533-0130-b839-7cd1c3f718ad" style="display: block;"></a><a id="symplectic-euler-box2d-df27c9b0-2533-0130-b83a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="euler-integrationsymplectic-euler-box2d-828d0d70-253f-0130-bc4b-7cd1c3f718ad" style="display: block;"></a><a id="symplectic-euler-box2d-828d2390-253f-0130-bc4c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>I still believe that Euler is the best method for learning the basics, and it’s also perfectly adequate for most of the projects we might make in Processing.  Anything we lose in efficiency or inaccuracy we make up in ease of use and understandability.    For better accuracy, Box2D uses something called <a href="http://en.wikipedia.org/wiki/Symplectic_Euler_method">symplectic Euler or semi-explicit Euler</a>, a slight modification of Euler.</p>
-<p><a id="integrationrunge-kutta-method-df27e070-2533-0130-b83b-7cd1c3f718ad" style="display: block;"></a><a id="kutta-m-w-df2800e0-2533-0130-b83c-7cd1c3f718ad" style="display: block;"></a><a id="runge-c-df281850-2533-0130-b83d-7cd1c3f718ad" style="display: block;"></a><a id="runge-kutta-method-df282d10-2533-0130-b83e-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="integrationrunge-kutta-method-828d4530-253f-0130-bc4d-7cd1c3f718ad" style="display: block;"></a><a id="kutta-m-w-828d6030-253f-0130-bc4e-7cd1c3f718ad" style="display: block;"></a><a id="runge-c-828d7640-253f-0130-bc4f-7cd1c3f718ad" style="display: block;"></a><a id="runge-kutta-method-828d8c20-253f-0130-bc50-7cd1c3f718ad" style="display: block;"></a></p>
 <p>There is also an integration method called Runge-Kutta (named for German mathematicians C. Runge and M. W. Kutta), which is used in some physics engines.</p>
-<p><a id="particle-systemsverlet-integration-and-df284100-2533-0130-b83f-7cd1c3f718ad" style="display: block;"></a><a id="verlet-integration-df2852f0-2533-0130-b840-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="particle-systemsverlet-integration-and-828da3a0-253f-0130-bc51-7cd1c3f718ad" style="display: block;"></a><a id="verlet-integration-828db990-253f-0130-bc52-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A very popular integration method that our next physics library uses is known as “Verlet integration.”  A simple way to describe Verlet integration is to think of our typical motion algorithm without velocity.  After all, we don’t really need to store the velocity.  If we always know where an object was at one point in time and where it is now, we can extrapolate its velocity.  Verlet integration does precisely this, though instead of having a variable for velocity, it calculates velocity while the program is running.   Verlet integration is particularly well suited for particle systems, especially particle systems with spring connections between the particles.    We don’t need to worry about the details because toxiclibs, as we’ll see below, takes care of them for us.  However, if you are interested, here is the seminal paper on Verlet physics, from which just about every Verlet computer graphics simulation is derived: <a href="http://www.gamasutra.com/resource_guide/20030121/jacobson_pfv.htm">"Advanced Character Physics"</a>. And of course, you can find out more about Verlet integration from <a href="http://en.wikipedia.org/wiki/Verlet_integration">Wikipedia</a>.</p>
-</section><section><a id="chapter05_section15" style="display: block;"></a><h3 id="515-verlet-physics-with-toxiclibs">5.15 Verlet Physics with toxiclibs</h3><p><a id="processingtoxiclibs-and-df2878c0-2533-0130-b841-7cd1c3f718ad" style="display: block;"></a><a id="schmidt-karsten-df288a40-2533-0130-b842-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibs-df289940-2533-0130-b843-7cd1c3f718ad" style="display: block;"></a><a id="verlet-integrationtoxiclibs-df28a9a0-2533-0130-b844-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter05_section15" style="display: block;"></a><h3 id="515-verlet-physics-with-toxiclibs">5.15 Verlet Physics with toxiclibs</h3><p><a id="processingtoxiclibs-and-828de710-253f-0130-bc53-7cd1c3f718ad" style="display: block;"></a><a id="schmidt-karsten-828dfd60-253f-0130-bc54-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibs-828e0c60-253f-0130-bc55-7cd1c3f718ad" style="display: block;"></a><a id="verlet-integrationtoxiclibs-828e1c80-253f-0130-bc56-7cd1c3f718ad" style="display: block;"></a></p>
 <p>From toxiclibs.org:</p>
 <p><em>“toxiclibs is an independent, open source library collection for computational design tasks with Java & Processing developed by Karsten “toxi” Schmidt (thus far). The classes are purposefully kept fairly generic in order to maximize re-use in different contexts ranging from generative design, animation, interaction/interface design, data visualization to architecture and digital fabrication, use as teaching tool and more.”</em></p>
 <p>In other words, we should thank our lucky stars for toxiclibs.  We are only going to focus on a few examples related to Verlet physics, but toxiclibs includes a suite of other wonderful packages that help with audio, color, geometry, and more.  In particular, if you are looking to work with form and fabrication in Processing, take a look at the geometry package.   Demos can be found at <a href="http://www.openprocessing.org/portal/?userID=4530">Open Processing</a>.</p>
 <p>We should note that toxiclibs was designed specifically for use with Processing.  This is great news.  The trouble we had with making Box2D work in Processing (multiple coordinate systems, Box2D vs. JBox2D vs. PBox2D) is not an issue here.  toxiclibs is a library that you just download, stick in your libraries folder, and use.  And the coordinate system that we’ll use for the physics engine is the coordinate system of Processing, so no translating back and forth.   In addition, toxiclibs is not limited to a 2D world; all of the physics simulations and functions work in both two and three dimensions.  So how do you decide which library you should use?  Box2D or toxiclibs?  If you fall into one of the following two categories, your decision is a bit easier:</p>
-<p><a id="box2dtoxiclibs-vs-df28da70-2533-0130-b845-7cd1c3f718ad" style="display: block;"></a><a id="collisionstoxiclibs-and-df28ed70-2533-0130-b846-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsbox2d-vs-df290280-2533-0130-b847-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="box2dtoxiclibs-vs-828e43e0-253f-0130-bc57-7cd1c3f718ad" style="display: block;"></a><a id="collisionstoxiclibs-and-828e55f0-253f-0130-bc58-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsbox2d-vs-828e7100-253f-0130-bc59-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong>1. My project involves collisions.   I have circles, squares, and other strangely shaped objects that knock each other around and bounce off each other.</strong></p>
 <p>In this case, you are going to need Box2D.  toxiclibs does not handle collisions.</p>
 <p><strong>2. My project involves lots of particles flying around the screen.  Sometimes they attract each other.  Sometimes they repel each other.  And sometimes they are connected with springs.</strong></p>
@@ -3422,12 +3422,12 @@ location.add(velocity);</textarea>
 		
 		</tbody>
 	</table>
-</div><section><a id="_getting_toxiclibs" style="display: block;"></a><h4 id="getting-toxiclibs">Getting toxiclibs</h4><p><a id="toxiclibsdownloading-df299330-2533-0130-b848-7cd1c3f718ad" style="display: block;"></a></p>
+</div><section><a id="_getting_toxiclibs" style="display: block;"></a><h4 id="getting-toxiclibs">Getting toxiclibs</h4><p><a id="toxiclibsdownloading-828f1630-253f-0130-bc5a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Everything you need to download and install toxiclibs can be found at:</p>
 <p><a href="http://toxiclibs.org/">toxiclibs</a></p>
 <p>When you download the library, you’ll notice that it comes with eight modules (i.e. sub-folders), each a library in its own right.  For the examples in this chapter, you will only need “verletphysics” and “toxiclibscore”; however, I recommend you take a look at and consider using all of the modules!</p>
 <p>Once you have the library installed to your <a href="http://wiki.processing.org/w/How_to_Install_a_Contributed_Library">Processing library folder</a>, you are ready to start looking at the following examples.</p>
-</section><section><a id="_core_elements_of_verletphysics" style="display: block;"></a><h4 id="core-elements-of-verletphysics">Core Elements of VerletPhysics</h4><p><a id="verletphysics-class-toxiclibscore-elements-of-df29bc70-2533-0130-b849-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_core_elements_of_verletphysics" style="display: block;"></a><h4 id="core-elements-of-verletphysics">Core Elements of VerletPhysics</h4><p><a id="verletphysics-class-toxiclibscore-elements-of-828f5d50-253f-0130-bc5b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We spent a lot of time working through the core elements of a Box2D world: world, body, shape, joint.   This gives us a head start on understanding toxiclibs, since it follows a similar structure.</p>
 <div class="table">
 	
@@ -3500,12 +3500,12 @@ location.add(velocity);</textarea>
 		
 		</tbody>
 	</table>
-</div></section><section><a id="_vectors_with_toxiclibs" style="display: block;"></a><h4 id="vectors-with-toxiclibs">Vectors with toxiclibs</h4><p><a id="vec2d-toxiclibs-type-df2a0d40-2533-0130-b84a-7cd1c3f718ad" style="display: block;"></a><a id="vec3d-toxiclibs-type-df2a1bf0-2533-0130-b84b-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_vectors_with_toxiclibs" style="display: block;"></a><h4 id="vectors-with-toxiclibs">Vectors with toxiclibs</h4><p><a id="vec2d-toxiclibs-type-828fde80-253f-0130-bc5c-7cd1c3f718ad" style="display: block;"></a><a id="vec3d-toxiclibs-type-828ff4f0-253f-0130-bc5d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here we go again.  Remember all that time we spent learning the ins and outs of the <span class="klass">PVector</span> class?  Then remember how when we got to Box2D, we had to translate all those concepts to a Box2D vector class: <span class="klass">Vec2</span>?  Well, it’s time to do it again.  toxiclibs also includes its own vector classes, one for two dimensions and one for three:  <span class="klass">Vec2D</span> and <span class="klass">Vec3D</span>.</p>
 <p>Again, toxiclibs vectors are the same conceptually, but we need to learn a bit of new syntax.  You can find all of the documentation for these vector classes here:</p>
 <p><a href="http://toxiclibs.org/docs/core/toxi/geom/Vec2D.html">Vec2D</a><br /><a href="http://toxiclibs.org/docs/core/toxi/geom/Vec3D.html">Vec3D</a></p>
 <p>And let’s just review some of the basic vector math operations with <span class="klass">PVector</span> translated to <span class="klass">Vec2D</span> (we’re sticking with 2D for simplicity’s sake).</p>
-<p><a id="vec2d-toxiclibs-typemath-functions-for-df2a7af0-2533-0130-b84c-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="vec2d-toxiclibs-typemath-functions-for-82906970-253f-0130-bc5e-7cd1c3f718ad" style="display: block;"></a></p>
 <table class="code">
 <tr>
 <th>PVector</th>
@@ -3562,7 +3562,7 @@ a.normalize();
 </td>
 </tr>
 
-</table></section><section><a id="_building_the_toxiclibs_physics_world" style="display: block;"></a><h4 id="building-the-toxiclibs-physics-world">Building the toxiclibs physics world</h4><p><a id="toxiclibsworld-building-df2aa3c0-2533-0130-b84d-7cd1c3f718ad" style="display: block;"></a></p>
+</table></section><section><a id="_building_the_toxiclibs_physics_world" style="display: block;"></a><h4 id="building-the-toxiclibs-physics-world">Building the toxiclibs physics world</h4><p><a id="toxiclibsworld-building-829091b0-253f-0130-bc5f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The first thing we need to do to create a toxiclibs physics world in our examples is import the library itself.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3584,7 +3584,7 @@ import toxi.geom.*;
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="toxiclibsverletphysics-class-df2abdd0-2533-0130-b84e-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsverletphysics2d-class-df2ad110-2533-0130-b84f-7cd1c3f718ad" style="display: block;"></a><a id="verletphysics-class-toxiclibs-df2ae420-2533-0130-b850-7cd1c3f718ad" style="display: block;"></a><a id="verletphysics2d-class-toxiclibs-df2af410-2533-0130-b851-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="toxiclibsverletphysics-class-8290b520-253f-0130-bc60-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsverletphysics2d-class-8290cf50-253f-0130-bc61-7cd1c3f718ad" style="display: block;"></a><a id="verletphysics-class-toxiclibs-8290e9a0-253f-0130-bc62-7cd1c3f718ad" style="display: block;"></a><a id="verletphysics2d-class-toxiclibs-8290fd70-253f-0130-bc63-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Then we’ll need a reference to our physics world, a <span class="klass">VerletPhysics</span> or <span class="klass">VerletPhysics2D</span> object (depending on whether we are working in two or three dimensions).  The examples in this chapter will operate in 2D only for simplicity, but they could easily be extended into 3D (and 3D versions are available with the chapter download).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3619,7 +3619,7 @@ void setup() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="gravitygravitybehavior-toxiclibs-df2b3240-2533-0130-b852-7cd1c3f718ad" style="display: block;"></a><a id="gravitybehavior-class-toxiclibs-df2b48a0-2533-0130-b853-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="gravitygravitybehavior-toxiclibs-82913fd0-253f-0130-bc64-7cd1c3f718ad" style="display: block;"></a><a id="gravitybehavior-class-toxiclibs-82915dc0-253f-0130-bc65-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In addition, you can add gravity to the physics world with a <span class="klass">GravityBehavior</span> object.  A gravity behavior requires a vector—how strong and in what direction is the gravity?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3635,7 +3635,7 @@ void setup() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="update-function-toxiclibs-df2b68f0-2533-0130-b854-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="update-function-toxiclibs-82918180-253f-0130-bc66-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Finally, in order to calculate the physics of the world and move the objects in the world, we have to call <span class="function">update()</span>.  Typically this would happen once per frame in <span class="function">draw()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3655,7 +3655,7 @@ void setup() {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section></section><section><a id="chapter05_section16" style="display: block;"></a><h3 id="516-particles-and-springs-in-toxiclibs">5.16 Particles and Springs in toxiclibs</h3><p><a id="particlestoxiclibs-implementation-of-df2b9890-2533-0130-b855-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsparticles-implementing-in-df2bb940-2533-0130-b856-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter05_section16" style="display: block;"></a><h3 id="516-particles-and-springs-in-toxiclibs">5.16 Particles and Springs in toxiclibs</h3><p><a id="particlestoxiclibs-implementation-of-8291b310-253f-0130-bc67-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsparticles-implementing-in-8291c7f0-253f-0130-bc68-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the Box2D examples, we saw how we can create our own class (called, say, <span class="klass">Particle</span>) and include a reference to a Box2D body.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3672,7 +3672,7 @@ void setup() {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This technique is somewhat redundant since Box2D itself keeps track of all of the bodies in its world.  However, it allows us to manage which body is which (and therefore how each body is drawn) without having to rely on iterating through Box2D’s internal lists.</p>
-<p><a id="particlesverletparticle2d-object-toxiclibs-df2bfd50-2533-0130-b857-7cd1c3f718ad" style="display: block;"></a><a id="verletparticle2d-object-toxiclibs-df2c1a60-2533-0130-b858-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="particlesverletparticle2d-object-toxiclibs-8291f350-253f-0130-bc69-7cd1c3f718ad" style="display: block;"></a><a id="verletparticle2d-object-toxiclibs-82920900-253f-0130-bc6a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s look at how we might take the same approach with the class <span class="klass">VerletParticle2D</span> in toxiclibs. We want to make our own <span class="klass">Particle</span> class so that we can draw our particles a certain way and include any custom properties. We’d probably write our code as follows:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3760,7 +3760,7 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Remember our multi-step process with the Box2D examples?  We had to ask the body for its location, then convert that location to pixels, then use that location in a drawing function.  Now, because we have inherited everything from the <span class="klass">VerletParticle</span> class, our only step is to draw the shape at <span class="var">x</span> and <span class="var">y</span>!</p>
-<p><a id="vec2d-toxiclibs-typeverletparticle2d-class-and-df2f8fe0-2533-0130-b859-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="vec2d-toxiclibs-typeverletparticle2d-class-and-82954220-253f-0130-bc6b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Incidentally, it’s interesting to note that the <span class="klass">VerletParticle2D</span> class is a subclass of <span class="klass">Vec2D</span>. So in addition to inheriting everything from <span class="klass">VerletParticle2D</span>, our <span class="klass">Particle</span> class actually has all of the <span class="klass">Vec2D</span> functions available as well.</p>
 <p>We can now create particles anywhere within our sketch.</p>
 <div class="source-code">
@@ -3777,7 +3777,7 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="addparticle-function-toxiclibs-df2fd950-2533-0130-b85a-7cd1c3f718ad" style="display: block;"></a><a id="particle-systemsaddparticle-function-toxiclibs-df2fe9b0-2533-0130-b85b-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="addparticle-function-toxiclibs-8295a2b0-253f-0130-bc6c-7cd1c3f718ad" style="display: block;"></a><a id="particle-systemsaddparticle-function-toxiclibs-8295b5f0-253f-0130-bc6d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Just making a particle isn’t enough, however.  We have to make sure we tell our physics world about them with the <span class="function">addParticle()</span> function.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3796,9 +3796,9 @@ VerletParticle for its x and y coordinates.</div><code><pre><span class='one-lin
 </div><p>If you look at the toxiclibs documentation, you’ll see that the <span class="function">addParticle()</span> expects a <span class="klass">VerletParticle2D</span> object.</p>
 <p><span class="function">addParticle(VerletParticle2D particle)</span></p>
 <p>And how can we then pass into the function our own <span class="klass">Particle</span> object?   Remember that other tenet of object-oriented programming—polymorphism? Here, because our <span class="klass">Particle</span> class <span class="klass">extends VerletParticle2D</span>, we can choose to treat our particle in two different ways—as a <span class="klass">Particle</span> or as a <span class="klass">VerletParticle2D</span>.   This is an incredibly powerful feature of object-oriented programming.  If we build our custom classes based on classes from toxiclibs, we can use our objects in conjunction with all of the functions toxiclibs has to offer.</p>
-<p><a id="springstoxiclibs-and-df305130-2533-0130-b85c-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibssprings-df306c20-2533-0130-b85d-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="springstoxiclibs-and-82962440-253f-0130-bc6e-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibssprings-82963790-253f-0130-bc6f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In addition to the <span class="klass">VerletParticle</span> class, toxiclibs has a set of classes that allow you to connect particles with spring forces.  There are three types of springs in toxiclibs:</p>
-<p><a id="springsverletconstrainedspring-class-toxiclibs-df309d80-2533-0130-b85e-7cd1c3f718ad" style="display: block;"></a><a id="springsverletmindistancespring-class-toxiclibs-df30b960-2533-0130-b85f-7cd1c3f718ad" style="display: block;"></a><a id="springsverletspring-class-toxiclibs-df30d4e0-2533-0130-b860-7cd1c3f718ad" style="display: block;"></a><a id="verletconstrainedspring-class-toxiclibs-df30f0d0-2533-0130-b861-7cd1c3f718ad" style="display: block;"></a><a id="verletmindistancespring-class-toxiclibs-df310c80-2533-0130-b862-7cd1c3f718ad" style="display: block;"></a><a id="verletspring-class-toxiclibs-df3123c0-2533-0130-b863-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="springsverletconstrainedspring-class-toxiclibs-829657c0-253f-0130-bc70-7cd1c3f718ad" style="display: block;"></a><a id="springsverletmindistancespring-class-toxiclibs-82966ac0-253f-0130-bc71-7cd1c3f718ad" style="display: block;"></a><a id="springsverletspring-class-toxiclibs-82968c30-253f-0130-bc72-7cd1c3f718ad" style="display: block;"></a><a id="verletconstrainedspring-class-toxiclibs-8296a620-253f-0130-bc73-7cd1c3f718ad" style="display: block;"></a><a id="verletmindistancespring-class-toxiclibs-8296b6b0-253f-0130-bc74-7cd1c3f718ad" style="display: block;"></a><a id="verletspring-class-toxiclibs-8296c4f0-253f-0130-bc75-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -3849,7 +3849,7 @@ VerletSpring2D spring=new VerletSpring2D(p1,p2,len,strength);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter05_section17" style="display: block;"></a><h3 id="517-putting-it-all-together-a-simple-interactive-spring">5.17 Putting It All Together: A Simple Interactive Spring</h3><p><a id="lock-function-toxiclibs-df31c850-2533-0130-b864-7cd1c3f718ad" style="display: block;"></a><a id="springslock-function-toxiclibs-df31e070-2533-0130-b865-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section17" style="display: block;"></a><h3 id="517-putting-it-all-together-a-simple-interactive-spring">5.17 Putting It All Together: A Simple Interactive Spring</h3><p><a id="lock-function-toxiclibs-829757b0-253f-0130-bc76-7cd1c3f718ad" style="display: block;"></a><a id="springslock-function-toxiclibs-82976830-253f-0130-bc77-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One thing we saw with Box2D is that the physics simulation broke down when we overrode it and manually set the location of a body. With toxiclibs, we don’t have this problem.  If we want to move the location of a particle, we can simply set its <em>x</em> and <em>y</em> location manually.  However, before we do so, it’s generally a good idea to call the <span class="function">lock()</span> function.</p>
 <p><span class="function">lock()</span> is typically used to lock a particle in place and is identical to setting a Box2D body’s density to 0.   However, here we are going to show how to lock a particle temporarily, move it, and then unlock it so that it continues to move according to the physics simulation.
  Let’s say you want to move a given particle whenever you click the mouse.</p>
@@ -4030,7 +4030,7 @@ class Particle extends VerletParticle2D {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter05_section18" style="display: block;"></a><h3 id="518-connected-systems-part-i-string">5.18 Connected Systems, Part I: String</h3><p><a id="connected-systemsstrings-df3260d0-2533-0130-b866-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsconnected-systems-df327e20-2533-0130-b867-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section18" style="display: block;"></a><h3 id="518-connected-systems-part-i-string">5.18 Connected Systems, Part I: String</h3><p><a id="connected-systemsstrings-8297bba0-253f-0130-bc78-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsconnected-systems-8297cca0-253f-0130-bc79-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The above example, two particles connected with a single spring, is the core building block for what toxiclibs’ physics is particularly well suited for: soft body simulations.  For example, a string can be simulated by connecting a line of particles with springs.  A blanket can be simulated by connecting a grid of particles with springs.  And a cute, cuddly, squishy cartoon character can be simulated by a custom layout of particles connected with springs.</p>
 <a id="chapter05_figure14" style="display: block;"></a><div class="image-container " >
 	
@@ -4146,7 +4146,7 @@ float numParticles = 20;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="stringshanging-from-fixed-points-df333d80-2533-0130-b868-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="stringshanging-from-fixed-points-829864e0-253f-0130-bc7a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now, what if we want the string to hang from a fixed point?  We can lock one of the particles—the first, the last, the middle one, etc.  Here’s how we would access the first particle (in the <span class="klass">ArrayList</span>) and lock it.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -4212,7 +4212,7 @@ tail.display();</textarea>
 	
 </div>
 
-</div></section><section><a id="chapter05_section19" style="display: block;"></a><h3 id="519-connected-systems-part-ii-force-directed-graph">5.19 Connected Systems, Part II: Force-Directed Graph</h3><p><a id="connected-systemsforce-directed-graphs-df33cb70-2533-0130-b869-7cd1c3f718ad" style="display: block;"></a><a id="force-directed-graphs-df33df20-2533-0130-b86a-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsforce-directed-graphs-df33f640-2533-0130-b86b-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section19" style="display: block;"></a><h3 id="519-connected-systems-part-ii-force-directed-graph">5.19 Connected Systems, Part II: Force-Directed Graph</h3><p><a id="connected-systemsforce-directed-graphs-8298d480-253f-0130-bc7b-7cd1c3f718ad" style="display: block;"></a><a id="force-directed-graphs-8298ea40-253f-0130-bc7c-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsforce-directed-graphs-8298f940-253f-0130-bc7d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Have you ever encountered the following scenario?</p>
 <p>“I have a whole bunch of stuff I want to draw on the screen and I want all that stuff to be spaced out evenly in a nice, neat, organized manner.  Otherwise I have trouble sleeping at night.”</p>
 <p>This is not an uncommon problem in computational design. One solution is typically referred to as a “force-directed graph.”  A force-directed graph is a visualization of elements—let’s call them “nodes”—in which the positions of those nodes are not manually assigned. Rather, the nodes arrange themselves according to a set of forces.  While any forces can be used, a typical example involves spring forces.  And so toxiclibs is perfect for this scenario.</p>
@@ -4464,9 +4464,9 @@ void draw() {
 	
 </div>
 
-</div></section><section><a id="chapter05_section20" style="display: block;"></a><h3 id="520-attraction-and-repulsion-behaviors">5.20 Attraction and Repulsion Behaviors</h3><p><a id="addforce-function-toxiclibs-df35a0a0-2533-0130-b86c-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsattractionrepulsion-behaviors-and-df35b340-2533-0130-b86d-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter05_section20" style="display: block;"></a><h3 id="520-attraction-and-repulsion-behaviors">5.20 Attraction and Repulsion Behaviors</h3><p><a id="addforce-function-toxiclibs-829a6d40-253f-0130-bc7e-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsattractionrepulsion-behaviors-and-829a8130-253f-0130-bc7f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>When we looked at adding an attraction force to Box2D, we found that the Box2D <span class="klass">Body</span> class included an <span class="function">applyForce()</span> function.  All we needed to do was calculate the attraction force (Force = G * mass1 * mass2 / distance squared) as a vector and apply it to the body.  toxiclibs <span class="klass">VerletParticle</span> class also includes a function called <span class="function">addForce()</span> that we can use to apply any calculated force to a particle.</p>
-<p><a id="attractionbehavior-class-toxiclibs-df386000-2533-0130-b86e-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsattractionbehavior-class-df387020-2533-0130-b86f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="attractionbehavior-class-toxiclibs-829d39e0-253f-0130-bc80-7cd1c3f718ad" style="display: block;"></a><a id="toxiclibsattractionbehavior-class-829d4ad0-253f-0130-bc81-7cd1c3f718ad" style="display: block;"></a></p>
 <p>However, toxiclibs also takes this idea one step further by allowing us to attach some common forces (let’s call them “behaviors”) to particles, calculating them and applying them for us!  For example, if we attach an <span class="klass">AttractionBehavior</span> object to a particle, then all other particles in the physics world will be attracted to that particle.</p>
 <p>Let’s say we have a <span class="klass">Particle</span> class (that <span class="klass">extends VerletParticle</span>).</p>
 <div class="source-code">
