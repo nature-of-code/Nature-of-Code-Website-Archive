@@ -111,7 +111,7 @@
   
 </blockquote><p>Here we are: the beginning.  Well, almost the beginning. If it’s been a while since you’ve done any programming in Processing (or any math, for that matter), this introduction will get your mind back into computational thinking before we approach some of the more difficult and complex material.</p>
 <p>In Chapter 1, we’re going to talk about the concept of a vector and how it will serve as the building block for simulating motion throughout this book.   But before we take that step, let’s think about what it means for something to simply move around the screen.   Let’s begin with one of the best-known and simplest simulations of motion—the random walk.</p>
-<section><a id="intro_section1" style="display: block;"></a><h3 id="i1-random-walks">I.1 Random Walks</h3><p><a id="random-walks-22016e70-1662-0130-0aca-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="intro_section1" style="display: block;"></a><h3 id="i1-random-walks">I.1 Random Walks</h3><p><a id="random-walks-7eb39800-251f-0130-add9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Imagine you are standing in the middle of a balance beam.  Every ten seconds, you flip a coin.  Heads, take a step forward.  Tails, take a step backward.   This is a random walk—a path defined as a series of random steps.    Stepping off that balance beam and onto the floor, you could perform a random walk in two dimensions by flipping that same coin twice with the following results:</p>
 <div class="table">
 	
@@ -189,7 +189,7 @@
 		</tbody>
 	</table>
 </div><p>Yes, this may seem like a particularly unsophisticated algorithm.  Nevertheless, random walks can be used to model phenomena that occur in the real world, from the movements of molecules in a gas to the behavior of a gambler spending a day at the casino.  As for us, we begin this book studying a random walk with three goals in mind.</p>
-<p><a id="natural-phenomena-modeling-with-random-walks-2201dcf0-1662-0130-0acb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="natural-phenomenamodeling-with-random-walks-7eb51d40-251f-0130-adda-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -210,11 +210,11 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
 </li>
 		
 	</ol>
-</div></section><section><a id="intro_section2" style="display: block;"></a><h3 id="i2-the-random-walker-class">I.2 The Random Walker Class</h3><p><a id="object-oriented-programming-review-of-22020900-1662-0130-0acc-7cd1c3f718ad" style="display: block;"></a><a id="processing-review-of-object-oriented-programming-with-22021640-1662-0130-0acd-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="intro_section2" style="display: block;"></a><h3 id="i2-the-random-walker-class">I.2 The Random Walker Class</h3><p><a id="object-oriented-programmingreview-of-7eb54f80-251f-0130-addb-7cd1c3f718ad" style="display: block;"></a><a id="processingreview-of-object-oriented-programming-with-7eb56220-251f-0130-addc-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s review a bit of object-oriented programming (OOP) first by building a <span class="klass">Walker</span> object.   This will be only a cursory review.  If you have never worked with OOP before, you may want something more comprehensive; I’d suggest stopping here and reviewing the <a href="http://processing.org/learning/objects/">basics on the Processing website</a> before continuing.</p>
-<p><a id="object-defined-22023350-1662-0130-0ace-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programming-object-22023fa0-1662-0130-0acf-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="objectdefined-7eb58250-251f-0130-addd-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programmingobject-7eb595c0-251f-0130-adde-7cd1c3f718ad" style="display: block;"></a></p>
 <p>An <strong><em>object</em></strong> in Processing is an entity that has both data and functionality.  We are looking to design a <span class="klass">Walker</span> object that both keeps track of its data (where it exists on the screen) and has the capability to perform certain actions (such as draw itself or take a step).</p>
-<p><a id="class-(processing)-defined-22026190-1662-0130-0ad0-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programming-class-22026be0-1662-0130-0ad1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="class-processingdefined-7eb5bb20-251f-0130-addf-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programmingclass-7eb5cdf0-251f-0130-ade0-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A <strong><em>class</em></strong> is the template for building actual instances of objects.  Think of a class as the cookie cutter; the objects are the cookies themselves.</p>
 <p>Let’s begin by defining the <span class="klass">Walker</span> class—what it means to be a <span class="klass">Walker</span> object.  The <span class="klass">Walker</span> only needs two pieces of data—a number for its x-location and one for its y-location.</p>
 <div class="source-code">
@@ -232,13 +232,13 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Walker</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Objects have data.</div><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="n">x</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="kt">int</span> <span class="n">y</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">int</span> <span class="n">y</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="class-(processing)-constructor-22029e60-1662-0130-0ad2-7cd1c3f718ad" style="display: block;"></a><a id="constructor-2202ac70-1662-0130-0ad3-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="class-processingconstructor-7eb60960-251f-0130-ade1-7cd1c3f718ad" style="display: block;"></a><a id="constructor-7eb61b60-251f-0130-ade2-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Every class must have a constructor, a special function that is called when the object is first created.  You can think of it as the object’s <span class="function">setup()</span>.   There, we’ll initialize the <span class="klass">Walker</span>’s starting location (in this case, the center of the window).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -256,19 +256,19 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Objects have a constructor where they are initialized.</div><code><pre><span class='one-line'>  <span class="n">Walker</span><span class="o">()</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">x</span> <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">y</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="class-(processing)-functionality-2202d2e0-1662-0130-0ad4-7cd1c3f718ad" style="display: block;"></a><a id="functionality-2202dd20-1662-0130-0ad5-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="class-processingfunctionality-7eb64970-251f-0130-ade3-7cd1c3f718ad" style="display: block;"></a><a id="functionality-7eb66670-251f-0130-ade4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Finally, in addition to data, classes can be defined with functionality.  In this example, a <span class="klass">Walker</span> has two functions.   We first write a function that allows the object to display itself (as a white dot).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  //[full] Objects have functions.
   void display() {
-    stroke(255);
+    stroke(0);
     point(x,y);
   }
   //[end]</textarea>
@@ -278,16 +278,16 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Objects have functions.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span></span>
-<span class='one-line'>    <span class="n">stroke</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span>
+<span class='one-line'>    <span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The second function directs the <span class="klass">Walker</span> object to take a step.   Now, this is where things get a bit more interesting.   Remember that floor on which we were taking random steps?  Well, now we can use a Processing window in that same capacity.  There are four possible steps. A step to the right can be simulated by incrementing <span class="var">x</span> (<span class="var">x</span>++); to the left by decrementing <span class="var">x</span> (<span class="var">x--</span>); forward by going down a pixel (<span class="var">y++</span>); and backward by going up a pixel (<span class="var">y--</span>).   How do we pick from these four choices?   Earlier we stated that we could flip two coins.  In Processing, however, when we want to randomly choose from a list of options, we can pick a random number using <span class="function">random()</span>.</p>
-<p><a id="random-number-generators-random()-function-22034620-1662-0130-0ad6-7cd1c3f718ad" style="display: block;"></a><a id="random()-function-22035100-1662-0130-0ad7-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="random-number-generatorsrandom-function-7eb6c840-251f-0130-ade5-7cd1c3f718ad" style="display: block;"></a><a id="random-function-7eb6d940-251f-0130-ade6-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  void step() {
@@ -333,7 +333,7 @@ Throughout the book, we’ll periodically need a basic understanding of randomne
 <span class='one-line'>      <span class="n">y</span><span class="o">++;</span></span>
 <span class='one-line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">y</span><span class="o">--;</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -354,16 +354,17 @@ Walker w;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="new-operator-(objects)-22039b10-1662-0130-0ad8-7cd1c3f718ad" style="display: block;"></a><a id="object-new-operator-2203a700-1662-0130-0ad9-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="new-operator-objects-7eb72810-251f-0130-ade7-7cd1c3f718ad" style="display: block;"></a><a id="objectnew-operator-7eb74040-251f-0130-ade8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Then we create the object in <span class="function">setup()</span> by calling the constructor with the <span class="function">new</span> operator.</p>
 <p><a id="intro_example1" style="display: block;"></a><span class="example">Example I.1: Traditional random walk</span></p>
+<p><em>Each time you see the above Example heading in this book, it means there is a corresponding code example available on <a href="http://github.com/shiffman/The-Nature-of-Code-Examples">GitHub</a>.</em></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void setup() {
   size(640,360);
   // Create the Walker.
   w = new Walker();  //[bold]
-  background(0);
+  background(255);
 }</textarea>
   
   
@@ -374,7 +375,7 @@ Walker w;</textarea>
 <span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span><span class="mi">360</span><span class="o">);</span></span></pre></code></div>
 
   <div class='code-comment-pair '><div class='code-comment '>Create the Walker.</div><code><pre><span class='one-line'>  <strong><span class="n">w</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Walker</span><span class="o">();</span></strong></span>
-<span class='one-line'>  <span class="n">background</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
+<span class='one-line'>  <span class="n">background</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
@@ -396,7 +397,7 @@ Walker w;</textarea>
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Call functions on the Walker.</div><code><pre><span class='one-line'>  <strong><span class="n">w</span><span class="o">.</span><span class="na">step</span><span class="o">();</span></strong></span>
-<span class='one-line'>  <strong><span class="n">w</span><span class="o">.</span><span class="na">display</span><span class="o">();</span></strong></span></pre></code></div>
+<span class='one-line'>  <strong><span class="n">w</span><span class="o">.</span><span class="na">display</span><span class="o">();</span></strong></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -415,7 +416,7 @@ Walker w;</textarea>
 	
 	
 </div>
-<p>There are a couple improvements we could make to the random walker.  For one, this [klass]*Walker*’s step choices are limited to four options—up, down, left, and right.  But any given pixel in the window has eight possible neighbors, and a ninth possibility is to stay in the same place.</p>
+<p>There are a couple improvements we could make to the random walker.  For one, this <span class="klass">Walker</span>’s step choices are limited to four options—up, down, left, and right.  But any given pixel in the window has eight possible neighbors, and a ninth possibility is to stay in the same place.</p>
 <a id="intro_figure1" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/intro/intro_01.png" alt="Nature of Code Image" />
@@ -441,7 +442,7 @@ Walker w;</textarea>
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Yields -1, 0, or 1</div><code><pre><span class='one-line'>    <span class="kt">int</span> <span class="n">stepx</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">random</span><span class="o">(</span><span class="mi">3</span><span class="o">))-</span><span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="kt">int</span> <span class="n">stepy</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">random</span><span class="o">(</span><span class="mi">3</span><span class="o">))-</span><span class="mi">1</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="kt">int</span> <span class="n">stepy</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">random</span><span class="o">(</span><span class="mi">3</span><span class="o">))-</span><span class="mi">1</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">x</span> <span class="o">+=</span> <span class="n">stepx</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">y</span> <span class="o">+=</span> <span class="n">stepy</span><span class="o">;</span></span>
@@ -468,7 +469,7 @@ Walker w;</textarea>
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Yields any floating point number between -1.0 and 1.0</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">stepx</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="kt">float</span> <span class="n">stepy</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="kt">float</span> <span class="n">stepy</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">x</span> <span class="o">+=</span> <span class="n">stepx</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">y</span> <span class="o">+=</span> <span class="n">stepy</span><span class="o">;</span></span>
@@ -477,7 +478,7 @@ Walker w;</textarea>
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>All of these variations on the “traditional” random walk have one thing in common: at any moment in time, the probability that the <span class="klass">Walker</span> will take a step in a given direction is equal to the probability that the <span class="klass">Walker</span> will take a step in any direction.   In other words, if there are four possible steps, there is a 1 in 4 (or 25%) chance the <span class="klass">Walker</span> will take any given step.  With nine possible steps, it’s a 1 in 9 (or 11.1%) chance.</p>
-<p><a id="random-number-generators-uniform-number-distributions-and-220482f0-1662-0130-0ada-7cd1c3f718ad" style="display: block;"></a><a id="uniform-number-distributions-22048ea0-1662-0130-0adb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="random-number-generatorsuniform-number-distributions-and-7eb818c0-251f-0130-ade9-7cd1c3f718ad" style="display: block;"></a><a id="uniform-number-distributions-7eb82d70-251f-0130-adea-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Conveniently, this is how the <span class="function">random()</span> function works.  Processing’s random number generator (which operates behind the scenes) produces what is known as a “uniform” distribution of numbers.   We can test this distribution with a Processing sketch that counts each time a random number is picked and graphs it as the height of a rectangle.</p>
 <div class="image-container screenshot" >
 	
@@ -543,25 +544,25 @@ void draw() {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Graphing the results</div><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">randomCounts</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">*</span><span class="n">w</span><span class="o">,</span><span class="n">height</span><span class="o">-</span><span class="n">randomCounts</span><span class="o">[</span><span class="n">x</span><span class="o">],</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">randomCounts</span><span class="o">[</span><span class="n">x</span><span class="o">]);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The above screenshot shows the result of the sketch running for a few minutes.   Notice how each bar of the graph differs in height.   Our sample size (i.e. the number of random numbers we’ve picked) is rather small and there are some occasional discrepancies, where certain numbers are picked more often.  Over time, with a good random number generator, this would even out.</p>
-<p><a id="pseudo-random-numbers-2204b790-1662-0130-0adc-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generators-pseudo-random-numbers-2204c290-1662-0130-0add-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="pseudo-random-numbers-7eb85ee0-251f-0130-adeb-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generatorspseudo-random-numbers-7eb86fb0-251f-0130-adec-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="note">
   <h4 id="pseudo-random-numbers">Pseudo-Random Numbers</h4><p>The random numbers we get from the <span class="function">random()</span> function are not truly random; therefore they are known as “pseudo-random.”  They are the result of a mathematical function that simulates randomness.  This function would yield a pattern over time, but that time period is so long that for us, it’s just as good as pure randomness!</p>
 
 </div><div class="example">
   <a id="intro_exercise1" style="display: block;"></a><h4 id="exercise-i1">Exercise I.1</h4><p>Create a random walker that has a tendency to move down and to the right.  (We’ll see the solution to this in the next section.)</p>
 
-</div></section><section><a id="intro_section3" style="display: block;"></a><h3 id="i3-probability-and-non-uniform-distributions">I.3 Probability and Non-Uniform Distributions</h3><p><a id="natural-phenomena-modeling-with-the-random()-function-2204faa0-1662-0130-0ade-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributions-probability-and-22050ac0-1662-0130-0adf-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-probability-and-220516b0-1662-0130-0ae0-7cd1c3f718ad" style="display: block;"></a><a id="probability-non-uniform-distributions-and-22052140-1662-0130-0ae1-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generators-non-uniform-distributions,-creating-22052c20-1662-0130-0ae2-7cd1c3f718ad" style="display: block;"></a><a id="random()-function-natural-phenomena,-modeling-with-22053b50-1662-0130-0ae3-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="intro_section3" style="display: block;"></a><h3 id="i3-probability-and-non-uniform-distributions">I.3 Probability and Non-Uniform Distributions</h3><p><a id="natural-phenomenamodeling-with-the-random-function-7eb8b4e0-251f-0130-aded-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributionsprobability-and-7eb8d5c0-251f-0130-adee-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformprobability-and-7eb8f8a0-251f-0130-adef-7cd1c3f718ad" style="display: block;"></a><a id="probabilitynon-uniform-distributions-and-7eba8070-251f-0130-adf0-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generatorsnon-uniform-distributions-creating-7eba95c0-251f-0130-adf1-7cd1c3f718ad" style="display: block;"></a><a id="random-functionnatural-phenomena-modeling-with-7ebaa9d0-251f-0130-adf2-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Remember when you first started programming in Processing?  Perhaps you wanted to draw a lot of circles on the screen.  So you said to yourself: “Oh, I know.  I’ll draw all these circles at random locations, with random sizes and random colors.”   In a computer graphics system, it’s often easiest to seed a system with randomness.   In this book, however, we’re looking to build systems modeled on what we see in nature.  Defaulting to randomness is not a particularly thoughtful solution to a design problem—in particular, the kind of problem that involves creating an organic or natural-looking simulation.</p>
-<p><a id="probability-of-the-fittest-22054eb0-1662-0130-0ae4-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="probability-of-the-fittest-7ebac080-251f-0130-adf3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>With a few tricks, we can change the way we use <span class="function">random()</span> to produce “non-uniform” distributions of random numbers.    This will come in handy throughout the book as we look at a number of different scenarios.    When we examine genetic algorithms, for example, we’ll need a methodology for performing “selection”—which members of our population should be selected to pass their DNA to the next generation?   Remember the concept of survival of the fittest?    Let’s say we have a population of monkeys evolving.  Not every monkey will have a equal chance of reproducing.  To simulate Darwinian evolution, we can’t simply pick two random monkeys to be parents.  We need the more “fit” ones to be more likely to be chosen.  We need to define the “probability of the fittest.”   For example, a particularly fast and strong monkey might have a 90% chance of procreating, while a weaker one has only a 10% chance.</p>
-<p><a id="probability-22056b10-1662-0130-0ae5-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="probability-7ebada10-251f-0130-adf4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s pause here and take a look at probability’s basic principles. First we’ll examine single event probability, i.e. the likelihood that a given event will occur.</p>
 <p>If you have a system with a certain number of possible outcomes, the probability of the occurrence of a given event equals the number of outcomes that qualify as that event divided by the total number of all possible outcomes. A coin toss is a simple example—it has only two possible outcomes, heads or tails. There is only one way to flip heads. The probability that the coin will turn up heads, therefore, is one divided by two: 1/2 or 50%.</p>
 <p>Take a deck of fifty-two cards. The probability of drawing an ace from that deck is:</p>
@@ -575,7 +576,7 @@ void draw() {
 <div class="example">
   <a id="intro_exercise2" style="display: block;"></a><h4 id="exercise-i2">Exercise I.2</h4><p>What is the probability of drawing two aces in a row from a deck of fifty-two cards?</p>
 
-</div><p><a id="arrays-custom-distributions,-creating-with-22076a60-1662-0130-0ae6-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-creating-with-arrays-22077960-1662-0130-0ae7-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributions-creating-with-arrays-22078560-1662-0130-0ae8-7cd1c3f718ad" style="display: block;"></a><a id="random()-function-non-uniform-distributions,-creating-with-22079300-1662-0130-0ae9-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="arrayscustom-distributions-creating-with-7ebb1af0-251f-0130-adf5-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformcreating-with-arrays-7ebb2cf0-251f-0130-adf6-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributionscreating-with-arrays-7ebb3e90-251f-0130-adf7-7cd1c3f718ad" style="display: block;"></a><a id="random-functionnon-uniform-distributions-creating-with-7ebb52c0-251f-0130-adf8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>There are a couple of ways in which we can use the <span class="function">random()</span> function with probability in code. One technique is to fill an array with a selection of numbers—some of which are repeated—then choose random numbers from that array and generate events based on those choices.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -597,7 +598,7 @@ int index = int(random(stuff.length));</textarea>
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">int</span><span class="o">[]</span> <span class="n">stuff</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> 1 is stored in the array twice, making it more likely to be picked.</div><code><pre><span class='one-line'><span class="n">stuff</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'><span class="n">stuff</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'><span class="n">stuff</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">stuff</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span></span>
 <span class='one-line'><span class="n">stuff</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span></span>
@@ -633,7 +634,7 @@ if (r < prob) {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If our random number is less than 0.1, try again!</div><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">prob</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>   <span class="c1">// try again!</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -746,7 +747,7 @@ if (num < 0.6) {
 <span class='one-line'>    <span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A 40% chance of moving to the right!</div><code><pre><span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="o">)</span> <span class="o">{</span></span>
-<span class='one-line'>      <span class="n">x</span><span class="o">++;</span></span></pre></code></div>
+<span class='one-line'>      <span class="n">x</span><span class="o">++;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.6</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">x</span><span class="o">--;</span></span>
@@ -775,9 +776,9 @@ if (num < 0.6) {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="distributions,-normal-22082a20-1662-0130-0aea-7cd1c3f718ad" style="display: block;"></a><a id="probability-normal-distributions-22083660-1662-0130-0aeb-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="distributions-normal-7ebbe250-251f-0130-adf9-7cd1c3f718ad" style="display: block;"></a><a id="probabilitynormal-distributions-7ebbf220-251f-0130-adfa-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Does this accurately depict the heights of real-world beings?   Think of a crowded sidewalk in New York City.   Pick any person off the street and it may appear that their height is random.  Nevertheless, it’s not the kind of random that <span class="function">random()</span> produces.   People’s heights are not uniformly distributed; there are a great deal more people of average height than there are very tall or very short ones.   To simulate nature, we may want it to be more likely that our monkeys are of average height (250 pixels), yet still allow them to be, on occasion, very short or very tall.</p>
-<p><a id="bell-curve-22084f90-1662-0130-0aec-7cd1c3f718ad" style="display: block;"></a><a id="bell-curve-mean-and-22085e20-1662-0130-0aed-7cd1c3f718ad" style="display: block;"></a><a id="gauss,-carl-friedrich-22086bb0-1662-0130-0aee-7cd1c3f718ad" style="display: block;"></a><a id="gaussian-distribution-22087980-1662-0130-0aef-7cd1c3f718ad" style="display: block;"></a><a id="laplace,-pierre-simon-22088910-1662-0130-0af0-7cd1c3f718ad" style="display: block;"></a><a id="laplacian-distribution-22089530-1662-0130-0af1-7cd1c3f718ad" style="display: block;"></a><a id="mean-2208a240-1662-0130-0af2-7cd1c3f718ad" style="display: block;"></a><a id="normal-distribution-2208afc0-1662-0130-0af3-7cd1c3f718ad" style="display: block;"></a><a id="probability-mean-2208bcc0-1662-0130-0af4-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="bell-curve-7ebc0da0-251f-0130-adfb-7cd1c3f718ad" style="display: block;"></a><a id="bell-curvemean-and-7ebc1c10-251f-0130-adfc-7cd1c3f718ad" style="display: block;"></a><a id="gauss-carl-friedrich-7ebc37b0-251f-0130-adfd-7cd1c3f718ad" style="display: block;"></a><a id="gaussian-distribution-7ebc4710-251f-0130-adfe-7cd1c3f718ad" style="display: block;"></a><a id="laplace-pierre-simon-7ebc56c0-251f-0130-adff-7cd1c3f718ad" style="display: block;"></a><a id="laplacian-distribution-7ebc67b0-251f-0130-ae00-7cd1c3f718ad" style="display: block;"></a><a id="mean-7ebc75a0-251f-0130-ae01-7cd1c3f718ad" style="display: block;"></a><a id="normal-distribution-7ebc83f0-251f-0130-ae02-7cd1c3f718ad" style="display: block;"></a><a id="probabilitymean-7ebc9290-251f-0130-ae03-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A distribution of values that cluster around an average (referred to as the “mean”) is known as a “normal” distribution.   It is also called the Gaussian distribution (named for mathematician Carl Friedrich Gauss) or, if you are French, the Laplacian distribution (named for Pierre-Simon Laplace).  Both mathematicians were working concurrently in the early nineteenth century on defining such a distribution.</p>
 <p>When you graph the distribution, you get something that looks like the following, informally known as a bell curve:</p>
 <a id="intro_figure2" style="display: block;"></a><div class="image-container two-col" >
@@ -792,7 +793,7 @@ if (num < 0.6) {
 	
 	<p class="caption">Figure I.3</p>
 </div>
-<p><a id="μ-(mu)-2208e6e0-1662-0130-0af5-7cd1c3f718ad" style="display: block;"></a><a id="σ-(sigma)-2208f140-1662-0130-0af6-7cd1c3f718ad" style="display: block;"></a><a id="μ-(mu)-22090140-1662-0130-0af7-7cd1c3f718ad" style="display: block;"></a><a id="σ-(sigma)-220910d0-1662-0130-0af8-7cd1c3f718ad" style="display: block;"></a><a id="probability-standard-deviation-22092120-1662-0130-0af9-7cd1c3f718ad" style="display: block;"></a><a id="standard-deviation-22092ee0-1662-0130-0afa-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mu--7ebcb8f0-251f-0130-ae04-7cd1c3f718ad" style="display: block;"></a><a id="sigma--7ebccce0-251f-0130-ae05-7cd1c3f718ad" style="display: block;"></a><a id="probabilitystandard-deviation-7ebce700-251f-0130-ae06-7cd1c3f718ad" style="display: block;"></a><a id="standard-deviation-7ebcf8d0-251f-0130-ae07-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The curve is generated by a mathematical function that defines the probability of any given value occurring as a function of the mean (often written as μ, the Greek letter <em>mu</em>) and standard deviation (σ, the Greek letter <em>sigma</em>).</p>
 <p>The mean is pretty easy to understand.  In the case of our height values between 200 and 300, you probably have an intuitive sense of the mean (i.e. average) as 250. However, what if I were to say that the standard deviation is 3 or 15?   What does this mean for the numbers?  The graphs above should give us a hint. The graph on the left shows us the distribution with a very low standard deviation, where the majority of the values cluster closely around the mean.  The graph on the right shows us a higher standard deviation, where the values are more evenly spread out from the average.</p>
 <p>The numbers work out as follows: Given a population, 68% of the members of that population will have values in the range of one standard deviation from the mean, 98% within two standard deviations, and 99.7% within three standard deviations.   Given a standard deviation of 5 pixels, only 0.3% of the monkey heights will be less than 235 pixels (three standard deviations below the mean of 250) or greater than 265 pixels (three standard deviations above the mean of 250).</p>
@@ -800,7 +801,7 @@ if (num < 0.6) {
   <h4 id="calculating-mean-and-standard-deviation">Calculating Mean and Standard Deviation</h4><p>Consider a class of ten students who receive the following scores (out of 100) on a test:</p>
 <p><em>85, 82, 88, 86, 85, 93, 98, 40, 73, 83</em></p>
 <p><strong><em>The mean is the average:  81.3</em></strong></p>
-<p><a id="standard-deviation-calculating-22096d00-1662-0130-0afb-7cd1c3f718ad" style="display: block;"></a><a id="standard-deviation-variance-22097a10-1662-0130-0afc-7cd1c3f718ad" style="display: block;"></a><a id="variance-220984f0-1662-0130-0afd-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="standard-deviationcalculating-7ebd2e70-251f-0130-ae08-7cd1c3f718ad" style="display: block;"></a><a id="standard-deviationvariance-7ebd3f40-251f-0130-ae09-7cd1c3f718ad" style="display: block;"></a><a id="variance-7ebd4fb0-251f-0130-ae0a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The standard deviation is calculated as the square root of the average of the squares of deviations around the mean. In other words, take the difference from the mean for each person and square it (variance). Calculate the average of all these values and take the square root as the standard deviation.</p>
 <div class="table">
 	
@@ -881,9 +882,9 @@ if (num < 0.6) {
 	</table>
 </div><p><strong><em>The standard deviation is the square root of the average variance:  15.13</em></strong></p>
 
-</div><p><a id="processing-random-class-220a0770-1662-0130-0afe-7cd1c3f718ad" style="display: block;"></a><a id="random-class-(processing)-220a1250-1662-0130-0aff-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="processingrandom-class-7ebdab30-251f-0130-ae0b-7cd1c3f718ad" style="display: block;"></a><a id="random-class-processing-7ebdbd20-251f-0130-ae0c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Luckily for us, to use a normal distribution of random numbers in a Processing sketch, we don’t have to do any of these calculations ourselves.   Instead, we can make use of a class known as <span class="klass">Random</span>, which we get for free as part of the default Java libraries imported into Processing (see <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Random.html">the JavaDocs</a> for more information).</p>
-<p>To use the Random class, we must first declare a variable of type Random and create the Random object in <span class="function">setup()</span>.</p>
+<p>To use the <span class="klass">Random</span> class, we must first declare a variable of type <span class="klass">Random</span> and create the <span class="klass">Random</span> object in <span class="function">setup()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>// We use the variable name “generator” because what we
@@ -909,13 +910,13 @@ have here can be thought of as a random number generator.</div><code><pre><span 
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="nextgaussian()-function-(random-class)-220a4240-1662-0130-0b00-7cd1c3f718ad" style="display: block;"></a><a id="random-class-(processing)-nextgaussian()-function-220a5530-1662-0130-0b01-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="nextgaussian-function-random-class-7ebe1b40-251f-0130-ae0d-7cd1c3f718ad" style="display: block;"></a><a id="random-class-processingnextgaussian-function-7ebe2c20-251f-0130-ae0e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If we want to produce a random number with a normal (or Gaussian) distribution each time we run through <span class="function">draw()</span>, it’s as easy as calling the function <span class="function">nextGaussian()</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void draw() {
-  // Asking for a Gaussian random number
-  float num = generator.nextGaussian();
+  // Asking for a Gaussian random number. (Note nextGaussian() returns a double and must be converted to float.)
+  float num = (float) generator.nextGaussian();
 }</textarea>
   
   
@@ -924,13 +925,13 @@ have here can be thought of as a random number generator.</div><code><pre><span 
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>Asking for a Gaussian random number</div><code><pre><span class='one-line'>  <span class="kt">float</span> <span class="n">num</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="na">nextGaussian</span><span class="o">();</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>Asking for a Gaussian random number. (Note nextGaussian() returns a double and must be converted to float.)</div><code><pre><span class='one-line'>  <span class="kt">float</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">generator</span><span class="o">.</span><span class="na">nextGaussian</span><span class="o">();</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Here’s the thing.  What are we supposed to do with this value?  What if we wanted to use it, for example, to assign the x-position of a shape we draw on screen?</p>
-<p><a id="nextgaussian()-function-(random-class)-default-mean/standard-deviation-settings-of-220a85f0-1662-0130-0b02-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="nextgaussian-function-random-classdefault-meanstandard-deviation-settings-of-7ebe5da0-251f-0130-ae0f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The <span class="function">nextGaussian()</span> function returns a normal distribution of random numbers with the following parameters: <em>a mean of zero</em> and <em>a standard deviation of one</em>.    Let’s say we want a mean of 320 (the center horizontal pixel in a window of width 640) and a standard deviation of 60 pixels.   We can adjust the value to our parameters by multiplying it by the standard deviation and adding the mean.</p>
 <div class="image-container screenshot" >
 	
@@ -985,14 +986,14 @@ have here can be thought of as a random number generator.</div><code><pre><span 
 <div class="example">
   <a id="intro_exercise4" style="display: block;"></a><h4 id="exercise-i4">Exercise I.4</h4><p>Consider a simulation of paint splatter drawn as a collection of colored dots. Most of the paint clusters around a central location, but some dots do splatter out towards the edges.  Can you use a normal distribution of random numbers to generate the locations of the dots?  Can you also use a normal distribution of random numbers to generate a color palette?</p>
 
-</div><p><a id="random-walks-gaussian-220acc60-1662-0130-0b03-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="random-walksgaussian-7ebff7d0-251f-0130-ae10-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="example">
   <a id="intro_exercise5" style="display: block;"></a><h4 id="exercise-i5">Exercise I.5</h4><p>A Gaussian random walk is defined as one in which the step size (how far the object moves in a given direction) is generated with a normal distribution.  Implement this variation of our random walk.</p>
 
-</div></section><section><a id="intro_section5" style="display: block;"></a><h3 id="i5-a-custom-distribution-of-random-numbers">I.5 A Custom Distribution of Random Numbers</h3><p><a id="distributions,-custom-220ae710-1662-0130-0b04-7cd1c3f718ad" style="display: block;"></a><a id="lévy-flight-220af1b0-1662-0130-0b05-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributions-custom-220afb20-1662-0130-0b06-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-custom-220b06f0-1662-0130-0b07-7cd1c3f718ad" style="display: block;"></a><a id="oversampling-220b1610-1662-0130-0b08-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generators-custom-distributions,-creating-220b25a0-1662-0130-0b09-7cd1c3f718ad" style="display: block;"></a><a id="random-walks-lévy-flight-220b34d0-1662-0130-0b0a-7cd1c3f718ad" style="display: block;"></a><a id="random-walks-oversampling-220b4530-1662-0130-0b0b-7cd1c3f718ad" style="display: block;"></a></p>
-<p>There will come a time in your life when you do not want a uniform distribution of random values, or a Gaussian one.Let’s imagine for a moment that you are a random walker in search of food.   Moving randomly around a space seems like a reasonable strategy for finding something to eat.   After all, you don’t know where the food is, so you might as well search randomly until you find it.  The problem, as you may have noticed, is that random walkers return to previously visited locations many times (this is known as “oversampling.”)   One strategy to avoid such a problem is to, every so often, take a very large step.   This allows the walker to forage randomly around a specific location while periodically jumping very far away to reduce the amount of oversampling.   This variation on the random walk (known as a Lévy flight) requires a custom set of probabilities.   Though not an exact implementation of a Lévy flight, we could state the probability distribution as follows: the longer the step, the less likely it is to be picked; the shorter the step, the more likely.</p>
+</div></section><section><a id="intro_section5" style="display: block;"></a><h3 id="i5-a-custom-distribution-of-random-numbers">I.5 A Custom Distribution of Random Numbers</h3><p><a id="distributions-custom-7ec01760-251f-0130-ae11-7cd1c3f718ad" style="display: block;"></a><a id="lvy-flight-7ec024f0-251f-0130-ae12-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributionscustom-7ec03330-251f-0130-ae13-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformcustom-7ec04450-251f-0130-ae14-7cd1c3f718ad" style="display: block;"></a><a id="oversampling-7ec05540-251f-0130-ae15-7cd1c3f718ad" style="display: block;"></a><a id="random-number-generatorscustom-distributions-creating-7ec06530-251f-0130-ae16-7cd1c3f718ad" style="display: block;"></a><a id="random-walkslvy-flight-7ec07720-251f-0130-ae17-7cd1c3f718ad" style="display: block;"></a><a id="random-walksoversampling-7ec089e0-251f-0130-ae18-7cd1c3f718ad" style="display: block;"></a></p>
+<p>There will come a time in your life when you do not want a uniform distribution of random values, or a Gaussian one. Let’s imagine for a moment that you are a random walker in search of food.   Moving randomly around a space seems like a reasonable strategy for finding something to eat.   After all, you don’t know where the food is, so you might as well search randomly until you find it.  The problem, as you may have noticed, is that random walkers return to previously visited locations many times (this is known as “oversampling”).   One strategy to avoid such a problem is to, every so often, take a very large step.   This allows the walker to forage randomly around a specific location while periodically jumping very far away to reduce the amount of oversampling.   This variation on the random walk (known as a Lévy flight) requires a custom set of probabilities.   Though not an exact implementation of a Lévy flight, we could state the probability distribution as follows: the longer the step, the less likely it is to be picked; the shorter the step, the more likely.</p>
 <p>Earlier in this prologue, we saw that we could generate custom probability distributions by filling an array with values (some duplicated so that they would be picked more frequently) or by testing the result of <span class="function">random()</span>.  We could implement a Lévy flight by saying that there is a 1% chance of the walker taking a large step.</p>
-<p><a id="arrays-lévy-flights,-implementing-with-220b6f30-1662-0130-0b0c-7cd1c3f718ad" style="display: block;"></a><a id="lévy-flight-implementing-with-arrays-220b7f80-1662-0130-0b0d-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="arrayslvy-flights-implementing-with-7ec0b330-251f-0130-ae19-7cd1c3f718ad" style="display: block;"></a><a id="lvy-flightimplementing-with-arrays-7ec0c940-251f-0130-ae1a-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float r = random(1);
@@ -1014,7 +1015,7 @@ if (r < 0.01) {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A 1% chance of taking a large step</div><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">xstep</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">100</span><span class="o">,</span><span class="mi">100</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="n">ystep</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">100</span><span class="o">,</span><span class="mi">100</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">ystep</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">100</span><span class="o">,</span><span class="mi">100</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span> <span class="k">else</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">xstep</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span></span>
@@ -1023,7 +1024,7 @@ if (r < 0.01) {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="lévy-flight-implementing-with-qualifying-random-values-220b91d0-1662-0130-0b0e-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="lvy-flightimplementing-with-qualifying-random-values-7ec0dd80-251f-0130-ae1b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>However, this reduces the probabilities to a fixed number of options.  What if we wanted to make a more general rule—the higher a number, the more likely it is to be picked?  3.145 would be more likely to be picked than 3.144, even if that likelihood is just a tiny bit greater.  In other words, if <span class="var">x</span> is the random number, we could map the likelihood on the y-axis with <span class="var">y</span> = <span class="var">x</span>.</p>
 <a id="intro_figure4" style="display: block;"></a><div class="image-container " >
 	
@@ -1032,9 +1033,9 @@ if (r < 0.01) {
 	<p class="caption">Figure I.4</p>
 </div>
 <p>If we can figure out how to generate a distribution of random numbers according to the above graph, then we will be able to apply the same methodology to any curve for which we have a formula.</p>
-<p><a id="non-uniform-distributions-qualifying-random-values-220bc760-1662-0130-0b0f-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-qualifying-random-values-220bd200-1662-0130-0b10-7cd1c3f718ad" style="display: block;"></a><a id="qualifying-random-values-220bdc50-1662-0130-0b11-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="non-uniform-distributionsqualifying-random-values-7ec11530-251f-0130-ae1c-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformqualifying-random-values-7ec126a0-251f-0130-ae1d-7cd1c3f718ad" style="display: block;"></a><a id="qualifying-random-values-7ec137f0-251f-0130-ae1e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One solution is to pick two random numbers instead of one.  The first random number is just that, a random number.  The second one, however, is what we’ll call a “qualifying random value.”  It will tell us whether to use the first one or throw it away and pick another one.  Numbers that have an easier time qualifying will be picked more often, and numbers that rarely qualify will be picked infrequently.   Here are the steps (for now, let’s consider only random values between 0 and 1):</p>
-<div class="list">
+<div style="page-break-after:always;"> </div><div class="list">
 	
 	<ol class="arabic">
 		
@@ -1065,7 +1066,7 @@ If R2 is not less than P, go back to step 1 and start over.
 		
 	</ol>
 </div><p>Here we are saying that the likelihood that a random value will qualify is equal to the random number itself.  Let’s say we pick 0.1 for R1.  This means that R1 will have a 10% chance of qualifying.  If we pick 0.83 for R1 then it will have a 83% chance of qualifying.  The higher the number, the greater the likelihood that we will actually use it.</p>
-<p><a id="monte-carlo-method-220c13d0-1662-0130-0b12-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributions-monte-carlo-method-220c21c0-1662-0130-0b13-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-monte-carlo-method-220c3310-1662-0130-0b14-7cd1c3f718ad" style="display: block;"></a><a id="qualifying-random-values-monte-carlo-method-220c4480-1662-0130-0b15-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="monte-carlo-method-7ec16730-251f-0130-ae1f-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributionsmonte-carlo-method-7ec176a0-251f-0130-ae20-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformmonte-carlo-method-7ec18b30-251f-0130-ae21-7cd1c3f718ad" style="display: block;"></a><a id="qualifying-random-valuesmonte-carlo-method-7ec1a6a0-251f-0130-ae22-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here is a function (named for the Monte Carlo method, which was named for the Monte Carlo casino) that implements the above algorithm, returning a random value between 0 and 1.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1104,7 +1105,7 @@ If R2 is not less than P, go back to step 1 and start over.
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Does it qualify?  If so, we’re done!</div><code><pre><span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">r2</span> <span class="o">&lt;</span> <span class="n">probability</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="k">return</span> <span class="n">r1</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -1140,9 +1141,9 @@ If R2 is not less than P, go back to step 1 and start over.
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>(Later we’ll see how to do this more efficiently using vectors.)</p>
 
-</div></section><section><a id="intro_section6" style="display: block;"></a><h3 id="i6-perlin-noise-a-smoother-approach">I.6 Perlin Noise (A Smoother Approach)</h3><p><a id="natural-phenomena-perlin-noise-and-220c76b0-1662-0130-0b16-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributions-perlin-noise-220df820-1662-0130-0b17-7cd1c3f718ad" style="display: block;"></a><a id="distributions,-non-uniform-perlin-noise-220e0360-1662-0130-0b18-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noise-natural-phenomena,-modeling-with-220e1830-1662-0130-0b19-7cd1c3f718ad" style="display: block;"></a><a id="tron-(1982)-220e2990-1662-0130-0b1a-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="intro_section6" style="display: block;"></a><h3 id="i6-perlin-noise-a-smoother-approach">I.6 Perlin Noise (A Smoother Approach)</h3><p><a id="natural-phenomenaperlin-noise-and-7ec1d840-251f-0130-ae23-7cd1c3f718ad" style="display: block;"></a><a id="non-uniform-distributionsperlin-noise-7ec1ec40-251f-0130-ae24-7cd1c3f718ad" style="display: block;"></a><a id="distributions-non-uniformperlin-noise-7ec1fff0-251f-0130-ae25-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noisenatural-phenomena-modeling-with-7ec213e0-251f-0130-ae26-7cd1c3f718ad" style="display: block;"></a><a id="tron-1982-7ec22680-251f-0130-ae27-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A good random number generator produces numbers that have no relationship and show no discernible pattern. As we are beginning to see, a little bit of randomness can be a good thing when programming organic, lifelike behaviors.  However, randomness as the single guiding principle is not necessarily natural.   An algorithm known as “Perlin noise,” named for its inventor Ken Perlin, takes this concept into account.   Perlin developed the noise function while working on the original <em>Tron</em> movie in the early 1980s; it was designed to create procedural textures for computer-generated effects. In 1997 Perlin won an Academy Award in technical achievement for this work. Perlin noise can be used to generate various effects with natural qualities, such as clouds, landscapes, and patterned textures like marble.</p>
-<p><a id="naturally-ordered-sequence-of-numbers-220e42c0-1662-0130-0b1b-7cd1c3f718ad" style="display: block;"></a><a id="pseudo-random-numbers-perlin-noise-and-220e5160-1662-0130-0b1c-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="naturally-ordered-sequence-of-numbers-7ec24290-251f-0130-ae28-7cd1c3f718ad" style="display: block;"></a><a id="pseudo-random-numbersperlin-noise-and-7ec25270-251f-0130-ae29-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Perlin noise has a more organic appearance because it produces a naturally ordered (“smooth”) sequence of pseudo-random numbers.    The graph on the left below shows Perlin noise over time, with the x-axis representing time; note the smoothness of the curve. The graph on the right shows pure random numbers over time.  (The code for generating these graphs is available in the accompanying book downloads.)</p>
 <div class="image-container two-col" >
 	
@@ -1156,13 +1157,14 @@ If R2 is not less than P, go back to step 1 and start over.
 	
 	<p class="caption">Figure I.6: Random</p>
 </div>
-<p><a id="noise()-function-(processing)-220e7560-1662-0130-0b1d-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noise-noise()-function-(processing)-220e8010-1662-0130-0b1e-7cd1c3f718ad" style="display: block;"></a><a id="processing-noise()-function-220e8e70-1662-0130-0b1f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="noise-function-processing-7ec28290-251f-0130-ae2a-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noisenoise-function-processing-7ec29270-251f-0130-ae2b-7cd1c3f718ad" style="display: block;"></a><a id="processingnoise-function-7ec2a6e0-251f-0130-ae2c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Processing has a built-in implementation of the Perlin noise algorithm: the function <span class="function">noise()</span>.  The <span class="function">noise()</span> function takes one, two, or three arguments, as noise is computed in one, two, or three dimensions.  Let’s start by looking at one-dimensional noise.</p>
-<p><a id="noisedetail()-function-(processing)-220eb330-1662-0130-0b20-7cd1c3f718ad" style="display: block;"></a><a id="processing-noisedetail()-function-220ec050-1662-0130-0b21-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="noisedetail-function-processing-7ec2ce50-251f-0130-ae2d-7cd1c3f718ad" style="display: block;"></a><a id="processingnoisedetail-function-7ec2de10-251f-0130-ae2e-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="note">
-  <h3 id="noise-detail">Noise Detail</h3>
-  <p>The Processing.org noise reference tells us that noise is calculated over several “octaves.” Calling the <a href="http://processing.org/reference/noiseDetail_.html"><span class="function">noiseDetail()</span></a> function will change both the number of octaves and their importance relative to one another.  This in turn changes how the noise function behaves.</p>
-  <p>An online lecture by Ken Perlin lets you learn more about how noise works from <a href="http://www.noisemachine.com/talk1/">Perlin himself</a>.</p>
+<h3 id="noise-detail">Noise Detail</h3>
+<p>The Processing <a href="http://processing.org/reference/noise_.html">noise reference</a> tells us that noise is calculated over several “octaves.” Calling the <a href="http://processing.org/reference/noiseDetail_.html"><span class="function">noiseDetail()</span></a> function will change both the number of octaves and their importance relative to one another.  This in turn changes how the noise function behaves.</p>
+
+<p>An online lecture by Ken Perlin lets you learn more about how noise works from <a href="http://www.noisemachine.com/talk1/">Perlin himself</a>.</p>
 </div><p>Consider drawing a circle in our Processing window at a random x-location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1193,7 +1195,7 @@ float x = noise(0,width); //[line-through]</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="noise()-function-(processing)-arguments-for-220f02c0-1662-0130-0b22-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="noise-function-processingarguments-for-7ec30f00-251f-0130-ae2f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While conceptually this is exactly what we want to do—calculate an x-value that ranges between 0 and the width according to Perlin noise—this is not the correct implementation.    While the arguments to the <span class="function">random()</span> function specify a range of values between a minimum and a maximum, <span class="function">noise()</span> does not work this way.  Instead, the output range is fixed—it always returns a value between 0 and 1.  We’ll see in a moment that we can get around this easily with Processing’s <span class="function">map()</span> function, but first we must examine what exactly <span class="function">noise()</span> expects us to pass in as an argument.</p>
 <p>We can think of one-dimensional Perlin noise as a linear sequence of values over time.   For example:</p>
 <div class="table">
@@ -1341,7 +1343,7 @@ void draw() {
 	<p class="caption">Figure I.7</p>
 </div>
 <p>Try running the code several times, incrementing <span class="var">t</span> by 0.01, 0.02, 0.05, 0.1, 0.0001, and you will see different results.</p>
-<section><a id="_mapping_noise" style="display: block;"></a><h4 id="mapping-noise">Mapping Noise</h4><p><a id="map()-function-(processing)-220fe6e0-1662-0130-0b23-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noise-map()-function-220ff2c0-1662-0130-0b24-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="_mapping_noise" style="display: block;"></a><h4 id="mapping-noise">Mapping Noise</h4><p><a id="map-function-processing-7ec53820-251f-0130-ae30-7cd1c3f718ad" style="display: block;"></a><a id="perlin-noisemap-function-7ec55100-251f-0130-ae31-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now we’re ready to answer the question of what to do with the noise value.   Once we have the value with a range between 0 and 1, it’s up to us to map that range to what we want.   The easiest way to do this is with Processing’s <span class="function">map()</span> function.   The <span class="function">map()</span> function takes five arguments.  First up is the value we want to map, in this case <span class="var">n</span>.  Then we have to give it the value’s current range (minimum and maximum), followed by our desired range.</p>
 <a id="intro_figure8" style="display: block;"></a><div class="image-container " >
 	
@@ -1436,12 +1438,12 @@ void draw() {
 <span class='one-line'>  <span class="kt">void</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> x- and y-location mapped from noise</div><code><pre><span class='one-line'>    <span class="n">x</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">noise</span><span class="o">(</span><span class="n">tx</span><span class="o">),</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">y</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">noise</span><span class="o">(</span><span class="n">ty</span><span class="o">),</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">y</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">noise</span><span class="o">(</span><span class="n">ty</span><span class="o">),</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Move forward through “time.”</div><code><pre><span class='one-line'>    <span class="n">tx</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="n">ty</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">ty</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -1459,7 +1461,7 @@ void draw() {
 <div class="example">
   <a id="intro_exercise7" style="display: block;"></a><h5 id="exercise-i7">Exercise I.7</h5><p>In the above random walker, the result of the noise function is mapped directly to the <span class="klass">Walker</span>’s location.  Create a random walker where you instead map the result of the <span class="function">noise()</span> function to a <span class="klass">Walker</span>’s step size.</p>
 
-</div></section><section><a id="_two_dimensional_noise" style="display: block;"></a><h4 id="two-dimensional-noise">Two-Dimensional Noise</h4><p><a id="perlin-noise-two-dimensional-22115470-1662-0130-0b25-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_two_dimensional_noise" style="display: block;"></a><h4 id="two-dimensional-noise">Two-Dimensional Noise</h4><p><a id="perlin-noisetwo-dimensional-7ec67cd0-251f-0130-ae32-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This idea of noise values living in a one-dimensional space is important because it leads us right into a discussion of two-dimensional space.  Let’s think about this for a moment.  With one-dimensional noise, we have a sequence of values in which any given value is similar to its neighbor.  Because the value is in one dimension, it only has two neighbors: a value that comes before it (to the left on the graph) and one that comes after it (to the right).</p>
 <a id="intro_figure10" style="display: block;"></a><div class="image-container two-col-borderless" >
 	
@@ -1616,7 +1618,7 @@ for (int x = 0; x < width; x++) {
 <p>As we finish off the introduction, it’s also worth noting that we could just as easily fall into the trap of using Perlin noise as a crutch.   How should this object move? Perlin noise!  What color should it be?  Perlin noise!  How fast should it grow?  Perlin noise!</p>
 <p>The point of all of this is not to say that you should or shouldn’t use randomness.  Or that you should or shouldn’t use Perlin noise.   The point is that the rules of your system are defined by you, and the larger your toolbox, the more choices you’ll have as you implement those rules.   The goal of this book is to fill your toolbox.  If all you know is random, then your design thinking is limited.  Sure, Perlin noise helps, but you’ll need more.  A lot more.</p>
 <p>I think we’re ready to begin.</p>
-</section>
+<div style="page-break-after:always;"> </div></section>
   	</div>
   </div>
 

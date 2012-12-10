@@ -109,13 +109,13 @@
 — Valentino Braitenberg
 </span>
   
-</blockquote><p><a id="autonomous-agents-22a76a70-1662-0130-0d3e-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-autonomous-agents-22a77a60-1662-0130-0d3f-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="autonomous-agents-7f5d4cb0-251f-0130-b04c-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaautonomous-agents-7f5d5cf0-251f-0130-b04d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Believe it or not, there is a purpose.  Well, at least there’s a purpose to the first five chapters of this book.  We could stop right here; after all, we’ve looked at several different ways of modeling motion and simulating physics.  Angry Birds, here we come!</p>
 <p>Still, let’s think for a moment.  Why are we here?   The <em>nature</em> of code, right?   What have we been designing so far?   Inanimate objects.  Lifeless shapes sitting on our screens that flop around when affected by forces in their environment.   What if we could breathe life into those shapes? What if those shapes could live by their own rules?  Can shapes have hopes and dreams and fears?   This is what we are here in this chapter to do—develop <em>autonomous agents</em>.</p>
-<section><a id="chapter06_section1" style="display: block;"></a><h3 id="61-forces-from-within">6.1  Forces from Within</h3><p><a id="forces-autonomous-agents-and-22a7b220-1662-0130-0d40-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter06_section1" style="display: block;"></a><h3 id="61-forces-from-within">6.1  Forces from Within</h3><p><a id="forcesautonomous-agents-and-7f5d8810-251f-0130-b04e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The term <strong><em>autonomous agent</em></strong> generally refers to an entity that makes its own choices about how to act in its environment without any influence from a leader or global plan.  For us, “acting” will mean moving.   This addition is a significant conceptual leap.  Instead of a box sitting on a boundary waiting to be pushed by another falling box, we are now going to design a box that has the ability and “desire” to leap out of the way of that other falling box, if it so chooses.   While the concept of forces that come from within is a major shift in our design thinking, our code base will barely change, as these desires and actions are simply that—<em>forces</em>.</p>
 <p>Here are three key components of autonomous agents that we’ll want to keep in mind as we build our examples.</p>
-<p><a id="autonomous-agents-key-components-of-22a7daa0-1662-0130-0d41-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="autonomous-agentskey-components-of-7f5daeb0-251f-0130-b04f-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -133,9 +133,9 @@
 </li>
 		
 	</ul>
-</div><p><a id="boids-model-22a81fc0-1662-0130-0d42-7cd1c3f718ad" style="display: block;"></a><a id="reynolds,-craig-22a82e90-1662-0130-0d43-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="boids-model-7f5e0470-251f-0130-b050-7cd1c3f718ad" style="display: block;"></a><a id="reynolds-craig-7f5e1210-251f-0130-b051-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the late 1980s, computer scientist <a href="http://www.red3d.com/cwr/">Craig Reynolds</a> developed algorithmic steering behaviors for animated characters. These behaviors allowed individual elements to navigate their digital environments in a “lifelike” manner with strategies for fleeing, wandering, arriving, pursuing, evading, etc. Used in the case of a single autonomous agent, these behaviors are fairly simple to understand and implement. In addition, by building a system of multiple characters that steer themselves according to simple, locally based rules, surprising levels of complexity emerge.  The most famous example is Reynolds’s “boids” model for “flocking/swarming” behavior.</p>
-</section><section><a id="chapter06_section2" style="display: block;"></a><h3 id="62-vehicles-and-steering">6.2  Vehicles and Steering</h3><p><a id="turtles,-termites,-and-traffic-jams-(resnick)-22a85560-1662-0130-0d44-7cd1c3f718ad" style="display: block;"></a><a id="resnick,-mitchel-22a862d0-1662-0130-0d45-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter06_section2" style="display: block;"></a><h3 id="62-vehicles-and-steering">6.2  Vehicles and Steering</h3><p><a id="turtles-termites-and-traffic-jams-resnick-7f5e2e00-251f-0130-b052-7cd1c3f718ad" style="display: block;"></a><a id="resnick-mitchel-7f5e3f90-251f-0130-b053-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we understand the core concepts behind autonomous agents, we can begin writing the code.  There are many places where  we could start. Artificial simulations of ant and termite colonies are fantastic demonstrations of systems of autonomous agents. (For more on this topic, I encourage you to read <em>Turtles, Termites, and Traffic Jams</em> by Mitchel Resnick.)  However, we want to begin by examining agent behaviors that build on the work we’ve done in the first five chapters of this book: modeling motion with vectors and driving motion with forces.  And so it’s time to rename our <span class="klass">Mover</span> class that became our <span class="klass">Particle</span> class once again.  This time we are going to call it <span class="klass">Vehicle</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -161,14 +161,14 @@
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="steering-behaviors-for-autonomous-characters-(reynolds)-22a8abe0-1662-0130-0d46-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="steering-behaviors-for-autonomous-characters-reynolds-7f5e77c0-251f-0130-b054-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In his 1999 paper “Steering Behaviors for Autonomous Characters,” Reynolds uses the word “vehicle” to describe his autonomous agents, so we will follow suit.</p>
-<p><a id="vehicles:-experiments-in-synthetic-psychology-(braitenberg)-22a8c240-1662-0130-0d47-7cd1c3f718ad" style="display: block;"></a><a id="braitenberg,-valentino-22a8d070-1662-0130-0d48-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="vehicles-experiments-in-synthetic-psychology-braitenberg-7f5e89e0-251f-0130-b055-7cd1c3f718ad" style="display: block;"></a><a id="braitenberg-valentino-7f5e9b40-251f-0130-b056-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="note">
   <h4 id="why-vehicle">Why Vehicle?</h4><p>In 1986, Italian neuroscientist and cyberneticist Valentino Braitenberg described a series of hypothetical vehicles with simple internal structures in his book <em>Vehicles: Experiments in Synthetic Psychology</em>.  Braitenberg argues that his extraordinarily simple mechanical vehicles manifest behaviors such as fear, aggression, love, foresight, and optimism.  Reynolds took his inspiration from Braitenberg, and we’ll take ours from Reynolds.</p>
 
 </div><p>Reynolds describes the motion of <em>idealized</em> vehicles (idealized because we are not concerned with the actual engineering of such vehicles, but simply assume that they exist and will respond to our rules) as a series of three layers—<strong>Action Selection</strong>, <strong>Steering</strong>, and <strong>Locomotion</strong>.</p>
-<p><a id="action-selection-22a92bb0-1662-0130-0d49-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agents-action-selection-22a936b0-1662-0130-0d4a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="action-selection-7f5ecf50-251f-0130-b057-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agentsaction-selection-7f5ee180-251f-0130-b058-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agentssteering-7f5efcd0-251f-0130-b059-7cd1c3f718ad" style="display: block;"></a><a id="steering-force-7f5f0f60-251f-0130-b05a-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -177,29 +177,18 @@
 </p>
 </li>
 		
-	</ol>
-</div><p><a id="autonomous-agents-steering-22a952b0-1662-0130-0d4b-7cd1c3f718ad" style="display: block;"></a><a id="steering-force-22a961f0-1662-0130-0d4c-7cd1c3f718ad" style="display: block;"></a></p>
-<div class="list">
-	
-	<ol class="arabic">
-		
 			<li><p><strong><em>Steering.</em></strong>  Once an action has been selected, the vehicle has to calculate its next move.  For us, the next move will be a force; more specifically, a steering force.  Luckily, Reynolds has developed a simple steering force formula that we’ll use throughout the examples in this chapter: <strong><em>steering force = desired velocity - current velocity</em></strong>.  We’ll get into the details of this formula and why it works so effectively in the next section.
 </p>
 </li>
-		
-	</ol>
-</div><p><a id="autonomous-agents-locomotion-22a99650-1662-0130-0d4d-7cd1c3f718ad" style="display: block;"></a><a id="locomotion-22a9a270-1662-0130-0d4e-7cd1c3f718ad" style="display: block;"></a></p>
-<div class="list">
-	
-	<ol class="arabic">
 		
 			<li><p><strong><em>Locomotion.</em></strong>  For the most part, we’re going to ignore this third layer.   In the case of fleeing zombies, the locomotion could be described as “left foot, right foot, left foot, right foot, as fast as you can.”   In our Processing world, however, a rectangle or circle or triangle’s actual movement across a window is irrelevant given that it’s all an illusion in the first place.  Nevertheless, this isn’t to say that you should ignore locomotion entirely.   You will find great value in thinking about the locomotive design of your vehicle and how you choose to animate it.   The examples in this chapter will remain visually bare, and a good exercise would be to elaborate on the animation style —could you add spinning wheels or oscillating paddles or shuffling legs?
 </p>
 </li>
 		
 	</ol>
-</div><p>Ultimately, the most important layer for you to consider is #1—<em>Action Selection</em>.  What are the elements of your system and what are their goals?  In this chapter, we are going to look at a series of steering behaviors (i.e. actions): seek, flee, follow a path, follow a flow field, flock with your neighbors, etc.   It’s important to realize, however, that the point of understanding how to write the code for these behaviors is not because you should use them in all of your projects.  Rather, these are a set of building blocks, a foundation from which you can design and develop vehicles with creative goals and new and exciting behaviors.   And even though we will think literally in this chapter (follow that pixel!), you should allow yourself to think more abstractly (like Braitenberg). What would it mean for your vehicle to have “love” or “fear” as its goal, its driving force?    Finally (and we’ll address this later in the chapter), you won’t get very far by developing simulations with only one action.  Yes, our first example will be “seek a target.”  But for you to be creative—to make these steering behaviors <em>your own</em>—it will all come down to mixing and matching multiple actions within the same vehicle.  So view these examples not as singular behaviors to be emulated, but as pieces of a larger puzzle that you will eventually assemble.</p>
-</section><section><a id="chapter06_section3" style="display: block;"></a><h3 id="63-the-steering-force">6.3  The Steering Force</h3><p><a id="forces-steering-22a9e720-1662-0130-0d4f-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="autonomous-agentslocomotion-7f5f4df0-251f-0130-b05b-7cd1c3f718ad" style="display: block;"></a><a id="locomotion-7f5f6110-251f-0130-b05c-7cd1c3f718ad" style="display: block;"></a></p>
+<p>Ultimately, the most important layer for you to consider is #1—<em>Action Selection</em>.  What are the elements of your system and what are their goals?  In this chapter, we are going to look at a series of steering behaviors (i.e. actions): seek, flee, follow a path, follow a flow field, flock with your neighbors, etc.   It’s important to realize, however, that the point of understanding how to write the code for these behaviors is not because you should use them in all of your projects.  Rather, these are a set of building blocks, a foundation from which you can design and develop vehicles with creative goals and new and exciting behaviors.   And even though we will think literally in this chapter (follow that pixel!), you should allow yourself to think more abstractly (like Braitenberg). What would it mean for your vehicle to have “love” or “fear” as its goal, its driving force?    Finally (and we’ll address this later in the chapter), you won’t get very far by developing simulations with only one action.  Yes, our first example will be “seek a target.”  But for you to be creative—to make these steering behaviors <em>your own</em>—it will all come down to mixing and matching multiple actions within the same vehicle.  So view these examples not as singular behaviors to be emulated, but as pieces of a larger puzzle that you will eventually assemble.</p>
+</section><section><a id="chapter06_section3" style="display: block;"></a><h3 id="63-the-steering-force">6.3  The Steering Force</h3><p><a id="forcessteering-7f5f8de0-251f-0130-b05d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We can entertain ourselves by discussing the theoretical principles behind autonomous agents and steering as much as we like, but we can’t get anywhere without first understanding the concept of a steering force. Consider the following scenario.  A vehicle moving with velocity desires to seek a target.</p>
 <a id="chapter06_figure1" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -222,7 +211,7 @@
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="desired-velocity-22aa1ea0-1662-0130-0d50-7cd1c3f718ad" style="display: block;"></a><a id="steering-force-desired-velocity-22aa2c70-1662-0130-0d51-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="desired-velocity-7f5fce90-251f-0130-b05e-7cd1c3f718ad" style="display: block;"></a><a id="steering-forcedesired-velocity-7f5fdff0-251f-0130-b05f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the above formula, velocity is no problem.  After all, we’ve got a variable for that.   However, we don’t have the <em>desired velocity</em>; this is something we have to calculate.  Let’s take a look at Figure 6.2.   If we’ve defined the vehicle’s goal as “seeking the target,” then its desired velocity is a vector that points from its current location to the target location.</p>
 <a id="chapter06_figure2" style="display: block;"></a><div class="image-container " >
 	
@@ -337,7 +326,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
 	<p class="caption">Figure 6.4</p>
 </div>
 <p>Again, notice how this is not at all the same force as gravitational attraction.  Remember one of our principles of autonomous agents: An autonomous agent has a <em>limited</em> ability to perceive its environment.  Here is that ability, subtly embedded into Reynolds’s steering formula.  If the vehicle weren’t moving at all (zero velocity), desired minus velocity would be equal to desired.  But this is not the case.  The vehicle is aware of its own velocity and its steering force compensates accordingly.   This creates a more active simulation, as the way in which the vehicle moves towards the targets depends on the way it is moving in the first place.</p>
-<p><a id="steering-force-magnitude-of-22aad310-1662-0130-0d52-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="steering-forcemagnitude-of-7f609d20-251f-0130-b060-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In all of this excitement, however, we’ve missed one last step.  What sort of vehicle is this?  Is it a super sleek race car with amazing handling?  Or a giant Mack truck that needs a lot of advance notice to turn?   A graceful panda, or a lumbering elephant?  Our example code, as it stands, has no feature to account for this variability in steering ability.   Steering ability can be controlled by limiting the magnitude of the steering force.  Let’s call that limit the “maximum force” (or <span class="var">maxforce</span> for short).  And so finally, we have:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -470,7 +459,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
     // Vehicle is a triangle pointing in
     // the direction of velocity; since it is drawn
     // pointing up, we rotate it an additional 90 degrees.
-    float theta = velocity.heading2D() + PI/2;
+    float theta = velocity.heading() + PI/2;
     fill(175);
     stroke(0);
     pushMatrix();
@@ -506,7 +495,7 @@ to the object’s acceleration</div><code><pre><span class='one-line'>    <span 
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Arbitrary values for maxspeed and
 force; try varying these!</div><code><pre><span class='one-line'>    <span class="n">maxspeed</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="n">maxforce</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">maxforce</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'> </span></pre></code></div>
@@ -537,7 +526,7 @@ force; try varying these!</div><code><pre><span class='one-line'>    <span class
 
   <div class='code-comment-pair '><div class='code-comment '>Vehicle is a triangle pointing in
 the direction of velocity; since it is drawn
-pointing up, we rotate it an additional 90 degrees.</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">velocity</span><span class="o">.</span><span class="na">heading2D</span><span class="o">()</span> <span class="o">+</span> <span class="n">PI</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span></span>
+pointing up, we rotate it an additional 90 degrees.</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">velocity</span><span class="o">.</span><span class="na">heading</span><span class="o">()</span> <span class="o">+</span> <span class="n">PI</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">fill</span><span class="o">(</span><span class="mi">175</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">pushMatrix</span><span class="o">();</span></span>
@@ -562,7 +551,7 @@ pointing up, we rotate it an additional 90 degrees.</div><code><pre><span class=
 </div><div class="example">
   <a id="chapter06_exercise3" style="display: block;"></a><h4 id="exercise-63">Exercise 6.3</h4><p>Create a sketch where a vehicle’s maximum force and maximum speed do not remain constant, but rather vary according to environmental factors.</p>
 
-</div></section><section><a id="chapter06_section4" style="display: block;"></a><h3 id="64-arriving-behavior">6.4  Arriving Behavior</h3><p><a id="arriving-behavior-22ab87c0-1662-0130-0d53-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agents-arriving-behavior-22ab9360-1662-0130-0d54-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section4" style="display: block;"></a><h3 id="64-arriving-behavior">6.4  Arriving Behavior</h3><p><a id="arriving-behavior-7f6117e0-251f-0130-b061-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agentsarriving-behavior-7f6129f0-251f-0130-b062-7cd1c3f718ad" style="display: block;"></a></p>
 <p>After working for a bit with the seeking behavior, you probably are asking yourself,  “What if I want my vehicle to slow down as it approaches the target?”   Before we can even begin to answer this question, we should look at the reasons behind why the seek behavior causes the vehicle to fly past the target so that it has to turn around and go back.  Let’s consider the brain of a seeking vehicle.  What is it thinking?</p>
 <p>Frame 1: I want to go as fast as possible towards the target!<br />
 Frame 2: I want to go as fast as possible towards the target!<br />
@@ -716,7 +705,7 @@ location to target.</div><code><pre><span class='one-line'>    <span class="kt">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> ...set the magnitude
 according to how close we are.</div><code><pre><span class='one-line'>      <span class="kt">float</span> <span class="n">m</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">d</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">100</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">maxspeed</span><span class="o">);</span></span>
-<span class='one-line'>      <span class="n">desired</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="n">m</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>      <span class="n">desired</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="n">m</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span></span></pre></code></div>
 
@@ -732,7 +721,7 @@ according to how close we are.</div><code><pre><span class='one-line'>      <spa
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>The arrive behavior is a great demonstration of the magic of “desired minus velocity.”   Let’s examine this model again relative to how we calculated forces in earlier chapters.   In the “gravitational attraction” examples, the force always pointed directly from the object to the target (the exact direction of the desired velocity), whether the force was strong or weak.</p>
-<p><a id="arriving-behavior-steering-force-and-22ac5ae0-1662-0130-0d55-7cd1c3f718ad" style="display: block;"></a><a id="steering-force-arriving-behavior-and-22ac67d0-1662-0130-0d56-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="arriving-behaviorsteering-force-and-7f6437f0-251f-0130-b063-7cd1c3f718ad" style="display: block;"></a><a id="steering-forcearriving-behavior-and-7f644b80-251f-0130-b064-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The steering function, however, says: “I have the ability to perceive the environment.”  The force isn’t based on just the desired velocity, but on the desired velocity relative to the current velocity.  Only things that are alive can know their current velocity.  A box falling off a table doesn’t know it’s falling.  A cheetah chasing its prey, however, knows it is chasing.</p>
 <p>The steering force, therefore, is essentially a manifestation of the current velocity’s <strong><em>error</em></strong>:  "I’m supposed to be going this fast in this direction, but I’m actually going this fast in another direction.   My error is the difference between where I want to go and where I am currently going."  Taking that error and applying it as a steering force results in more dynamic, lifelike simulations.   With gravitational attraction, you would never have a force pointing away from the target, no matter how close. But with arriving via steering, if you are moving too fast towards the target, the error would actually tell you to slow down!</p>
 <a id="chapter06_figure11" style="display: block;"></a><div class="image-container " >
@@ -741,20 +730,22 @@ according to how close we are.</div><code><pre><span class='one-line'>      <spa
 	
 	<p class="caption">Figure 6.11</p>
 </div>
-</section><section><a id="chapter06_section5" style="display: block;"></a><h3 id="65-your-own-desires-desired-velocity">6.5 Your Own Desires: Desired Velocity</h3><p><a id="autonomous-agents-desired-velocity-22aefca0-1662-0130-0d57-7cd1c3f718ad" style="display: block;"></a><a id="desired-velocity-22af09a0-1662-0130-0d58-7cd1c3f718ad" style="display: block;"></a><a id="velocity-desired,-for-autonomous-agents-22af1a70-1662-0130-0d59-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter06_section5" style="display: block;"></a><h3 id="65-your-own-desires-desired-velocity">6.5 Your Own Desires: Desired Velocity</h3><p><a id="autonomous-agentsdesired-velocity-7f6477d0-251f-0130-b065-7cd1c3f718ad" style="display: block;"></a><a id="desired-velocity-7f648800-251f-0130-b066-7cd1c3f718ad" style="display: block;"></a><a id="velocitydesired-for-autonomous-agents-7f6497d0-251f-0130-b067-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The first two examples we’ve covered—seek and arrive—boil down to calculating a single vector for each behavior: the <em>desired</em> velocity.  And in fact, every single one of Reynolds’s steering behaviors follows this same pattern.  In this chapter, we’re going to walk through several more of Reynolds’s behaviors—flow field, path-following, flocking.  First, however, I want to emphasize again that these are <em>examples</em>—demonstrations of common steering behaviors that are useful in procedural animation.   They are not the be-all and end-all of what <em>you</em> can do.  As long as you can come up with a vector that describes a vehicle’s <em>desired</em> velocity, then you have created your own steering behavior.</p>
 <p>Let’s see how Reynolds defines the desired velocity for his wandering behavior.</p>
-<p><a id="wandering-behavior-(reynolds)-22af57d0-1662-0130-0d5a-7cd1c3f718ad" style="display: block;"></a></p>
-<blockquote>
+<p><a id="wandering-behavior-reynolds-7f64c410-251f-0130-b068-7cd1c3f718ad" style="display: block;"></a></p>
+<blockquote >
 “Wandering is a type of random steering which has some long term order: the steering direction on one frame is related to the steering direction on the next frame. This produces more interesting motion than, for example, simply generating a random steering direction each frame.”
-<span class="attribution"><a href="http://www.red3d.com/cwr/steer/Wander.html">—Craig Reynolds</a></span>
+<span class="attribution">
+<a href="http://www.red3d.com/cwr/steer/Wander.html">—Craig Reynolds</a>
+</span>
 </blockquote><a id="chapter06_figure12" style="display: block;"></a><div class="image-container half-width-right" >
 	
 	<img src="/book/imgs/chapter06/ch06_12.png" alt="Nature of Code Image" />
 	
 	<p class="caption">Figure 6.12</p>
 </div>
-<p><a id="steering-behaviors-wandering-22af6fd0-1662-0130-0d5b-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="steering-behaviorswandering-7f64e060-251f-0130-b069-7cd1c3f718ad" style="display: block;"></a></p>
 <p>For Reynolds, the goal of wandering is not simply random motion, but rather a sense of moving in one direction for a little while, wandering off to the next for a little bit, and so on and so forth.  So how does Reynolds calculate a desired vector to achieve such an effect?</p>
 <p>Figure 6.12 illustrates how the vehicle predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius <span class="var">r</span> at that location, and picks a random point along the circumference of the circle.  That random point moves randomly around the circle in each frame of animation.   And that random point is the vehicle’s target, its desired vector pointing in that direction.</p>
 <p>Sounds a bit absurd, right?  Or, at the very least, rather arbitrary.   In fact, this is a very clever and thoughtful solution—it uses randomness to drive a vehicle’s steering, but constrains that randomness along the path of a circle to keep the vehicle’s movement from appearing jittery, and, well, random.</p>
@@ -775,13 +766,13 @@ according to how close we are.</div><code><pre><span class='one-line'>      <spa
 </div>
 
 </div><p>Let’s say we want to create a steering behavior called “stay within walls.”  We’ll define the desired velocity as:</p>
-<a id="chapter06_figure13" style="display: block;"></a><div class="image-container half-width-right" >
+<p><strong><em>If a vehicle comes within a distance</em></strong> d <strong><em>of a wall, it desires to move at maximum speed in the opposite direction of the wall.</em></strong></p>
+<a id="chapter06_figure13" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/chapter06/ch06_13.png" alt="Nature of Code Image" />
 	
 	<p class="caption">Figure 6.13</p>
 </div>
-<p><strong><em>If a vehicle comes within a distance</em></strong> d <strong><em>of a wall, it desires to move at maximum speed in the opposite direction of the wall.</em></strong></p>
 <p>If we define the walls of the space as the edges of a Processing window and the distance <span class="var">d</span> as 25, the code is rather simple.</p>
 <div class="image-container screenshot" >
 	
@@ -827,7 +818,7 @@ the window’s left edge.</div><code><pre><span class='one-line'>  <span class="
 </div><div class="example">
   <a id="chapter06_exercise5" style="display: block;"></a><h4 id="exercise-65">Exercise 6.5</h4><p>Come up with your own arbitrary scheme for calculating a desired velocity.</p>
 
-</div></section><section><a id="chapter06_section6" style="display: block;"></a><h3 id="66-flow-fields">6.6  Flow Fields</h3><p><a id="autonomous-agents-flow-field-following-22afedd0-1662-0130-0d5c-7cd1c3f718ad" style="display: block;"></a><a id="flow-field-following-22aff8f0-1662-0130-0d5d-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviors-flow-field-following-22b003d0-1662-0130-0d5e-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section6" style="display: block;"></a><h3 id="66-flow-fields">6.6  Flow Fields</h3><p><a id="autonomous-agentsflow-field-following-7f655300-251f-0130-b06a-7cd1c3f718ad" style="display: block;"></a><a id="flow-field-following-7f656490-251f-0130-b06b-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviorsflow-field-following-7f657d60-251f-0130-b06c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now back to the task at hand.  Let’s examine a couple more of Reynolds’s steering behaviors.  First, <strong><em>flow field following</em></strong>.  What is a flow field?   Think of your Processing window as a grid.  In each cell of the grid lives an arrow pointing in some direction—you know, a vector.   As a vehicle moves around the screen, it asks, “Hey, what arrow is beneath me?  That’s my desired velocity!”</p>
 <a id="chapter06_figure14" style="display: block;"></a><div class="image-container " >
 	
@@ -836,7 +827,7 @@ the window’s left edge.</div><code><pre><span class='one-line'>  <span class="
 	<p class="caption">Figure 6.14</p>
 </div>
 <p>Reynolds’s flow field following example has the vehicle predicting its future location and following the vector at that spot, but for simplicity’s sake, we’ll have the vehicle simply look to the vector at its current location.</p>
-<p><a id="arrays-(2d)-22b02ff0-1662-0130-0d5f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="arrays-2d-7f65ab00-251f-0130-b06d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we can write the additional code for our <span class="klass">Vehicle</span> class, we’ll need to build a class that describes the flow field itself, the grid of vectors.   A two-dimensional array is a convenient data structure in which to store a grid of information. If you are not familiar with 2D arrays, I suggest reviewing this online Processing tutorial: <a href="http://processing.org/learning/2darray/">2D array</a>.   The 2D array is convenient because we reference each element with two indices, which we can think of as columns and rows.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -866,7 +857,7 @@ width and height in pixels</div><code><pre><span class='one-line'>  <span class=
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="flow-field-following-resolution-and-22b060a0-1662-0130-0d60-7cd1c3f718ad" style="display: block;"></a><a id="resolution,-flow-field-following-and-22b07010-1662-0130-0d61-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="flow-field-followingresolution-and-7f65d790-251f-0130-b06e-7cd1c3f718ad" style="display: block;"></a><a id="resolution-flow-field-following-and-7f65e960-251f-0130-b06f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Notice how we are defining a third variable called <span class="var">resolution</span> above.   What is this variable?  Let’s say we have a Processing window that is 200 pixels wide by 200 pixels high.  We could make a flow field that has a <span class="klass">PVector</span> object for every single pixel, or 40,000 <span class="klass">PVector</span>s (200 * 200).  This isn’t terribly unreasonable, but in our case, it’s overkill.  We don’t need a <span class="klass">PVector</span> for every single pixel; we can achieve the same effect by having, say, one every ten pixels (20 * 20 = 400).   We use this resolution to define the number of columns and rows based on the size of the window divided by resolution:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -894,7 +885,7 @@ width and height in pixels</div><code><pre><span class='one-line'>  <span class=
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="vectors-flow-fields,-computing-for-22b0bf10-1662-0130-0d62-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="vectorsflow-fields-computing-for-7f661e60-251f-0130-b070-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we’ve set up the flow field’s data structures, it’s time to compute the vectors in the flow field itself.  How do we do that? However we feel like it!  Perhaps we want to have every vector in the flow field pointing to the right.</p>
 <a id="chapter06_figure15" style="display: block;"></a><div class="image-container " >
 	
@@ -920,7 +911,7 @@ for (int i = 0; i < cols; i++) {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Using a nested loop to hit every column
 and every row of the flow field</div><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cols</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
+<span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair '><div class='code-comment '>
 Arbitrary decision to make each vector point to the right</div><code><pre><span class='one-line'>    <span class="n">field</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
@@ -961,7 +952,7 @@ Arbitrary decision to make each vector point to the right</div><code><pre><span 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>What if we use 2D Perlin noise (mapped to an angle)?</p>
-<p><a id="perlin-noise-flow-field-following-and-22b0fe10-1662-0130-0d63-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="perlin-noiseflow-field-following-and-7f664980-251f-0130-b071-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter06_figure17" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/chapter06/ch06_17.png" alt="Nature of Code Image" />
@@ -1041,14 +1032,17 @@ int row = int(location.y/resolution);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="constrain()-function-(processing)-22b17770-1662-0130-0d64-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="constrain-function-processing-7f6691f0-251f-0130-b072-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Because a vehicle could theoretically wander off the Processing window, it’s also useful for us to employ the <span class="function">constrain()</span> function to make sure we don’t look outside of the flow field array.  Here is a function we’ll call <span class="function">lookup()</span> that goes in the <span class="klass">FlowField</span> class—it receives a <span class="klass">PVector</span> (presumably the location of our vehicle) and returns the corresponding flow field <span class="klass">PVector</span> for that location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector lookup(PVector lookup) {
-    //[offset-up] Using constrain()
+    //[full]
+    // Using constrain()
+
     int column = int(constrain(lookup.x/resolution,0,cols-1));
     int row = int(constrain(lookup.y/resolution,0,rows-1));
+    //[end]
     // Note the use of get() to ensure
     // we return a copy of the PVector.
     return field[column][row].get();
@@ -1060,10 +1054,13 @@ int row = int(location.y/resolution);</textarea>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="nf">lookup</span><span class="o">(</span><span class="n">PVector</span> <span class="n">lookup</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
 
-  <div class='code-comment-pair offset-up'><div class='code-comment '> Using constrain()</div><code><pre><span class='one-line'>    <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">x</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span>
-<span class='one-line'>    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">y</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span></pre></code></div>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'>
+Using constrain()</div><code><pre><span class='one-line'> </span>
+<span class='one-line'>    <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">x</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span>
+<span class='one-line'>    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">y</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>Note the use of get() to ensure
+  <div class='code-comment-pair '><div class='code-comment '>
+Note the use of get() to ensure
 we return a copy of the PVector.</div><code><pre><span class='one-line'>    <span class="k">return</span> <span class="n">field</span><span class="o">[</span><span class="n">column</span><span class="o">][</span><span class="n">row</span><span class="o">].</span><span class="na">get</span><span class="o">();</span></span>
 <span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -1129,7 +1126,7 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 <span class='one-line'>    <span class="n">resolution</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Determine the number of columns and rows.</div><code><pre><span class='one-line'>    <span class="n">cols</span> <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="n">resolution</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="n">rows</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="n">resolution</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">rows</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="n">resolution</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">[</span><span class="n">cols</span><span class="o">][</span><span class="n">rows</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="n">init</span><span class="o">();</span></span>
@@ -1156,7 +1153,7 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 <span class='one-line'>    <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">x</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span>
 <span class='one-line'>    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">constrain</span><span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">y</span><span class="o">/</span><span class="n">resolution</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="n">field</span><span class="o">[</span><span class="n">column</span><span class="o">][</span><span class="n">row</span><span class="o">].</span><span class="na">get</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -1216,7 +1213,7 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 </div><div class="example">
   <a id="chapter06_exercise8" style="display: block;"></a><h4 id="exercise-68">Exercise 6.8</h4><p>Can you seed a flow field from a <span class="klass">PImage</span>?  For example, try having the <span class="klass">PVector</span>s point from dark to light colors (or vice versa).</p>
 
-</div></section><section><a id="chapter06_section7" style="display: block;"></a><h3 id="67-the-dot-product">6.7  The Dot Product</h3><p><a id="autonomous-agents-dot-product-22b26f20-1662-0130-0d65-7cd1c3f718ad" style="display: block;"></a><a id="dot-product-(pvector)-22b27ad0-1662-0130-0d66-7cd1c3f718ad" style="display: block;"></a><a id="vectors-dot-product-22b28660-1662-0130-0d67-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section7" style="display: block;"></a><h3 id="67-the-dot-product">6.7  The Dot Product</h3><p><a id="autonomous-agentsdot-product-7f672f80-251f-0130-b073-7cd1c3f718ad" style="display: block;"></a><a id="dot-product-pvector-7f674030-251f-0130-b074-7cd1c3f718ad" style="display: block;"></a><a id="vectorsdot-product-7f674ec0-251f-0130-b075-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In a moment, we’re going to work through the algorithm (along with accompanying mathematics) and code for another of Craig Reynolds’s steering behaviors: <a href="http://www.red3d.com/cwr/steer/PathFollow.html">Path Following</a>.  Before we can do this, however, we have to spend some time learning about another piece of vector math that we skipped in Chapter 1—the dot product.  We haven’t needed it yet, but it’s likely going to prove quite useful for you (beyond just this path-following example), so we’ll go over it in detail now.</p>
 <p>Remember all the basic vector math we covered in Chapter 1?  Add, subtract, multiply, and divide?</p>
 <a id="chapter06_figure18" style="display: block;"></a><div class="image-container " >
@@ -1226,15 +1223,15 @@ we return a copy of the PVector.</div><code><pre><span class='one-line'>    <spa
 	<p class="caption">Figure 6.18</p>
 </div>
 <p>Notice how in the above diagram, vector multiplication involves multiplying a vector by a scalar value.  This makes sense; when we want a vector to be twice as large (but facing the same direction), we multiply it by 2.  When we want it to be half the size, we multiply it by 0.5.</p>
-<p><a id="dot-product-(pvector)-defined-22b2a7e0-1662-0130-0d68-7cd1c3f718ad" style="display: block;"></a></p>
-<p>However, there are two other <em>multiplication-like</em> operations with vectors that are useful in certain scenarios—the dot product and the cross product. For now we’re going to focus on the dot product, which is defined as follows.  Assume vectors <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math>:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><msub><mrow><mi> a </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> , </mo><msub><mrow><mi> a </mi></mrow><mrow><mi> y </mi></mrow></msub></mrow></mfenced></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><msub><mrow><mi> b </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> , </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> y </mi></mrow></msub></mrow></mfenced></mstyle></math></p>
-<p>THE DOT PRODUCT: <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msub><mrow><mi> a </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> + </mo><msub><mrow><mi> a </mi></mrow><mrow><mi> y </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> y </mi></mrow></msub></mstyle></math></p>
+<p><a id="dot-product-pvectordefined-7f677660-251f-0130-b076-7cd1c3f718ad" style="display: block;"></a></p>
+<p>However, there are two other <em>multiplication-like</em> operations with vectors that are useful in certain scenarios—the dot product and the cross product. For now we’re going to focus on the dot product, which is defined as follows.  Assume vectors <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> and <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" />:</p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/axay.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/bxby.svg" type="image/svg+xml" class ="mathinline" /></p>
+<p>THE DOT PRODUCT: <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dotform.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>For example, if we have the following two vectors:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><mo> - </mo><mn> 3 </mn><mo> , </mo><mn> 5 </mn></mrow></mfenced></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><mn> 10 </mn><mo> , </mo><mn> 1 </mn></mrow></mfenced></mstyle></math></p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> - </mo><mn> 3 </mn><mo> * </mo><mn> 10 </mn><mo> + </mo><mn> 5 </mn><mo> * </mo><mn> 1 </mn><mo> = </mo><mo> - </mo><mn> 30 </mn><mo> + </mo><mn> 5 </mn><mo> = </mo><mn> 35 </mn></mstyle></math></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/threefive.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/tenone.svg" type="image/svg+xml" class ="mathinline" /></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dotresult.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>Notice that the result of the dot product is a scalar value (a single number) and not a vector.</p>
 <p>In Processing, this would translate to:</p>
 <div class="source-code">
@@ -1278,14 +1275,14 @@ function to calculate the dot product.</div><code><pre><span class='one-line'><s
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This is simple enough, but why do we need the dot product, and when is it going to be useful for us in code?</p>
 <p>One of the more common uses of the dot product is to find the angle between two vectors.   Another way in which the dot product can be expressed is:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
-<p><a id="dot-product-(pvector)-theta-22b2fe10-1662-0130-0d69-7cd1c3f718ad" style="display: block;"></a><a id="theta-dot-product-and-22b30910-1662-0130-0d6a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
+<p><a id="dot-product-pvectortheta-7f67f0e0-251f-0130-b077-7cd1c3f718ad" style="display: block;"></a><a id="theta-dot-product-and-7f680650-251f-0130-b078-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In other words, A dot B is equal to the magnitude of A times magnitude of B times cosine of theta (with theta defined as <em>the angle between the two vectors A and B</em>).</p>
 <p>The two formulas for dot product can be derived from one another with <a href="http://mathworld.wolfram.com/DotProduct.html">trigonometry</a>, but for our purposes we can be happy with operating on the assumption that:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msub><mrow><mi> a </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> + </mo><msub><mrow><mi> a </mi></mrow><mrow><mi> y </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> y </mi></mrow></msub></mstyle></math></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dotform.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>both hold true and therefore:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msub><mrow><mi> a </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> x </mi></mrow></msub><mo> + </mo><msub><mrow><mi> a </mi></mrow><mrow><mi> y </mi></mrow></msub><mo> * </mo><msub><mrow><mi> b </mi></mrow><mrow><mi> y </mi></mrow></msub></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
+<p><img src="svgs/dotform.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
 <a id="chapter06_figure19" style="display: block;"></a><div class="image-container half-width-right" >
 	
 	<img src="/book/imgs/chapter06/ch06_19.png" alt="Nature of Code Image" />
@@ -1293,19 +1290,19 @@ function to calculate the dot product.</div><code><pre><span class='one-line'><s
 	<p class="caption">Figure 6.19</p>
 </div>
 <p>Now, let’s start with the following problem. We have the vectors A and B:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><mn> 10 </mn><mo> , </mo><mn> 2 </mn></mrow></mfenced></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mfenced><mrow><mn> 4 </mn><mo> , </mo><mo> - </mo><mn> 3 </mn></mrow></mfenced></mstyle></math></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/tentwo.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/fourthree.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>We now have a situation in which we know everything except for theta.   We know the components of the vector and can calculate the magnitude of each vector.  We can therefore solve for cosine of theta:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> / </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math></p>
+<p><img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/div.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>To solve for theta, we can take the inverse cosine (often expressed as <em>cosine<sup>-1</sup></em> or <em>arccosine</em>).</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> θ </mi></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msup><mrow><mi> cos </mi></mrow><mrow><mo> - </mo><mn> 1 </mn></mrow></msup></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> / </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math></p>
+<p><img src="svgs/theta.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/arccos.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/div.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>Let’s now do the math with actual numbers:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 10.2 </mn></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 5 </mn></mstyle></math></p>
+<p><img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/tenpointtwo.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/five.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>Therefore:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> θ </mi></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msup><mrow><mi> cos </mi></mrow><mrow><mo> - </mo><mn> 1 </mn></mrow></msup></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 10 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 4 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> + </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 2 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> -3 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> / </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 10.2 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 5 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> θ </mi></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><msup><mrow><mi> cos </mi></mrow><mrow><mo> - </mo><mn> 1 </mn></mrow></msup></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ( </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 34 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> / </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 51 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ) </mo></mstyle></math><br />
-<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> θ </mi></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∼ </mo><mn> 4 </mn><msup><mrow><mn> 8 </mn></mrow><mrow><mo> ∘ </mo></mrow></msup></mstyle></math></p>
+<p><img src="svgs/theta.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/arccos.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/ten.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/four.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/plus.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/two.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/negthree.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/div.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/tenpointtwo.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/five.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/theta.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/arccos.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/open.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/threefour.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/div.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/fiveone.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/close.svg" type="image/svg+xml" class ="mathinline" /><br />
+<img src="svgs/theta.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/foureightdeg.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>The Processing version of this would be:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1365,17 +1362,17 @@ float theta = acos(a.dot(b) / (a.mag() * b.mag()));</textarea>
 	<ol class="arabic">
 		
 			<li><p>
-If two vectors (<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math>) are orthogonal (i.e. perpendicular), the dot product (<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math>) is equal to 0.
+If two vectors (<img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> and <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" />) are orthogonal (i.e. perpendicular), the dot product (<img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" />) is equal to 0.
 </p>
 </li>
 		
 			<li><p>
-If two vectors are unit vectors, then the dot product is simply equal to cosine of the angle between them, i.e. <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math> if <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> are of length 1.
+If two vectors are unit vectors, then the dot product is simply equal to cosine of the angle between them, i.e. <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /> if <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> and <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> are of length 1.
 </p>
 </li>
 		
 	</ol>
-</div></section><section><a id="chapter06_section8" style="display: block;"></a><h3 id="68-path-following">6.8  Path Following</h3><p><a id="autonomous-agents-path-following-22b3c5e0-1662-0130-0d6b-7cd1c3f718ad" style="display: block;"></a><a id="path-following-22b3d190-1662-0130-0d6c-7cd1c3f718ad" style="display: block;"></a><a id="path-following-pathfinding-vs.-22b3e010-1662-0130-0d6d-7cd1c3f718ad" style="display: block;"></a><a id="pathfinding-22b3ede0-1662-0130-0d6e-7cd1c3f718ad" style="display: block;"></a><a id="reynolds,-craig-path-following-algorithm-22b400b0-1662-0130-0d6f-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section8" style="display: block;"></a><h3 id="68-path-following">6.8  Path Following</h3><p><a id="autonomous-agentspath-following-7f6b2810-251f-0130-b079-7cd1c3f718ad" style="display: block;"></a><a id="path-following-7f6b3a80-251f-0130-b07a-7cd1c3f718ad" style="display: block;"></a><a id="path-followingpathfinding-vs-7f6b49a0-251f-0130-b07b-7cd1c3f718ad" style="display: block;"></a><a id="pathfinding-7f6b59a0-251f-0130-b07c-7cd1c3f718ad" style="display: block;"></a><a id="reynolds-craigpath-following-algorithm-7f6b68c0-251f-0130-b07d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we’ve got a basic understanding of the dot product under our belt, we can return to a discussion of Craig Reynolds’s path-following algorithm.     Let’s quickly clarify something.  We are talking about path <em>following</em>, not path <em>finding</em>.  Pathfinding refers to a research topic (commonly studied in artificial intelligence) that involves solving for the shortest distance between two points, often in a maze.   With <strong><em>path following</em></strong>, the path already exists and we’re asking a vehicle to follow that path.</p>
 <p>Before we work out the individual pieces, let’s take a look at the overall algorithm for path following, as defined by Reynolds.</p>
 <a id="chapter06_figure20" style="display: block;"></a><div class="image-container " >
@@ -1384,7 +1381,7 @@ If two vectors are unit vectors, then the dot product is simply equal to cosine 
 	
 	<p class="caption">Figure 6.20</p>
 </div>
-<p><a id="path-22b44250-1662-0130-0d70-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="path-7f6b99e0-251f-0130-b07e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We’ll first define what we mean by a path.  There are many ways we could implement a path, but for us, a simple way will be to define a path as a series of connected points:</p>
 <a id="chapter06_figure21" style="display: block;"></a><div class="image-container " >
 	
@@ -1411,7 +1408,7 @@ If two vectors are unit vectors, then the dot product is simply equal to cosine 
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Path {
 
-  //[full] A Path is only two points, start and end.
+  //[full] A path is only two points, start and end.
   PVector start;
   PVector end;
   //[end]
@@ -1443,8 +1440,8 @@ If two vectors are unit vectors, then the dot product is simply equal to cosine 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Path</span> <span class="o">{</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair stretch'><div class='code-comment stretch'> A Path is only two points, start and end.</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">start</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="n">PVector</span> <span class="n">end</span><span class="o">;</span></span></pre></code></div>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'> A path is only two points, start and end.</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">start</span><span class="o">;</span></span>
+<span class='one-line'>  <span class="n">PVector</span> <span class="n">end</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1501,7 +1498,7 @@ PVector predictLoc = PVector.add(loc, predict);</textarea>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Normalize it and look 25 pixels
 ahead by scaling the vector up.</div><code><pre><span class='one-line'><span class="n">predict</span><span class="o">.</span><span class="na">normalize</span><span class="o">();</span></span>
-<span class='one-line'><span class="n">predict</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'><span class="n">predict</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1510,7 +1507,7 @@ predicted location.</div><code><pre><span class='one-line'><span class="n">PVect
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="path-following-current-distance-from-path,-finding-22b48ba0-1662-0130-0d71-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="path-followingcurrent-distance-from-path-finding-7f6bd8d0-251f-0130-b07f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once we have that location, it’s now our job to find out the vehicle’s current distance from the path of that predicted location.  If it’s very far away, well, then, we’ve strayed from the path and need to steer back towards it.  If it’s close, then we’re doing OK and are following the path nicely.</p>
 <p>So, how do we find the distance between a point and a line?  This concept is key.  The distance between a point and a line is defined as the length of the normal between that point and line.  The normal is a vector that extends from that point and is perpendicular to the line.</p>
 <a id="chapter06_figure24" style="display: block;"></a><div class="image-container " >
@@ -1519,7 +1516,7 @@ predicted location.</div><code><pre><span class='one-line'><span class="n">PVect
 	
 	<p class="caption">Figure 6.24</p>
 </div>
-<p>Let’s figure out what we do know.    We know we have a vector (call it <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math>) that extends from the path’s starting point to the vehicle’s predicted location.</p>
+<p>Let’s figure out what we do know.    We know we have a vector (call it <img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" />) that extends from the path’s starting point to the vehicle’s predicted location.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector a = PVector.sub(predictLoc,path.start);</textarea>
@@ -1532,7 +1529,7 @@ predicted location.</div><code><pre><span class='one-line'><span class="n">PVect
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>We also know that we can define a vector (call it <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math>) that points from the start of the path to the end.</p>
+</div><p>We also know that we can define a vector (call it <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" />) that points from the start of the path to the end.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>PVector b = PVector.sub(path.end,path.start);</textarea>
@@ -1600,16 +1597,16 @@ PVector normalPoint = PVector.add(path.start,b);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>While the above code will work, there’s one more simplification we can make.   If you’ll notice, the desired magnitude for vector <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> is:</p>
+</div><p>While the above code will work, there’s one more simplification we can make.   If you’ll notice, the desired magnitude for vector <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> is:</p>
 <p><span class="formula">a.mag()*cos(theta)</span></p>
 <p>which is the code translation of:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
+<p><img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>And if you recall:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
-<p>Now, what if vector <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> is a unit vector, i.e. length 1?  Then:</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mn> 1 </mn></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/magb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
+<p>Now, what if vector <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> is a unit vector, i.e. length 1?  Then:</p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/one.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>or</p>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> · </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mover><mrow><mi> B </mi></mrow><mrow><mo> → </mo></mrow></mover></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> = </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> ∥ </mo><mover><mrow><mi> A </mi></mrow><mrow><mo> → </mo></mrow></mover><mo> ∥ </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mo> * </mo></mstyle></math> <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi> cos </mi><mfenced><mrow><mi> θ </mi></mrow></mfenced></mstyle></math></p>
+<p><img src="svgs/vectora.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/dot.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/vectorb.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/equals.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/maga.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/mult.svg" type="image/svg+xml" class ="mathinline" /> <img src="svgs/costheta.svg" type="image/svg+xml" class ="mathinline" /></p>
 <p>And what are we doing in our code?  Normalizing b!</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1648,15 +1645,15 @@ PVector normalPoint = PVector.add(path.start,b);</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><a id="chapter06_figure26" style="display: block;"></a><div class="image-container half-width" >
+</div><p><a id="scalar-projection-7f6c4210-251f-0130-b080-7cd1c3f718ad" style="display: block;"></a></p>
+<p>This process is commonly known as “scalar projection.”  <strong><em>|A| cos(θ) is the scalar projection of A onto B.</em></strong></p>
+<a id="chapter06_figure26" style="display: block;"></a><div class="image-container " >
 	
 	<img src="/book/imgs/chapter06/ch06_26.png" alt="Nature of Code Image" />
 	
 	<p class="caption">Figure 6.26</p>
 </div>
-<p><a id="scalar-projection-22b50ce0-1662-0130-0d72-7cd1c3f718ad" style="display: block;"></a><a id="scalar-projection-22b51cc0-1662-0130-0d73-7cd1c3f718ad" style="display: block;"></a></p>
-<p>This process is commonly known as “scalar projection.”  <strong><em>|A| cos(θ) is the scalar projection of A onto B.</em></strong>  And if we normalize B before computing the dot product, the scalar projection of A onto B is equal to A • B.</p>
-<p><a id="normal-points-22b54030-1662-0130-0d74-7cd1c3f718ad" style="display: block;"></a><a id="path-following-normal-points-22b54bb0-1662-0130-0d75-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="normal-points-7f6c61c0-251f-0130-b081-7cd1c3f718ad" style="display: block;"></a><a id="path-followingnormal-points-7f6c7ac0-251f-0130-b082-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once we have the normal point along the path, we have to decide whether the vehicle should steer towards the path and how.  Reynolds’s algorithm states that the vehicle should only steer towards the path if it strays beyond the path (i.e., if the distance between the normal point and the predicted future location is greater than the path radius).</p>
 <a id="chapter06_figure27" style="display: block;"></a><div class="image-container " >
 	
@@ -1695,7 +1692,7 @@ which we already wrote in Example 6.1.</div><code><pre><span class='one-line'>  
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>But what is the target?</p>
-<p><a id="path-following-target,-determining-22b56970-1662-0130-0d76-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="path-followingtarget-determining-7f6c9ec0-251f-0130-b083-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Reynolds’s algorithm involves picking a point ahead of the normal on the path (see step #3 above).  But for simplicity, we could just say that the target is the normal itself. This will work fairly well:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1747,7 +1744,7 @@ if (distance > path.radius) {
 <span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="n">path</span><span class="o">.</span><span class="na">radius</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Normalize and scale b (pick 25 pixels arbitrarily).</div><code><pre><span class='one-line'>  <span class="n">b</span><span class="o">.</span><span class="na">normalize</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="n">b</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">b</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair '><div class='code-comment '>
 By adding b to normalPoint, we now move
@@ -1798,7 +1795,8 @@ By adding b to normalPoint, we now move
 
     //[full] Step 4: If we are off the path,
     // seek that target in order to stay on the path.
-    float distance = PVector.dist(normalPoint, predictLoc);
+    float distance =
+      PVector.dist(normalPoint, predictLoc);
     if (distance > p.radius) {
       seek(target);
     }//[end]
@@ -1814,29 +1812,30 @@ By adding b to normalPoint, we now move
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Step 1: Predict the vehicle’s future location.</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">predict</span> <span class="o">=</span> <span class="n">vel</span><span class="o">.</span><span class="na">get</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="n">predict</span><span class="o">.</span><span class="na">normalize</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="n">predict</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">PVector</span> <span class="n">predictLoc</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">loc</span><span class="o">,</span> <span class="n">predict</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">PVector</span> <span class="n">predictLoc</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">loc</span><span class="o">,</span> <span class="n">predict</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Step 2: Find the normal point along the path.</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">start</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">b</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="n">PVector</span> <span class="n">normalPoint</span> <span class="o">=</span> <span class="n">getNormalPoint</span><span class="o">(</span><span class="n">predictLoc</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">PVector</span> <span class="n">normalPoint</span> <span class="o">=</span> <span class="n">getNormalPoint</span><span class="o">(</span><span class="n">predictLoc</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Step 3: Move a little further along the path and set a target.</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">dir</span><span class="o">.</span><span class="na">normalize</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="n">dir</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">PVector</span> <span class="n">target</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">normalPoint</span><span class="o">,</span> <span class="n">dir</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">PVector</span> <span class="n">target</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">normalPoint</span><span class="o">,</span> <span class="n">dir</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Step 4: If we are off the path,
-seek that target in order to stay on the path.</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">dist</span><span class="o">(</span><span class="n">normalPoint</span><span class="o">,</span> <span class="n">predictLoc</span><span class="o">);</span></span>
+seek that target in order to stay on the path.</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span></span>
+<span class='one-line'>      <span class="n">PVector</span><span class="o">.</span><span class="na">dist</span><span class="o">(</span><span class="n">normalPoint</span><span class="o">,</span> <span class="n">predictLoc</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="n">p</span><span class="o">.</span><span class="na">radius</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">seek</span><span class="o">(</span><span class="n">target</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="end"><span class="o">}</span></span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
@@ -1877,7 +1876,7 @@ seek that target in order to stay on the path.</div><code><pre><span class='one-
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Using the dot product for scalar projection</div><code><pre><span class='one-line'>    <span class="n">ab</span><span class="o">.</span><span class="na">normalize</span><span class="o">();</span></span>
-<span class='one-line'>    <span class="n">ab</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="n">ap</span><span class="o">.</span><span class="na">dot</span><span class="o">(</span><span class="n">ab</span><span class="o">));</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">ab</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="n">ap</span><span class="o">.</span><span class="na">dot</span><span class="o">(</span><span class="n">ab</span><span class="o">));</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair '><div class='code-comment '>
 Finding the normal point along the line segment</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">normalPoint</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">ab</span><span class="o">);</span></span>
@@ -1889,7 +1888,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>What do we have so far?  We have a <span class="klass">Path</span> class that defines a path as a line between two points.  We have a <span class="klass">Vehicle</span> class that defines a vehicle that can follow the path (using a steering behavior to seek a target along the path).  What is missing?</p>
 <p>Take a deep breath.  We’re almost there.</p>
-</section><section><a id="chapter06_section9" style="display: block;"></a><h3 id="69-path-following-with-multiple-segments">6.9 Path Following with Multiple Segments</h3><p><a id="path-following-multiple-segments-22b864a0-1662-0130-0d77-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter06_section9" style="display: block;"></a><h3 id="69-path-following-with-multiple-segments">6.9 Path Following with Multiple Segments</h3><p><a id="path-followingmultiple-segments-7f6d2120-251f-0130-b084-7cd1c3f718ad" style="display: block;"></a></p>
 <a id="chapter06_figure30" style="display: block;"></a><div class="image-container A Curvy Path" >
 	
 	<img src="/book/imgs/chapter06/ch06_30.png" alt="Nature of Code Image" />
@@ -1906,7 +1905,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 <p>While it’s true that we could make this example work for a curved path, we’re much less likely to end up needing a cool compress on our forehead if we stick with line segments.  In the end, we  can always employ the same technique we discovered with Box2D—we can draw whatever fancy curved path we want and approximate it behind the scenes with simple geometric forms.</p>
 <p>So, what’s the problem?  If we made path following work with one line segment, how do we make it work with a series of connected line segments?   Let’s take a look again at our vehicle driving along the screen.    Say we arrive at Step 3.</p>
 <p><strong><em>Step 3: Find a target point on the path.</em></strong></p>
-<p><a id="normal-points-series-of,-for-path-following-22b89260-1662-0130-0d78-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="normal-pointsseries-of-for-path-following-7f6d51d0-251f-0130-b085-7cd1c3f718ad" style="display: block;"></a></p>
 <p>To find the target, we need to find the normal to the line segment.  But now that we have a series of line segments, we have a series of normal points (see above)!  Which one do we choose?  The solution we’ll employ is to pick the normal point that is (a) closest and (b) on the path itself.</p>
 <a id="chapter06_figure32" style="display: block;"></a><div class="image-container " >
 	
@@ -1974,7 +1973,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> This function allows us to add points to the path.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">addPoint</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>   <span class="o">.</span></span>
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">point</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">points</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">point</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1986,7 +1985,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 <span class='one-line'>      <span class="n">vertex</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="n">v</span><span class="o">.</span><span class="na">y</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>    <span class="n">endShape</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -1998,7 +1997,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
   <textarea>for (int i = 0; i < p.points.size()-1; i++) {
   PVector a = p.points.get(i);
   PVector b = p.points.get(i+1);
-  //[offset-up] Finding the normals for each line segment
+  //[offset-down] Finding the normals for each line segment
   PVector normalPoint = getNormalPoint(predictLoc, a, b);</textarea>
   
   
@@ -2009,7 +2008,7 @@ Finding the normal point along the line segment</div><code><pre><span class='one
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">b</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span></span></pre></code></div>
 
-  <div class='code-comment-pair offset-up'><div class='code-comment '> Finding the normals for each line segment</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">normalPoint</span> <span class="o">=</span> <span class="n">getNormalPoint</span><span class="o">(</span><span class="n">predictLoc</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></span></pre></code></div>
+  <div class='code-comment-pair offset-down'><div class='code-comment '> Finding the normals for each line segment</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">normalPoint</span> <span class="o">=</span> <span class="n">getNormalPoint</span><span class="o">(</span><span class="n">predictLoc</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
@@ -2099,7 +2098,7 @@ that can easily be beaten.</div><code><pre><span class='one-line'><span class="k
 this should be our target!</div><code><pre><span class='one-line'>  <span class="k">if</span> <span class="o">(</span><span class="n">distance</span> <span class="o">&lt;</span> <span class="n">worldRecord</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">worldRecord</span> <span class="o">=</span> <span class="n">distance</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">normalPoint</span><span class="o">.</span><span class="na">get</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -2127,13 +2126,13 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 </div><div class="example">
   <a id="chapter06_exercise11" style="display: block;"></a><h4 id="exercise-611">Exercise 6.11</h4><p>Create a path that changes over time.  Can the points that define the path itself have their own steering behaviors?</p>
 
-</div></section><section><a id="chapter06_section10" style="display: block;"></a><h3 id="610-complex-systems">6.10  Complex Systems</h3><p><a id="autonomous-agents-complex-systems-and-22b972e0-1662-0130-0d79-7cd1c3f718ad" style="display: block;"></a><a id="complex-systems-22b97db0-1662-0130-0d7a-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section10" style="display: block;"></a><h3 id="610-complex-systems">6.10  Complex Systems</h3><p><a id="autonomous-agentscomplex-systems-and-7f6e10d0-251f-0130-b086-7cd1c3f718ad" style="display: block;"></a><a id="complex-systems-7f6e2260-251f-0130-b087-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Remember our purpose?  To breathe life into the things that move around our Processing windows?  By learning to write the code for an autonomous agent and building a series of examples of individual behaviors, hopefully our souls feel a little more full.  But this is no place to stop and rest on our laurels.  We’re just getting started.   After all, there is a deeper purpose at work here.  Yes, a vehicle is a simulated being that makes decisions about how to seek and flow and follow.  But what is a life led alone, without the love and support of others?  Our purpose here is not only to build individual behaviors for our vehicles, but to put our vehicles into systems of many vehicles and allow those vehicles to interact with each other.</p>
-<p><a id="ants,-modeling-for-22b98e00-1662-0130-0d7b-7cd1c3f718ad" style="display: block;"></a><a id="complex-systems-superorganisms-22b99b00-1662-0130-0d7c-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-ants,-modeling-22b9a600-1662-0130-0d7d-7cd1c3f718ad" style="display: block;"></a><a id="superorganisms-22b9b080-1662-0130-0d7e-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="ants-modeling-for-7f6e34c0-251f-0130-b088-7cd1c3f718ad" style="display: block;"></a><a id="complex-systemssuperorganisms-7f6e4440-251f-0130-b089-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaants-modeling-7f6e56f0-251f-0130-b08a-7cd1c3f718ad" style="display: block;"></a><a id="superorganisms-7f6e68e0-251f-0130-b08b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s think about a tiny, crawling ant—one single ant.  An ant is an autonomous agent; it can perceive its environment (using antennae to gather information about the direction and strength of chemical signals) and make decisions about how to move based on those signals.  But can a single ant acting alone build a nest, gather food, defend its queen?   An ant is a simple unit and can only perceive its immediate environment.  A colony of ants, however, is a sophisticated complex system, a “superorganism” in which the components work together to accomplish difficult and complicated goals.</p>
 <p>We want to take what we’ve learned during the process of building autonomous agents in Processing into simulations that involve many agents operating in parallel—agents that have an ability to perceive not only their physical environment but also the actions of their fellow agents, and then act accordingly.  We want to create complex systems in Processing.</p>
 <p>What is a complex system?  A complex system is typically defined as a system that is “more than the sum of its parts.”  While the individual elements of the system may be incredibly simple and easily understood, the behavior of the system as a whole can be highly complex, intelligent, and difficult to predict.  Here are three key principles of complex systems.</p>
-<p><a id="complex-systems-key-principles-of-22b9c9e0-1662-0130-0d7f-7cd1c3f718ad" style="display: block;"></a><a id="short-range-relationships-complex-systems-22b9d9d0-1662-0130-0d80-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="complex-systemskey-principles-of-7f6e8590-251f-0130-b08c-7cd1c3f718ad" style="display: block;"></a><a id="short-range-relationshipscomplex-systems-7f6ea360-251f-0130-b08d-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -2152,7 +2151,7 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 		
 	</ul>
 </div><p>Following are three additional features of complex systems that will help frame the discussion, as well as provide guidelines for features we will want to include in our software simulations.  It’s important to acknowledge that this is a fuzzy set of characteristics and not all complex systems have all of them.</p>
-<p><a id="complex-systems-non-linearity-component-22ba3120-1662-0130-0d81-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="complex-systemsnon-linearity-component-7f6f1990-251f-0130-b08e-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -2162,7 +2161,7 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 </li>
 		
 	</ul>
-</div><p><a id="complex-systems-competition/cooperation-component-22ba4e40-1662-0130-0d82-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="complex-systemscompetitioncooperation-component-7f6f42b0-251f-0130-b08f-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -2172,7 +2171,7 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 </li>
 		
 	</ul>
-</div><p><a id="complex-systems-feedback-component-22ba6c60-1662-0130-0d83-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="complex-systemsfeedback-component-7f6f6c80-251f-0130-b090-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -2183,7 +2182,7 @@ this should be our target!</div><code><pre><span class='one-line'>  <span class=
 		
 	</ul>
 </div><p>Complexity will serve as a theme for the remaining content in this book. In this chapter, we’ll begin by adding one more feature to our <span class="klass">Vehicle</span> class: an ability to look at neighboring vehicles.</p>
-</section><section><a id="chapter06_section11" style="display: block;"></a><h3 id="611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</h3><p><a id="complex-systems-group-behavior-22ba99a0-1662-0130-0d84-7cd1c3f718ad" style="display: block;"></a><a id="group-behavior-22baa310-1662-0130-0d85-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-group-behavior-22baade0-1662-0130-0d86-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter06_section11" style="display: block;"></a><h3 id="611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</h3><p><a id="complex-systemsgroup-behavior-7f723c50-251f-0130-b091-7cd1c3f718ad" style="display: block;"></a><a id="group-behavior-7f724e10-251f-0130-b092-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenagroup-behavior-7f725e30-251f-0130-b093-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a <span class="klass">ParticleSystem</span> class.   There, we stored a list of particles in an <span class="klass">ArrayList</span>.  We’ll do the same thing here: store a bunch of <span class="klass">Vehicle</span> objects in an <span class="klass">ArrayList</span>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2252,7 +2251,7 @@ with a bunch of Vehicles.</div><code><pre><span class='one-line'>  <span class="
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="collisions-avoiding-in-group-behavior-22baeb60-1662-0130-0d87-7cd1c3f718ad" style="display: block;"></a><a id="group-behavior-collisions,-avoiding-22baf610-1662-0130-0d88-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="collisionsavoiding-in-group-behavior-7f72a970-251f-0130-b094-7cd1c3f718ad" style="display: block;"></a><a id="group-behaviorcollisions-avoiding-7f72bc40-251f-0130-b095-7cd1c3f718ad" style="display: block;"></a></p>
 <p>But that’s an individual behavior.  We’ve already spent thirty-odd pages worrying about individual behaviors.  We’re here because we want to apply a group behavior.  Let’s begin with separation, a behavior that commands, “Avoid colliding with your neighbors!”</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2341,7 +2340,7 @@ separation force.</div><code><pre><span class='one-line'>    <strong><span class
 	
 	<p class="caption">Figure 6.33</p>
 </div>
-<p><a id="repulsion-group-behavior-and-22bb4dc0-1662-0130-0d89-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviors-group-behavior-and-22bb5e00-1662-0130-0d8a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="repulsiongroup-behavior-and-7f731640-251f-0130-b096-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviorsgroup-behavior-and-7f7329b0-251f-0130-b097-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Of course, this is just the beginning.  The real work happens inside the <span class="function">separate()</span> function itself.  Let’s figure out how we want to define separation. Reynolds states: “Steer to avoid crowding.” In other words, if a given vehicle is too close to you, steer away from that vehicle.  Sound familiar?  Remember the seek behavior where a vehicle steers towards a target?  Reverse that force and we have the flee behavior.</p>
 <a id="chapter06_figure34" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -2378,6 +2377,7 @@ separation force.</div><code><pre><span class='one-line'>    <strong><span class
     //[offset-down] What is the distance between me and another Vehicle?
     float d = PVector.dist(location, other.location);
 
+
     if ((d > 0) && (d < desiredseparation)) {
       // Any code here will be executed if the Vehicle is within 20 pixels.
 
@@ -2394,6 +2394,7 @@ separation force.</div><code><pre><span class='one-line'>    <strong><span class
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair offset-down'><div class='code-comment '> What is the distance between me and another Vehicle?</div><code><pre><span class='one-line'>    <span class="kt">float</span> <span class="n">d</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">dist</span><span class="o">(</span><span class="n">location</span><span class="o">,</span> <span class="n">other</span><span class="o">.</span><span class="na">location</span><span class="o">);</span></span>
+<span class='one-line'> </span>
 <span class='one-line'> </span>
 <span class='one-line'>    <span class="k">if</span> <span class="o">((</span><span class="n">d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">d</span> <span class="o">&lt;</span> <span class="n">desiredseparation</span><span class="o">))</span> <span class="o">{</span></span></pre></code></div>
 
@@ -2613,7 +2614,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 </div><div class="example">
   <a id="chapter06_exercise12" style="display: block;"></a><h4 id="exercise-612">Exercise 6.12</h4><p>Rewrite <span class="function">separate()</span> to work in the opposite fashion (“cohesion”).  If a vehicle is beyond a certain distance, steer towards that vehicle.  This will keep the group together.  (Note that in a moment, we’re going to look at what happens when we have both cohesion and separation in the same simulation.)</p>
 
-</div><div class="example">
+</div><div style="page-break-after:always;"> </div><div class="example">
   <a id="chapter06_exercise13" style="display: block;"></a><h4 id="exercise-613">Exercise 6.13</h4><p>Add the separation force to path following to create a simulation of Reynolds’s “Crowd Path Following.”</p>
 <div class="image-container screenshot" >
 	
@@ -2628,7 +2629,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 	
 </div>
 
-</div></section><section><a id="chapter06_section12" style="display: block;"></a><h3 id="612-combinations">6.12  Combinations</h3><p><a id="autonomous-agents-combinations-22bc24a0-1662-0130-0d8b-7cd1c3f718ad" style="display: block;"></a><a id="combinations-22bc32e0-1662-0130-0d8c-7cd1c3f718ad" style="display: block;"></a><a id="group-behavior-combinations-22bc3eb0-1662-0130-0d8d-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section12" style="display: block;"></a><h3 id="612-combinations">6.12  Combinations</h3><p><a id="autonomous-agentscombinations-7f73e150-251f-0130-b098-7cd1c3f718ad" style="display: block;"></a><a id="combinations-7f73fbf0-251f-0130-b099-7cd1c3f718ad" style="display: block;"></a><a id="group-behaviorcombinations-7f741050-251f-0130-b09a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The previous two exercises hint at what is perhaps the most important aspect of this chapter.  After all, what is a Processing sketch with one steering force compared to one with many?  How could we even begin to simulate emergence in our sketches with only one rule?   The most exciting and intriguing behaviors will come from mixing and matching multiple steering forces, and we’ll need a mechanism for doing so.</p>
 <p>You may be thinking, “Duh, this is nothing new.  We do this all the time.”  You would be right.  In fact, we did this as early as Chapter 2.</p>
 <div class="source-code">
@@ -2701,7 +2702,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">seek</span> <span class="o">=</span> <span class="n">seek</span><span class="o">(</span><span class="k">new</span> <span class="n">PVector</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span><span class="n">mouseY</span><span class="o">));</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> We have to apply the force here since seek() and separate() no longer do so.</div><code><pre><span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">separate</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">seek</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">seek</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -2736,7 +2737,7 @@ by the distance to weight it appropriately.</div><code><pre><span class='one-lin
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Instead of applying the force we return the PVector.</div><code><pre><span class='one-line'>    <span class="line-through"><span class="n">applyForce</span><span class="o">(</span><span class="n">steer</span><span class="o">);</span></span></span>
-<span class='one-line'>    <span class="k">return</span> <span class="n">steer</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="k">return</span> <span class="n">steer</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -2788,7 +2789,7 @@ They can be variables that are customized for
 each vehicle, or they can change over time.</div><code><pre><span class='one-line'>  <strong><span class="n">separate</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">1.5</span><span class="o">);</span></strong></span>
 <span class='one-line'>  <strong><span class="n">seek</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">0.5</span><span class="o">);</span></strong></span>
 <span class='one-line'> </span>
-<span class='one-line'> </span></pre></code></div>
+<span class='one-line'> </span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">applyForce</span><span class="o">(</span><span class="n">separate</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">applyForce</span><span class="o">(</span><span class="n">seek</span><span class="o">);</span></span>
@@ -2799,7 +2800,7 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
 </div><div class="example">
   <a id="chapter06_exercise14" style="display: block;"></a><h4 id="exercise-614">Exercise 6.14</h4><p>Redo Example 6.8 so that the behavior weights are not constants.  What happens if they change over time (according to a sine wave or Perlin noise)?  Or if some vehicles are more concerned with seeking and others more concerned with separating?  Can you introduce other steering behaviors as well?</p>
 
-</div></section><section><a id="chapter06_section13" style="display: block;"></a><h3 id="613-flocking">6.13  Flocking</h3><p><a id="flocks,-herds,-and-schools:-a-distributed-behavioral-model-(reynolds)-22bd1220-1662-0130-0d8e-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agents-flocking-22bd1ea0-1662-0130-0d8f-7cd1c3f718ad" style="display: block;"></a><a id="flocking-22bd2990-1662-0130-0d90-7cd1c3f718ad" style="display: block;"></a><a id="group-behavior-flocking-22bd3550-1662-0130-0d91-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-flocking-22bd4120-1662-0130-0d92-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section13" style="display: block;"></a><h3 id="613-flocking">6.13  Flocking</h3><p><a id="flocks-herds-and-schools-a-distributed-behavioral-model-reynolds-7f74a610-251f-0130-b09b-7cd1c3f718ad" style="display: block;"></a><a id="autonomous-agentsflocking-7f74b530-251f-0130-b09c-7cd1c3f718ad" style="display: block;"></a><a id="flocking-7f74c710-251f-0130-b09d-7cd1c3f718ad" style="display: block;"></a><a id="group-behaviorflocking-7f74d5e0-251f-0130-b09e-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaflocking-7f74e740-251f-0130-b09f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Flocking is an group animal behavior that is characteristic of many living creatures, such as birds, fish, and insects.   In 1986, Craig Reynolds created a computer simulation of flocking behavior and documented the algorithm in his paper, “Flocks, Herds, and Schools: A Distributed Behavioral Model.”    Recreating this simulation in Processing will bring together all the concepts in this chapter.</p>
 <div class="list">
 	
@@ -2821,7 +2822,7 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
 </div><p>The good news is, we’ve already done items 1 through 3 in this chapter, so this section will be about just putting it all together and seeing the result.</p>
 <p>Before we begin, I should mention that we’re going to change the name of our <span class="klass">Vehicle</span> class (yet again).  Reynolds uses the term “boid” (a made-up word that refers to a bird-like object) to describe the elements of a flocking system and we will do the same.</p>
 <p>Let’s take an overview of the three rules of flocking.</p>
-<p><a id="alignment-(flocking)-22bd9360-1662-0130-0d93-7cd1c3f718ad" style="display: block;"></a><a id="cohesion-(flocking)-22bda430-1662-0130-0d94-7cd1c3f718ad" style="display: block;"></a><a id="flocking-rules-of-22bdb510-1662-0130-0d95-7cd1c3f718ad" style="display: block;"></a><a id="separation-(flocking)-22bdc550-1662-0130-0d96-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="alignment-flocking-7f7528f0-251f-0130-b0a0-7cd1c3f718ad" style="display: block;"></a><a id="cohesion-flocking-7f753f30-251f-0130-b0a1-7cd1c3f718ad" style="display: block;"></a><a id="flockingrules-of-7f754fc0-251f-0130-b0a2-7cd1c3f718ad" style="display: block;"></a><a id="separation-flocking-7f7561b0-251f-0130-b0a3-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -2877,20 +2878,20 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> The three flocking rules</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">separate</span><span class="o">(</span><span class="n">boids</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">ali</span> <span class="o">=</span> <span class="n">align</span><span class="o">(</span><span class="n">boids</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">PVector</span> <span class="n">coh</span> <span class="o">=</span> <span class="n">cohesion</span><span class="o">(</span><span class="n">boids</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">PVector</span> <span class="n">coh</span> <span class="o">=</span> <span class="n">cohesion</span><span class="o">(</span><span class="n">boids</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Arbitrary weights for these forces
 (Try different ones!)</div><code><pre><span class='one-line'>    <span class="n">sep</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">1.5</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">ali</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">1.0</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">coh</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">1.0</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">coh</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mf">1.0</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Applying all the forces</div><code><pre><span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">sep</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">ali</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">coh</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">coh</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -2898,7 +2899,7 @@ each vehicle, or they can change over time.</div><code><pre><span class='one-lin
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Now, it’s just a matter of implementing the three rules.   We did separation before; it’s identical to our previous example.  Let’s take a look at alignment, or steering in the same direction as your neighbors.  As with all of our steering behaviors, we’ve got to boil down this concept into a desire: the boid’s desired velocity is the average velocity of its neighbors.</p>
 <p>So our algorithm is to calculate the average velocity of all the other boids and set that to desired.</p>
-<p><a id="separation-(flocking)-implementing-22be6060-1662-0130-0d97-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="separation-flockingimplementing-7f75c330-251f-0130-b0a4-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector align (ArrayList<Boid> boids) {
@@ -2935,7 +2936,7 @@ to calculate the average velocity.</div><code><pre><span class='one-line'>    <s
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Boid</span> <span class="n">other</span> <span class="o">:</span> <span class="n">boids</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">sum</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">velocity</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
-<span class='one-line'>    <span class="n">sum</span><span class="o">.</span><span class="na">div</span><span class="o">(</span><span class="n">boids</span><span class="o">.</span><span class="na">size</span><span class="o">());</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">sum</span><span class="o">.</span><span class="na">div</span><span class="o">(</span><span class="n">boids</span><span class="o">.</span><span class="na">size</span><span class="o">());</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -2951,7 +2952,7 @@ force formula</div><code><pre><span class='one-line'>    <span class="n">PVector
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="short-range-relationships-flocking-behavior-and-22be7c90-1662-0130-0d98-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="short-range-relationshipsflocking-behavior-and-7f75da30-251f-0130-b0a5-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The above is pretty good, but it’s missing one rather crucial detail.  One of the key principles behind complex systems like flocking is that the elements (in this case, boids) have short-range relationships.   Thinking about ants again, it’s pretty easy to imagine an ant being able to sense its immediate environment, but less so an ant having an awareness of what another ant is doing hundreds of feet away.  The fact that the ants can perform such complex collective behavior from only these neighboring relationships is what makes them so exciting in the first place.</p>
 <p>In our alignment function, we’re taking the average velocity of all the boids, whereas we should really only be looking at the boids within a certain distance.  That distance threshold is up to you, of course.  You could design boids that can see only twenty pixels away or boids that can see a hundred pixels away.</p>
 <a id="chapter06_figure36" style="display: block;"></a><div class="image-container " >
@@ -2961,7 +2962,7 @@ force formula</div><code><pre><span class='one-line'>    <span class="n">PVector
 	<p class="caption">Figure 6.36</p>
 </div>
 <p>Much like we did with separation (only calculating a force for others within a certain distance), we’ll want to do the same with alignment (and cohesion).</p>
-<p><a id="alignment-(flocking)-implementing-22beb1b0-1662-0130-0d99-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="alignment-flockingimplementing-7f760020-251f-0130-b0a6-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  PVector align (ArrayList<Boid> boids) {
@@ -3024,7 +3025,7 @@ how many boids are within the distance.</div><code><pre><span class='one-line'> 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If we don’t find any close boids,
 the steering force is zero.</div><code><pre><span class='one-line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="k">return</span> <span class="k">new</span> <span class="nf">PVector</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -3045,7 +3046,7 @@ the steering force is zero.</div><code><pre><span class='one-line'>    <span cla
 	
 </div>
 
-</div><p><a id="cohesion-(flocking)-implementing-22bee340-1662-0130-0d9a-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cohesion-flockingimplementing-7f762c80-251f-0130-b0a7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Finally, we are ready for cohesion.  Here our code is virtually identical to that for alignment—only instead of calculating the average velocity of the boid’s neighbors, we want to calculate the average location of the boid’s neighbors (and use that as a target to seek).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3219,7 +3220,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 	
 	
 </div>
-<p><a id="computational-beauty-of-nature-(flake)-22c23c40-1662-0130-0d9b-7cd1c3f718ad" style="display: block;"></a><a id="flake,-gary-22c24880-1662-0130-0d9c-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="computational-beauty-of-nature-flake-7f792e30-251f-0130-b0a8-7cd1c3f718ad" style="display: block;"></a><a id="flake-gary-7f794160-251f-0130-b0a9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In his book The <em>Computational Beauty of Nature</em> (MIT Press, 2000), Gary Flake describes a fourth rule for flocking: “View: move laterally away from any boid that blocks the view.” Have your boids follow this rule.</p>
 <div class="image-container " >
 	
@@ -3234,21 +3235,21 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 </div><div class="example">
   <a id="chapter06_exercise19" style="display: block;"></a><h4 id="exercise-619">Exercise 6.19</h4><p>Visualize the flock in an entirely different way.</p>
 
-</div></section><section><a id="chapter06_section14" style="display: block;"></a><h3 id="614-algorithmic-efficiency-or-why-does-my-run-so-slowly">6.14  Algorithmic Efficiency (or: Why does my $@(*%! run so slowly?)</h3><p><a id="efficiency-22c29dd0-1662-0130-0d9d-7cd1c3f718ad" style="display: block;"></a><a id="performance-22c2a8b0-1662-0130-0d9e-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter06_section14" style="display: block;"></a><h3 id="614-algorithmic-efficiency-or-why-does-my-run-so-slowly">6.14  Algorithmic Efficiency (or: Why does my $@(*%! run so slowly?)</h3><p><a id="efficiency-7f799800-251f-0130-b0aa-7cd1c3f718ad" style="display: block;"></a><a id="performance-7f79a600-251f-0130-b0ab-7cd1c3f718ad" style="display: block;"></a></p>
 <p>I would like to hide the dark truth behind we’ve just done, because I would like you to be happy and live a fulfilling and meaningful life.  But I also would like to be able to sleep at night without worrying about you so much.  So it is with a heavy heart that I must bring up this topic.  Group behaviors are wonderful.  But they can be slow, and the more elements in the group, the slower they can be.  Usually, when we talk about Processing sketches running slowly, it’s because drawing to the screen can be slow—the more you draw, the slower your sketch runs.  This is actually a case, however, where the slowness derives from the algorithm itself.  Let’s discuss.</p>
-<p><a id="big-o-notation-22c2bd20-1662-0130-0d9f-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-big-o-notation-22c2cb20-1662-0130-0da0-7cd1c3f718ad" style="display: block;"></a><a id="flocking-performance-and-22c2d580-1662-0130-0da1-7cd1c3f718ad" style="display: block;"></a><a id="performance-big-o-notation-22c2dfe0-1662-0130-0da2-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="big-o-notation-7f79b800-251f-0130-b0ac-7cd1c3f718ad" style="display: block;"></a><a id="efficiencybig-o-notation-7f79c770-251f-0130-b0ad-7cd1c3f718ad" style="display: block;"></a><a id="flockingperformance-and-7f79d870-251f-0130-b0ae-7cd1c3f718ad" style="display: block;"></a><a id="performancebig-o-notation-7f79ea00-251f-0130-b0af-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Computer scientists classify algorithms with something called “Big O notation,” which describes the efficiency of an algorithm: how many computational cycles does it require to complete?  Let’s consider a simple analog search problem.  You have a basket containing one hundred chocolate treats, only one of which is pure dark chocolate. That’s the one you want to eat.  To find it, you pick the chocolates out of the basket one by one.  Sure, you might be lucky and find it on the first try, but in the worst-case scenario you have to check all one hundred before you find the dark chocolate.   To find one thing in one hundred, you have to check one hundred things (or to find one thing in N things, you have to check N times.)  Your Big O Notation is N.  This, incidentally, is the Big O Notation that describes our simple particle system.  If we have N particles, we have to run and display those particles N times.</p>
 <p>Now, let’s think about a group behavior (such as flocking).   For every <span class="klass">Boid</span> object, we have to check every other <span class="klass">Boid</span> object (for its velocity and location).  Let’s say we have one hundred boids.  For boid #1, we need to check one hundred boids; for boid #2, we need to check one hundred boids, and so on and so forth.   For one hundred boids, we need to perform one hundred times one hundred checks, or ten thousand.   No problem: computers are fast and can do things ten thousand times pretty easily.  Let’s try one thousand.</p>
 <p>1,000 x 1,000 = 1,000,000 cycles.</p>
 <p>OK, this is rather slow, but still somewhat manageable.   Let’s try 10,000 elements:</p>
 <p>10,000 x 10,000 elements = 100,000,000 cycles.</p>
 <p>Now, we’re really getting slow. Really, really, really slow.</p>
-<p><a id="big-o-notation-n-squared-22c31380-1662-0130-0da3-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-big-o-notation-n-squared-22c325b0-1662-0130-0da4-7cd1c3f718ad" style="display: block;"></a><a id="performance-big-o-notation-n-squared-22c33100-1662-0130-0da5-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="big-o-notation-n-squared-7f7a1e70-251f-0130-b0b0-7cd1c3f718ad" style="display: block;"></a><a id="efficiencybig-o-notation-n-squared-7f7a3690-251f-0130-b0b1-7cd1c3f718ad" style="display: block;"></a><a id="performancebig-o-notation-n-squared-7f7a48e0-251f-0130-b0b2-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Notice something odd?  As the number of elements increases by a factor of 10, the number of required cycles increases by a factor of 100.  Or as the number of elements increases by a factor of N, the cycles increase by a factor of N times N.  This is known as Big O Notation N-Squared.</p>
 <p>I know what you are thinking.  You are thinking: “No problem; with flocking, we only need to consider the boids that are close to other boids.  So even if we have 1,000 boids, we can just look at, say, the 5 closest boids and then we only have 5,000 cycles.”   You pause for a moment, and then start thinking: “So for each boid I just need to check all the boids and find the five closest ones and I’m good!”  See the catch-22?  Even if we only want to look at the close ones, the only way to know what the close ones are would be to check all of them.</p>
 <p>Or is there another way?</p>
 <p>Let’s take a number that we might actually want to use, but would still run too slowly: 2,000 (4,000,000 cycles required).</p>
-<p><a id="bin-lattice-spatial-subdivision-22c34d40-1662-0130-0da6-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-bin-lattice-spatial-subdivision-22c35840-1662-0130-0da7-7cd1c3f718ad" style="display: block;"></a><a id="flocking-bin-lattice-spatial-subdivision-22c36410-1662-0130-0da8-7cd1c3f718ad" style="display: block;"></a><a id="performance-bin-lattice-spatial-subdivision-22c36db0-1662-0130-0da9-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="bin-lattice-spatial-subdivision-7f7a6510-251f-0130-b0b3-7cd1c3f718ad" style="display: block;"></a><a id="efficiencybin-lattice-spatial-subdivision-7f7a73f0-251f-0130-b0b4-7cd1c3f718ad" style="display: block;"></a><a id="flockingbin-lattice-spatial-subdivision-7f7a8630-251f-0130-b0b5-7cd1c3f718ad" style="display: block;"></a><a id="performancebin-lattice-spatial-subdivision-7f7a97c0-251f-0130-b0b6-7cd1c3f718ad" style="display: block;"></a></p>
 <p>What if we could divide the screen into a grid?  We would take all 2,000 boids and assign each boid to a cell within that grid.   We would then be able to look at each boid and compare it to its neighbors within that cell at any given moment. Imagine a 10 x 10 grid. In a system of 2,000 elements, on average, approximately 20 elements would be found in each cell (20 x 10 x 10 = 2,000).  Each cell would then require 20 x 20 = 400 cycles. With 100 cells, we’d have 100 x 400 = 40,000 cycles, a massive savings over 4,000,000.</p>
 <a id="chapter06_figure37" style="display: block;"></a><div class="image-container " >
 	
@@ -3256,7 +3257,7 @@ entire group.</div><code><pre><span class='one-line'><span class="n">Flock</span
 	
 	<p class="caption">Figure 6.37</p>
 </div>
-<p><a id="interaction-with-groups-of-autonomous-characters-(reynolds)-22c38770-1662-0130-0daa-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="interaction-with-groups-of-autonomous-characters-reynolds-7f7ab240-251f-0130-b0b7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This technique is known as “bin-lattice spatial subdivision” and is outlined in more detail in (surprise, surprise) Reynolds’s 2000 paper, <a href="http://www.red3d.com/cwr/papers/2000/pip.pdf">“Interaction with Groups of Autonomous Characters”</a>.   How do we implement such an algorithm in Processing?  One way is to keep multiple <span class="klass">ArrayList</span>s.  One <span class="klass">ArrayList</span> would keep track of all the boids, just like in our flocking example.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3327,7 +3328,7 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 </div><p>We’re only covering the basics here; for the full code, check the book’s website.</p>
 <p>Now, there are certainly flaws with this system.  What if all the boids congregate in the corner and live in the same cell? Then don’t we have to check all 2,000 against all 2,000?</p>
 <p>The good news is that this need for optimization is a common one and there are a wide variety of similar techniques out there.   For us, it’s likely that a basic approach will be good enough (in most cases, you won’t need one at all.)  For another, more sophisticated approach, check out <a href="http://toxiclibs.org/2010/02/new-package-simutils/">toxiclibs' Octree examples</a>.</p>
-</section><section><a id="chapter06_section15" style="display: block;"></a><h3 id="615-a-few-last-notes-optimization-tricks">6.15  A Few Last Notes: Optimization Tricks</h3><p><a id="autonomous-agents-efficiency-22c43080-1662-0130-0dab-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-22c43c50-1662-0130-0dac-7cd1c3f718ad" style="display: block;"></a><a id="performance-22c44750-1662-0130-0dad-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter06_section15" style="display: block;"></a><h3 id="615-a-few-last-notes-optimization-tricks">6.15  A Few Last Notes: Optimization Tricks</h3><p><a id="autonomous-agentsefficiency-7f7b3f10-251f-0130-b0b8-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-7f7b5000-251f-0130-b0b9-7cd1c3f718ad" style="display: block;"></a><a id="performance-7f7b5de0-251f-0130-b0ba-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This is something of a momentous occasion.  The end of Chapter 6 marks the end of our story of motion (in the context of this book, that is).  We started with the concept of a vector, moved on to forces, designed systems of many elements, examined physics libraries, built entities with hopes and dreams and fears, and simulated emergence.  The story doesn’t end here, but it does take a bit of a turn.  The next two chapters won’t focus on moving bodies, but rather on systems of rules.   Before we get there, I have a few quick items I’d like to mention that are important when working with the examples in Chapters 1 through 6.  They also relate to optimizing your code, which fits in with the previous section.</p>
 <section><a id="_1_magnitude_squared_or_sometimes_distance_squared" style="display: block;"></a><h4 id="1-magnitude-squared-or-sometimes-distance-squared">1) Magnitude squared (or sometimes distance squared)</h4><p>What is magnitude squared and when should you use it?  Let’s revisit how the magnitude of a vector is calculated.</p>
 <div class="source-code">
@@ -3397,9 +3398,9 @@ the boids, just this cell</div><code><pre><span class='one-line'><span class="n"
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="efficiency-magsq()-function-(pvector-class).-22c48ff0-1662-0130-0dae-7cd1c3f718ad" style="display: block;"></a><a id="mag()-function-(pvector-class)-magsq()-function-vs.-22c49c40-1662-0130-0daf-7cd1c3f718ad" style="display: block;"></a><a id="magsq()-function-(pvector-class).-22c4a7c0-1662-0130-0db0-7cd1c3f718ad" style="display: block;"></a><a id="optimization-magsq()-function-(pvector-class).-22c4b360-1662-0130-0db1-7cd1c3f718ad" style="display: block;"></a><a id="performance-magsq()-function-(pvector-class).-22c4bed0-1662-0130-0db2-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="efficiencymagsq-function-pvector-class-7f7b9940-251f-0130-b0bb-7cd1c3f718ad" style="display: block;"></a><a id="mag-function-pvector-classmagsq-function-vs-7f7bad70-251f-0130-b0bc-7cd1c3f718ad" style="display: block;"></a><a id="magsq-function-pvector-class-7f7bbf60-251f-0130-b0bd-7cd1c3f718ad" style="display: block;"></a><a id="optimizationmagsq-function-pvector-class-7f7bced0-251f-0130-b0be-7cd1c3f718ad" style="display: block;"></a><a id="performancemagsq-function-pvector-class-7f7be770-251f-0130-b0bf-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Same as magnitude, but without the square root.  In the case of a single <span class="klass">PVector</span> object, this will never make a significant difference on a Processing sketch.  However, if you are computing the magnitude of thousands of <span class="klass">PVector</span> objects each time through <span class="function">draw()</span>, using <span class="function">magSq()</span> instead of <span class="function">mag()</span> could help your code run a wee bit faster.  (Note: <span class="function">magSq()</span> is only available in Processing 2.0a1 or later.)</p>
-</section><section><a id="_2_sine_and_cosine_lookup_tables" style="display: block;"></a><h4 id="2-sine-and-cosine-lookup-tables">2) Sine and cosine lookup tables</h4><p><a id="cosine-lookup-tables-22c50650-1662-0130-0db3-7cd1c3f718ad" style="display: block;"></a><a id="efficiency-sine/cosine-lookup-tables-22c516b0-1662-0130-0db4-7cd1c3f718ad" style="display: block;"></a><a id="optimization-sine/cosine-lookup-tables-22c52490-1662-0130-0db5-7cd1c3f718ad" style="display: block;"></a><a id="performance-sine/cosine-lookup-tables-22c53170-1662-0130-0db6-7cd1c3f718ad" style="display: block;"></a><a id="sine-lookup-tables-22c53e30-1662-0130-0db7-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_2_sine_and_cosine_lookup_tables" style="display: block;"></a><h4 id="2-sine-and-cosine-lookup-tables">2) Sine and cosine lookup tables</h4><p><a id="cosine-lookup-tables-7f7c3290-251f-0130-b0c0-7cd1c3f718ad" style="display: block;"></a><a id="efficiencysinecosine-lookup-tables-7f7c4a70-251f-0130-b0c1-7cd1c3f718ad" style="display: block;"></a><a id="optimizationsinecosine-lookup-tables-7f7c6990-251f-0130-b0c2-7cd1c3f718ad" style="display: block;"></a><a id="performancesinecosine-lookup-tables-7f7c8a50-251f-0130-b0c3-7cd1c3f718ad" style="display: block;"></a><a id="sine-lookup-tables-7f7ca700-251f-0130-b0c4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>There’s a pattern here.  What kinds of functions are slow to compute? Square root. Sine. Cosine.  Tangent.  Again, if you just need a sine or cosine value here or there in your code, you are never going to run into a problem.  But what if you had something like this?</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3460,7 +3461,7 @@ float answer = sinvalues[angle];</textarea>
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>A more sophisticated example of this technique is available on the <a href="http://wiki.processing.org/w/Sin/Cos_look-up_table">Processing wiki</a>.</p>
-</section><section><a id="_3_making_gajillions_of_unnecessary_pvector_objects" style="display: block;"></a><h4 id="3-making-gajillions-of-unnecessary-pvector-objects">3) Making gajillions of unnecessary PVector objects</h4><p><a id="efficiency-temporary-objects-and-22c56ee0-1662-0130-0db8-7cd1c3f718ad" style="display: block;"></a><a id="optimization-temporary-objects-and-22c579d0-1662-0130-0db9-7cd1c3f718ad" style="display: block;"></a><a id="performance-temporary-objects-and-22c58470-1662-0130-0dba-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_3_making_gajillions_of_unnecessary_pvector_objects" style="display: block;"></a><h4 id="3-making-gajillions-of-unnecessary-pvector-objects">3) Making gajillions of unnecessary PVector objects</h4><p><a id="efficiencytemporary-objects-and-7f7ce850-251f-0130-b0c5-7cd1c3f718ad" style="display: block;"></a><a id="optimizationtemporary-objects-and-7f7d0140-251f-0130-b0c6-7cd1c3f718ad" style="display: block;"></a><a id="performancetemporary-objects-and-7f7d1420-251f-0130-b0c7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>I have to admit, I am perhaps the biggest culprit of this last note.  In fact, in the interest of writing clear and understandable examples, I often choose to make extra <span class="klass">PVector</span> objects when I absolutely do not need to.  For the most part, this is not a problem at all.   But sometimes, it can be.  Let’s take a look at an example.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3599,7 +3600,7 @@ void draw() {
 </div><div class="example">
   <a id="chapter06_exercise21" style="display: block;"></a><h5 id="exercise-621">Exercise 6.21</h5><p>Use steering behaviors with Box2D or toxiclibs.</p>
 
-</div><div class="tip">
+</div><div style="page-break-after:always;"> </div><div class="tip">
   <h5 id="the-ecosystem-project">The Ecosystem Project</h5><p>Step 6 Exercise:</p>
 <p>Use the concept of steering forces to drive the behavior of the creatures in your ecosystem.  Some possibilities:</p>
 <div class="list">
@@ -3638,7 +3639,7 @@ Complex systems can have memory (and be adaptive).  Can the history of your ecos
 		
 	</ul>
 </div>
-</div></section></section>
+</div><div style="page-break-after:always;"> </div></section></section>
   	</div>
   </div>
 

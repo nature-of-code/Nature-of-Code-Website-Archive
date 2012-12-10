@@ -109,7 +109,7 @@
 — Charlie Sheen
 </span>
   
-</blockquote><p><a id="artificial-intelligence-2319bbb0-1662-0130-0e9c-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-2319c760-1662-0130-0e9d-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="artificial-intelligence-7fc1ae00-251f-0130-b1a9-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-7fc1bd90-251f-0130-b1aa-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We’re at the end of our story.   This is the last official chapter of this book (though I envision additional supplemental material for the website and perhaps new chapters in the future).    We began with inanimate objects living in a world of forces and gave those objects desires, autonomy, and the ability to take action according to a system of rules.  Next, we allowed those objects to live in a population and evolve over time.  Now we ask: What is each object’s decision-making process?  How can it adjust its choices by learning over time?  Can a computational entity process its environment and generate a decision?</p>
 <p>The human brain can be described as a biological neural network—an interconnected web of neurons transmitting elaborate patterns of electrical signals.   Dendrites receive input signals and, based on those inputs, fire an output signal via an axon.  Or something like that.  How the human brain actually works is an elaborate and complex mystery, one that we certainly are not going to attempt to tackle in rigorous detail in this chapter.</p>
 <a id="chapter10_figure1" style="display: block;"></a><div class="image-container " >
@@ -120,12 +120,12 @@
 </div>
 <p>The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book.   We can simply be inspired by the idea of brain function.</p>
 <p>In this chapter, we’ll begin with a conceptual overview of the properties and features of neural networks and build the simplest possible example of one (a network that consists of a single neuron).  Afterwards, we’ll examine strategies for creating a “Brain” object that can be inserted into our <span class="klass">Vehicle</span> class and used to determine steering.   Finally, we’ll also look at techniques for visualizing and animating a network of neurons.</p>
-<section><a id="chapter10_section1" style="display: block;"></a><h3 id="101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</h3><p><a id="a-logical-calculus-of-the-ideas-imminent-in-nervous-activity-(mcculloch/pitts)-231a0440-1662-0130-0e9e-7cd1c3f718ad" style="display: block;"></a></p>
-<p><a id="mcculloch,-warren-s.-231a14b0-1662-0130-0e9f-7cd1c3f718ad" style="display: block;"></a><a id="pitts,-walter-231a2200-1662-0130-0ea0-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter10_section1" style="display: block;"></a><h3 id="101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</h3><p><a id="logical-calculus-of-the-ideas-imminent-in-nervous-activity-a-mccullochpitts-7fc1ede0-251f-0130-b1ab-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mcculloch-warren-s-7fc1fd40-251f-0130-b1ac-7cd1c3f718ad" style="display: block;"></a><a id="pitts-walter-7fc20d10-251f-0130-b1ad-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Computer scientists have long been inspired by the human brain.   In 1943, Warren S. McCulloch, a neuroscientist, and Walter Pitts, a logician, developed the first conceptual model of an artificial neural network.  In their paper, "A logical calculus of the ideas imminent in nervous activity,” they describe the concept of a neuron, a single cell living in a network of cells that receives inputs, processes those inputs, and generates an output.</p>
 <p>Their work, and the work of many scientists and researchers that followed, was not meant to accurately describe how the biological brain works.  Rather, an artificial neural network (which we will now simply refer to as a “neural network”) was designed as a computational model based on the brain to solve certain kinds of problems.</p>
 <p>It’s probably pretty obvious to you that there are problems that are incredibly simple for a computer to solve, but difficult for you.  Take the square root of 964,324, for example.  A quick line of code produces the value 982, a number Processing computed in less than a millisecond.   There are, on the other hand, problems that are incredibly simple for you or me to solve, but not so easy for a computer.   Show any toddler a picture of a kitten or puppy and they’ll be able to tell you very quickly which one is which.   Say hello and shake my hand one morning and you should be able to pick me out of a crowd of people the next day.  But need a machine to perform one of these tasks?  Scientists have already spent entire careers researching and implementing complex solutions.</p>
-<p><a id="ai-for-game-developers-(bourg/seemann)-231a37c0-1662-0130-0ea1-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligence:-a-modern-approach-(russell/norvig)-231a4140-1662-0130-0ea2-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligence-pattern-recognition-231a4cb0-1662-0130-0ea3-7cd1c3f718ad" style="display: block;"></a><a id="bourg,-david-m.-231a5960-1662-0130-0ea4-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-pattern-recognition-231a6900-1662-0130-0ea5-7cd1c3f718ad" style="display: block;"></a><a id="norvig,-peter-231a7650-1662-0130-0ea6-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognition-231a8540-1662-0130-0ea7-7cd1c3f718ad" style="display: block;"></a><a id="russell,-stuart-j.-231a9410-1662-0130-0ea8-7cd1c3f718ad" style="display: block;"></a><a id="seemann,-glenn-231aa400-1662-0130-0ea9-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="ai-for-game-developers-bourgseemann-7fc23650-251f-0130-b1ae-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligence-a-modern-approach-russellnorvig-7fc251f0-251f-0130-b1af-7cd1c3f718ad" style="display: block;"></a><a id="artificial-intelligencepattern-recognition-7fc26550-251f-0130-b1b0-7cd1c3f718ad" style="display: block;"></a><a id="bourg-david-m-7fc27560-251f-0130-b1b1-7cd1c3f718ad" style="display: block;"></a><a id="neural-networkspattern-recognition-7fc283f0-251f-0130-b1b2-7cd1c3f718ad" style="display: block;"></a><a id="norvig-peter-7fc29520-251f-0130-b1b3-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognition-7fc2a2e0-251f-0130-b1b4-7cd1c3f718ad" style="display: block;"></a><a id="russell-stuart-j-7fc2b0d0-251f-0130-b1b5-7cd1c3f718ad" style="display: block;"></a><a id="seemann-glenn-7fc2bfd0-251f-0130-b1b6-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The most common application of neural networks in computing today is to perform one of these “easy-for-a-human, difficult-for-a-machine” tasks, often referred to as pattern recognition.   Applications range from optical character recognition (turning printed or handwritten scans into digital text) to facial recognition.  We don’t have the time or need to use some of these more elaborate artificial intelligence algorithms here, but if you are interested in researching neural networks, I’d recommend the books <em>Artificial Intelligence: A Modern Approach</em> by Stuart J. Russell and Peter Norvig and <em>AI for Game Developers</em> by David M. Bourg and Glenn Seemann.</p>
 <a id="chapter10_figure2" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -133,13 +133,13 @@
 	
 	<p class="caption">Figure 10.2</p>
 </div>
-<p><a id="complex-systems-connectionist-computational-system-231ad600-1662-0130-0eaa-7cd1c3f718ad" style="display: block;"></a><a id="connectionist-computational-system-231ae2a0-1662-0130-0eab-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-connectionist-computational-system-231aed60-1662-0130-0eac-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="complex-systemsconnectionist-computational-system-7fc2f440-251f-0130-b1b7-7cd1c3f718ad" style="display: block;"></a><a id="connectionist-computational-system-7fc305a0-251f-0130-b1b8-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksconnectionist-computational-system-7fc31490-251f-0130-b1b9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A neural network is a “connectionist” computational system.   The computational systems we write are procedural; a program starts at the first line of code, executes it, and goes on to the next, following instructions in a linear fashion.   A true neural network does not follow a linear path.  Rather, information is processed collectively, in parallel throughout a network of nodes (the nodes, in this case, being neurons).</p>
 <p>Here we have yet another example of a complex system, much like the ones we examined in Chapters 6, 7, and 8.   The individual elements of the network, the neurons, are simple.  They read an input, process it, and generate an output.   A network of many neurons, however, can exhibit incredibly rich and intelligent behaviors.</p>
-<p><a id="neural-networks-learning-and-231b00b0-1662-0130-0ead-7cd1c3f718ad" style="display: block;"></a><a id="weight-neural-networks-and-231b1050-1662-0130-0eae-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networkslearning-and-7fc32d20-251f-0130-b1ba-7cd1c3f718ad" style="display: block;"></a><a id="weightneural-networks-and-7fc33f80-251f-0130-b1bb-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the key elements of a neural network is its ability to <em>learn</em>.  A neural network is not just a complex system, but a complex <strong><em>adaptive</em></strong> system, meaning it can change its internal structure based on the information flowing through it.  Typically, this is achieved through the adjusting of <em>weights</em>.  In the diagram above, each line represents a connection between two neurons and indicates the pathway for the flow of information.    Each connection has a <strong><em>weight</em></strong>, a number that controls the signal between the two neurons.   If the network generates a “good” output (which we’ll define later), there is no need to adjust the weights. However, if the network generates a “poor” output—an error, so to speak—then the system adapts, altering the weights in order to improve subsequent results.</p>
 <p>There are several strategies for learning, and we’ll examine two of them in this chapter.</p>
-<p><a id="neural-networks-supervised-learning-231b4920-1662-0130-0eaf-7cd1c3f718ad" style="display: block;"></a><a id="supervised-learning-(neural-networks)-231b5420-1662-0130-0eb0-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networkssupervised-learning-7fc37330-251f-0130-b1bc-7cd1c3f718ad" style="display: block;"></a><a id="supervised-learning-neural-networks-7fc38600-251f-0130-b1bd-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -149,7 +149,7 @@
 </li>
 		
 	</ul>
-</div><p><a id="neural-networks-unsupervised-learning-231b70c0-1662-0130-0eb1-7cd1c3f718ad" style="display: block;"></a><a id="unsupervised-learning-(neural-networks)-231b7e60-1662-0130-0eb2-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksunsupervised-learning-7fc3a650-251f-0130-b1be-7cd1c3f718ad" style="display: block;"></a><a id="unsupervised-learning-neural-networks-7fc3bb00-251f-0130-b1bf-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -159,7 +159,7 @@
 </li>
 		
 	</ul>
-</div><p><a id="neural-networks-reinforcement-learning-231b9c10-1662-0130-0eb3-7cd1c3f718ad" style="display: block;"></a><a id="reinforcement-learning-(neural-networks)-231ba8c0-1662-0130-0eb4-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksreinforcement-learning-7fc3e450-251f-0130-b1c0-7cd1c3f718ad" style="display: block;"></a><a id="reinforcement-learning-neural-networks-7fc3f6e0-251f-0130-b1c1-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -170,7 +170,7 @@
 		
 	</ul>
 </div><p>This ability of a neural network to learn, to make adjustments to its structure over time, is what makes it so useful in the field of artificial intelligence.  Here are some standard uses of neural networks in software today.</p>
-<p><a id="anomaly-detection-231bce50-1662-0130-0eb5-7cd1c3f718ad" style="display: block;"></a><a id="control-(of-physical-objects)-231bd910-1662-0130-0eb6-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-uses-of-231be630-1662-0130-0eb7-7cd1c3f718ad" style="display: block;"></a><a id="signal-processing-231bf5b0-1662-0130-0eb8-7cd1c3f718ad" style="display: block;"></a><a id="soft-sensors-231c0680-1662-0130-0eb9-7cd1c3f718ad" style="display: block;"></a><a id="time-series-prediction-231c17b0-1662-0130-0eba-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="anomaly-detection-7fc42200-251f-0130-b1c2-7cd1c3f718ad" style="display: block;"></a><a id="control-of-physical-objects-7fc43110-251f-0130-b1c3-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksuses-of-7fc440d0-251f-0130-b1c4-7cd1c3f718ad" style="display: block;"></a><a id="signal-processing-7fc45260-251f-0130-b1c5-7cd1c3f718ad" style="display: block;"></a><a id="soft-sensors-7fc460d0-251f-0130-b1c6-7cd1c3f718ad" style="display: block;"></a><a id="time-series-prediction-7fc47020-251f-0130-b1c7-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -202,7 +202,7 @@
 	</ul>
 </div><p>This is by no means a comprehensive list of applications of neural networks.   But hopefully it gives you an overall sense of the features and possibilities.   The thing is, neural networks are complicated and difficult.  They involve all sorts of fancy mathematics.   While this is all fascinating (and incredibly important to scientific research), a lot of the techniques are not very practical in the world of building interactive, animated Processing sketches.   Not to mention that in order to cover all this material, we would need another book—or more likely, a series of books.</p>
 <p>So instead, we’ll begin our last hurrah in the nature of code with the simplest of all neural networks, in an effort to understand how the overall concepts are applied in code.  Then we’ll look at some Processing sketches that generate visual results inspired by these concepts.</p>
-</section><section><a id="chapter10_section2" style="display: block;"></a><h3 id="102-the-perceptron">10.2  The Perceptron</h3><p><a id="cornell-aeronautical-laboratory-231c8980-1662-0130-0ebb-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-perceptron-231c95d0-1662-0130-0ebc-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-231ca050-1662-0130-0ebd-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-implementing-231cabe0-1662-0130-0ebe-7cd1c3f718ad" style="display: block;"></a><a id="rosenblatt,-frank-231cb790-1662-0130-0ebf-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter10_section2" style="display: block;"></a><h3 id="102-the-perceptron">10.2  The Perceptron</h3><p><a id="cornell-aeronautical-laboratory-7fc4d0c0-251f-0130-b1c8-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksperceptron-7fc4e880-251f-0130-b1c9-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-7fc4fbb0-251f-0130-b1ca-7cd1c3f718ad" style="display: block;"></a><a id="perceptronimplementing-7fc50ca0-251f-0130-b1cb-7cd1c3f718ad" style="display: block;"></a><a id="rosenblatt-frank-7fc521c0-251f-0130-b1cc-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.</p>
 <a id="chapter10_figure3" style="display: block;"></a><div class="image-container " >
 	
@@ -210,7 +210,7 @@
 	
 	<p class="caption">Figure 10.3: The perceptron</p>
 </div>
-<p><a id="feed-forward-model-(neural-networks)-231ccee0-1662-0130-0ec0-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="feed-forward-model-neural-networks-7fc54240-251f-0130-b1cd-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output.  In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.</p>
 <p>Let’s follow each of these steps in more detail.</p>
 <p><span class="highlight">Step 1: Receive inputs.</span></p>
@@ -228,7 +228,7 @@ Weight 1: -1</span></p>
 <p>The weighted inputs are then summed.</p>
 <p><span class="mono">Sum = 6 + -4 = 2</span></p>
 <p><span class="highlight">Step 4: Generate output.</span></p>
-<p><a id="activation-functions-of-neural-networks-231d6f00-1662-0130-0ec1-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-activation-functions-of-231d7c10-1662-0130-0ec2-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="activation-functions-of-neural-networks-7fc5e970-251f-0130-b1ce-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksactivation-functions-of-7fc5f9c0-251f-0130-b1cf-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The output of a perceptron is generated by passing that sum through an activation function.    In the case of a simple binary output, the activation function is what tells the perceptron whether to “fire” or not.   You can envision an LED connected to the output signal: if it fires, the light goes on; if not, it stays off.</p>
 <p>Activation functions can get a little bit hairy.   If you start reading one of those artificial intelligence textbooks looking for more info about activation functions, you may soon find yourself reaching for a calculus textbook.    However, with our friend the simple perceptron, we’re going to do something really easy.  Let’s make the activation function the sign of the sum.   In other words, if the sum is a positive number, the output is 1; if it is negative, the output is -1.</p>
 <p><span class="mono">Output = sign(sum) ⇒ sign(2) ⇒ +1</span></p>
@@ -286,7 +286,7 @@ for (int i = 0; i < inputs.length; i++) {
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Steps 1 and 2: Add up all the weighted inputs.</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
 <span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inputs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">sum</span> <span class="o">+=</span> <span class="n">inputs</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -318,13 +318,13 @@ through an activation function</div><code><pre><span class='one-line'><span clas
   <div class='code-comment-pair '><div class='code-comment '>The activation function</div><code><pre><span class='one-line'><span class="kt">int</span> <span class="nf">activate</span><span class="o">(</span><span class="kt">float</span> <span class="n">sum</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Return a 1 if positive, -1 if negative.</div><code><pre><span class='one-line'>  <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="k">else</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="k">else</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter10_section3" style="display: block;"></a><h3 id="103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</h3><p><a id="bias-input,-perceptron-231dc250-1662-0130-0ec3-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognition-perceptron-and-231dcf20-1662-0130-0ec4-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-bias-input-231ddb80-1662-0130-0ec5-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-error-calculations-and-231de790-1662-0130-0ec6-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-pattern-recognition-with-231df260-1662-0130-0ec7-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section3" style="display: block;"></a><h3 id="103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</h3><p><a id="bias-input-perceptron-7fc64d10-251f-0130-b1d0-7cd1c3f718ad" style="display: block;"></a><a id="pattern-recognitionperceptron-and-7fc65d20-251f-0130-b1d1-7cd1c3f718ad" style="display: block;"></a><a id="perceptronbias-input-7fc670b0-251f-0130-b1d2-7cd1c3f718ad" style="display: block;"></a><a id="perceptronerror-calculations-and-7fc68470-251f-0130-b1d3-7cd1c3f718ad" style="display: block;"></a><a id="perceptronpattern-recognition-with-7fc69710-251f-0130-b1d4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we understand the computational process of a perceptron, we can look at an example of one in action.   We stated that neural networks are often used for pattern recognition applications, such as facial recognition.   Even simple perceptrons can demonstrate the basics of classification, as in the following example.</p>
 <a id="chapter10_figure4" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -570,7 +570,7 @@ Return to Step 1 and repeat!
 		
 		</tbody>
 	</table>
-</div><p><a id="delta-weight-231f9a80-1662-0130-0ec8-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="delta-weight-7fcb2d30-251f-0130-b1d5-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The error is the determining factor in how the perceptron’s weights should be adjusted.   For any given weight, what we are looking to calculate is the change in weight, often called <em>Δweight</em> (or “delta” weight, delta being the Greek letter Δ).</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ΔWEIGHT</span></p>
 <p>Δweight is calculated as the error multiplied by the input.</p>
@@ -578,7 +578,7 @@ Return to Step 1 and repeat!
 <p>Therefore:</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ERROR * INPUT</span></p>
 <p>To understand why this works, we can again return to <a href="#chapter06_section3">steering</a>.  A steering force is essentially an error in velocity.  If we apply that force as our acceleration (Δvelocity), then we adjust our velocity to move in the correct direction.  This is what we want to do with our neural network’s weights.  We want to adjust them in the right direction, as defined by the error.</p>
-<p><a id="learning-constant-231fdd00-1662-0130-0ec9-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-learning-constant-231fecf0-1662-0130-0eca-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="learning-constant-7fcb6b80-251f-0130-b1d6-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlearning-constant-7fcb7a20-251f-0130-b1d7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>With steering, however, we had an additional variable that controlled the vehicle’s ability to steer: the <em>maximum force</em>.   With a high maximum force, the vehicle was able to accelerate and turn very quickly; with a lower force, the vehicle would take longer to adjust its velocity.  The neural network will employ a similar strategy with a variable called the “learning constant.”  We’ll add in the learning constant as follows:</p>
 <p><span class="formula">NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT</span></p>
 <p>Notice that a high learning constant means the weight will change more drastically.  This may help us arrive at a solution more quickly, but with such large changes in weight it’s possible we will overshoot the optimal weights.  With a small learning constant, the weights will be adjusted slowly, requiring more training time but allowing the network to make very small adjustments that could improve the network’s overall accuracy.</p>
@@ -630,7 +630,7 @@ between answer and guess).</div><code><pre><span class='one-line'>  <span class=
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Step 4: Adjust all the weights according
 to the error and learning constant.</div><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">weights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">error</span> <span class="o">*</span> <span class="n">inputs</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -689,7 +689,7 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Perceptron</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> The Perceptron stores its weights and learning constants.</div><code><pre><span class='one-line'>  <span class="kt">float</span><span class="o">[]</span> <span class="n">weights</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'>  <span class="n">Perceptron</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span></span>
@@ -697,7 +697,7 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Weights start off random.</div><code><pre><span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">weights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'> </span></pre></code></div>
@@ -708,14 +708,14 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
 <span class='one-line'>      <span class="n">sum</span> <span class="o">+=</span> <span class="n">inputs</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="nf">activate</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Output is a +1 or -1.</div><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="nf">activate</span><span class="o">(</span><span class="kt">float</span> <span class="n">sum</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">1</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -725,13 +725,13 @@ to the error and learning constant.</div><code><pre><span class='one-line'>  <sp
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">weights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">error</span> <span class="o">*</span> <span class="n">inputs</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="perceptron-training-23205230-1662-0130-0ecb-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="perceptrontraining-7fcbbc70-251f-0130-b1d8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>To train the perceptron, we need a set of inputs with a known answer.   We could package this up in a class like so:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -794,7 +794,7 @@ float f(float x) {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A function to calculate y based on x along a line</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="nf">f</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -914,7 +914,7 @@ float f(float x) {
 //[end]
 
 void setup() {
-  size(400, 400);
+  size(640, 360);
 
   ptron = new Perceptron(3);
 
@@ -962,11 +962,11 @@ void draw() {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> The formula for a line</div><code><pre><span class='one-line'><span class="kt">float</span> <span class="nf">f</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span></span>
+<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">360</span><span class="o">);</span></span>
 <span class='one-line'> </span>
 <span class='one-line'>  <span class="n">ptron</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Perceptron</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
@@ -976,7 +976,7 @@ void draw() {
 <span class='one-line'>    <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">(-</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Is the correct answer 1 or -1?</div><code><pre><span class='one-line'>    <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="n">answer</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="n">answer</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">training</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trainer</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">answer</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="o">}</span></span>
@@ -996,7 +996,7 @@ void draw() {
 <span class='one-line'>    <span class="kt">int</span> <span class="n">guess</span> <span class="o">=</span> <span class="n">ptron</span><span class="o">.</span><span class="na">feedforward</span><span class="o">(</span><span class="n">training</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">inputs</span><span class="o">);</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Show the classification—no fill for -1, black for +1.</div><code><pre><span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">guess</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="n">noFill</span><span class="o">();</span></span>
-<span class='one-line'>    <span class="k">else</span>           <span class="nf">fill</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="k">else</span>           <span class="nf">fill</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">ellipse</span><span class="o">(</span><span class="n">training</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">inputs</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">training</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">inputs</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="o">}</span></span>
@@ -1010,7 +1010,7 @@ void draw() {
 </div><div class="example">
   <a id="chapter10_exercise2" style="display: block;"></a><h4 id="exercise-102">Exercise 10.2</h4><p>Visualize the perceptron itself. Draw the inputs, the processing node, and the output.</p>
 
-</div></section><section><a id="chapter10_section5" style="display: block;"></a><h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p><a id="perceptron-steering-and-23211c60-1662-0130-0ecc-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviors-perceptron-for-23213de0-1662-0130-0ecd-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptron-23214ed0-1662-0130-0ece-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section5" style="display: block;"></a><h3 id="105-a-steering-perceptron">10.5  A Steering Perceptron</h3><p><a id="perceptronsteering-and-7fcc90f0-251f-0130-b1d9-7cd1c3f718ad" style="display: block;"></a><a id="steering-behaviorsperceptron-for-7fcca320-251f-0130-b1da-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptron-7fccb3a0-251f-0130-b1db-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While classifying points according to their position above or below a line was a useful demonstration of the perceptron in action, it doesn’t have much practical relevance to the other examples throughout this book.  In this section, we’ll take the concepts of a perceptron (array of inputs, single output), apply it to steering behaviors, and demonstrate reinforcement learning along the way.</p>
 <p>We are now going to take significant creative license with the concept of a neural network. This will allow us to stick with the basics and avoid some of the highly complex algorithms associated with more sophisticated neural networks.   Here we’re not so concerned with following rules outlined in artificial intelligence textbooks—we’re just hoping to make something interesting and brain-like.</p>
 <p>Remember our good friend the <span class="klass">Vehicle</span> class?  You know, that one for making objects with a location, velocity, and acceleration?  That could obey Newton’s laws with an <span class="function">applyForce()</span> function and move around the window according to a variety of steering rules?</p>
@@ -1143,7 +1143,7 @@ for each target.</div><code><pre><span class='one-line'>      <span class="n">fo
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Ask our brain for a result and apply that as the force!</div><code><pre><span class='one-line'>    <span class="n">PVector</span> <span class="n">output</span> <span class="o">=</span> <span class="n">brain</span><span class="o">.</span><span class="na">process</span><span class="o">(</span><span class="n">forces</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">output</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">applyForce</span><span class="o">(</span><span class="n">output</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -1151,14 +1151,14 @@ for each target.</div><code><pre><span class='one-line'>      <span class="n">fo
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>In other words, instead of weighting and accumulating the forces inside our vehicle, we simply pass an array of forces to the vehicle’s “brain” object and allow the brain to weight and sum the forces for us.  The output is then applied as a steering force.  This opens up a range of possibilities. A vehicle could make decisions as to how to steer on its own, learning from its mistakes and responding to stimuli in its environment.  Let’s see how this works.</p>
 <p>We can use the line classification perceptron as a model, with one important difference—the inputs are not single numbers, but vectors!     Let’s look at how the <span class="function">feedforward()</span> function works in our vehicle’s perceptron, alongside the one from our previous example.</p>
-<table class="code">
-  <tr>
-    <th>Vehicle PVector inputs</th>
-    <th>Line float inputs</th>
-  </tr>
-  <tr>
-    <td>
-      <pre>
+<table class="codewide">
+<tr>
+<th>Vehicle PVector inputs</th>
+<th>Line float inputs</th>
+</tr>
+<tr>
+<td>
+<pre>
 PVector feedforward(PVector[] forces) {
   // Sum is a PVector.
   <b>PVector sum = new PVector();</b>
@@ -1171,9 +1171,9 @@ PVector feedforward(PVector[] forces) {
   <b>return sum;</b>
 }
 </pre>
-    </td>
-    <td>
-      <pre>
+</td>
+<td>
+<pre>
 int feedforward(float[] inputs) {
   // Sum is a float.
   <b>float sum = 0;</b>
@@ -1186,8 +1186,9 @@ int feedforward(float[] inputs) {
   <b>return activate(sum);</b>
 }
 </pre>
-    </td>
-  </tr>
+</td>
+</tr>
+
 </table><p>Note how these two functions implement nearly identical algorithms, with two differences:</p>
 <div class="list">
 	
@@ -1202,7 +1203,7 @@ int feedforward(float[] inputs) {
 </li>
 		
 	</ol>
-</div><p><a id="reinforcement-learning(neural-networks)-2321e2d0-1662-0130-0ecf-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptron-reinforcement-learning(neural-networks)-2321edc0-1662-0130-0ed0-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="reinforcement-learningneural-networks-7fcd6d20-251f-0130-b1dc-7cd1c3f718ad" style="display: block;"></a><a id="steering-perceptronreinforcement-learningneural-networks-7fcd7f30-251f-0130-b1dd-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once the resulting steering force has been applied, it’s time to give feedback to the brain, i.e. <em>reinforcement learning</em>.   Was the decision to steer in that particular direction a good one or a bad one?  Presumably if some of the targets were predators (resulting in being eaten) and some of the targets were food (resulting in greater health), the network would adjust its weights in order to steer away from the predators and towards the food.</p>
 <p>Let’s take a simpler example, where the vehicle simply wants to stay close to the center of the window.    We’ll train the brain as follows:</p>
 <div class="source-code">
@@ -1229,14 +1230,14 @@ int feedforward(float[] inputs) {
 </div>
 <p>Here we are passing the brain a copy of all the inputs (which it will need for error correction) as well as an observation about its environment: a <span class="klass">PVector</span> that points from its current location to where it desires to be.  This <span class="klass">PVector</span> essentially serves as the error—the longer the <span class="klass">PVector</span>, the worse the vehicle is performing; the shorter, the better.</p>
 <p>The brain can then apply this “error” vector (which has two error values, one for <span class="var">x</span> and one for <span class="var">y</span>) as a means for adjusting the weights, just as we did in the line classification example.</p>
-<table class="code">
-  <tr>
-    <th>Training the Vehicle</th>
-    <th>Training the Line Classifier</th>
-  </tr>
-  <tr>
-    <td>
-      <pre>
+<table class="codewide">
+<tr>
+<th>Training the Vehicle</th>
+<th>Training the Line Classifier</th>
+</tr>
+<tr>
+<td>
+<pre>
 void train(PVector[] forces, PVector error) {
 
 
@@ -1248,9 +1249,9 @@ void train(PVector[] forces, PVector error) {
   }
 }
 </pre>
-    </td>
-    <td>
-      <pre>
+</td>
+<td>
+<pre>
 void train(float[] inputs, int desired) {
 
   int guess = feedforward(inputs);
@@ -1262,8 +1263,9 @@ void train(float[] inputs, int desired) {
   }
 }
 </pre>
-    </td>
-  </tr>
+</td>
+</tr>
+
 </table><p>Because the vehicle observes its own error, there is no need to calculate one; we can simply receive the error as an argument.  Notice how the change in weight is processed twice, once for the error along the x-axis and once for the y-axis.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1381,7 +1383,7 @@ weights[i] += c*error.y*forces[i].y;</textarea>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">velocity</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">acceleration</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="kt">float</span> <span class="n">maxforce</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="kt">float</span> <span class="n">maxspeed</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">float</span> <span class="n">maxspeed</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1400,13 +1402,13 @@ weights[i] += c*error.y*forces[i].y;</textarea>
 <span class='one-line'>    <span class="n">velocity</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">maxspeed</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">location</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">velocity</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">acceleration</span><span class="o">.</span><span class="na">mult</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Same old applyForce() function</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">force</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">acceleration</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">force</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'>  <span class="kt">void</span> <span class="nf">steer</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PVector</span><span class="o">&gt;</span> <span class="n">targets</span><span class="o">)</span> <span class="o">{</span></span>
@@ -1438,7 +1440,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">steer</span> <span class="o">=</span> <span class="n">PVector</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="n">desired</span><span class="o">,</span><span class="n">velocity</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">steer</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">maxforce</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="n">steer</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -1451,7 +1453,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 </div><div class="example">
   <a id="chapter10_exercise4" style="display: block;"></a><h4 id="exercise-104">Exercise 10.4</h4><p>Try different rules for reinforcement learning.  What if some targets are desirable and some are undesirable?</p>
 
-</div></section><section><a id="chapter10_section6" style="display: block;"></a><h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p><a id="linearly-separable-problems-2322a540-1662-0130-0ed1-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-linearly-separable-problems-and-2322b130-1662-0130-0ed2-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section6" style="display: block;"></a><h3 id="106-its-a-network-remember">10.6  It’s a “Network,” Remember?</h3><p><a id="linearly-separable-problems-7fce0660-251f-0130-b1de-7cd1c3f718ad" style="display: block;"></a><a id="perceptronlinearly-separable-problems-and-7fce15b0-251f-0130-b1df-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Yes, a perceptron can have multiple inputs, but it is still a lonely neuron.  The power of neural networks comes in the networking itself.   Perceptrons are, sadly, incredibly limited in their abilities.    If you read an AI textbook, it will say that a perceptron can only solve <strong><em>linearly separable</em></strong> problems.  What’s a linearly separable problem?  Let’s take a look at our first example, which determined whether points were on one side of a line or the other.</p>
 <a id="chapter10_figure11" style="display: block;"></a><div class="image-container " >
 	
@@ -1460,7 +1462,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 	<p class="caption">Figure 10.11</p>
 </div>
 <p>On the left of Figure 10.11, we have classic linearly separable data.  Graph all of the possibilities; if you can classify the data with a straight line, then it is linearly separable.  On the right, however, is non-linearly separable data.  You can’t draw a straight line to separate the black dots from the gray ones.</p>
-<p><a id="exclusive-or-(xor)-2322d370-1662-0130-0ed3-7cd1c3f718ad" style="display: block;"></a><a id="non-linearly-separable-problems-2322e250-1662-0130-0ed4-7cd1c3f718ad" style="display: block;"></a><a id="xor-(exclusive-or)-2322f280-1662-0130-0ed5-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="exclusive-or-xor-7fce3ea0-251f-0130-b1e0-7cd1c3f718ad" style="display: block;"></a><a id="non-linearly-separable-problems-7fce4cb0-251f-0130-b1e1-7cd1c3f718ad" style="display: block;"></a><a id="xor-exclusive-or-7fce5b60-251f-0130-b1e2-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the simplest examples of a non-linearly separable problem is <em>XOR</em>, or “exclusive or.”  We’re all familiar with <em>AND</em>.  For <em>A</em> <em>AND</em> <em>B</em> to be true, both <em>A</em> and <em>B</em> must be true.  With <em>OR</em>, either <em>A</em> or <em>B</em> can be true for <em>A</em> <em>OR</em> <em>B</em> to evaluate as true. These are both linearly separable problems.  Let’s look at the solution space, a “truth table.”</p>
 <a id="chapter10_figure12" style="display: block;"></a><div class="image-container " >
 	
@@ -1477,7 +1479,7 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 	<p class="caption">Figure 10.13</p>
 </div>
 <p>This is not linearly separable.  Try to draw a straight line to separate the true outputs from the false ones—you can’t!</p>
-<p><a id="neural-networks-networks-of-perceptrons-232378a0-1662-0130-0ed6-7cd1c3f718ad" style="display: block;"></a><a id="perceptron-networks-of-232383b0-1662-0130-0ed7-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neural-networksnetworks-of-perceptrons-7fceeac0-251f-0130-b1e3-7cd1c3f718ad" style="display: block;"></a><a id="perceptronnetworks-of-7fcf0460-251f-0130-b1e4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>So perceptrons can’t even solve something as simple as <em>XOR</em>.  But what if we made a network out of two perceptrons?  If one perceptron can solve <em>OR</em> and one perceptron can solve <em>NOT AND</em>, then two perceptrons combined can solve <em>XOR</em>.</p>
 <a id="chapter10_figure14" style="display: block;"></a><div class="image-container " >
 	
@@ -1487,11 +1489,11 @@ the distance to the center.</div><code><pre><span class='one-line'>    <strong><
 </div>
 <p>The above diagram is known as a <em>multi-layered perceptron</em>, a network of many neurons.   Some are input neurons and receive the inputs, some are part of what’s called a “hidden” layer (as they are connected to neither the inputs nor the outputs of the network directly), and then there are the output neurons, from which we read the results.</p>
 <p>Training these networks is much more complicated.  With the simple perceptron, we could easily evaluate how to change the weights according to the error. But here there are so many different connections, each in a different layer of the network. How does one know how much each neuron or connection contributed to the overall error of the network?</p>
-<p><a id="backpropagation-2323c2e0-1662-0130-0ed8-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-backpropagation-2323cd50-1662-0130-0ed9-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="backpropagation-7fcf4a70-251f-0130-b1e5-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksbackpropagation-7fcf5ad0-251f-0130-b1e6-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The solution to optimizing weights of a multi-layered network is known as <strong><em>backpropagation</em></strong>.  The output of the network is generated in the same manner as a perceptron.   The inputs multiplied by the weights are summed and fed forward through the network.  The difference here is that they pass through additional layers of neurons before reaching the output. Training the network (i.e. adjusting the weights) also involves taking the error (desired result - guess).  The error, however, must be fed backwards through the network. The final error ultimately adjusts the weights of all the connections.</p>
 <p>Backpropagation is a bit beyond the scope of this book and involves a fancier activation function (called the sigmoid function) as well as some basic calculus.  If you are interested in how backpropagation works, check the book website (and GitHub repository) for an example that solves <em>XOR</em> using a multi-layered feed forward network with backpropagation.</p>
 <p>Instead, here we’ll focus on a code framework for building the visual architecture of a network.  We’ll make <span class="klass">Neuron</span> objects and <span class="klass">Connection</span> objects from which a <span class="klass">Network</span> object can be created and animated to show the feed forward process.   This will closely resemble some of the force-directed graph examples we examined in Chapter 5 (toxiclibs).</p>
-</section><section><a id="chapter10_section7" style="display: block;"></a><h3 id="107-neural-network-diagram">10.7  Neural Network Diagram</h3><p><a id="neural-networks-diagramming-232406b0-1662-0130-0eda-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter10_section7" style="display: block;"></a><h3 id="107-neural-network-diagrams">10.7  Neural Network Diagrams</h3><p><a id="neural-networksdiagramming-7fcfa510-251f-0130-b1e7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Our goal will be to create the following simple network diagram:</p>
 <a id="chapter10_figure15" style="display: block;"></a><div class="image-container " >
 	
@@ -1574,7 +1576,7 @@ class Network {
   <div class="code-block">
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A Network is a list of neurons.</div><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Network</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Neuron</span><span class="o">&gt;</span> <span class="n">neurons</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Neuron</span><span class="o">&gt;</span> <span class="n">neurons</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">location</span><span class="o">;</span></span>
 <span class='one-line'> </span>
@@ -1586,7 +1588,7 @@ class Network {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> We can add an neuron to the network.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">addNeuron</span><span class="o">(</span><span class="n">Neuron</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">neurons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1597,7 +1599,7 @@ class Network {
 <span class='one-line'>      <span class="n">n</span><span class="o">.</span><span class="na">display</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>    <span class="n">popMatrix</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -1649,14 +1651,14 @@ void draw() {
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Make the Neurons.</div><code><pre><span class='one-line'>  <span class="n">Neuron</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(-</span><span class="mi">200</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">Neuron</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">100</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">Neuron</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(</span><span class="mi">0</span><span class="o">,-</span><span class="mi">100</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="n">Neuron</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">Neuron</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Neuron</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Add the Neurons to the network.</div><code><pre><span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">addNeuron</span><span class="o">(</span><span class="n">a</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">addNeuron</span><span class="o">(</span><span class="n">b</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">addNeuron</span><span class="o">(</span><span class="n">c</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">addNeuron</span><span class="o">(</span><span class="n">d</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">network</span><span class="o">.</span><span class="na">addNeuron</span><span class="o">(</span><span class="n">d</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span>
 <span class='one-line'> </span>
@@ -1707,7 +1709,7 @@ void draw() {
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kd">class</span> <span class="nc">Connection</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A connection is between two neurons.</div><code><pre><span class='one-line'>  <span class="n">Neuron</span> <span class="n">a</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="n">Neuron</span> <span class="n">b</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">Neuron</span> <span class="n">b</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair '><div class='code-comment '>
 A connection has a weight.</div><code><pre><span class='one-line'>  <span class="kt">float</span> <span class="n">weight</span><span class="o">;</span></span>
@@ -1860,7 +1862,7 @@ A connection has a weight.</div><code><pre><span class='one-line'>  <span class=
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Adding a connection to this neuron</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">addConnection</span><span class="o">(</span><span class="n">Connection</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">connections</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">c</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -1909,14 +1911,14 @@ A connection has a weight.</div><code><pre><span class='one-line'>  <span class=
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Drawing all the connections</div><code><pre><span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Connection</span> <span class="n">c</span> <span class="o">:</span> <span class="n">connections</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">c</span><span class="o">.</span><span class="na">display</span><span class="o">();</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter10_section8" style="display: block;"></a><h3 id="108-animating-feed-forward">10.8  Animating Feed Forward</h3><p><a id="feed-forward-model-(neural-networks)-animating-23254d30-1662-0130-0edb-7cd1c3f718ad" style="display: block;"></a><a id="neural-networks-animating-232558d0-1662-0130-0edc-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter10_section8" style="display: block;"></a><h3 id="108-animating-feed-forward">10.8  Animating Feed Forward</h3><p><a id="feed-forward-model-neural-networksanimating-7fd10700-251f-0130-b1e8-7cd1c3f718ad" style="display: block;"></a><a id="neural-networksanimating-7fd11a70-251f-0130-b1e9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>An interesting problem to consider is how to visualize the flow of information as it travels throughout a neural network.    Our network is built on the feed forward model, meaning that an input arrives at the first neuron (drawn on the lefthand side of the window) and the output of that neuron flows across the connections to the right until it exits as output from the network itself.</p>
 <p>Our first step is to add a function to the network to receive this input, which we’ll make a random number between 0 and 1.</p>
 <div class="source-code">
@@ -1965,7 +1967,7 @@ A connection has a weight.</div><code><pre><span class='one-line'>  <span class=
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A new function to feed an input into the neuron</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">feedforward</span><span class="o">(</span><span class="kt">float</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">Neuron</span> <span class="n">start</span> <span class="o">=</span> <span class="n">neurons</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">start</span><span class="o">.</span><span class="na">feedforward</span><span class="o">(</span><span class="n">input</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -2077,7 +2079,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="neural-networks-real-vs.-simulated-2325c230-1662-0130-0edd-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="neural-networksreal-vs-simulated-7fd196c0-251f-0130-b1ea-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here’s where things get a little tricky.  After all, our job here is not to actually make a functioning neural network, but to animate a simulation of one.  If the neural network were just continuing its work, it would instantly pass those inputs (multiplied by the connection’s weight) along to the connected neurons.  We’d say something like:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -2231,7 +2233,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 <span class='one-line'>    <span class="k">if</span> <span class="o">(</span><span class="n">sending</span><span class="o">)</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> As long as we’re sending, interpolate our points.</div><code><pre><span class='one-line'>      <span class="n">sender</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">lerp</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">);</span></span>
-<span class='one-line'>      <span class="n">sender</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">lerp</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>      <span class="n">sender</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">lerp</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>  <span class="o">}</span></span></pre></code></div>
@@ -2292,7 +2294,7 @@ through all of its connections</div><code><pre><span class='one-line'>      <spa
 	
 	
 </div>
-<p><a id="chapter10_example4" style="display: block;"></a><span class="example">Example 10.4: Animating neural network diagram</span></p>
+<p><a id="chapter10_example4" style="display: block;"></a><span class="example">Example 10.4: Animating a neural network diagram</span></p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void draw() {
@@ -2448,7 +2450,7 @@ class Connection {
 </div><div class="example">
   <a id="chapter10_exercise7" style="display: block;"></a><h4 id="exercise-107">Exercise 10.7</h4><p>Instead of <span class="function">lerp()</span>, use moving bodies with steering forces to visualize the flow of information in the network.</p>
 
-</div><div class="tip">
+</div><div style="page-break-after:always;"> </div><div class="tip">
   <h4 id="the-ecosystem-project">The Ecosystem Project</h4><p>Step 10 Exercise:</p>
 <p>Try incorporating the concept of a “brain” into your creatures.</p>
 <div class="list">
@@ -2472,8 +2474,8 @@ Can the ecosystem as a whole emulate the brain?  Can elements of the environment
 		
 	</ul>
 </div>
-</div><p>If you’re still reading, thank you!  You’ve reached the end of the book.  But for as much material as this book contains, we’ve barely scratched the surface of the world we inhabit and of techniques for simulating it.  It’s my intention for this book to live as an ongoing project, and I hope to continue adding new tutorials and examples to the <a href="http://natureofcode.com">book’s website</a> as well as expand and update the printed material.  Your feedback is truly appreciated, so please get in touch via email (<a href="mailto:daniel@shiffman.net">daniel@shiffman.net</a>) or by contributing to the <a href="http://github.com/shiffman/The-Nature-of-Code/">GitHub repository</a>, in keeping with the open-source spirit of the project.  Share your work. Keep in touch.  Let’s be two with nature.</p>
-</section>
+</div><section><a id="_the_end" style="display: block;"></a><h4 id="the-end">The end</h4><p>If you’re still reading, thank you!  You’ve reached the end of the book.  But for as much material as this book contains, we’ve barely scratched the surface of the world we inhabit and of techniques for simulating it.  It’s my intention for this book to live as an ongoing project, and I hope to continue adding new tutorials and examples to the <a href="http://natureofcode.com">book’s website</a> as well as expand and update the printed material.  Your feedback is truly appreciated, so please get in touch via email at (daniel@shiffman.net) or by contributing to the <a href="http://github.com/shiffman/The-Nature-of-Code/">GitHub repository</a>, in keeping with the open-source spirit of the project.  Share your work. Keep in touch.  Let’s be two with nature.</p>
+<div style="page-break-after:always;"> </div></section></section>
   	</div>
   </div>
 
