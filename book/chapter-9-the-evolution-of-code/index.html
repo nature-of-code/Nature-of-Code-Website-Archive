@@ -110,16 +110,16 @@
 </span>
   
 </blockquote><p>Let’s take a moment to think back to a simpler time, when you wrote your first Processing sketches and life was free and easy.  What is one of programming’s fundamental concepts that you likely used in those first sketches and continue to use over and over again?  <em>Variables</em>.  Variables allow you to save data and reuse that data while a program runs.   This, of course, is nothing new to us.  In fact, we have moved far beyond a sketch with just one or two variables and on to more complex data structures—variables made from custom types (objects) that include both data and functionality.  We’ve made our own little worlds of movers and particles and vehicles and cells and trees.</p>
-<p><a id="evolution-modeling-22f473f0-1662-0130-0e3f-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-evolution-22f48630-1662-0130-0e40-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="evolutionmodeling-7faaafb0-251f-0130-b14c-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaevolution-7faac080-251f-0130-b14d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In each and every example in this book, the variables of these objects have to be initialized.  Perhaps you made a whole bunch of particles with random colors and sizes or a list of vehicles all starting at the same <span class="var">x</span>,<span class="var">y</span> location on screen.   But  instead of acting as “intelligent designers” and assigning the properties of our objects through randomness or thoughtful consideration, we can let a process found in nature—<em>evolution</em>—decide for us.</p>
 <p>Can we think of the variables of an object as its DNA?  Can objects make other objects and pass down their DNA to a new generation?  Can our simulation evolve?</p>
 <p> The answer to all these questions is yes.  After all, we wouldn’t be able to face ourselves in the mirror as nature-of-coders without tackling a simulation of one of the most powerful algorithmic processes found in nature itself.  This chapter is dedicated to examining the principles behind biological evolution and finding ways to apply those principles in code.</p>
-<section><a id="chapter09_section1" style="display: block;"></a><h3 id="91-genetic-algorithms-inspired-by-actual-events">9.1  Genetic Algorithms: Inspired by Actual Events</h3><p><a id="evolution-genetic-algorithms-22f4e910-1662-0130-0e41-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-22f4f960-1662-0130-0e42-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-genetic-algorithms-22f50a90-1662-0130-0e43-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter09_section1" style="display: block;"></a><h3 id="91-genetic-algorithms-inspired-by-actual-events">9.1  Genetic Algorithms: Inspired by Actual Events</h3><p><a id="evolutiongenetic-algorithms-7faaf2b0-251f-0130-b14e-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-7fab03b0-251f-0130-b14f-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenagenetic-algorithms-7fab1a80-251f-0130-b150-7cd1c3f718ad" style="display: block;"></a></p>
 <p>It’s important for us to clarify the goals of this chapter.   We will not go into depth about the science of genetics and evolution as it happens in the real world.  We won’t be making Punnett squares (sorry to disappoint) and there will be no discussion of nucleotides, protein synthesis, RNA, and other topics related to the actual biological processes of evolution.  Instead, we are going to look at the core principles behind Darwinian evolutionary theory and develop a set of algorithms <em>inspired</em> by these principles.   We don’t care so much about an accurate simulation of evolution; rather, we care about methods for applying evolutionary strategies in software.</p>
 <p>This is not to say that a project with more scientific depth wouldn’t have value, and I encourage readers with a particular interest in this topic to explore possibilities for expanding the examples provided with additional evolutionary features.  Nevertheless, for the sake of keeping things manageable, we’re going to stick to the basics, which will be plenty complex and exciting.</p>
-<p><a id="genetic-algorithms-defined-22f53350-1662-0130-0e44-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="genetic-algorithmsdefined-7fab3540-251f-0130-b151-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The term “genetic algorithm” refers to a specific algorithm implemented in a specific way to solve specific sorts of problems.   While the formal genetic algorithm itself will serve as the foundation for the examples we create in this chapter, we needn’t worry about implementing the algorithm with perfect accuracy, given that we are looking for creative uses of evolutionary theories in our code.  This chapter will be broken down into the following three parts (with the majority of the time spent on the first).</p>
-<p><a id="genetic-algorithms-traditional-22f54e30-1662-0130-0e45-7cd1c3f718ad" style="display: block;"></a><a id="traditional-genetic-algorithms-22f55ec0-1662-0130-0e46-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="genetic-algorithmstraditional-7fab47d0-251f-0130-b152-7cd1c3f718ad" style="display: block;"></a><a id="traditional-genetic-algorithms-7fab5700-251f-0130-b153-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -128,18 +128,19 @@
 </p>
 </li>
 		
-			<li><p><a id="genetic-algorithms-interactive-selection-22f58c30-1662-0130-0e47-7cd1c3f718ad" style="display: block;"></a><a id="interactive-selection-genetic-algorithms-22f598b0-1662-0130-0e48-7cd1c3f718ad" style="display: block;"></a><strong><em>Interactive Selection.</em></strong>  Once we establish the traditional computer science algorithm, we’ll look at other applications of genetic algorithms in the visual arts.  Interactive selection refers to the process of evolving something (often an computer-generated image) through user interaction.  Let’s say you walk into a museum gallery and see ten paintings.   With interactive selection, you would pick your favorites and allow an algorithmic process to generate (or “evolve”) new paintings based on your preferences.
+			<li><p><a id="genetic-algorithmsinteractive-selection-7fab78c0-251f-0130-b154-7cd1c3f718ad" style="display: block;"></a><a id="interactive-selection-genetic-algorithms-7fab8960-251f-0130-b155-7cd1c3f718ad" style="display: block;"></a><strong><em>Interactive Selection.</em></strong>  Once we establish the traditional computer science algorithm, we’ll look at other applications of genetic algorithms in the visual arts.  Interactive selection refers to the process of evolving something (often an computer-generated image) through user interaction.  Let’s say you walk into a museum gallery and see ten paintings.   With interactive selection, you would pick your favorites and allow an algorithmic process to generate (or “evolve”) new paintings based on your preferences.
 </p>
 </li>
 		
-			<li><p><a id="ecosystem-simulation-genetic-algorithms-22f5b080-1662-0130-0e49-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-ecosystem-simulation-22f5bc40-1662-0130-0e4a-7cd1c3f718ad" style="display: block;"></a><strong><em>Ecosystem Simulation.</em></strong>  The traditional computer science genetic algorithm and interactive selection technique are what you will likely find if you search online or read a textbook about artificial intelligence.  But as we’ll soon see, they don’t really simulate the process of evolution as it happens in the real world.   In this chapter, I want to also explore techniques for simulating the process of evolution in an ecosystem of pseudo-living beings.  How can our objects that move about the screen meet each other, mate, and pass their genes on to a new generation?  This would apply directly to the Ecosystem Project outlined at the end of each chapter.
+			<li><p><strong><em>Ecosystem Simulation.</em></strong>  The traditional computer science genetic algorithm and interactive selection technique are what you will likely find if you search online or read a textbook about artificial intelligence.  But as we’ll soon see, they don’t really simulate the process of evolution as it happens in the real world.   In this chapter, I want to also explore techniques for simulating the process of evolution in an ecosystem of pseudo-living beings.  How can our objects that move about the screen meet each other, mate, and pass their genes on to a new generation?  This would apply directly to the Ecosystem Project outlined at the end of each chapter.
 </p>
 </li>
 		
 	</ol>
-</div></section><section><a id="chapter09_section2" style="display: block;"></a><h3 id="92-why-use-genetic-algorithms">9.2 Why Use Genetic Algorithms?</h3><p><a id="adaptation-in-natural-and-artificial-systems-(holland)-22f5dda0-1662-0130-0e4b-7cd1c3f718ad" style="display: block;"></a><a id="evolutionary-computing-22f5ed70-1662-0130-0e4c-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-purpose-of-22f5fdf0-1662-0130-0e4d-7cd1c3f718ad" style="display: block;"></a><a id="holland,-john-22f60bb0-1662-0130-0e4e-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="ecosystem-simulation-genetic-algorithms-7faba730-251f-0130-b156-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmsecosystem-simulation-7fabb5a0-251f-0130-b157-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter09_section2" style="display: block;"></a><h3 id="92-why-use-genetic-algorithms">9.2 Why Use Genetic Algorithms?</h3><p><a id="adaptation-in-natural-and-artificial-systems-holland-7fabccd0-251f-0130-b158-7cd1c3f718ad" style="display: block;"></a><a id="evolutionary-computing-7fabe5c0-251f-0130-b159-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmspurpose-of-7fabf380-251f-0130-b15a-7cd1c3f718ad" style="display: block;"></a><a id="holland-john-7fac0300-251f-0130-b15b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While computer simulations of evolutionary processes date back to the 1950s, much of what we think of as genetic algorithms (also known as “GAs”) today was developed by John Holland, a professor at the University of Michigan, whose book <em>Adaptation in Natural and Artificial Systems</em> pioneered GA research.  Today, more genetic algorithms are part of a wider field of research, often referred to as "Evolutionary Computing."</p>
-<p><a id="brute-force-method-22f621e0-1662-0130-0e4f-7cd1c3f718ad" style="display: block;"></a><a id="infinite-monkey-theorem-22f62d00-1662-0130-0e50-7cd1c3f718ad" style="display: block;"></a><a id="probability-infinite-monkey-theorem-22f63850-1662-0130-0e51-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="brute-force-method-7fac1c00-251f-0130-b15c-7cd1c3f718ad" style="display: block;"></a><a id="infinite-monkey-theorem-7fac2b80-251f-0130-b15d-7cd1c3f718ad" style="display: block;"></a><a id="probabilityinfinite-monkey-theorem-7fac3d60-251f-0130-b15e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>To help illustrate the traditional genetic algorithm, we are going to start with monkeys.  No, not our evolutionary ancestors.  We’re going to start with some fictional monkeys that bang away on keyboards with the goal of typing out the complete works of Shakespeare.</p>
 <a id="chapter09_figure1" style="display: block;"></a><div class="image-container " >
 	
@@ -149,7 +150,7 @@
 </div>
 <p>The “infinite monkey theorem” is stated as follows:  A monkey hitting keys randomly on a typewriter will eventually type the complete works of Shakespeare (given an infinite amount of time).   The problem with this theory is that the probability of said monkey actually typing Shakespeare is so low that even if that monkey started at the Big Bang, it’s unbelievably unlikely we’d even have <em>Hamlet</em> at this point.</p>
 <p>Let’s consider a monkey named George.  George types on a reduced typewriter containing only twenty-seven characters: twenty-six letters and one space bar.  So the probability of George hitting any given key is one in twenty-seven.</p>
-<p>Let’s consider the phrase “to be or not to be that is the question” (we’re simplifying it from the original “To be, or not to be: that is the question”).  The phrase is 39 characters long. If George starts typing, the chance he’ll get the first character right is 1 in 27. Since the probability he’ll get the second character right is also 1 in 27, he has a 1 in 27*27 chance of landing the first two characters in correct order—which follows directly from our discussion of  <a href="#intro.section3">"event probability" in the Introduction</a>. Therefore, the probability that George will type the full phrase is:</p>
+<p>Let’s consider the phrase “to be or not to be that is the question” (we’re simplifying it from the original “To be, or not to be: that is the question”).  The phrase is 39 characters long. If George starts typing, the chance he’ll get the first character right is 1 in 27. Since the probability he’ll get the second character right is also 1 in 27, he has a 1 in 27*27 chance of landing the first two characters in correct order—which follows directly from our discussion of  <a href="#intro_section3">"event probability" in the Introduction</a>. Therefore, the probability that George will type the full phrase is:</p>
 <p>(1/27) multiplied by itself 39 times, i.e. (1/27)<sup>39</sup></p>
 <p>which equals a 1 in 66,555,937,033,867,822,607,895,549,241,096,482,953,017,615,834,735,226,163 chance of getting it right!</p>
 <p>Needless to say, even hitting just this one phrase, not to mention an entire play, is highly unlikely.   Even if George is a computer simulation and can type one million random phrases per second, for George to have a 99% probability of eventually getting it right, he would have to type for 9,719,096,182,010,563,073,125,591,133,903,305,625,605,017 years. (Note that the age of the universe is estimated to be a mere 13,750,000,000 years.)</p>
@@ -173,9 +174,9 @@ println(s);</textarea>
 <div class="example">
   <a id="chapter09_exercise1" style="display: block;"></a><h4 id="exercise-91">Exercise 9.1</h4><p>Create a sketch that generates random strings.  We’ll need to know how to do this in order to implement the genetic algorithm example that will shortly follow.   How long does it take for Processing to randomly generate the string “cat”?  How could you adapt this to generate a random design using Processing’s shape-drawing functions?</p>
 
-</div></section><section><a id="chapter09_section3" style="display: block;"></a><h3 id="93-darwinian-natural-selection">9.3  Darwinian Natural Selection</h3><p><a id="darwinian-natural-selection-22f6a480-1662-0130-0e52-7cd1c3f718ad" style="display: block;"></a><a id="evolution-darwinian-natural-selection-22f6b270-1662-0130-0e53-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-darwinian-natural-selection-22f6bf70-1662-0130-0e54-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-darwinian-natural-selection-22f6d000-1662-0130-0e55-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-22f6e110-1662-0130-0e56-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter09_section3" style="display: block;"></a><h3 id="93-darwinian-natural-selection">9.3  Darwinian Natural Selection</h3><p><a id="darwinian-natural-selection-7fac9f10-251f-0130-b15f-7cd1c3f718ad" style="display: block;"></a><a id="evolutiondarwinian-natural-selection-7facad50-251f-0130-b160-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmsdarwinian-natural-selection-7facbe80-251f-0130-b161-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenadarwinian-natural-selection-7facdd80-251f-0130-b162-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-7facefb0-251f-0130-b163-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we begin walking through the genetic algorithm, let’s take a moment to describe three core principles of Darwinian evolution that will be required as we implement our simulation.   In order for natural selection to occur as it does in nature, all three of these elements must be present.</p>
-<p><a id="heredity-(natural-selection)-22f6fc10-1662-0130-0e57-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="heredity-natural-selection-7fad09c0-251f-0130-b164-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -184,81 +185,69 @@ println(s);</textarea>
 </p>
 </li>
 		
-			<li><p><a id="variation-(natural-selection)-22f721b0-1662-0130-0e58-7cd1c3f718ad" style="display: block;"></a><strong><em>Variation.</em></strong>  There must be a variety of traits present in the population or a means with which to introduce variation.   For example, let’s say there is a population of beetles in which all the beetles are exactly the same: same color, same size, same wingspan, same everything.   Without any variety in the population, the children will always be identical to the parents and to each other.  New combinations of traits can never occur and nothing can evolve.
+			<li><p><a id="variation-natural-selection-7fad3a70-251f-0130-b165-7cd1c3f718ad" style="display: block;"></a><strong><em>Variation.</em></strong>  There must be a variety of traits present in the population or a means with which to introduce variation.   For example, let’s say there is a population of beetles in which all the beetles are exactly the same: same color, same size, same wingspan, same everything.   Without any variety in the population, the children will always be identical to the parents and to each other.  New combinations of traits can never occur and nothing can evolve.
 </p>
 </li>
 		
-			<li><p><a id="selection-(natural-selection-algorithms)-22f73c60-1662-0130-0e59-7cd1c3f718ad" style="display: block;"></a><strong><em>Selection.</em></strong>  There must be a mechanism by which some members of a population have the opportunity to be parents and pass down their genetic information and some do not.  This is typically referred to as “survival of the fittest.”   For example, let’s say a population of gazelles is chased by lions every day.  The faster gazelles are more likely to escape the lions and are therefore more likely to live longer and have a chance to reproduce and pass their genes down to their children.   The term <em>fittest</em>, however, can be a bit misleading.  Generally, we think of it as meaning bigger, faster, or stronger.   While this may be the case in some instances, natural selection operates on the principle that some traits are better adapted for the creature’s environment and therefore produce a greater likelihood of surviving and reproducing.    It has nothing to do with a given creature being “better” (after all, this is a subjective term) or more “physically fit.”    In the case of our typing monkeys, for example, a more “fit” monkey is one that has typed a phrase closer to “to be or not to be”.
+			<li><p><a id="selection-natural-selection-algorithms-7fad55e0-251f-0130-b166-7cd1c3f718ad" style="display: block;"></a><strong><em>Selection.</em></strong>  There must be a mechanism by which some members of a population have the opportunity to be parents and pass down their genetic information and some do not.  This is typically referred to as “survival of the fittest.”   For example, let’s say a population of gazelles is chased by lions every day.  The faster gazelles are more likely to escape the lions and are therefore more likely to live longer and have a chance to reproduce and pass their genes down to their children.   The term <em>fittest</em>, however, can be a bit misleading.  Generally, we think of it as meaning bigger, faster, or stronger.   While this may be the case in some instances, natural selection operates on the principle that some traits are better adapted for the creature’s environment and therefore produce a greater likelihood of surviving and reproducing.    It has nothing to do with a given creature being “better” (after all, this is a subjective term) or more “physically fit.”    In the case of our typing monkeys, for example, a more “fit” monkey is one that has typed a phrase closer to “to be or not to be”.
 </p>
 </li>
 		
 	</ol>
 </div><p>Next I’d like to walk through the narrative of the genetic algorithm.  We’ll do this in the context of the typing monkey.  The algorithm itself will be divided into two parts: a set of conditions for initialization (i.e. Processing’s <span class="function">setup()</span>) and the steps that are repeated over and over again (i.e. Processing’s <span class="function">draw()</span>) until we arrive at the correct answer.</p>
-</section><section><a id="chapter09_section4" style="display: block;"></a><h3 id="94-the-genetic-algorithm-part-i-creating-a-population">9.4 The Genetic Algorithm, Part I: Creating a Population</h3><p><a id="genetic-algorithms-populations,-creating-22fa7060-1662-0130-0e5a-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-populations,-creating-22fa7c90-1662-0130-0e5b-7cd1c3f718ad" style="display: block;"></a><a id="populations-(genetic-algorithms)-creating-22fa8710-1662-0130-0e5c-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter09_section4" style="display: block;"></a><h3 id="94-the-genetic-algorithm-part-i-creating-a-population">9.4 The Genetic Algorithm, Part I: Creating a Population</h3><p><a id="genetic-algorithmspopulations-creating-7fad8560-251f-0130-b167-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithmspopulations-creating-7fad9680-251f-0130-b168-7cd1c3f718ad" style="display: block;"></a><a id="populations-genetic-algorithmscreating-7fada8a0-251f-0130-b169-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the context of the typing monkey example, we will create a population of phrases.  (Note that we are using the term “phrase” rather loosely, meaning a string of characters.)   This begs the question: How do we create this population?  Here is where the Darwinian principle of <strong><em>variation</em></strong> applies.  Let’s say, for simplicity, that we are trying to evolve the phrase “cat” and that we have a population of three phrases.</p>
 <p><span class="mono">hug<br />
 rid<br />
 won</span></p>
 <p>Sure, there is variety in the three phrases above, but try to mix and match the characters every which way and you will never get <em>cat</em>.  There is not <em>enough</em> variety here to evolve the optimal solution.  However, if we had a population of thousands of phrases, all generated randomly, chances are that at least one member of the population will have a <em>c</em> as the first character, one will have an <em>a</em> as the second, and one a <em>t</em> as the third.  A large population will most likely give us enough variety to generate the desired phrase (and in Part 2 of the algorithm, we’ll have another opportunity to introduce even more variation in case there isn’t enough in the first place).   So we can be more specific in describing Step 1 and say:</p>
 <p><span class="highlight">Create a population of randomly generated elements.</span></p>
-<p><a id="populations-(genetic-algorithms)-elements-of-22fae3e0-1662-0130-0e5d-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="populations-genetic-algorithmselements-of-7fadef90-251f-0130-b16a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This brings up another important question.   What is the element itself?   As we move through the examples in this chapter, we’ll see several different scenarios; we might have a population of images or a population of vehicles à la <a href="#chapter06_section13">Chapter 6</a>.   The key, and the part that is new for us in this chapter, is that each member of the population has a virtual “DNA,” a set of properties (we can call them “genes”) that describe how a given element looks or behaves.   In the case of the typing monkey, for example, the DNA is simply a string of characters.</p>
-<p><a id="genotype-(natural-selection-algorithms)-22faf740-1662-0130-0e5e-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-(natural-selection-algorithms)-22fb04d0-1662-0130-0e5f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="genotype-natural-selection-algorithms-7fae1090-251f-0130-b16b-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-natural-selection-algorithms-7fae1fa0-251f-0130-b16c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In the field of genetics, there is an important distinction between the concepts <em>genotype</em> and <em>phenotype</em>.  The actual genetic code—in our case, the digital information itself—is an element’s <strong><em>genotype</em></strong>.   This is what gets passed down from generation to generation.  The <strong><em>phenotype</em></strong>, however, is the expression of that data.   This distinction is key to how you will use genetic algorithms in your own work.  What are the objects in your world?   How will you design the genotype for your objects (the data structure to store each object’s properties) as well as the phenotype (what are <em>you</em> using these variables to express?) We do this all the time in graphics programming.   The simplest example is probably color.</p>
 <table>
-  <tr>
-    <th>Genotype</th>
-    <th>Phenotype</th>
-  </tr>
-  <tr>
-    <td>int c = 255;</td>
-    <td>
-      <div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"/>
-    </td>
-  </tr>
-  <tr>
-    <td>int c = 127;</td>
-    <td>
-      <div style="background-color: #7F7F7F; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"/>
-    </td>
-  </tr>
-  <tr>
-    <td>int c = 0;</td>
-    <td>
-      <div style="background-color: #000000; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"/>
-    </td>
-  </tr>
+<tr>
+<th>Genotype</th>
+<th>Phenotype</th>
+</tr>
+<tr>
+<td>int c = 255;</td>
+<td><div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"></div></td>
+</tr>
+<tr>
+<td>int c = 127;</td>
+<td><div style="background-color: #7F7F7F; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"></div></td>
+</tr>
+<tr>
+<td>int c = 0;</td>
+<td><div style="background-color: #000000; margin-left: auto; margin-right: auto; border: black thin solid; height: 20px; width: 20px"></div></td>
+</tr>
 </table><p>As we can see, the genotype is the digital information.  Each color is a variable that stores an integer and we choose to express that integer as a color.  But how we choose to express the data is arbitrary.   In a different approach, we could have used the integer to describe the length of a line, the weight of a force, etc.</p>
 <table>
-  <tr>
-    <th>Same Genotype</th>
-    <th>Different Phenotype (line length)</th>
-  </tr>
-  <tr>
-    <td>int c = 255;</td>
-    <td>
-      <div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 255px"/>
-    </td>
-  </tr>
-  <tr>
-    <td>int c = 127;</td>
-    <td>
-      <div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 127px"/>
-    </td>
-  </tr>
-  <tr>
-    <td>int c = 0;</td>
-    <td>
-      <div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 0px"/>
-    </td>
-  </tr>
+<tr>
+<th>Same Genotype</th>
+<th>Different Phenotype (line length)</th>
+</tr>
+<tr>
+<td>int c = 255;</td>
+<td><div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 255px"></div></td>
+</tr>
+<tr>
+<td>int c = 127;</td>
+<td><div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 127px"></div></td>
+</tr>
+<tr>
+<td>int c = 0;</td>
+<td><div style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; border-top: black thin solid; height: 1px; width: 0px"></div></td>
+</tr>
 </table><p>The nice thing about our monkey-typing example is that there is no difference between genotype and phenotype.   The DNA data itself is a string of characters and the expression of that data is that very string.</p>
 <p>So, we can finally end the discussion of this first step and be more specific with its description, saying:</p>
 <p><span class="highlight">Create a population of N elements, each with randomly generated DNA.</span></p>
-</section><section><a id="chapter09_section5" style="display: block;"></a><h3 id="95-the-genetic-algorithm-part-ii-selection">9.5 The Genetic Algorithm, Part II: Selection</h3><p><a id="genetic-algorithms-selection,-implementing-22fb8ac0-1662-0130-0e60-7cd1c3f718ad" style="display: block;"></a><a id="selection-(natural-selection-algorithms)-implementing-22fba1c0-1662-0130-0e61-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter09_section5" style="display: block;"></a><h3 id="95-the-genetic-algorithm-part-ii-selection">9.5 The Genetic Algorithm, Part II: Selection</h3><p><a id="genetic-algorithmsselection-implementing-7fae67d0-251f-0130-b16d-7cd1c3f718ad" style="display: block;"></a><a id="selection-natural-selection-algorithmsimplementing-7fae8600-251f-0130-b16e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here is where we apply the Darwinian principle of <em>selection</em>.   We need to evaluate the population and determine which members are fit to be selected as parents for the next generation.  The process of selection can be divided into two steps.</p>
 <p><strong><em>1) Evaluate fitness.</em></strong></p>
-<p><a id="fitness-functions-(natural-selection-algorithms)-22fbc2f0-1662-0130-0e62-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-fitness-functions-22fbd590-1662-0130-0e63-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fitness-functions-natural-selection-algorithms-7faeb0f0-251f-0130-b16f-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithmsfitness-functions-7faec0f0-251f-0130-b170-7cd1c3f718ad" style="display: block;"></a></p>
 <p>For our genetic algorithm to function properly, we will need to design what is referred to as a <strong><em>fitness function</em></strong>.  The function will produce a numeric score to describe the fitness of a given member of the population.   This, of course, is not how the real world works at all.  Creatures are not given a score; they simply survive or not.  But in the case of the traditional genetic algorithm, where we are trying to evolve an optimal solution to a problem, we need to be able to numerically evaluate any given possible solution.</p>
 <p>Let’s examine our current example, the typing monkey.   Again, let’s simplify the scenario and say we are attempting to evolve the word “cat”.   We have three members of the population: <em>hut</em>, <em>car</em>, and <em>box</em>.   <em>Car</em> is obviously the most fit, given that it has two correct characters, <em>hut</em> has only one, and <em>box</em> has zero.   And there it is, our fitness function:</p>
 <p><span class="formula">fitness = the number of correct characters</span></p>
@@ -315,9 +304,9 @@ won</span></p>
 	</table>
 </div><p>We will eventually want to look at examples with more sophisticated fitness functions, but this is a good place to start.</p>
 <p><strong><em>2) Create a mating pool.</em></strong></p>
-<p><a id="mating-pools-(natural-selection)-creating-22fc8940-1662-0130-0e64-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-mating-pools,-creating-22fc9bd0-1662-0130-0e65-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mating-pools-natural-selectioncreating-7faf3530-251f-0130-b171-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithmsmating-pools-creating-7faf4690-251f-0130-b172-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once the fitness has been calculated for all members of the population, we can then select which members are fit to become parents and place them in a mating pool.  There are several different approaches we could take here.  For example, we could employ what is known as the <strong><em>elitist</em></strong> method and say, “Which two members of the population scored the highest?  You two will make all the children for the next generation.”  This is probably one of the easier methods to program; however, it flies in the face of the principle of variation.  If two members of the population (out of perhaps thousands) are the only ones available to reproduce, the next generation will have little variety and this may stunt the evolutionary process.   We could instead make a mating pool out of a larger number—for example, the top 50% of the population, 500 out of 1,000.   This is also just as easy to program, but it will not produce optimal results.   In this case, the high-scoring top elements would have the same chance of being selected as a parent as the ones toward the middle.  And why should element number 500 have a solid shot of reproducing, while element number 501 has no shot?</p>
-<p><a id="natural-selection-algorithms-probability-22fcc610-1662-0130-0e66-7cd1c3f718ad" style="display: block;"></a><a id="probability-natural-selection-algorithms-and-22fcd620-1662-0130-0e67-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="natural-selection-algorithmsprobability-7faf6470-251f-0130-b173-7cd1c3f718ad" style="display: block;"></a><a id="probabilitynatural-selection-algorithms-and-7faf75c0-251f-0130-b174-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A better solution for the mating pool is to use a <strong><em>probabilistic</em></strong> method, which we’ll call the “wheel of fortune” (also known as the “roulette wheel”).    To illustrate this method, let’s consider a simple example where we have a population of five elements, each with a fitness score.</p>
 <div class="table">
 	
@@ -390,7 +379,7 @@ won</span></p>
 		
 		</tbody>
 	</table>
-</div><p><a id="normalization-mating-pools,-creating-with-22fd2d70-1662-0130-0e68-7cd1c3f718ad" style="display: block;"></a><a id="roulette-wheel-probability-method-22fd38b0-1662-0130-0e69-7cd1c3f718ad" style="display: block;"></a><a id="wheel-of-fortune-probability-method-22fd45f0-1662-0130-0e6a-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="normalizationmating-pools-creating-with-7fafc4c0-251f-0130-b175-7cd1c3f718ad" style="display: block;"></a><a id="roulette-wheel-probability-method-7fafd4c0-251f-0130-b176-7cd1c3f718ad" style="display: block;"></a><a id="wheel-of-fortune-probability-method-7fafe360-251f-0130-b177-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The first thing we’ll want to do is <strong><em>normalize</em></strong> all the scores.  Remember normalizing a vector?  That involved taking an vector and standardizing its length, setting it to 1.   When we normalize a set of fitness scores, we are standardizing their range to between 0 and 1, as a percentage of total fitness.   Let’s add up all the fitness scores.</p>
 <p><span class="fomrula">total fitness = 3 + 4 + 0.5 + 1.5 + 1 = 10</span></p>
 <p>Then let’s divide each score by the total fitness, giving us the normalized fitness.</p>
@@ -511,10 +500,10 @@ won</span></p>
 B:    to be or not to pi<br />
 C:    xxxxxxxxxxxxxxxxbe</span></p>
 <p>As you can see, elements A and B are clearly the most fit and would have the highest score.  But neither contains the correct characters for the end of the phrase.  Element C, even though it would receive a very low score, happens to have the genetic data for the end of the phrase.  And so while we would want A and B to be picked to generate the majority of the next generation, we would still want C to have a small chance to participate in the reproductive process.</p>
-</section><section><a id="chapter09_section6" style="display: block;"></a><h3 id="96-the-genetic-algorithm-part-iii-reproduction">9.6 The Genetic Algorithm, Part III: Reproduction</h3><p><a id="heredity-(natural-selection)-implementing-22fe0580-1662-0130-0e6b-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithms-reproduction-22fe10b0-1662-0130-0e6c-7cd1c3f718ad" style="display: block;"></a><a id="reproduction-(natural-selection-algorithms)-22fe22a0-1662-0130-0e6d-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter09_section6" style="display: block;"></a><h3 id="96-the-genetic-algorithm-part-iii-reproduction">9.6 The Genetic Algorithm, Part III: Reproduction</h3><p><a id="heredity-natural-selectionimplementing-7fb09140-251f-0130-b178-7cd1c3f718ad" style="display: block;"></a><a id="natural-selection-algorithmsreproduction-7fb0a340-251f-0130-b179-7cd1c3f718ad" style="display: block;"></a><a id="reproduction-natural-selection-algorithms-7fb0b3e0-251f-0130-b17a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we have a strategy for picking parents, we need to figure out how to use <em>reproduction</em> to make the population’s next generation, keeping in mind the Darwinian principle of heredity—that children inherit properties from their parents.  Again, there are a number of different techniques we could employ here.  For example, one reasonable (and easy to program) strategy is asexual reproduction, meaning we pick just one parent and create a child that is an exact copy of that parent.   The standard approach with genetic algorithms, however, is to pick two parents and create a child according to the following steps.</p>
 <p><strong><em>1) Crossover.</em></strong></p>
-<p><a id="crossover-(natural-selection-algorithms)-22fe5280-1662-0130-0e6e-7cd1c3f718ad" style="display: block;"></a><a id="heredity-(natural-selection)-crossover-22fe6330-1662-0130-0e6f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="crossover-natural-selection-algorithms-7fb0d030-251f-0130-b17b-7cd1c3f718ad" style="display: block;"></a><a id="heredity-natural-selectioncrossover-7fb0def0-251f-0130-b17c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Crossover involves creating a child out of the genetic code of two parents.   In the case of the monkey-typing example, let’s assume we’ve picked two phrases from the mating pool (as outlined in our selection step).</p>
 <p><span class="mono">Parent A:    FORK<br />
 Parent B:    PLAY</span></p>
@@ -541,7 +530,7 @@ Parent B:    PLAY</span></p>
 </div>
 <p>This strategy will produce essentially the same results as the random midpoint method; however, if the order of the genetic information plays some role in expressing the phenotype, you may prefer one solution over the other.</p>
 <p><strong><em>2) Mutation.</em></strong></p>
-<p><a id="heredity-(natural-selection)-mutation-22fed8a0-1662-0130-0e70-7cd1c3f718ad" style="display: block;"></a><a id="mutation-(natural-selection-algorithms)-22fee540-1662-0130-0e71-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="heredity-natural-selectionmutation-7fb127d0-251f-0130-b17d-7cd1c3f718ad" style="display: block;"></a><a id="mutation-natural-selection-algorithms-7fb137f0-251f-0130-b17e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once the child DNA has been created via crossover, we apply one final process before adding the child to the next generation—<strong><em>mutation</em></strong>.   Mutation is an optional step, as there are some cases in which it is unnecessary.  However, it exists because of the Darwinian principle of variation.  We created an initial population randomly, making sure that we start with a variety of elements.  However, there can only be so much variety when seeding the first generation, and mutation allows us to introduce additional variety throughout the evolutionary process itself.</p>
 <a id="chapter09_figure6" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -549,7 +538,7 @@ Parent B:    PLAY</span></p>
 	
 	<p class="caption">Figure 9.6</p>
 </div>
-<p><a id="mutation-(natural-selection-algorithms)-rate-of-22ff09a0-1662-0130-0e72-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="mutation-natural-selection-algorithmsrate-of-7fb15870-251f-0130-b17f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Mutation is described in terms of a <em>rate</em>.  A given genetic algorithm might have a mutation rate of 5% or 1% or 0.1%, etc.  Let’s assume we just finished with crossover and ended up with the child FORY.  If we have a mutation rate of 1%, this means that for each character in the phrase generated from crossover, there is a 1% chance that it will mutate.  What does it mean for a character to mutate?  In this case, we define mutation as picking a new random character.    A 1% probability is fairly low, and most of the time mutation will not occur at all in a four-character string (96% of the time to be more precise).   However, when it does, the mutated character is replaced with a randomly generated one (see Figure 9.6).</p>
 <p>As we’ll see in some of the examples, the mutation rate can greatly affect the behavior of the system.   Certainly, a very high mutation rate (such as, say, 80%) would negate the evolutionary process itself.  If the majority of a child’s genes are generated randomly, then we cannot guarantee that the more “fit” genes occur with greater frequency with each successive generation.</p>
 <p>The process of selection (picking two parents) and reproduction (crossover and mutation) is applied over and over again <span class="var">N</span> times until we have a new population of <span class="var">N</span> elements.  At this point, the new population of children becomes the current population and we loop back to evaluate fitness and perform selection and reproduction again.</p>
@@ -564,7 +553,7 @@ Parent B:    PLAY</span></p>
            c) Mutation—mutate the child’s DNA based on a given probability.<br />
            d) Add the new child to a new population.</p>
 <p>Step 4. Replace the old population with the new population and return to Step 2.</p>
-</section><section><a id="chapter09_section7" style="display: block;"></a><h3 id="97-code-for-creating-the-population">9.7  Code for Creating the Population</h3><section><a id="_step_1_initialize_population" style="display: block;"></a><h4 id="step-1-initialize-population">Step 1: Initialize Population</h4><p><a id="populations-(genetic-algorithms)-implementing-23027a10-1662-0130-0e73-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter09_section7" style="display: block;"></a><h3 id="97-code-for-creating-the-population">9.7  Code for Creating the Population</h3><section><a id="_step_1_initialize_population" style="display: block;"></a><h4 id="step-1-initialize-population">Step 1: Initialize Population</h4><p><a id="populations-genetic-algorithmsimplementing-7fb1c270-251f-0130-b180-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If we’re going to create a population, we need a data structure to store a list of members of the population.   In most cases (such as our typing-monkey example), the number of elements in the population can be fixed, and so we use an array.  (Later we’ll see examples that involve a growing/shrinking population and we’ll use an <span class="klass">ArrayList</span>.)   But an array of what?   We need an object that stores the genetic information for a member of the population.  Let’s call it <strong><em>DNA</em></strong>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -700,7 +689,7 @@ void setup() {
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Our <span class="klass">DNA</span> class is not at all complete. We’ll need to add functions to it to perform all the other tasks in our genetic algorithm, which we’ll do as we walk through steps 2 and 3.</p>
-</section><section><a id="_step_2_selection" style="display: block;"></a><h4 id="step-2-selection">Step 2: Selection</h4><p><a id="selection-(natural-selection-algorithms)-implementing-23032de0-1662-0130-0e74-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_step_2_selection" style="display: block;"></a><h4 id="step-2-selection">Step 2: Selection</h4><p><a id="selection-natural-selection-algorithmsimplementing-7fb24180-251f-0130-b181-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Step 2 reads, <em>“Evaluate the fitness of each element of the population and build a mating pool.”</em>  Let’s first evaluate each object’s fitness.   Earlier we stated that one possible fitness function for our typed phrases is the total number of correct characters.  Let’s revise this fitness function a little bit and state it as the percentage of correct characters—i.e., the total number of correct characters divided by the total characters.</p>
 <p><span class="formula">Fitness = Total # Characters Correct/Total # Characters</span></p>
 <p>Where should we calculate the fitness?   Since the <span class="klass">DNA</span> class contains the genetic information (the phrase we will test against the target phrase), we can write a function inside the <span class="klass">DNA</span> class itself to score its own fitness.  Let’s assume we have a target phrase:</p>
@@ -784,7 +773,7 @@ DNA class to track fitness.</div><code><pre><span class='one-line'>  <span class
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="mating-pools-(natural-selection)-implementing-23037b50-1662-0130-0e75-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="mating-pools-natural-selectionimplementing-7fb28290-251f-0130-b182-7cd1c3f718ad" style="display: block;"></a></p>
 <p>After we have all the fitness scores, we can build the “mating pool” that we’ll need for the reproduction step.  The mating pool is a data structure from which we’ll continuously pick two parents.  Recalling our description of the selection process, we want to pick parents with probabilities calculated according to fitness.  In other words, the members of the population that have the highest fitness scores should be most likely to be picked; those with the lowest scores, the least likely.</p>
 <p>In the <a href="#intro_section3">Introduction</a>, we covered the basics of probability and generating a custom distribution of random numbers.    We’re going to use those techniques to assign a probability to each member of the population, picking parents by spinning the “wheel of fortune.”  Let’s look at Figure 9.2 again.</p>
 <a id="chapter09_figure2" style="display: block;"></a><div class="image-container " >
@@ -853,7 +842,7 @@ B: 33% (2/6)<br />
 C: 17% (1/6)</span></p>
 <p>Rewrite the mating pool algorithm to use this method instead.</p>
 
-</div></section><section><a id="_step_3_reproduction" style="display: block;"></a><h4 id="step-3-reproduction">Step 3: Reproduction</h4><p><a id="reproduction-(natural-selection-algorithms)-implementing-230434e0-1662-0130-0e76-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_step_3_reproduction" style="display: block;"></a><h4 id="step-3-reproduction">Step 3: Reproduction</h4><p><a id="reproduction-natural-selection-algorithmsimplementing-7fb2eea0-251f-0130-b183-7cd1c3f718ad" style="display: block;"></a></p>
 <p>With the mating pool ready to go, it’s time to make some babies.  The first step is to pick two parents.  Again, it’s somewhat of an arbitrary decision to pick two parents.  It certainly mirrors human reproduction and is the standard means in the traditional GA, but in terms of your work, there really aren’t any restrictions here.  You could choose to perform “asexual” reproduction with one parent, or come up with a scheme for picking three or four parents from which to generate child DNA.   For this code demonstration, we’ll stick to two parents and call them <span class="var">parentA</span> and <span class="var">parentB</span>.</p>
 <p>First thing we need are two random indices into the mating pool—random numbers between 0 and the size of the <span class="klass">ArrayList</span>.</p>
 <div class="source-code">
@@ -889,7 +878,7 @@ C: 17% (1/6)</span></p>
 <div class="example">
   <a id="chapter09_exercise4" style="display: block;"></a><h5 id="exercise-94">Exercise 9.4</h5><p>Add code to the above to guarantee that you have picked two unique “parents.”</p>
 
-</div><p><a id="crossover-(natural-selection-algorithms)-implementing-2304a920-1662-0130-0e77-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="crossover-natural-selection-algorithmsimplementing-7fb33e10-251f-0130-b184-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once we have the two parents, we can perform <strong><em>crossover</em></strong> to generate the child DNA, followed by <strong><em>mutation</em></strong>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -950,7 +939,7 @@ but we will overwrite it below with DNA from parents.</div><code><pre><span clas
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">genes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Before midpoint copy genes from one parent, after midpoint copy genes from the other parent</div><code><pre><span class='one-line'>      <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">midpoint</span><span class="o">)</span> <span class="n">child</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">genes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
-<span class='one-line'>      <span class="k">else</span> <span class="n">child</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">partner</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span></pre></code></div>
+<span class='one-line'>      <span class="k">else</span> <span class="n">child</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">partner</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'> </span></pre></code></div>
@@ -964,7 +953,7 @@ but we will overwrite it below with DNA from parents.</div><code><pre><span clas
 <div class="example">
   <a id="chapter09_exercise5" style="display: block;"></a><h5 id="exercise-95">Exercise 9.5</h5><p>Rewrite the crossover function to use the “coin flipping” method instead, in which each gene has a 50% chance of coming from parent A and a 50% chance of coming from parent B.</p>
 
-</div><p><a id="mutation-(natural-selection-algorithms)-implementing-23050520-1662-0130-0e78-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="mutation-natural-selection-algorithmsimplementing-7fb39550-251f-0130-b185-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The mutate() function is even simpler to write than crossover().   All we need to do is loop through the array of genes and for each randomly pick a new character according to the mutation rate.   With a mutation rate of 1%, for example, we would pick a new character one time out of a hundred.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1017,7 +1006,7 @@ if (random(1) < mutationRate) {
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section></section><section><a id="chapter09_section8" style="display: block;"></a><h3 id="98-genetic-algorithms-putting-it-all-together">9.8  Genetic Algorithms: Putting It All Together</h3><p><a id="genetic-algorithms-building-23052310-1662-0130-0e79-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section></section><section><a id="chapter09_section8" style="display: block;"></a><h3 id="98-genetic-algorithms-putting-it-all-together">9.8  Genetic Algorithms: Putting It All Together</h3><p><a id="genetic-algorithmsbuilding-7fb3b540-251f-0130-b186-7cd1c3f718ad" style="display: block;"></a></p>
 <p>You may have noticed that we’ve essentially walked through the steps of the genetic algorithm twice, once describing it in narrative form and another time with code snippets implementing each of the steps.    What I’d like to do in this section is condense the previous two sections into one page, with the algorithm described in just three steps and the corresponding code alongside.</p>
 <div class="image-container screenshot" >
 	
@@ -1043,7 +1032,7 @@ ArrayList<DNA> matingPool;
 String target;
 
 void setup() {
-  size(200, 200);
+  size(640, 360);
 
   // Initializing target phrase and mutation rate
   target = "to be or not to be";
@@ -1113,7 +1102,7 @@ void draw() {
   <div class='code-comment-pair '><div class='code-comment '>Target phrase</div><code><pre><span class='one-line'><span class="n">String</span> <span class="n">target</span><span class="o">;</span></span>
 <span class='one-line'> </span>
 <span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span></span>
+<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">360</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair '><div class='code-comment '>Initializing target phrase and mutation rate</div><code><pre><span class='one-line'>  <span class="n">target</span> <span class="o">=</span> <span class="s">&quot;to be or not to be&quot;</span><span class="o">;</span></span>
@@ -1143,7 +1132,7 @@ void draw() {
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Add each member n times according to its fitness score.</div><code><pre><span class='one-line'>    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="kt">int</span><span class="o">(</span><span class="n">population</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">fitness</span> <span class="o">*</span> <span class="mi">100</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">matingPool</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">population</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'> </span></pre></code></div>
@@ -1243,7 +1232,7 @@ steps with the new population of children.</div><code><pre><span class='one-line
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">genes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="n">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">random</span><span class="o">(</span><span class="mi">32</span><span class="o">,</span><span class="mi">128</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1255,7 +1244,7 @@ steps with the new population of children.</div><code><pre><span class='one-line
 <span class='one-line'>        <span class="o">}</span></span>
 <span class='one-line'>     <span class="o">}</span></span>
 <span class='one-line'>     <span class="n">fitness</span> <span class="o">=</span> <span class="kt">float</span><span class="o">(</span><span class="n">score</span><span class="o">)/</span><span class="n">target</span><span class="o">.</span><span class="na">length</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1267,7 +1256,7 @@ steps with the new population of children.</div><code><pre><span class='one-line
 <span class='one-line'>      <span class="k">else</span>              <span class="n">child</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">partner</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="n">child</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1277,13 +1266,13 @@ steps with the new population of children.</div><code><pre><span class='one-line
 <span class='one-line'>        <span class="n">genes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">random</span><span class="o">(</span><span class="mi">32</span><span class="o">,</span><span class="mi">128</span><span class="o">);</span></span>
 <span class='one-line'>      <span class="o">}</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Convert to String—PHENOTYPE.</div><code><pre><span class='one-line'>  <span class="n">String</span> <span class="nf">getPhrase</span><span class="o">()</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">genes</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -1291,7 +1280,7 @@ steps with the new population of children.</div><code><pre><span class='one-line
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
-  <a id="chapter09_exercise6" style="display: block;"></a><h4 id="exercise-96">Exercise 9.6</h4><p>Add features to the above example to report more information about the progress of the genetic algorithm itself.   For example, show the phrase closest to the target each generation, as well as report on the number of generations, average fitness, etc.  Stop the genetic algorithm once it has solved the phrase.  Consider writing a <span class="klass">Population</span> class to manage the GA (instead of including all the code in draw()).</p>
+  <a id="chapter09_exercise6" style="display: block;"></a><h4 id="exercise-96">Exercise 9.6</h4><p>Add features to the above example to report more information about the progress of the genetic algorithm itself.   For example, show the phrase closest to the target each generation, as well as report on the number of generations, average fitness, etc.  Stop the genetic algorithm once it has solved the phrase.  Consider writing a <span class="klass">Population</span> class to manage the GA, instead of including all the code in draw().</p>
 <div class="image-container screenshot" >
 	
 	<img src="/book/imgs/chapter09/ch09_exc01.png" alt="Nature of Code Image" />
@@ -1299,10 +1288,10 @@ steps with the new population of children.</div><code><pre><span class='one-line
 	
 </div>
 
-</div></section><section><a id="chapter09_section9" style="display: block;"></a><h3 id="99-genetic-algorithms-make-them-your-own">9.9  Genetic Algorithms: Make Them Your Own</h3><p><a id="genetic-algorithms-modifying-23058500-1662-0130-0e7a-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter09_section9" style="display: block;"></a><h3 id="99-genetic-algorithms-make-them-your-own">9.9  Genetic Algorithms: Make Them Your Own</h3><p><a id="genetic-algorithmsmodifying-7fb40960-251f-0130-b187-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The nice thing about using genetic algorithms in a project is that example code can easily be ported from application to application.  The core mechanics of selection and reproduction don’t need to change.  There are, however, three key components to genetic algorithms that you, the developer, will have to customize for each use.  This is crucial to moving beyond trivial demonstrations of evolutionary simulations (as in the Shakespeare example) to creative uses in projects that you make in Processing and other creative programming environments.</p>
-<section><a id="_key_1_varying_the_variables" style="display: block;"></a><h4 id="key-1-varying-the-variables">Key #1: Varying the variables</h4><p><a id="genetic-algorithms-mutation-rate,-varying-23059d80-1662-0130-0e7b-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-population-maximum,-varying-2305a8c0-1662-0130-0e7c-7cd1c3f718ad" style="display: block;"></a></p>
-<p>There aren’t a lot of variables to the genetic algorithm itself. In fact, if you look at the previous example’s code, you’ll see only two global variables (not including the arrays and [klass]*ArrayList*s to store the population and mating pool).</p>
+<section><a id="_key_1_varying_the_variables" style="display: block;"></a><h4 id="key-1-varying-the-variables">Key #1: Varying the variables</h4><p><a id="genetic-algorithmsmutation-rate-varying-7fb429a0-251f-0130-b188-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmspopulation-maximum-varying-7fb439f0-251f-0130-b189-7cd1c3f718ad" style="display: block;"></a></p>
+<p>There aren’t a lot of variables to the genetic algorithm itself. In fact, if you look at the previous example’s code, you’ll see only two global variables (not including the arrays and <span class="klass">ArrayList</span>s to store the population and mating pool).</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>float mutationRate = 0.01;
@@ -1500,7 +1489,7 @@ int totalPopulation = 150;</textarea>
 		</tbody>
 	</table>
 </div><p>Without any mutation at all (0%), you just have to get lucky.  If all the correct characters are present somewhere in some member of the initial population, you’ll evolve the phrase very quickly.  If not, there is no way for the sketch to ever reach the exact phrase.  Run it a few times and you’ll see both instances.  In addition, once the mutation rate gets high enough (10%, for example), there is so much randomness involved (1 out of every 10 letters is random in each new child) that the simulation is pretty much back to a random typing monkey.  In theory, it will eventually solve the phrase, but you may be waiting much, much longer than is reasonable.</p>
-</section><section><a id="_key_2_the_fitness_function" style="display: block;"></a><h4 id="key-2-the-fitness-function">Key #2: The fitness function</h4><p><a id="fitness-functions-(natural-selection-algorithms)-exponential-vs.-linear-23099d80-1662-0130-0e7d-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-fitness-algorithms,-modifying-2309a950-1662-0130-0e7e-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_key_2_the_fitness_function" style="display: block;"></a><h4 id="key-2-the-fitness-function">Key #2: The fitness function</h4><p><a id="fitness-functions-natural-selection-algorithmsexponential-vs-linear-7fb4e5d0-251f-0130-b18a-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmsfitness-algorithms-modifying-7fb4f5a0-251f-0130-b18b-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Playing around with the mutation rate or population total is pretty easy and involves little more than typing numbers in your sketch.  The real hard work of a developing a genetic algorithm is in writing a fitness function.  If you cannot define your problem’s goals and evaluate numerically how well those goals have been achieved, then you will not have successful evolution in your simulation.</p>
 <p>Before we think about other scenarios with other fitness functions, let’s look at flaws in our Shakespearean fitness function.   Consider solving for a phrase that is not nineteen characters long, but one thousand.  Now, let’s say there are two members of the population, one with 800 characters correct and one with 801.  Here are their fitness scores:</p>
 <div class="table">
@@ -1540,7 +1529,7 @@ int totalPopulation = 150;</textarea>
 		
 		</tbody>
 	</table>
-</div><p>There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by one hundred.  Objects can only be added to an <span class="klass">ArrayList</span> a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes floating point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.</p>
+</div><p>There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by 100.  Objects can only be added to an <span class="klass">ArrayList</span> a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes floating point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.</p>
 <p>To put it another way, let’s graph the fitness function.</p>
 <a id="chapter09_figure8" style="display: block;"></a><div class="image-container " >
 	
@@ -1667,7 +1656,7 @@ int totalPopulation = 150;</textarea>
 <div class="example">
   <a id="chapter09_exercise7" style="display: block;"></a><h5 id="exercise-97">Exercise 9.7</h5><p>Rewrite the fitness function to increase exponentially according to the number of correct characters.  Note that you will also have to normalize the fitness values to a range between 0 and 1 so they can be added to the mating pool a reasonable number of times.</p>
 
-</div><p><a id="fitness-functions-(natural-selection-algorithms)-design-your-own-230a8000-1662-0130-0e7f-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="fitness-functions-natural-selection-algorithmsdesign-your-own-7fb8e9f0-251f-0130-b18c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While this rather specific discussion of exponential vs. linear fitness functions is an important detail in the design of a good fitness function, I don’t want us to miss the more important point here: <em>Design your own fitness function!</em>    I seriously doubt that any project you undertake in Processing with genetic algorithms will actually involve counting the correct number of characters in a string.   In the context of this book, it’s more likely you will be looking to evolve a creature that is part of a physics system.  Perhaps you are looking to optimize the weights of steering behaviors so a creature can best escape a predator or avoid an obstacle or make it through a maze.   You have to ask yourself what you’re hoping to evaluate.</p>
 <p>Let’s consider a racing simulation in which a vehicle is evolving a design optimized for speed.</p>
 <p><span class="formula">fitness = total number of frames required for vehicle to reach target</span></p>
@@ -1675,7 +1664,7 @@ int totalPopulation = 150;</textarea>
 <p><span class="formula">fitness = cannonball distance to target</span></p>
 <p>The design of computer-controlled players in a game is also a common scenario.  Let’s say you are programming a soccer game in which the user is the goalie.   The rest of the players are controlled by your program and have a set of parameters that determine how they kick a ball towards the goal.  What would the fitness score for any given player be?</p>
 <p><span class="formula">fitness = total goals scored</span></p>
-<p><a id="fitness-functions-(natural-selection-algorithms)-robotic-enslavement-of-humanity-and-230ac760-1662-0130-0e80-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fitness-functions-natural-selection-algorithmsrobotic-enslavement-of-humanity-and-7fb92540-251f-0130-b18d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This, obviously, is a simplistic take on the game of soccer, but it illustrates the point.  The more goals a player scores, the higher its fitness, and the more likely its genetic information will appear in the next game.   Even with a fitness function as simple as the one described here, this scenario is demonstrating something very powerful—the adaptability of a system.  If the players continue to evolve from game to game to game, when a new <em>human</em> user enters the game with a completely different strategy, the system will quickly discover that the fitness scores are going down and evolve a new optimal strategy.  It will adapt.  (Don’t worry, there is very little danger in this resulting in sentient robots that will enslave all humans.)</p>
 <p>In the end, if you do not have a fitness function that effectively evaluates the performance of the individual elements of your population, you will not have any evolution.  And the fitness function from one example will likely not apply to a totally different project.  So this is the part where you get to shine.  You have to design a function, sometimes from scratch, that works for your particular project.   And where do you do this?   All you have to edit are those few lines of code inside the function that computes the fitness variable.</p>
 <div class="source-code">
@@ -1698,7 +1687,7 @@ int totalPopulation = 150;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="_key_3_genotype_and_phenotype" style="display: block;"></a><h4 id="key-3-genotype-and-phenotype">Key #3: Genotype and Phenotype</h4><p><a id="genotype-(natural-selection-algorithms)-modifying-230ae8e0-1662-0130-0e81-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-(natural-selection-algorithms)-230af530-1662-0130-0e82-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="_key_3_genotype_and_phenotype" style="display: block;"></a><h4 id="key-3-genotype-and-phenotype">Key #3: Genotype and Phenotype</h4><p><a id="genotype-natural-selection-algorithmsmodifying-7fb94e50-251f-0130-b18e-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-natural-selection-algorithms-7fb96100-251f-0130-b18f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The final key to designing your own genetic algorithm relates to how you choose to encode the properties of your system.  What are you trying to express, and how can you translate that expression into a bunch of numbers?   What is the genotype and phenotype?</p>
 <p>When talking about the fitness function, we happily assumed we could create computer-controlled kickers that each had a “set of parameters that determine how they kick a ball towards the goal.”   However, what those parameters are and how you choose to encode them is up to you.</p>
 <p>We started with the Shakespeare example because of how easy it was to design both the genotype (an array of characters) and its expression, the phenotype (the string drawn in the window).</p>
@@ -1760,7 +1749,7 @@ int totalPopulation = 150;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Notice how we’ve now put the genetic data (genotype) and its expression (phenotype) into two separate classes.  The <span class="klass">DNA</span> class is the genotype and the Vehicle class uses a <span class="klass">DNA</span> object to drive its behaviors and express that data visually—it is the phenotype.  The two can be linked by creating a <span class="klass">DNA</span> instance inside the vehicle class itself.</p>
+</div><p>Notice how we’ve now put the genetic data (genotype) and its expression (phenotype) into two separate classes.  The <span class="klass">DNA</span> class is the genotype and the <span class="klass">Vehicle</span> class uses a <span class="klass">DNA</span> object to drive its behaviors and express that data visually—it is the phenotype.  The two can be linked by creating a <span class="klass">DNA</span> instance inside the <span class="klass">Vehicle</span> class itself.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class Vehicle {
@@ -1809,7 +1798,7 @@ int totalPopulation = 150;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>Of course, you most likely don’t want all your variables to have a range between 0 and 1.  But rather than try to remember how to adjust those ranges in the <span class="klass">DNA</span> class itself, it’s easier to pull the genetic information from the DNA object and use Processing’s <span class="function">map()</span> function to change the range.  For example, if you want a size variable between 10 and 72, you would say:</p>
+</div><p>Of course, you most likely don’t want all your variables to have a range between 0 and 1.  But rather than try to remember how to adjust those ranges in the <span class="klass">DNA</span> class itself, it’s easier to pull the genetic information from the <span class="klass">DNA</span> object and use Processing’s <span class="function">map()</span> function to change the range.  For example, if you want a size variable between 10 and 72, you would say:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>    size = map(dna.genes[2],0,1,10,72);</textarea>
@@ -1878,10 +1867,10 @@ int totalPopulation = 150;</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="object-oriented-programming-genotype/phenotype-objects-and-230ba290-1662-0130-0e83-7cd1c3f718ad" style="display: block;"></a></p>
-<p>What’s great about this technique of dividing the genotype and phenotype into separate classes (<span class="klass">DNA</span> and <span class="klass">Rocket</span> for example) is that when it comes time to build all of the code, you’ll notice that the DNA class we developed earlier remains intact.   The only thing that changes is the array’s data type (<span class="klass">float</span>, <span class="klass">PVector</span>, etc.) and the expression of that data in the phenotype class.</p>
+</div><p><a id="object-oriented-programminggenotypephenotype-objects-and-7fb9fd70-251f-0130-b190-7cd1c3f718ad" style="display: block;"></a></p>
+<p>What’s great about this technique of dividing the genotype and phenotype into separate classes (<span class="klass">DNA</span> and <span class="klass">Rocket</span> for example) is that when it comes time to build all of the code, you’ll notice that the <span class="klass">DNA</span> class we developed earlier remains intact.   The only thing that changes is the array’s data type (<span class="klass">float</span>, <span class="klass">PVector</span>, etc.) and the expression of that data in the phenotype class.</p>
 <p>In the next section, we’ll follow this idea a bit further and walk through the necessary steps for an example that involves moving bodies and an array of <span class="klass">PVector</span>s as DNA.</p>
-</section></section><section><a id="chapter09_section10" style="display: block;"></a><h3 id="910-evolving-forces-smart-rockets">9.10  Evolving Forces: Smart Rockets</h3><p><a id="genetic-algorithms-smart-rockets-(thorp)-230bebe0-1662-0130-0e84-7cd1c3f718ad" style="display: block;"></a><a id="smart-rockets-(thorp)-230bf750-1662-0130-0e85-7cd1c3f718ad" style="display: block;"></a><a id="thorp,-jer-230c01f0-1662-0130-0e86-7cd1c3f718ad" style="display: block;"></a></p>
+</section></section><section><a id="chapter09_section10" style="display: block;"></a><h3 id="910-evolving-forces-smart-rockets">9.10  Evolving Forces: Smart Rockets</h3><p><a id="genetic-algorithmssmart-rockets-thorp-7fba4780-251f-0130-b191-7cd1c3f718ad" style="display: block;"></a><a id="smart-rockets-thorp-7fba5860-251f-0130-b192-7cd1c3f718ad" style="display: block;"></a><a id="thorp-jer-7fba65a0-251f-0130-b193-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We picked the rocket idea for a specific reason.  In 2009, <a href="http://blprnt.com">Jer Thorp</a> released a genetic algorithms example on his blog entitled “Smart Rockets.”  Jer points out that NASA uses evolutionary computing techniques to solve all sorts of problems, from satellite antenna design to rocket firing patterns. This inspired him to create a Flash demonstration of evolving rockets.  Here is a description of the scenario:</p>
 <p>A population of rockets launches from the bottom of the screen with the goal of hitting a target at the top of the screen (with obstacles blocking a straight line path).</p>
 <a id="chapter09_figure10" style="display: block;"></a><div class="image-container screenshot" >
@@ -1935,13 +1924,13 @@ int totalPopulation = 150;</textarea>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A rocket has three vectors: location, velocity, acceleration.</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">location</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="n">PVector</span> <span class="n">velocity</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="n">PVector</span> <span class="n">acceleration</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">PVector</span> <span class="n">acceleration</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Accumulating forces into acceleration (Newton’s 2nd law)</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">applyForce</span><span class="o">(</span><span class="n">PVector</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">acceleration</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">f</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -2378,7 +2367,7 @@ number of generations.</div><code><pre><span class='one-line'>  <span class="kt"
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> These functions haven’t changed, so
 no need to go through the code again.</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">fitness</span><span class="o">()</span> <span class="o">{}</span></span>
 <span class='one-line'>  <span class="kt">void</span> <span class="nf">selection</span><span class="o">()</span> <span class="o">{}</span></span>
-<span class='one-line'>  <span class="kt">void</span> <span class="nf">reproduction</span><span class="o">()</span> <span class="o">{}</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">void</span> <span class="nf">reproduction</span><span class="o">()</span> <span class="o">{}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -2585,7 +2574,7 @@ selection and reproduction).</div><code><pre><span class='one-line'>    <span cl
 	
 </div>
 <p><span class="highlight">Improvement #1: Obstacles</span></p>
-<p><a id="fitness-functions-(natural-selection-algorithms)-avoidance-of-obstacles-and-231237c0-1662-0130-0e87-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fitness-functions-natural-selection-algorithmsavoidance-of-obstacles-and-7fbd17f0-251f-0130-b194-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Adding obstacles that the rockets must avoid will make the system more complex and demonstrate the power of the evolutionary algorithm more effectively.  We can make rectangular, stationary obstacles fairly easily by creating a class that stores a location and dimensions.</p>
 <p><a id="chapter09_example3" style="display: block;"></a><span class="example">Example 9.3: Smart Rockets</span></p>
 <div class="source-code">
@@ -2716,7 +2705,7 @@ hit an obstacle.</div><code><pre><span class='one-line'>  <span class="kt">void<
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p><span class="highlight">Improvement #2: Evolve reaching the target faster</span></p>
-<p><a id="fitness-functions-(natural-selection-algorithms)-evolving-for-specific-attributes-2312ad00-1662-0130-0e88-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fitness-functions-natural-selection-algorithmsevolving-for-specific-attributes-7fbd7470-251f-0130-b195-7cd1c3f718ad" style="display: block;"></a></p>
 <p>If you look closely at our first Smart Rockets example, you’ll notice that the rockets are not rewarded for getting to the target faster.  The only variable in their fitness calculation is the distance to the target at the end of the generation’s life.  In fact, in the event that the rockets get very close to the target but overshoot it and fly past, they may actually be penalized for getting to the target faster.   Slow and steady wins the race in this case.</p>
 <p>We could improve the algorithm to optimize for speed a number of ways.  First, instead of using the distance to the target at the end of the generation, we could use the distance that is the closest to the target at any point during the rocket’s life.  We would call this the rocket’s “record” distance.  (All of the code snippets in this section live inside the <span class="klass">Rocket</span> class.)</p>
 <div class="source-code">
@@ -2819,7 +2808,7 @@ the target, keep incrementing the counter.</div><code><pre><span class='one-line
 </div><div class="example">
   <a id="chapter09_exercise11" style="display: block;"></a><h4 id="exercise-911">Exercise 9.11</h4><p>Another way to achieve a similar result is to evolve a flow field.  Can you make the genotype of a rocket a flow field of <span class="klass">PVector</span>s?</p>
 
-</div><p><a id="evolved-virtual-creatures-(sims)-231650e0-1662-0130-0e89-7cd1c3f718ad" style="display: block;"></a><a id="sims,-karl-23165b40-1662-0130-0e8a-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="evolved-virtual-creatures-sims-7fbdd500-251f-0130-b196-7cd1c3f718ad" style="display: block;"></a><a id="sims-karl-7fbde360-251f-0130-b197-7cd1c3f718ad" style="display: block;"></a></p>
 <p>One of the more famous implementations of genetic algorithms in computer graphics is Karl Sims’s “Evolved Virtual Creatures.”   In Sims’s work, a population of digital creatures (in a simulated physics environment) is evaluated for the creatures' ability to perform tasks, such as swimming, running, jumping, following, and competing for a green cube.</p>
 <p>One of the innovations in Sims’s work is a node-based genotype.  In other words, the creature’s DNA is not a linear list of <span class="klass">PVector</span>s or numbers, but a map of nodes.  (For an example of this, take a look at <a href="#chapter05_exercise15">Exercise 5.15</a>, toxiclibs' Force Directed Graph.)  The phenotype is the creature’s design itself, a network of limbs connected with muscles.</p>
 <div class="example">
@@ -2838,7 +2827,7 @@ Virtual Creatures</a>.   In addition, you can find a similar example that uses B
 	
 </div>
 
-</div></section><section><a id="chapter09_section12" style="display: block;"></a><h3 id="912-interactive-selection">9.12 Interactive Selection</h3><p><a id="interactive-selection-genetic-algorithms-23169640-1662-0130-0e8b-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter09_section12" style="display: block;"></a><h3 id="912-interactive-selection">9.12 Interactive Selection</h3><p><a id="interactive-selection-genetic-algorithms-7fbe2b50-251f-0130-b198-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In addition to Evolved Virtual Creatures, Sims is also well known for his museum installation <em>Galapagos</em>.  Originally installed in the Intercommunication Center in Tokyo in 1997, the installation consists of twelve monitors displaying computer-generated images.  These images evolve over time, following the genetic algorithm steps of selection and reproduction.  The innovation here is not the use of the genetic algorithm itself, but rather the strategy behind the fitness function.    In front of each monitor is a sensor on the floor that can detect the presence of a user viewing the screen.  The fitness of an image is tied to the length of time that viewers look at the image.  This is known as <em>interactive selection</em>, a genetic algorithm with fitness values assigned by users.</p>
 <p>Think of all the rating systems you’ve ever used.  Could you evolve the perfect movie by scoring all films according to your Netflix ratings?  The perfect singer according to American Idol voting?</p>
 <a id="chapter09_figure14" style="display: block;"></a><div class="image-container half-width-right" >
@@ -2940,14 +2929,14 @@ Virtual Creatures</a>.   In addition, you can find a similar example that uses B
 <span class='one-line'>    <span class="kt">float</span> <span class="n">mouth_y</span>    <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">25</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="kt">float</span> <span class="n">mouth_x</span>    <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,-</span><span class="mi">25</span><span class="o">,</span><span class="mi">25</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="kt">float</span> <span class="n">mouthw</span>     <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">50</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="kt">float</span> <span class="n">mouthh</span>     <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="kt">float</span> <span class="n">mouthh</span>     <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>So far, we’re not really doing anything new.  This is what we’ve done in every GA example so far.   What’s new is that we are not going to write a <span class="function">fitness()</span> function in which the score is computed based on a math formula.   Instead, we are going to ask the user to assign the fitness.</p>
-<p><a id="interactive-selection-genetic-algorithms-user-interaction-and-2316eb30-1662-0130-0e8c-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="interactive-selection-genetic-algorithmsuser-interaction-and-7fbe9040-251f-0130-b199-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now, how best to ask a user to assign fitness is really more of an interaction design problem, and it isn’t really within the scope of this book.    So we’re not going to launch into an elaborate discussion of how to program sliders or build your own hardware dials or build a Web app for users to submit online scores.  How you choose to acquire fitness scores is really up to you and the particular application you are developing.</p>
 <p>For this simple demonstration, we’ll increase fitness whenever a user rolls the mouse over a face.  The next generation is created when the user presses a button with an “evolve next generation” label.</p>
 <p>Let’s look at how the steps of the genetic algorithm are applied in the main tab, noting how fitness is assigned according to mouse interaction and the next generation is created on a button press.  The rest of the code for checking mouse locations, button interactions, etc. can be found in the accompanying example code.</p>
@@ -3033,17 +3022,17 @@ via selection and reproduction.</div><code><pre><span class='one-line'>  <strong
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This example, it should be noted, is really just a demonstration of the idea of interactive selection and does not achieve a particularly meaningful result.  For one, we didn’t take much care in the visual design of the faces; they are just a few simple shapes with sizes and colors.  Sims, for example, used more elaborate mathematical functions as his images’ genotype.  You might also consider a vector-based approach, in which a design’s genotype is a set of points and/or paths.</p>
-<p><a id="interactive-selection-genetic-algorithms-time-lag-and-23170ed0-1662-0130-0e8d-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="interactive-selection-genetic-algorithmstime-lag-and-7fbecb40-251f-0130-b19a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The more significant problem here, however, is one of time.  In the natural world, evolution occurs over millions of years.  In the computer simulation world of our previous examples, we were able to evolve behaviors relatively quickly because we were producing new generations algorithmically.  In the Shakespeare monkey example, a new generation was born in each frame of animation (approximately sixty per second).   Since the fitness values were computed according to a math formula, we could also have had arbitrarily large populations that increased the speed of evolution.  In the case of interactive selection, however, we have to sit and wait for a user to rate each and every member of the population before we can get to the next generation.   A large population would be unreasonably tedious to deal with—not to mention, how many generations could you stand to sit through?</p>
 <p>There are certainly clever solutions around this.  Sims’s Galapagos exhibit concealed the rating process from the users, as it occurred through the normal behavior of looking at artwork in a museum setting.  Building a Web application that would allow many users to rate a population in a distributed fashion is also a good strategy for achieving many ratings for large populations quickly.</p>
 <p>In the end, the key to a successful interactive selection system boils down to the same keys we previously established.   What is the genotype and phenotype?  And how do you calculate fitness, which in this case we can revise to say: “What is your strategy for assigning fitness according to user interaction?”</p>
 <div class="example">
   <a id="chapter09_exercise14" style="display: block;"></a><h4 id="exercise-914">Exercise 9.14</h4><p>Build your own interactive selection project.   In addition to a visual design, consider evolving sounds—for example, a short sequence of tones.  Can you devise a strategy, such as a Web application or physical sensor system, to acquire ratings from many users over time?</p>
 
-</div></section><section><a id="chapter09_section13" style="display: block;"></a><h3 id="913-ecosystem-simulation">9.13  Ecosystem Simulation</h3><p><a id="ecosystem-simulation-genetic-algorithms-231734d0-1662-0130-0e8e-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithms-ecosystem-simulation-23174460-1662-0130-0e8f-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-ecosystems,-modeling-231754d0-1662-0130-0e90-7cd1c3f718ad" style="display: block;"></a><a id="populations-(genetic-algorithms)-ecosystem-simulations-and-23176af0-1662-0130-0e91-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter09_section13" style="display: block;"></a><h3 id="913-ecosystem-simulation">9.13  Ecosystem Simulation</h3><p><a id="ecosystem-simulation-genetic-algorithms-7fbef6c0-251f-0130-b19b-7cd1c3f718ad" style="display: block;"></a><a id="genetic-algorithmsecosystem-simulation-7fbf0720-251f-0130-b19c-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaecosystems-modeling-7fbf1b00-251f-0130-b19d-7cd1c3f718ad" style="display: block;"></a><a id="populations-genetic-algorithmsecosystem-simulations-and-7fbf2b70-251f-0130-b19e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>You may have noticed something a bit odd about every single evolutionary system we’ve built so far in this chapter.   After all, in the real world, a population of babies isn’t born all at the same time.  Those babies don’t then grow up and all reproduce at exactly the same time, then instantly die to leave the population size perfectly stable.   That would be ridiculous.  Not to mention the fact that there is certainly no one running around the forest with a calculator crunching numbers and assigning fitness values to all the creatures.</p>
 <p>In the real world, we don’t really have “survival of the fittest”; we have “survival of the survivors.”  Things that happen to live longer, for whatever reason, have a greater chance of reproducing.   Babies are born, they live for a while, maybe they themselves have babies, maybe they don’t, and then they die.</p>
-<p>You won’t necessarily find simulations of “real-world” evolution in artificial intelligence textbooks.  Genetic algorithms are generally used in the more formal manner we outlined in this chapter.   However, since we are reading this book to develop simulations of natural systems, it’s worth looking at some ways in which  we might use a genetic algorithm to build something that resembles a living “ecosystem”, much like the one we’ve described in the exercises at the end of each chapter.</p>
+<p>You won’t necessarily find simulations of “real-world” evolution in artificial intelligence textbooks.  Genetic algorithms are generally used in the more formal manner we outlined in this chapter.   However, since we are reading this book to develop simulations of natural systems, it’s worth looking at some ways in which  we might use a genetic algorithm to build something that resembles a living “ecosystem,” much like the one we’ve described in the exercises at the end of each chapter.</p>
 <p>Let’s begin by developing a very simple scenario.  We’ll create a creature called a "bloop," a circle that moves about the screen according to Perlin noise.  The creature will have a radius and a maximum speed.  The bigger it is, the slower it moves; the smaller, the faster.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3161,7 +3150,7 @@ via selection and reproduction.</div><code><pre><span class='one-line'>  <strong
 </li>
 		
 	</ul>
-</div><p><a id="fitness-functions-(natural-selection-algorithms)-ecosystem-simulations-and-2317e640-1662-0130-0e92-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="fitness-functions-natural-selection-algorithmsecosystem-simulations-and-7fbf91e0-251f-0130-b19f-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Bloops dying is our replacement for a fitness function, the process of “selection.” If a bloop dies, it cannot be selected to be a parent, because it simply no longer exists!   One way we can build a mechanism to ensure bloop deaths in our world is by adding a <span class="var">health</span> variable to the <span class="klass">Bloop</span> class.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -3227,14 +3216,14 @@ to test if the bloop is alive or dead.</div><code><pre><span class='one-line'>  
 <span class='one-line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="k">return</span> <span class="kc">false</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="o">}</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>This is a good first step, but we haven’t really achieved anything.  After all, if all bloops start with 100 health points and lose 1 point per frame, then all bloops will live for the exact same amount of time and die together.   If every single bloop lives the same amount of time, they all have equal chances of reproducing and therefore nothing will evolve.</p>
-<p><a id="ecosystem-simulation-genetic-algorithms-lifespans,-varying-231828d0-1662-0130-0e93-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="ecosystem-simulation-genetic-algorithmslifespans-varying-7fbfc520-251f-0130-b1a0-7cd1c3f718ad" style="display: block;"></a></p>
 <p>There are many ways we could achieve variable lifespans with a more sophisticated world.  For example, we could introduce predators that eat bloops.  Perhaps the faster bloops would be able to escape being eaten more easily, and therefore our world would evolve to have faster and faster bloops.  Another option would be to introduce food.  When a bloop eats food, it increases its health points, and therefore extends its life.</p>
 <p>Let’s assume we have an <span class="klass">ArrayList</span> of <span class="klass">PVector</span> locations for food, named “food.”  We could test each bloop’s proximity to each food location.  If the bloop is close enough, it eats the food (which is then removed from the world) and increases its health.</p>
 <div class="source-code">
@@ -3277,7 +3266,7 @@ to test if the bloop is alive or dead.</div><code><pre><span class='one-line'>  
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Now we have a scenario in which bloops that eat more food live longer and have a greater likelihood of reproducing.  Therefore, we expect that our system would evolve bloops with an optimal ability to find and eat food.</p>
 <p>Now that we have built our world, it’s time to add the components required for evolution.  First we should establish our genotype and phenotype.</p>
-<section><a id="_genotype_and_phenotype" style="display: block;"></a><h4 id="genotype-and-phenotype">Genotype and Phenotype</h4><p><a id="ecosystem-simulation-genetic-algorithms-genotype-23186f70-1662-0130-0e94-7cd1c3f718ad" style="display: block;"></a><a id="ecosystem-simulation-genetic-algorithms-phenotype-23187c00-1662-0130-0e95-7cd1c3f718ad" style="display: block;"></a><a id="genotype-(natural-selection-algorithms)-ecosystem-simulation-23188680-1662-0130-0e96-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-(natural-selection-algorithms)-ecosystem-simulation-231891e0-1662-0130-0e97-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="_genotype_and_phenotype" style="display: block;"></a><h4 id="genotype-and-phenotype">Genotype and Phenotype</h4><p><a id="ecosystem-simulation-genetic-algorithmsgenotype-7fbff9f0-251f-0130-b1a1-7cd1c3f718ad" style="display: block;"></a><a id="ecosystem-simulation-genetic-algorithmsphenotype-7fc00db0-251f-0130-b1a2-7cd1c3f718ad" style="display: block;"></a><a id="genotype-natural-selection-algorithmsecosystem-simulation-7fc02a90-251f-0130-b1a3-7cd1c3f718ad" style="display: block;"></a><a id="phenotype-natural-selection-algorithmsecosystem-simulation-7fc04540-251f-0130-b1a4-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The ability for a bloop to find food is tied to two variables—size and speed.  Bigger bloops will find food more easily simply because their size will allow them to intersect with food locations more often. And faster bloops will find more food because they can cover more ground in a shorter period of time.</p>
 <a id="chapter09_figure15" style="display: block;"></a><div class="image-container half-width-right" >
 	
@@ -3369,14 +3358,14 @@ case we want to make more sophisticated bloops later.</div><code><pre><span clas
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> maxspeed and r (radius) are mapped
 to values according to the DNA.</div><code><pre><span class='one-line'>    <span class="n">maxspeed</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="n">r</span>        <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">r</span>        <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">dna</span><span class="o">.</span><span class="na">genes</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Notice that with <span class="var">maxspeed</span>, the range is mapped to between 15 and 0, meaning a bloop with a gene value of 0 moves at a speed of 15 and a bloop with a gene value of 1 doesn’t move at all (speed of 0).</p>
-</section><section><a id="_selection_and_reproduction" style="display: block;"></a><h4 id="selection-and-reproduction">Selection and Reproduction</h4><p><a id="ecosystem-simulation-genetic-algorithms-reproduction-2318c990-1662-0130-0e98-7cd1c3f718ad" style="display: block;"></a><a id="ecosystem-simulation-genetic-algorithms-selection-2318d410-1662-0130-0e99-7cd1c3f718ad" style="display: block;"></a><a id="reproduction-(natural-selection-algorithms)-ecosystem-simulation-2318df50-1662-0130-0e9a-7cd1c3f718ad" style="display: block;"></a><a id="selection-(natural-selection-algorithms)-ecosystem-simulation-2318f020-1662-0130-0e9b-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="_selection_and_reproduction" style="display: block;"></a><h4 id="selection-and-reproduction">Selection and Reproduction</h4><p><a id="ecosystem-simulation-genetic-algorithmsreproduction-7fc096b0-251f-0130-b1a5-7cd1c3f718ad" style="display: block;"></a><a id="ecosystem-simulation-genetic-algorithmsselection-7fc0a980-251f-0130-b1a6-7cd1c3f718ad" style="display: block;"></a><a id="reproduction-natural-selection-algorithmsecosystem-simulation-7fc0bb60-251f-0130-b1a7-7cd1c3f718ad" style="display: block;"></a><a id="selection-natural-selection-algorithmsecosystem-simulation-7fc0ce60-251f-0130-b1a8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we have the genotype and phenotype, we need to move on to devising a means for bloops to be selected as parents.  We stated before that the longer a bloop lives, the more chances it has to reproduce.    The length of life is the bloop’s fitness.</p>
 <p>One option would be to say that whenever two bloops come into contact with each other, they make a new bloop.  The longer a bloop lives, the more likely it is to come into contact with another bloop.  (This would also affect the evolutionary outcome given that, in addition to eating food, their ability to find other bloops is a factor in the likelihood of having a baby.)</p>
 <p>A simpler option would be to have “asexual” reproduction, meaning a bloop does not require a partner.  It can, at any moment, make a clone of itself, another bloop with the same genetic makeup.   If we state this selection algorithm as follows:</p>
@@ -3584,7 +3573,7 @@ and run a World object.</div><code><pre><span class='one-line'><span class="kt">
 <span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">background</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="n">world</span><span class="o">.</span><span class="na">run</span><span class="o">();</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'><span class="kd">class</span> <span class="nc">World</span> <span class="o">{</span></span>
@@ -3618,7 +3607,7 @@ population bloops as well as the food.</div><code><pre><span class='one-line'>  
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If one dies, it is removed from the population and food is added at its location.</div><code><pre><span class='one-line'>      <span class="k">if</span> <span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">dead</span><span class="o">())</span> <span class="o">{</span></span>
 <span class='one-line'>        <span class="n">bloops</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">i</span><span class="o">);</span></span>
 <span class='one-line'>        <span class="n">food</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">location</span><span class="o">);</span></span>
-<span class='one-line'>      <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>      <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -3628,7 +3617,7 @@ child is made (i.e. not null) it is
 added to the population.</div><code><pre><span class='one-line'>      <span class="n">Bloop</span> <span class="n">child</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">reproduce</span><span class="o">();</span></span>
 <span class='one-line'>      <span class="k">if</span> <span class="o">(</span><span class="n">child</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">bloops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">child</span><span class="o">);</span></span>
 <span class='one-line'> </span>
-<span class='one-line'> </span></pre></code></div>
+<span class='one-line'> </span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="o">}</span></span>
 <span class='one-line'>  <span class="o">}</span></span>
@@ -3667,7 +3656,7 @@ One of the greatest challenges in ecosystem simulations is achieving a nice bala
 		
 	</ul>
 </div>
-</div></section></section>
+</div><div style="page-break-after:always;"> </div></section></section>
   	</div>
   </div>
 

@@ -102,19 +102,19 @@
 
   	<div id="container">
   		<a id="_chapter_7_cellular_automata" style="display: block;"></a><h2 id="chapter-7-cellular-automata">Chapter 7.  Cellular Automata</h2>
-<blockquote class="long-quote">
+<blockquote class='long-quote'>
 “To play life you must have a fairly large checkerboard and a plentiful supply of flat counters of two colors.  It is possible to work with pencil and graph paper but it is much easier, particularly for beginners, to use counters and a board.”
 <span class="attribution">
 — Martin Gardner, <em>Scientific American</em> (October 1970)
 </span>
-</blockquote><p><a id="complex-systems-cellular-automata-22c6a420-1662-0130-0dbb-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="complex-systemscellular-automata-7f810310-251f-0130-b0c8-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In this chapter, we’re going to take a break from talking about vectors and motion.  In fact, the rest of the book will mostly focus on systems and algorithms (albeit ones that we can, should, and will apply to moving bodies).  In the previous chapter, we encountered our first Processing example of a complex system: flocking.  We briefly stated the core principles behind complex systems: more than the sum of its parts, a complex system is a system of elements, operating in parallel, with short-range relationships that as a whole exhibit emergent behavior.   This entire chapter is going to be dedicated to building another complex system simulation in Processing.    Oddly, we are going to take some steps backward and simplify the elements of our system.  No longer are the individual elements going to be members of a physics world; instead we will build a system out of the simplest digital element possible, a single bit.  This bit is going to be called a cell and its value (0 or 1) will be called its state.  Working with such simple elements will help us understand more of the details behind how complex systems work, and we’ll also be able to elaborate on some programming techniques that we can apply to code-based projects.</p>
-<section><a id="chapter07_section1" style="display: block;"></a><h3 id="71-what-is-a-cellular-automaton">7.1 What Is a Cellular Automaton?</h3><p><a id="cellular-automaton-(automata)-defined-22c6bc00-1662-0130-0dbc-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-cellular-automata-22c6c8a0-1662-0130-0dbd-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter07_section1" style="display: block;"></a><h3 id="71-what-is-a-cellular-automaton">7.1 What Is a Cellular Automaton?</h3><p><a id="cellular-automaton-automatadefined-7f812090-251f-0130-b0c9-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenacellular-automata-7f813310-251f-0130-b0ca-7cd1c3f718ad" style="display: block;"></a></p>
 <p>First, let’s get one thing straight.   The term <strong><em>cellular automata</em></strong> is plural.   Our code examples will simulate just one—a <strong><em>cellular automaton</em></strong>, singular.   To simplify our lives, we’ll also refer to cellular automata as “CA.”</p>
 <p>In Chapters 1 through 6, our objects (mover, particle, vehicle, boid) generally existed in only one “state.” They might have moved around with advanced behaviors and physics, but ultimately they remained the same type of object over the course of their digital lifetime.  We’ve alluded to the possibility that these entities can change over time (for example, the weights of steering “desires” can vary), but we haven’t fully put this into practice.   In this context, cellular automata make a great first step in building a system of many objects that have varying states over time.</p>
-<p><a id="cellular-automaton-(automata)-characteristics-of-22c6f740-1662-0130-0dbe-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automatacharacteristics-of-7f815c60-251f-0130-b0cb-7cd1c3f718ad" style="display: block;"></a></p>
 <p>A cellular automaton is a model of a system of “cell” objects with the following characteristics.</p>
-<p><a id="grid-(cellular-automata)-22c70720-1662-0130-0dbf-7cd1c3f718ad" style="display: block;"></a><a id="state-(cellular-automata)-22c71220-1662-0130-0dc0-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="grid-cellular-automata-7f817110-251f-0130-b0cc-7cd1c3f718ad" style="display: block;"></a><a id="state-cellular-automata-7f817f10-251f-0130-b0cd-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -141,10 +141,10 @@ Each cell has a <strong><em>neighborhood</em></strong>.  This can be defined in 
 	
 	<p class="caption">Figure 7.1</p>
 </div>
-<p><a id="cellular-automaton-(automata)-self-replicating-cells-22c75530-1662-0130-0dc1-7cd1c3f718ad" style="display: block;"></a><a id="game-of-life-22c760e0-1662-0130-0dc2-7cd1c3f718ad" style="display: block;"></a><a id="los-alamos-national-laboratory-22c771a0-1662-0130-0dc3-7cd1c3f718ad" style="display: block;"></a><a id="self-replicating-cells-22c781d0-1662-0130-0dc4-7cd1c3f718ad" style="display: block;"></a><a id="ulam,-stanisław-22c79410-1662-0130-0dc5-7cd1c3f718ad" style="display: block;"></a><a id="von-neumann,-john-22c7a180-1662-0130-0dc6-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automataself-replicating-cells-7f81cba0-251f-0130-b0ce-7cd1c3f718ad" style="display: block;"></a><a id="game-of-life-7f81ddc0-251f-0130-b0cf-7cd1c3f718ad" style="display: block;"></a><a id="los-alamos-national-laboratory-7f81ec70-251f-0130-b0d0-7cd1c3f718ad" style="display: block;"></a><a id="self-replicating-cells-7f8201d0-251f-0130-b0d1-7cd1c3f718ad" style="display: block;"></a><a id="ulam-stanisaw-7f821020-251f-0130-b0d2-7cd1c3f718ad" style="display: block;"></a><a id="von-neumann-john-7f821e50-251f-0130-b0d3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The development of cellular automata systems is typically attributed to Stanisław Ulam and John von Neumann, who were both researchers at the Los Alamos National Laboratory in New Mexico in the 1940s.  Ulam was studying the growth of crystals and von Neumann was imagining a world of self-replicating robots.  That’s right, robots that build copies of themselves.  Once we see some examples of CA visualized, it’ll be clear how one might imagine modeling crystal growth; the robots idea is perhaps less obvious.   Consider the design of a robot as a pattern on a grid of cells (think of filling in some squares on a piece of graph paper).  Now consider a set of simple rules that would allow that pattern to create copies of itself on that grid.  This is essentially the process of a CA that exhibits behavior similar to biological reproduction and evolution.  (Incidentally, von Neumann’s cells had twenty-nine possible states.)  Von Neumann’s work in self-replication and CA is conceptually similar to what is probably the most famous cellular automaton: the “Game of Life,” which we will discuss in detail in section 7.3.</p>
-<p><a id="a-new-kind-of-science-(wolfram)-22c7b3c0-1662-0130-0dc7-7cd1c3f718ad" style="display: block;"></a><a id="wolfram,-stephen-22c7c060-1662-0130-0dc8-7cd1c3f718ad" style="display: block;"></a></p>
-<p>Perhaps the most significant scientific (and lengthy) work studying cellular automata arrived in 2002: Stephen Wolfram’s 1,280-page <a href="http://www.wolframscience.com/nksonline/toc.html"><em>A New Kind of Science</em></a>. Available in its entirety for free online, Wolfram’s book discusses how CA are not simply neat tricks, but are relevant to the study of biology, chemistry, physics, and all branches of science.  This chapter will barely scratch the surface of the theories Wolfram outlines (we will focus on the code implementation) so if the examples provided spark your curiosity, you’ll find plenty more to read about in his book.</p></section><section><a id="chapter07_section2" style="display: block;"></a><h3 id="72-elementary-cellular-automata">7.2  Elementary Cellular Automata</h3><p><a id="cellular-automaton-(automata)-elementary-22c7e140-1662-0130-0dc9-7cd1c3f718ad" style="display: block;"></a><a id="cellular-automaton-(automata)-wolfram-algorithm-for-22c7ef30-1662-0130-0dca-7cd1c3f718ad" style="display: block;"></a><a id="elementary-cellular-automata-22cad960-1662-0130-0dcb-7cd1c3f718ad" style="display: block;"></a><a id="wolfram,-stephen-elementary-cellular-automata-algorithm-22cae670-1662-0130-0dcc-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="new-kind-of-science-a-wolfram-7f8231a0-251f-0130-b0d4-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-stephen-7f8243f0-251f-0130-b0d5-7cd1c3f718ad" style="display: block;"></a></p>
+<p>Perhaps the most significant scientific (and lengthy) work studying cellular automata arrived in 2002: Stephen Wolfram’s 1,280-page <a href="http://www.wolframscience.com/nksonline/toc.html"><em>A New Kind of Science</em></a>. Available in its entirety for free online, Wolfram’s book discusses how CA are not simply neat tricks, but are relevant to the study of biology, chemistry, physics, and all branches of science.  This chapter will barely scratch the surface of the theories Wolfram outlines (we will focus on the code implementation) so if the examples provided spark your curiosity, you’ll find plenty more to read about in his book.</p></section><section><a id="chapter07_section2" style="display: block;"></a><h3 id="72-elementary-cellular-automata">7.2  Elementary Cellular Automata</h3><p><a id="cellular-automaton-automataelementary-7f825da0-251f-0130-b0d6-7cd1c3f718ad" style="display: block;"></a><a id="cellular-automaton-automatawolfram-algorithm-for-7f826fd0-251f-0130-b0d7-7cd1c3f718ad" style="display: block;"></a><a id="elementary-cellular-automata-7f8281a0-251f-0130-b0d8-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-stephenelementary-cellular-automata-algorithm-7f8297e0-251f-0130-b0d9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The examples in this chapter will begin with a simulation of Wolfram’s work.   To understand Wolfram’s elementary CA, we should ask ourselves the question: “What is the simplest cellular automaton we can imagine?”  What’s exciting about this question and its answer is that even with the simplest CA imaginable, we will see the properties of complex systems at work.</p>
 <p>Let’s build Wolfram’s elementary CA from scratch.  Concepts first, then code.   What are the three key elements of a CA?</p>
 <p>1) <strong><em>Grid</em></strong>.  The simplest grid would be one-dimensional: a line of cells.</p>
@@ -161,7 +161,7 @@ Each cell has a <strong><em>neighborhood</em></strong>.  This can be defined in 
 	
 	<p class="caption">Figure 7.3</p>
 </div>
-<p><a id="neighborhood-(cellular-automata)-22cb1ef0-1662-0130-0dcd-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="neighborhood-cellular-automata-7f82e790-251f-0130-b0da-7cd1c3f718ad" style="display: block;"></a></p>
 <p>3) <strong><em>Neighborhood</em></strong>.  The simplest neighborhood in one dimension for any given cell would be the cell itself and its two adjacent neighbors: one to the left and one to the right.</p>
 <a id="chapter07_figure4" style="display: block;"></a><div class="image-container " >
 	
@@ -176,7 +176,7 @@ Each cell has a <strong><em>neighborhood</em></strong>.  This can be defined in 
 	
 	<p class="caption">Figure 7.5: The edge cell only has a neighborhood of two.</p>
 </div>
-<p><a id="cellular-automaton-(automata)-time-and-22cb5d90-1662-0130-0dce-7cd1c3f718ad" style="display: block;"></a><a id="time-cellular-automata-and-22cb6c80-1662-0130-0dcf-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automatatime-and-7f831df0-251f-0130-b0db-7cd1c3f718ad" style="display: block;"></a><a id="timecellular-automata-and-7f833510-251f-0130-b0dc-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We haven’t yet discussed, however, what is perhaps the most important detail of how cellular automata work—<em>time</em>.   We’re not really talking about real-world time here, but about the CA living over a period of <em>time</em>, which could also be called a <strong><em>generation</em></strong> and, in our case, will likely refer to the <strong><em>frame count</em></strong> of an animation.  The figures above show us the CA at time equals 0 or generation 0.  The questions we have to ask ourselves are: <em>How do we compute the states for all cells at generation 1?  And generation 2?</em>  And so on and so forth.</p>
 <a id="chapter07_figure6" style="display: block;"></a><div class="image-container " >
 	
@@ -230,7 +230,7 @@ Each cell has a <strong><em>neighborhood</em></strong>.  This can be defined in 
 	
 	<p class="caption">Figure 7.12: Rule 90</p>
 </div>
-<p><a id="cellular-automaton-(automata)-sierpiński-triangle-22cc1b00-1662-0130-0dd0-7cd1c3f718ad" style="display: block;"></a><a id="sierpiński-triangle-22cc25a0-1662-0130-0dd1-7cd1c3f718ad" style="display: block;"></a><a id="sierpiński,-wacław-22cc30b0-1662-0130-0dd2-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automatasierpiski-triangle-7f83cd10-251f-0130-b0dd-7cd1c3f718ad" style="display: block;"></a><a id="sierpiski-triangle-7f83df80-251f-0130-b0de-7cd1c3f718ad" style="display: block;"></a><a id="sierpiski-wacaw-7f83ee10-251f-0130-b0df-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The low-resolution shape we’re seeing above is the “Sierpiński triangle.” Named after the Polish mathematician Wacław Sierpiński, it’s a fractal pattern that we’ll examine in the next chapter.  That’s right: this incredibly simple system of 0s and 1s, with little neighborhoods of three cells, can generate a shape as sophisticated and detailed as the Sierpiński triangle.   Let’s look at it again, only with each cell a single pixel wide so that the resolution is much higher.</p>
 <a id="chapter07_figure13" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -262,7 +262,7 @@ Each cell has a <strong><em>neighborhood</em></strong>.  This can be defined in 
 </div>
 <p>As we can now see, the simple act of creating a CA and defining a ruleset does not guarantee visually interesting results. Out of all 256 rulesets, only a handful produce compelling outcomes.  However, it’s quite incredible that even one of these rulesets for a one-dimensional CA with only two possible states can produce the patterns we see every day in nature (see Figure 7.16), and it demonstrates how valuable these systems can be in simulation and pattern generation.</p>
 <p>Before we go too far down the road of how Wolfram classifies the results of varying rulesets, let’s look at how we actually build a Processing sketch that generates the Wolfram CA and visualizes it onscreen.</p>
-</section><section><a id="chapter07_section3" style="display: block;"></a><h3 id="73-how-to-program-an-elementary-ca">7.3 How to Program an Elementary CA</h3><p><a id="cellular-automaton-(automata)-elementary,-implementing-22cc7f10-1662-0130-0dd3-7cd1c3f718ad" style="display: block;"></a><a id="elementary-cellular-automata-implementing-22cc90f0-1662-0130-0dd4-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter07_section3" style="display: block;"></a><h3 id="73-how-to-program-an-elementary-ca">7.3 How to Program an Elementary CA</h3><p><a id="cellular-automaton-automataelementary-implementing-7f8439a0-251f-0130-b0e0-7cd1c3f718ad" style="display: block;"></a><a id="elementary-cellular-automataimplementing-7f845620-251f-0130-b0e1-7cd1c3f718ad" style="display: block;"></a></p>
 <p>You may be thinking: “OK, I’ve got this cell thing.  And the cell thing has some properties, like a state, what generation it’s on, who its neighbors are, where it lives pixel-wise on the screen.   And maybe it has some functions: it can display itself, it can generate its new state, etc.”  This line of thinking is an excellent one and would likely lead you to write some code like this:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -369,7 +369,7 @@ for (int i = 0; i < cells.length; i++) {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> ...take a look at the neighborhood.</div><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="n">left</span>   <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span></span>
 <span class='one-line'>  <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
-<span class='one-line'>  <span class="kt">int</span> <span class="n">right</span>  <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">int</span> <span class="n">right</span>  <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -383,7 +383,7 @@ for (int i = 0; i < cells.length; i++) {
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>We’re fairly close to getting this right, but we’ve made one minor blunder and one major blunder in the above code.  Let’s talk about what we’ve done well so far.</p>
 <p>Notice how easy it is to look at a cell’s neighbors.  Because an array is an ordered list of data, we can use the fact that the indices are numbered to know which cells are next to which cells.  We know that cell number 15, for example, has cell 14 to its left and 16 to its right.  More generally, we can say that for any cell <span class="var">i</span>, its neighbors are <span class="var">i-1</span> and <span class="var">i+1</span>.</p>
-<p><a id="elementary-cellular-automata-edge-cases-and-22cd0b20-1662-0130-0dd5-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="elementary-cellular-automataedge-cases-and-7f878ce0-251f-0130-b0e2-7cd1c3f718ad" style="display: block;"></a></p>
 <p>We’re also farming out the calculation of a new state value to some function called <span class="function">rules()</span>.  Obviously, we’re going to have to write this function ourselves, but the point we’re making here is modularity.  We have a basic framework for the CA in this function, and if we later want to change how the rules operate, we don’t have to touch that framework; we can simply rewrite the <span class="function">rules()</span> function to compute the new states differently.</p>
 <p>So what have we done wrong?  Let’s talk through how the code will execute.  First, we look at cell index <span class="var">i</span> equals 0.  Now let’s look at 0’s neighbors.  Left is index -1.  Middle is index 0.  And right is index 1.  However, our array by definition does not have an element with the index -1.  It starts with 0.  This is a problem we’ve alluded to before: the edge cases.</p>
 <p>How do we deal with the cells on the edge who don’t have a neighbor to both their left and their right?  Here are three possible solutions to this problem:</p>
@@ -430,7 +430,7 @@ for (int i = 1; i < cells.length-1; i++) { //[bold]
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="elementary-cellular-automata-generations,-maintaining-integrity-of-22cd7170-1662-0130-0dd6-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="elementary-cellular-automatagenerations-maintaining-integrity-of-7f87e850-251f-0130-b0e3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>There’s one more problem we have to fix before we’re done.  It’s subtle and you won’t get a compilation error; the CA just won’t perform correctly.  However, identifying this problem is absolutely fundamental to the techniques behind programming CA simulations.  It all lies in this line of code:</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -488,7 +488,7 @@ for the next generation.</div><code><pre><span class='one-line'><strong><span cl
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Look at the states from the current array.</div><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="n">left</span>   <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span></span>
 <span class='one-line'>  <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
-<span class='one-line'>  <span class="kt">int</span> <span class="n">right</span>  <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">int</span> <span class="n">right</span>  <span class="o">=</span> <span class="n">cell</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="kt">int</span> <span class="n">newstate</span> <span class="o">=</span> <span class="n">rules</span><span class="o">(</span><span class="n">left</span><span class="o">,</span><span class="n">middle</span><span class="o">,</span><span class="n">right</span><span class="o">);</span></span></pre></code></div>
 
@@ -526,7 +526,7 @@ cells = newcells; //[bold]</textarea>
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Now, there are many ways we could write this function, but I’d like to start with a long-winded one that will hopefully provide a clear illustration of what we are doing.</p>
-<p><a id="cellular-automaton-(automata)-rulesets,-defining-22cdc540-1662-0130-0dd7-7cd1c3f718ad" style="display: block;"></a><a id="rulesets-for-cellular-automata-22cdd170-1662-0130-0dd8-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automatarulesets-defining-7f883a60-251f-0130-b0e4-7cd1c3f718ad" style="display: block;"></a><a id="rulesets-for-cellular-automata-7f884b10-251f-0130-b0e5-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s first establish how we are storing the ruleset.  The ruleset, if you remember from the previous section, is a series of 8 bits (0 or 1) that defines that outcome for every possible neighborhood configuration.</p>
 <a id="chapter07_figure14" style="display: block;"></a><div class="image-container " >
 	
@@ -560,7 +560,7 @@ cells = newcells; //[bold]</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p>If left, middle, and right all have the state 1, then that matches the configuration 111 and the new state should be equal to the first element in the ruleset.   We can now duplicate this strategy for all eight possibilities.</p>
+</div><p>If left, middle, and right all have the state 1, then that matches the configuration 111 and the new state should be equal to the first value in the ruleset array.   We can now duplicate this strategy for all eight possibilities.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>  int rules (int a, int b, int c) {
@@ -569,6 +569,7 @@ cells = newcells; //[bold]</textarea>
     else if (a == 1 && b == 0 && c == 1) return ruleset[2];
     else if (a == 1 && b == 0 && c == 0) return ruleset[3];
     else if (a == 0 && b == 1 && c == 1) return ruleset[4];
+    else if (a == 0 && b == 1 && c == 0) return ruleset[5];
     else if (a == 0 && b == 0 && c == 1) return ruleset[6];
     else if (a == 0 && b == 0 && c == 0) return ruleset[7];
     // For this function to be valid, we have to make sure something is returned
@@ -587,6 +588,7 @@ cells = newcells; //[bold]</textarea>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span></span>
+<span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">6</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="mi">7</span><span class="o">];</span></span></pre></code></div>
 
@@ -723,7 +725,7 @@ int[] ruleset = {0,1,1,1,1,0,1,1};</textarea>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> We need an array for the cells and
 one for the rules.</div><code><pre><span class='one-line'>  <span class="kt">int</span><span class="o">[]</span> <span class="n">cells</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="kt">int</span><span class="o">[]</span> <span class="n">ruleset</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">int</span><span class="o">[]</span> <span class="n">ruleset</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'>  <span class="n">CA</span><span class="o">()</span> <span class="o">{</span></span>
@@ -747,7 +749,7 @@ cell has state 1.</div><code><pre><span class='one-line'>    <span class="n">cel
 <span class='one-line'>      <span class="kt">int</span> <span class="n">me</span>     <span class="o">=</span> <span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">];</span></span>
 <span class='one-line'>      <span class="kt">int</span> <span class="n">right</span>  <span class="o">=</span> <span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span></span>
 <span class='one-line'>      <span class="n">nextgen</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">rules</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">me</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>    <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>    <span class="n">cells</span> <span class="o">=</span> <span class="n">nextgen</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="o">}</span></span>
@@ -757,13 +759,13 @@ cell has state 1.</div><code><pre><span class='one-line'>    <span class="n">cel
 <span class='one-line'>    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="k">return</span> <span class="n">ruleset</span><span class="o">[</span><span class="n">index</span><span class="o">];</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter07_section4" style="display: block;"></a><h3 id="74-drawing-an-elementary-ca">7.4 Drawing an Elementary CA</h3><p><a id="elementary-cellular-automata-drawing-22ce1db0-1662-0130-0dd9-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter07_section4" style="display: block;"></a><h3 id="74-drawing-an-elementary-ca">7.4 Drawing an Elementary CA</h3><p><a id="elementary-cellular-automatadrawing-7f889520-251f-0130-b0e6-7cd1c3f718ad" style="display: block;"></a></p>
 <p>What’s missing?  Presumably, it’s our intention to display cells and their states in visual form.  As we saw earlier, the standard technique for doing this is to stack the generations one on top of each other and draw a rectangle that is black (for state 1) or white (for state 0).</p>
 <a id="chapter07_figure12" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -811,7 +813,7 @@ int[] cells = new int[width/w];</textarea>
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cells</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Black or white fill?</div><code><pre><span class='one-line'>  <span class="k">if</span> <span class="o">(</span><span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">fill</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="k">else</span>               <span class="nf">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>  <span class="k">else</span>               <span class="nf">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair '><div class='code-comment '>
 Notice how the x-location is the cell index times the cell width.
@@ -850,6 +852,7 @@ In the above scenario, this would give us cells located at x equals 0, 10, 20, 3
     cells[cells.length/2] = 1;
   }
 
+  // Function to compute the next generation
   void generate() {
     int[] nextgen = new int[cells.length];
     for (int i = 1; i < cells.length-1; i++) {
@@ -893,8 +896,9 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 <span class='one-line'>    <span class="n">ruleset</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">};</span></span>
 <span class='one-line'>    <span class="n">cells</span><span class="o">[</span><span class="n">cells</span><span class="o">.</span><span class="na">length</span><span class="o">/</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span>
 <span class='one-line'>  <span class="o">}</span></span>
-<span class='one-line'> </span>
-<span class='one-line'>  <span class="kt">void</span> <span class="nf">generate</span><span class="o">()</span> <span class="o">{</span></span>
+<span class='one-line'> </span></pre></code></div>
+
+  <div class='code-comment-pair '><div class='code-comment '>Function to compute the next generation</div><code><pre><span class='one-line'>  <span class="kt">void</span> <span class="nf">generate</span><span class="o">()</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="kt">int</span><span class="o">[]</span> <span class="n">nextgen</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">cells</span><span class="o">.</span><span class="na">length</span><span class="o">];</span></span>
 <span class='one-line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cells</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>      <span class="kt">int</span> <span class="n">left</span>   <span class="o">=</span> <span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span></span>
@@ -926,16 +930,16 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 </div><div class="example">
   <a id="chapter07_exercise1" style="display: block;"></a><h4 id="exercise-71">Exercise 7.1</h4><p>Expand Example 7.1 to have the following feature: when the CA reaches the bottom of the Processing window, the CA starts over with a new, random ruleset.</p>
 
-</div><div class="example">
+</div><p> </p><div class="example">
   <a id="chapter07_exercise2" style="display: block;"></a><h4 id="exercise-72">Exercise 7.2</h4><p>Examine what patterns occur if you initialize the first generation with each cell having a random state.</p>
 
-</div><div class="example">
+</div><p> </p><div class="example">
   <a id="chapter07_exercise3" style="display: block;"></a><h4 id="exercise-73">Exercise 7.3</h4><p>Visualize the CA in a non-traditional way.  Break all the rules you can; don’t feel tied to using squares on a perfect grid with black and white.</p>
 
-</div><div class="example">
+</div><p> </p><div class="example">
   <a id="chapter07_exercise4" style="display: block;"></a><h4 id="exercise-74">Exercise 7.4</h4><p>Create a visualization of the CA that scrolls upwards as the generations increase so that you can view the generations to “infinity.”  Hint: instead of keeping track of only one generation at a time, you’ll need to store a history of generations, always adding a new one and deleting the oldest one in each frame.</p>
 
-</div></section><section><a id="chapter07_section5" style="display: block;"></a><h3 id="75-wolfram-classification">7.5 Wolfram Classification</h3><p><a id="cellular-automaton-(automata)-wolfram-classification-22cea530-1662-0130-0dda-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-22ceb030-1662-0130-0ddb-7cd1c3f718ad" style="display: block;"></a><a id="wolfram,-stephen-wolfram-classification-22cebaf0-1662-0130-0ddc-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter07_section5" style="display: block;"></a><h3 id="75-wolfram-classification">7.5 Wolfram Classification</h3><p><a id="cellular-automaton-automatawolfram-classification-7f891770-251f-0130-b0e7-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-7f8929c0-251f-0130-b0e8-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-stephenwolfram-classification-7f894150-251f-0130-b0e9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we move on to looking at CA in two dimensions, it’s worth taking a brief look at Wolfram’s classification for cellular automata.  As we noted earlier, the vast majority of elementary CA rulesets produce uninspiring results, while some result in wondrously complex patterns like those found in nature.  Wolfram has divided up the range of outcomes into four classes:</p>
 <a id="chapter07_figure18" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -949,7 +953,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	
 	<p class="caption">Figure 7.18: Rule 222</p>
 </div>
-<p><a id="uniformity-class-(wolfram-classification)-22ced100-1662-0130-0ddd-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-uniformity-class-22cedbb0-1662-0130-0dde-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="uniformity-class-wolfram-classification-7f896070-251f-0130-b0ea-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classificationuniformity-class-7f896fa0-251f-0130-b0eb-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>Class 1: Uniformity.</em></strong>  Class 1 CAs end up, after some number of generations, with every cell constant.   This is not terribly exciting to watch.  Rule 222 (above) is a class 1 CA; if you run it for enough generations, every cell will eventually become and remain black.</p>
 <a id="chapter07_figure19" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -963,7 +967,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	
 	<p class="caption">Figure 7.19: Rule 190</p>
 </div>
-<p><a id="repetition-class-(wolfram-classification)-22ceffa0-1662-0130-0ddf-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-repetition-class-22cf1180-1662-0130-0de0-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="repetition-class-wolfram-classification-7f8994c0-251f-0130-b0ec-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classificationrepetition-class-7f89a340-251f-0130-b0ed-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>Class 2: Repetition.</em></strong>  Like class 1 CAs, class 2 CAs remain stable, but the cell states are not constant.  Rather, they oscillate in some regular pattern back and forth from 0 to 1 to 0 to 1 and so on.   In rule 190 (above), each cell follows the sequence 11101110111011101110.</p>
 <a id="chapter07_figure20" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -977,7 +981,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	
 	<p class="caption">Figure 7.20: Rule 30</p>
 </div>
-<p><a id="random-class-(wolfram-classification)-22cf41d0-1662-0130-0de1-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-random-class-22cf5560-1662-0130-0de2-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="random-class-wolfram-classification-7f89c6c0-251f-0130-b0ee-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classificationrandom-class-7f89d4d0-251f-0130-b0ef-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>Class 3: Random.</em></strong>  Class 3 CAs appear random and have no easily discernible pattern.   In fact, rule 30 (above) is used as a random number generator in Wolfram’s Mathematica software.  Again, this is a moment where we can feel amazed that such a simple system with simple rules can descend into a chaotic and random pattern.</p>
 <a id="chapter07_figure21" style="display: block;"></a><div class="image-container screenshot" >
 	
@@ -991,17 +995,17 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	
 	<p class="caption">Figure 7.21: Rule 110</p>
 </div>
-<p><a id="complexity-class-(wolfram-classification)-22cf8720-1662-0130-0de3-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classification-complexity-class-22cf9730-1662-0130-0de4-7cd1c3f718ad" style="display: block;"></a></p>
-<p><strong><em>Class 4: Complexity.</em></strong>  Class 4 CAs can be thought of as a mix between class 2 and class 3.  One can find repetitive, oscillating patterns inside the CA, but where and when these patterns appear is unpredictable and seemingly random.  Class 4 CA exhibit the properties of complex systems that we described earlier in this chapter and in Chapter 6.  If a class 3 CA wowed you, then a class 4 like Rule 110 above should really blow your mind.</p>
+<p><a id="complexity-class-wolfram-classification-7f89f550-251f-0130-b0f0-7cd1c3f718ad" style="display: block;"></a><a id="wolfram-classificationcomplexity-class-7f8a0690-251f-0130-b0f1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><strong><em>Class 4: Complexity.</em></strong>  Class 4 CAs can be thought of as a mix between class 2 and class 3.  One can find repetitive, oscillating patterns inside the CA, but where and when these patterns appear is unpredictable and seemingly random.  Class 4 CAs exhibit the properties of complex systems that we described earlier in this chapter and in Chapter 6.  If a class 3 CA wowed you, then a class 4 like Rule 110 above should really blow your mind.</p>
 <div class="example">
-  <a id="chapter07_exercise5" style="display: block;"></a><h4 id="exercise-75">Exercise 7.5</h4><p>Exercise: Create a Processing sketch that saves an image for every possible ruleset.  Can you classify them?</p>
+  <a id="chapter07_exercise5" style="display: block;"></a><h4 id="exercise-75">Exercise 7.5</h4><p>Create a Processing sketch that saves an image for every possible ruleset.  Can you classify them?</p>
 
-</div></section><section><a id="chapter07_section6" style="display: block;"></a><h3 id="76-the-game-of-life">7.6 The Game of Life</h3><p><a id="cellular-automaton-(automata)-two-dimensional-22cfd990-1662-0130-0de5-7cd1c3f718ad" style="display: block;"></a><a id="two-dimensional-cellular-automata-22cfff40-1662-0130-0de6-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter07_section6" style="display: block;"></a><h3 id="76-the-game-of-life">7.6 The Game of Life</h3><p><a id="cellular-automaton-automatatwo-dimensional-7f8a4f90-251f-0130-b0f2-7cd1c3f718ad" style="display: block;"></a><a id="two-dimensional-cellular-automata-7f8a69e0-251f-0130-b0f3-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The next step we are going to take is to move from a one-dimensional CA to a two-dimensional one.  This will introduce some additional complexity; each cell will have a bigger neighborhood, but that will open up the door to a range of possible applications.  After all, most of what we do in computer graphics lives in two dimensions, and this chapter will demonstrate how to apply CA thinking to what we draw in our Processing sketches.</p>
-<p><a id="complex-systems-game-of-life-as-22d02520-1662-0130-0de7-7cd1c3f718ad" style="display: block;"></a><a id="conway,-john-22d034c0-1662-0130-0de8-7cd1c3f718ad" style="display: block;"></a><a id="game-of-life-22d04560-1662-0130-0de9-7cd1c3f718ad" style="display: block;"></a><a id="gardner,-martin-22d056c0-1662-0130-0dea-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="complex-systemsgame-of-life-as-7f8a7e50-251f-0130-b0f4-7cd1c3f718ad" style="display: block;"></a><a id="conway-john-7f8a9150-251f-0130-b0f5-7cd1c3f718ad" style="display: block;"></a><a id="game-of-life-7f8a9fd0-251f-0130-b0f6-7cd1c3f718ad" style="display: block;"></a><a id="gardner-martin-7f8aae40-251f-0130-b0f7-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In 1970, Martin Gardner wrote an article in <em>Scientific American</em> that documented mathematician John Conway’s new “Game of Life,” describing it as “recreational” mathematics and suggesting that the reader get out a chessboard and some checkers and “play.”    While the Game of Life has become something of a computational cliché (make note of the myriad projects that display the Game of Life on LEDs, screens, projection surfaces, etc.), it is still important for us to build it from scratch.  For one, it provides a good opportunity to practice our skills with two-dimensional arrays, object orientation, etc.   But perhaps more importantly, its core principles are tied directly to our core goals—simulating the natural world with code.    Though we may want to avoid simply duplicating it without a great deal of thought or care, the algorithm and its technical implementation will provide us with the inspiration and foundation to build simulations that exhibit the characteristics and behaviors of biological systems of reproduction.</p>
 <p>Unlike von Neumann, who created an extraordinarily complex system of states and rules, Conway wanted to achieve a similar “lifelike” result with the simplest set of rules possible.    Martin Gardner outlined Conway’s goals as follows:</p>
-<blockquote>
+<blockquote >
 “1. There should be no initial pattern for which there is a simple proof that the population can grow without limit. 2. There should be initial patterns that apparently do grow without limit. 3. There should be simple initial patterns that grow and change for a considerable period of time before coming to an end in three possible ways: fading away completely (from overcrowding or becoming too sparse), settling into a stable configuration that remains unchanged thereafter, or entering an oscillating phase in which they repeat an endless cycle of two or more periods.”
 <span class="attribution">
 —Martin Gardner, <span style="font-style:normal"><a href="http://www.ibiblio.org/lifepatterns/october1970.html">Scientific American</a></span> 223 (October 1970): 120-123.
@@ -1017,7 +1021,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 <p>First, instead of a line of cells, we now have a two-dimensional matrix of cells.   As with the elementary CA, the possible states are 0 or 1.  Only in this case, since we’re talking about “life," 0 means dead and 1 means alive.</p>
 <p>The cell’s neighborhood has also expanded.  If a neighbor is an adjacent cell, a neighborhood is now nine cells instead of three.</p>
 <p>With three cells, we had a 3-bit number or eight possible configurations.  With nine cells, we have 9 bits, or 512 possible neighborhoods.  In most cases, it would be impractical to define an outcome for every single possibility.  The Game of Life gets around this problem by defining a set of rules according to general characteristics of the neighborhood.  In other words, is the neighborhood overpopulated with life?  Surrounded by death?  Or just right?  Here are the rules of life.</p>
-<p><a id="game-of-life-rules-of-22d0c760-1662-0130-0deb-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="game-of-liferules-of-7f8af760-251f-0130-b0f8-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ol class="arabic">
@@ -1068,7 +1072,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	
 	<p class="caption">Figure 7.23</p>
 </div>
-<p><a id="game-of-life-drawing-22d48250-1662-0130-0dec-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="game-of-lifedrawing-7f8b80a0-251f-0130-b0f9-7cd1c3f718ad" style="display: block;"></a></p>
 <p>With the elementary CA, we were able to look at all the generations next to each other, stacked as rows in a 2D grid.  With the Game of Life, however, the CA itself is in two dimensions.  We could try creating an elaborate 3D visualization of the results and stack all the generations in a cube structure (and in fact, you might want to try this as an exercise).  Nevertheless, the typical way the Game of Life is displayed is to treat each generation as a single frame in an animation.  So instead of viewing all the generations at once, we see them one at a time, and the result resembles rapidly growing bacteria in a petri dish.</p>
 <p>One of the exciting aspects of the Game of Life is that there are initial patterns that yield intriguing results.  For example, some remain static and never change.</p>
 <a id="chapter07_figure24" style="display: block;"></a><div class="image-container " >
@@ -1092,7 +1096,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 	<p class="caption">Figure 7.26</p>
 </div>
 <p>If you are interested in these patterns, there are several good “out of the box” Game of Life demonstrations online that allow you to configure the CA’s initial state and watch it run at varying speeds.  Two examples you might want to examine are:</p>
-<p><a id="conway's-game-of-life-(klise)-22d4bda0-1662-0130-0ded-7cd1c3f718ad" style="display: block;"></a><a id="exploring-emergence-(resnick/silverman)-22d4cf30-1662-0130-0dee-7cd1c3f718ad" style="display: block;"></a><a id="klise,-steven-22d4de70-1662-0130-0def-7cd1c3f718ad" style="display: block;"></a><a id="resnick,-mitchel-22d4ef80-1662-0130-0df0-7cd1c3f718ad" style="display: block;"></a><a id="silverman,-brian-22d50010-1662-0130-0df1-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="conways-game-of-life-klise-7f8e64f0-251f-0130-b0fa-7cd1c3f718ad" style="display: block;"></a><a id="exploring-emergence-resnicksilverman-7f8e7380-251f-0130-b0fb-7cd1c3f718ad" style="display: block;"></a><a id="klise-steven-7f8e82b0-251f-0130-b0fc-7cd1c3f718ad" style="display: block;"></a><a id="resnick-mitchel-7f8e90e0-251f-0130-b0fd-7cd1c3f718ad" style="display: block;"></a><a id="silverman-brian-7f8e9ea0-251f-0130-b0fe-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -1107,7 +1111,7 @@ many generations.</div><code><pre><span class='one-line'>  <span class="kt">int<
 		
 	</ul>
 </div><p>For the example we’ll build from scratch in the next section, it will be easier to simply randomly set the states for each cell.</p>
-</section><section><a id="chapter07_section7" style="display: block;"></a><h3 id="77-programming-the-game-of-life">7.7  Programming the Game of Life</h3><p><a id="two-dimensional-cellular-automata-implementing-22d541c0-1662-0130-0df2-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter07_section7" style="display: block;"></a><h3 id="77-programming-the-game-of-life">7.7  Programming the Game of Life</h3><p><a id="two-dimensional-cellular-automataimplementing-7f8ec9e0-251f-0130-b0ff-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now we just need to extend our code from the Wolfram CA to two dimensions.   We used a one-dimensional array to store the list of cell states before, and for the Game of Life, we can use a <a href="http://www.processing.org/learning/2darray/">two-dimensional array</a>.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1214,19 +1218,19 @@ if (board[x+1][y+1] == 1) neighbors++;
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Top row of neighbors</div><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span>
 <span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span>  <span class="o">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span>
-<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code></div>
+<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Middle row of neighbors
 (note we don’t count self)</div><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">]</span>   <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span>
-<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">]</span>   <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code></div>
+<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">]</span>   <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Bottom row of neighbors</div><code><pre><span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span>
 <span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span>  <span class="o">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span>
-<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code></div>
+<span class='one-line'><span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">neighbors</span><span class="o">++;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -1304,25 +1308,25 @@ else {
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If it is alive and has less than 2 live neighbors, it dies from loneliness.</div><code><pre><span class='one-line'><span class="k">if</span>      <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&lt;</span>  <span class="mi">2</span><span class="o">))</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If it is alive and has more than 3 live neighbors, it dies from overpopulation.</div><code><pre><span class='one-line'><span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&gt;</span>  <span class="mi">3</span><span class="o">))</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> If it is dead and has exactly 3 live neighbors, it is born!</div><code><pre><span class='one-line'><span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="o">))</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> In all other cases, its state remains the same.</div><code><pre><span class='one-line'><span class="k">else</span> <span class="o">{</span></span>
 <span class='one-line'>  <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">];</span></span>
-<span class='one-line'><span class="o">}</span></span></pre></code></div>
+<span class='one-line'><span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre></pre></code></div>
 
@@ -1351,7 +1355,8 @@ for (int x = 1; x < columns-1; x++) {
     // Correct by subtracting the cell state itself.
     neighbors -= board[x][y];
 
-    //[offset-up],[full] The rules of life!
+    //[full] <b>The rules of life!</b>
+
     if      ((board[x][y] == 1) && (neighbors <  2)) next[x][y] = 0;
     else if ((board[x][y] == 1) && (neighbors >  3)) next[x][y] = 0;
     else if ((board[x][y] == 0) && (neighbors == 3)) next[x][y] = 1;
@@ -1371,7 +1376,7 @@ board = next;</textarea>
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Looping but skipping the edge cells</div><code><pre><span class='one-line'><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">columns</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span></span></pre></code></div>
+<span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1387,10 +1392,11 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
   <div class='code-comment-pair '><div class='code-comment '>Correct by subtracting the cell state itself.</div><code><pre><span class='one-line'>    <span class="n">neighbors</span> <span class="o">-=</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">];</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair stretch'><div class='code-comment stretch'>, The rules of life!</div><code><pre><span class='one-line'>    <span class="k">if</span>      <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&lt;</span>  <span class="mi">2</span><span class="o">))</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'> <b>The rules of life!</b></div><code><pre><span class='one-line'> </span>
+<span class='one-line'>    <span class="k">if</span>      <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&lt;</span>  <span class="mi">2</span><span class="o">))</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&gt;</span>  <span class="mi">3</span><span class="o">))</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="o">))</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span></span>
-<span class='one-line'>    <span class="k">else</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">];</span></span></pre></code></div>
+<span class='one-line'>    <span class="k">else</span> <span class="n">next</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">];</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span>
@@ -1457,7 +1463,7 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
 </div><div class="example">
   <a id="chapter07_exercise8" style="display: block;"></a><h4 id="exercise-78">Exercise 7.8</h4><p>While the above solution (Example 7.2) is convenient, it is not particularly memory-efficient.  It creates a new 2D array for every frame of animation!  This matters very little for a Processing desktop application, but if you were implementing the Game of Life on a microcontroller or mobile device, you’d want to be more careful.    One solution is to have only two arrays and constantly swap them, writing the next set of states into whichever one isn’t the current array.  Implement this particular solution.</p>
 
-</div></section><section><a id="chapter07_section8" style="display: block;"></a><h3 id="78-object-oriented-cells">7.8 Object-Oriented Cells</h3><p><a id="object-cells-in-cellular-automata-as-22d65410-1662-0130-0df3-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programming-cellular-automata-and-22d665d0-1662-0130-0df4-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter07_section8" style="display: block;"></a><h3 id="78-object-oriented-cells">7.8 Object-Oriented Cells</h3><p><a id="objectcells-in-cellular-automata-as-7f8f6360-251f-0130-b100-7cd1c3f718ad" style="display: block;"></a><a id="object-oriented-programmingcellular-automata-and-7f8f7670-251f-0130-b101-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Over the course of the previous six chapters, we’ve slowly built examples of systems of <em>objects</em> with properties that move about the screen.  And in this chapter, although we’ve been talking about a “cell” as if it were an object, we actually haven’t been using any object orientation in our code (other than a class to describe the CA system as a whole).   This has worked because a cell is such an enormously simple object (a single bit).  However, in a moment, we are going to discuss some ideas for further developing CA systems, many of which involve keeping track of multiple properties for each cell.  For example, what if a cell needed to remember its last ten states?  Or what if we wanted to apply some of our motion and physics thinking to a CA and have the cells move about the window, dynamically changing their neighbors from frame to frame?</p>
 <p>To accomplish any of these ideas (and more), it would be helpful to see how we might treat a cell as an object with multiple properties, rather than as a single 0 or 1.  To show this, let’s just recreate the Game of Life simulation. Only instead of:</p>
 <div class="source-code">
@@ -1506,7 +1512,7 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Location and size</div><code><pre><span class='one-line'>  <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="kt">float</span> <span class="n">w</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="kt">float</span> <span class="n">w</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span></pre></code></div>
 
@@ -1549,7 +1555,7 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
   if (previous == 0 && state == 1) fill(0,0,255);
   else if (state == 1) fill(0);
 
-  //[offset-up] If the cell dies, color it red!
+  //[offset-down] If the cell dies, color it red!
   else if (previous == 1 && state == 0) fill(255,0,0);
   else fill(255);
 
@@ -1566,7 +1572,7 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
 <span class='one-line'>  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">state</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">fill</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair offset-up'><div class='code-comment '> If the cell dies, color it red!</div><code><pre><span class='one-line'>  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
+  <div class='code-comment-pair offset-down'><div class='code-comment '> If the cell dies, color it red!</div><code><pre><span class='one-line'>  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>  <span class="k">else</span> <span class="nf">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span></span>
 <span class='one-line'> </span>
 <span class='one-line'>  <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">w</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span></span>
@@ -1589,11 +1595,14 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
     }
     neighbors -= board[x][y].previous;
 
-    //[offset-up] We are calling a function newState()
-    // to assign a new state to each cell.
+    //[full]
+    // We are calling a function newState() to assign a new state to each cell.
+
+
     if      ((board[x][y].state == 1) && (neighbors <  2)) board[x][y].newState(0);
     else if ((board[x][y].state == 1) && (neighbors >  3)) board[x][y].newState(0);
     else if ((board[x][y].state == 0) && (neighbors == 3)) board[x][y].newState(1);
+    //[end]
     // else do nothing!
   }
 }</textarea>
@@ -1615,19 +1624,22 @@ calculate the number of live neighbors.</div><code><pre><span class='one-line'> 
 <span class='one-line'>    <span class="n">neighbors</span> <span class="o">-=</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">previous</span><span class="o">;</span></span>
 <span class='one-line'> </span></pre></code></div>
 
-  <div class='code-comment-pair offset-up'><div class='code-comment '> We are calling a function newState()
-to assign a new state to each cell.</div><code><pre><span class='one-line'>    <span class="k">if</span>      <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">state</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&lt;</span>  <span class="mi">2</span><span class="o">))</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">newState</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
+  <div class='code-comment-pair stretch'><div class='code-comment stretch'>
+We are calling a function newState() to assign a new state to each cell.</div><code><pre><span class='one-line'> </span>
+<span class='one-line'> </span>
+<span class='one-line'>    <span class="k">if</span>      <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">state</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&lt;</span>  <span class="mi">2</span><span class="o">))</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">newState</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">state</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">&gt;</span>  <span class="mi">3</span><span class="o">))</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">newState</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
-<span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">state</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="o">))</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">newState</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span></pre></code></div>
+<span class='one-line'>    <span class="k">else</span> <span class="nf">if</span> <span class="o">((</span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">state</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">neighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="o">))</span> <span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">].</span><span class="na">newState</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
-  <div class='code-comment-pair '><div class='code-comment '>else do nothing!</div><code><pre><span class='one-line'>  <span class="o">}</span></span>
+  <div class='code-comment-pair '><div class='code-comment '>
+else do nothing!</div><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div></section><section><a id="chapter07_section9" style="display: block;"></a><h3 id="79-variations-of-traditional-ca">7.9 Variations of Traditional CA</h3><p><a id="cellular-automaton-(automata)-variations-of-22d6d790-1662-0130-0df5-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter07_section9" style="display: block;"></a><h3 id="79-variations-of-traditional-ca">7.9 Variations of Traditional CA</h3><p><a id="cellular-automaton-automatavariations-of-7f8fd220-251f-0130-b102-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now that we have covered the basic concepts, algorithms, and programming strategies behind the most famous 1D and 2D cellular automata, it’s time to think about how you might take this foundation of code and build on it, developing creative applications of CAs in your own work.  In this section, we’ll talk through some ideas for expanding the features of the CA examples.  Example answers to each of these exercises can be found on the book website.</p>
-<p><a id="cellular-automaton-(automata)-non-rectangular-grids-and-22d6efd0-1662-0130-0df6-7cd1c3f718ad" style="display: block;"></a><a id="non-rectangular-grids-(cellular-automata)-22d6fb70-1662-0130-0df7-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cellular-automaton-automatanon-rectangular-grids-and-7f900080-251f-0130-b103-7cd1c3f718ad" style="display: block;"></a><a id="non-rectangular-grids-cellular-automata-7f901c80-251f-0130-b104-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>1) Non-rectangular Grids</em></strong>.  There’s no particular reason why you should limit yourself to having your cells on a rectangular grid.  What happens if you design a CA with another type of shape?</p>
 <div class="example">
   <a id="chapter07_exercise9" style="display: block;"></a><h4 id="exercise-79">Exercise 7.9</h4><p>Create a CA using a grid of hexagons (as below), each with six neighbors.</p>
@@ -1638,7 +1650,7 @@ to assign a new state to each cell.</div><code><pre><span class='one-line'>    <
 	
 </div>
 
-</div><p><a id="cellular-automaton-(automata)-probabilistic-22d72b60-1662-0130-0df8-7cd1c3f718ad" style="display: block;"></a><a id="probabilistic-(cellular-automata)-22d73620-1662-0130-0df9-7cd1c3f718ad" style="display: block;"></a><a id="probability-cellular-automata-based-on-22d74110-1662-0130-0dfa-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automataprobabilistic-7f905ef0-251f-0130-b105-7cd1c3f718ad" style="display: block;"></a><a id="probabilistic-cellular-automata-7f907060-251f-0130-b106-7cd1c3f718ad" style="display: block;"></a><a id="probabilitycellular-automata-based-on-7f908070-251f-0130-b107-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>2) Probabilistic</em></strong>.  The rules of a CA don’t necessarily have to define an exact outcome.</p>
 <div class="example">
   <a id="chapter07_exercise10" style="display: block;"></a><h4 id="exercise-710">Exercise 7.10</h4><p>Rewrite the Game of Life rules as follows:</p>
@@ -1646,32 +1658,32 @@ to assign a new state to each cell.</div><code><pre><span class='one-line'>    <
 Loneliness: If the cell has one or fewer alive neighbors, it has a 60% chance of dying.<br />
 Etc.</p>
 
-</div><p><a id="cellular-automaton-(automata)-continuous-22d77500-1662-0130-0dfb-7cd1c3f718ad" style="display: block;"></a><a id="continuous-(cellular-automata)-22d78550-1662-0130-0dfc-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automatacontinuous-7f90b480-251f-0130-b108-7cd1c3f718ad" style="display: block;"></a><a id="continuous-cellular-automata-7f90c5e0-251f-0130-b109-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>3) Continuous</em></strong>. We’ve looked at examples where the cell’s state can only be a 1 or a 0.  But what if the cell’s state was a floating point number between 0 and 1?</p>
 <div class="example">
   <a id="chapter07_exercise11" style="display: block;"></a><h4 id="exercise-711">Exercise 7.11</h4><p>Adapt Wolfram elementary CA to have the state be a float.  You could define rules such as, “If the state is greater than 0.5” or “…less than 0.2.”</p>
 
-</div><p><a id="cellular-automaton-(automata)-image-processing-22d7ba70-1662-0130-0dfd-7cd1c3f718ad" style="display: block;"></a><a id="image-processing-(cellular-automata)-22d7c7a0-1662-0130-0dfe-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automataimage-processing-7f90ea70-251f-0130-b10a-7cd1c3f718ad" style="display: block;"></a><a id="image-processing-cellular-automata-7f90fdd0-251f-0130-b10b-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>4) Image Processing</em></strong>.  We briefly touched on this earlier, but many image-processing algorithms operate on CA-like rules.  Blurring an image is creating a new pixel out of the average of a neighborhood of pixels.   Simulations of ink dispersing on paper or water rippling over an image can be achieved with CA rules.</p>
 <div class="example">
   <a id="chapter07_exercise12" style="display: block;"></a><h4 id="exercise-712">Exercise 7.12</h4><p>Create a CA in which a pixel is a cell and a color is its state.</p>
 
-</div><p><a id="cellular-automaton-(automata)-historical-22d7ee40-1662-0130-0dff-7cd1c3f718ad" style="display: block;"></a><a id="historical-(cellular-automata)-22d7fea0-1662-0130-0e00-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automatahistorical-7f9129f0-251f-0130-b10c-7cd1c3f718ad" style="display: block;"></a><a id="historical-cellular-automata-7f913a60-251f-0130-b10d-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>5) Historical</em></strong>.  In the Game of Life object-oriented example, we used two variables to keep track of its state: current and previous.  What if you use an array to keep track of a cell’s state history?   This relates to the idea of a “complex adaptive system,” one that has the ability to adapt and change its rules over time by learning from its history.  We’ll see an example of this in Chapter 10: Neural Networks.</p>
 <div class="example">
   <a id="chapter07_exercise13" style="display: block;"></a><h4 id="exercise-713">Exercise 7.13</h4><p>Visualize the Game of Life by coloring each cell according to how long it’s been alive or dead.  Can you also use the cell’s history to inform the rules?</p>
 
-</div><p><a id="cellular-automaton-(automata)-moving-cells-22d825c0-1662-0130-0e01-7cd1c3f718ad" style="display: block;"></a><a id="moving-cells-(cellular-automata)-22d831d0-1662-0130-0e02-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automatamoving-cells-7f916020-251f-0130-b10e-7cd1c3f718ad" style="display: block;"></a><a id="moving-cells-cellular-automata-7f917160-251f-0130-b10f-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>6) Moving cells</em></strong>.  In these basic examples, cells have a fixed position on a grid, but you could build a CA with cells that have no fixed position and instead move about the screen.</p>
 <div class="example">
   <a id="chapter07_exercise14" style="display: block;"></a><h4 id="exercise-714">Exercise 7.14</h4><p>Use CA rules in a flocking system.  What if each boid had a state (that perhaps informs its steering behaviors) and its neighborhood changed from frame to frame as it moved closer to or further from other boids?</p>
 
-</div><p><a id="cellular-automaton-(automata)-nesting-22d852f0-1662-0130-0e03-7cd1c3f718ad" style="display: block;"></a><a id="nesting-(cellular-automata)-22d85e10-1662-0130-0e04-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="cellular-automaton-automatanesting-7f919cf0-251f-0130-b110-7cd1c3f718ad" style="display: block;"></a><a id="nesting-cellular-automata-7f91b0b0-251f-0130-b111-7cd1c3f718ad" style="display: block;"></a></p>
 <p><strong><em>7) Nesting</em></strong>.  Another feature of complex systems is that they can be nested.   Our world tends to work this way: a city is a complex system of people, a person is a complex system of organs, an organ is a complex system of cells, and so on and so forth.</p>
 <div class="example">
   <a id="chapter07_exercise15" style="display: block;"></a><h4 id="exercise-715">Exercise 7.15</h4><p>Design a CA in which each cell itself is a smaller CA or a system of boids.</p>
 
-</div><div class="tip">
+</div><div style="page-break-after:always;"> </div><div class="tip">
   <h4 id="the-ecosystem-project">The Ecosystem Project</h4><p>Step 7 Exercise:</p>
 <p>Incorporate cellular automata into your ecosystem.  Some possibilities:</p>
 <div class="list">
@@ -1695,7 +1707,7 @@ Use a CA to generate a pattern for the design of a creature in your ecosystem.
 		
 	</ul>
 </div>
-</div></section>
+</div><div style="page-break-after:always;"> </div></section>
   	</div>
   </div>
 

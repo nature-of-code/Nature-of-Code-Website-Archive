@@ -102,7 +102,7 @@
 
   	<div id="container">
   		<a id="_chapter_8_fractals" style="display: block;"></a><h2 id="chapter-8-fractals">Chapter 8.  Fractals</h2>
-<blockquote class="long-quote">
+<blockquote class='long-quote'>
 “Pathological monsters! cried the terrified mathematician<br/>
 Every one of them a splinter in my eye<br/>
 I hate the Peano Space and the Koch Curve<br/>
@@ -113,8 +113,8 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 <span class="attribution">
 — Jonathan Coulton, lyrics from “Mandelbrot Set”
 </span>
-</blockquote><p><a id="fractals-22d8b1d0-1662-0130-0e05-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-fractals-22d8c280-1662-0130-0e06-7cd1c3f718ad" style="display: block;"></a></p>
-<p><a id="euclid-22d8d520-1662-0130-0e07-7cd1c3f718ad" style="display: block;"></a><a id="euclidean-geometry-22d8e580-1662-0130-0e08-7cd1c3f718ad" style="display: block;"></a></p>
+</blockquote><p><a id="fractals-7f9207f0-251f-0130-b112-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenafractals-7f921d30-251f-0130-b113-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="euclid-7f923290-251f-0130-b114-7cd1c3f718ad" style="display: block;"></a><a id="euclidean-geometry-7f924250-251f-0130-b115-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Once upon a time, I took a course in high school called “Geometry.”  Perhaps you did too.   You learned about shapes in one dimension, two dimensions, and maybe even three.  What is the circumference of a circle?  The area of a rectangle?   The distance between a point and a line?   Come to think of it, we’ve been studying geometry all along in this book, using vectors to describe the motion of bodies in Cartesian space.  This sort of geometry is generally referred to as Euclidean geometry, after the Greek mathematician Euclid.</p>
 <a id="chapter08_figure1" style="display: block;"></a><div class="image-container " >
 	
@@ -123,7 +123,7 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 	<p class="caption">Figure 8.1</p>
 </div>
 <p>For us nature coders, we have to ask the question: Can we describe our world with Euclidean geometry?    The LCD screen I’m staring at right now sure looks like a rectangle.  And the plum I ate this morning is circular.  But what if I were to look further, and consider the trees that line the street, the leaves that hang off those trees, the lightning from last night’s thunderstorm, the cauliflower I ate for dinner, the blood vessels in my body, and the mountains and coastlines that cover land beyond New York City?   Most of the stuff you find in nature cannot be described by the idealized geometrical forms of Euclidean geometry.  So if we want to start building computational designs with patterns beyond the simple shapes <span class="function">ellipse()</span>, <span class="function">rect()</span>, and <span class="function">line()</span>, it’s time for us to learn about the concepts behind and techniques for simulating the geometry of nature: fractals.</p>
-<section><a id="chapter08_section1" style="display: block;"></a><h3 id="81-what-is-a-fractal">8.1  What Is a Fractal?</h3><p><a id="fractals-defined-22d94850-1662-0130-0e09-7cd1c3f718ad" style="display: block;"></a><a id="mandelbrot,-benoit-22d95900-1662-0130-0e0a-7cd1c3f718ad" style="display: block;"></a><a id="the-fractal-geometry-of-nature-(mandelbrot)-22d96460-1662-0130-0e0b-7cd1c3f718ad" style="display: block;"></a></p>
+<section><a id="chapter08_section1" style="display: block;"></a><h3 id="81-what-is-a-fractal">8.1  What Is a Fractal?</h3><p><a id="fractalsdefined-7f954400-251f-0130-b116-7cd1c3f718ad" style="display: block;"></a><a id="mandelbrot-benoit-7f955810-251f-0130-b117-7cd1c3f718ad" style="display: block;"></a><a id="fractal-geometry-of-nature-the-mandelbrot-7f956750-251f-0130-b118-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The term <strong><em>fractal</em></strong> (from the Latin <em>fractus</em>, meaning “broken”) was coined by the mathematician Benoit Mandelbrot in 1975.  In his seminal work “The Fractal Geometry of Nature,” he defines a fractal as “a rough or fragmented geometric shape that can be split into parts, each of which is (at least approximately) a reduced-size copy of the whole.”</p>
 <a id="chapter08_figure2" style="display: block;"></a><div class="image-container " >
 	
@@ -145,7 +145,7 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 	
 	<p class="caption">Figure 8.4</p>
 </div>
-<p><a id="fractals-self-replicating-behavior-of-22d9ba80-1662-0130-0e0c-7cd1c3f718ad" style="display: block;"></a><a id="self-similarity-of-fractals-22d9c900-1662-0130-0e0d-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fractalsself-replicating-behavior-of-7f95acb0-251f-0130-b119-7cd1c3f718ad" style="display: block;"></a><a id="self-similarity-of-fractals-7f95be20-251f-0130-b11a-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Looking closely at a given section of the tree, we find that the shape of this branch resembles the tree itself.   This is known as <strong><em>self-similarity</em></strong>; as Mandelbrot stated, each part is a “reduced-size copy of the whole.”</p>
 <p>The above tree is perfectly symmetrical and the parts are, in fact, exact replicas of the whole.  However, fractals do not have to be perfectly self-similar.  Let’s take a look at a graph of the stock market (adapted from actual Apple stock data).</p>
 <a id="chapter08_figure5" style="display: block;"></a><div class="image-container " >
@@ -161,7 +161,7 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 	
 	<p class="caption">Figure 8.6: Graph B</p>
 </div>
-<p><a id="fractals-stochastic-22da0790-1662-0130-0e0e-7cd1c3f718ad" style="display: block;"></a><a id="stochastic-fractals-22da1490-1662-0130-0e0f-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fractalsstochastic-7f95edb0-251f-0130-b11b-7cd1c3f718ad" style="display: block;"></a><a id="stochastic-fractals-7f95ff10-251f-0130-b11c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In these graphs, the x-axis is time and the y-axis is the stock’s value.   It’s not an accident that I omitted the labels, however.   Graphs of stock market data are examples of fractals because they look the same at any scale.  Are these graphs of the stock over one year?  One day?  One hour?  There’s no way for you to know without a label.  (Incidentally, graph A shows six months’ worth of data and graph B zooms into a tiny part of graph A, showing six hours.)</p>
 <a id="chapter08_figure7" style="display: block;"></a><div class="image-container " >
 	
@@ -170,11 +170,11 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 	<p class="caption">Figure 8.7</p>
 </div>
 <p>This is an example of a <strong><em>stochastic</em></strong> fractal, meaning that it is built out of probabilities and randomness.  Unlike the deterministic tree-branching structure, it is statistically self-similar.  As we go through the examples in this chapter, we will look at both deterministic and stochastic techniques for generating fractal patterns.</p>
-<p><a id="euclidean-geometry-fractals-and-22da51a0-1662-0130-0e10-7cd1c3f718ad" style="display: block;"></a><a id="fractals-fine-structure-of-22da64b0-1662-0130-0e11-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="euclidean-geometryfractals-and-7f962440-251f-0130-b11d-7cd1c3f718ad" style="display: block;"></a><a id="fractalsfine-structure-of-7f9639d0-251f-0130-b11e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>While self-similarity is a key trait of fractals, it’s important to realize that self-similarity alone does not make a fractal.  After all, a line is self-similar.  A line looks the same at any scale, and can be thought of as comprising lots of little lines.  But it’s not a fractal.  Fractals are  characterized by having a fine structure at small scales (keep zooming into the stock market graph and you’ll continue to find fluctuations) and cannot be described with Euclidean geometry.  If you can say “It’s a line!” then it’s not a fractal.</p>
-<p><a id="fractals-recursion-22da7dc0-1662-0130-0e12-7cd1c3f718ad" style="display: block;"></a><a id="recursion-22da8f10-1662-0130-0e13-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="fractalsrecursion-7f965890-251f-0130-b11f-7cd1c3f718ad" style="display: block;"></a><a id="recursion-7f966930-251f-0130-b120-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Another fundamental component of fractal geometry is recursion.  Fractals all have a recursive definition.  We’ll start with recursion before developing techniques and code examples for building fractal patterns in Processing.</p>
-</section><section><a id="chapter08_section2" style="display: block;"></a><h3 id="82-recursion">8.2 Recursion</h3><p><a id="cantor-set-22dab780-1662-0130-0e14-7cd1c3f718ad" style="display: block;"></a><a id="cantor,-george-22dac8f0-1662-0130-0e15-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter08_section2" style="display: block;"></a><h3 id="82-recursion">8.2 Recursion</h3><p><a id="cantor-set-7f9682b0-251f-0130-b121-7cd1c3f718ad" style="display: block;"></a><a id="cantor-george-7f9691f0-251f-0130-b122-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Let’s begin our discussion of recursion by examining the first appearance of fractals in modern mathematics.  In 1883, German mathematician George Cantor developed simple rules to generate an infinite set:</p>
 <a id="chapter08_figure8" style="display: block;"></a><div class="image-container " >
 	
@@ -183,7 +183,7 @@ On a cold November day a man named Benoit Mandelbrot was born”<br/>
 	<p class="caption">Figure 8.8: The Cantor set</p>
 </div>
 <p>There is a feedback loop at work here.  Take a single line and break it into two.  Then return to those two lines and apply the same rule, breaking each line into two, and now we’re left with four.  Then return to those four lines and apply the rule.  Now you’ve got eight.   This process is known as <strong><em>recursion</em></strong>: the repeated application of a rule to successive results.   Cantor was interested in what happens when you apply these rules an infinite number of times.   We, however, are working in a finite pixel space and can mostly ignore the questions and paradoxes that arise from infinite recursion.  We will instead construct our code in such a way that we do not apply the rules forever (which would cause our program to freeze).</p>
-<p><a id="recursion-implementing-22db0550-1662-0130-0e16-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="recursionimplementing-7f96b560-251f-0130-b123-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Before we implement the Cantor set, let’s take a look at what it means to have recursion in code.
 Here’s something we’re used to doing all the time—calling a function inside another function.</p>
 <div class="source-code">
@@ -223,7 +223,7 @@ in the definition of someFunction()</div><code><pre><span class='one-line'>  <sp
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="factorial-22db2f80-1662-0130-0e17-7cd1c3f718ad" style="display: block;"></a><a id="recursion-factorial-22db3b20-1662-0130-0e18-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="factorial-7f96e6b0-251f-0130-b124-7cd1c3f718ad" style="display: block;"></a><a id="recursionfactorial-7f96f5c0-251f-0130-b125-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In fact, this is not only allowed, but it’s quite common (and essential to how we will implement the Cantor set).   Functions that call themselves are <em>recursive</em> and good for solving certain problems.  For example, certain mathematical calculations are implemented recursively; the most common example is <em>factorial</em>.</p>
 <p>The factorial of any number n, usually written as n!, is defined as:</p>
 <p><span class="formula">n! = n * n – 1 * . . . . * 3 * 2 * 1</span><br /><span class="formula">0! = 1</span></p>
@@ -249,7 +249,7 @@ in the definition of someFunction()</div><code><pre><span class='one-line'>  <sp
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> Using a regular loop to compute factorial</div><code><pre><span class='one-line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="k">return</span> <span class="n">f</span><span class="o">;</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -339,7 +339,7 @@ calling itself recursively.</div><code><pre><span class='one-line'>    <span cla
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p><span class="function">drawCircle()</span> draws an ellipse based on a set of parameters that it receives as arguments. It then calls itself with those same parameters, adjusting them slightly. The result is a series of circles, each of which is drawn inside the previous circle.</p>
-<p><a id="exit-conditions-for-recursion-22dfa0e0-1662-0130-0e19-7cd1c3f718ad" style="display: block;"></a><a id="recursion-exit-conditions-22dfabe0-1662-0130-0e1a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="exit-conditions-for-recursion-7f980110-251f-0130-b126-7cd1c3f718ad" style="display: block;"></a><a id="recursionexit-conditions-7f982140-251f-0130-b127-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Notice that the above function only recursively calls itself if the radius is greater than 2.  This is a crucial point.  As with iteration, <em>all recursive functions must have an exit condition!</em>    You likely are already aware that all <span class="function">for</span> and <span class="function">while</span> loops must include a boolean expression that eventually evaluates to false, thus exiting the loop. Without one, the program would crash, caught inside of an infinite loop. The same can be said about recursion.  If a recursive function calls itself forever and ever, you’ll be most likely be treated to a nice frozen screen.</p>
 <p>This circles example is rather trivial; it could easily be achieved through simple iteration. However, for scenarios in which a function calls itself more than once, recursion becomes wonderfully elegant.</p>
 <p>Let’s make <span class="function">drawCircle()</span> a bit more complex.    For every circle displayed, draw a circle half its size to the left and right of that circle.</p>
@@ -359,8 +359,7 @@ calling itself recursively.</div><code><pre><span class='one-line'>    <span cla
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>void setup() {
-  size(400,400);
-  smooth();
+  size(640,360);
 }
 
 void draw() {
@@ -388,8 +387,7 @@ void drawCircle(float x, float y, float radius) {
   <div class="code-block">
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span></span>
-<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span><span class="mi">400</span><span class="o">);</span></span>
-<span class='one-line'>  <span class="n">smooth</span><span class="o">();</span></span>
+<span class='one-line'>  <span class="n">size</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span><span class="mi">360</span><span class="o">);</span></span>
 <span class='one-line'><span class="o">}</span></span>
 <span class='one-line'> </span>
 <span class='one-line'><span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span></span>
@@ -407,7 +405,7 @@ void drawCircle(float x, float y, float radius) {
 a branching effect.  For every circle,
 a smaller circle is drawn to the left and the right.</div><code><pre><span class='one-line'>    <span class="n">drawCircle</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span>
 <span class='one-line'>    <span class="n">drawCircle</span><span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span></span>
-<span class='one-line'> </span></pre></code></div>
+<span class='one-line'> </span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span>
 <span class='one-line'><span class="o">}</span></span></pre></code></div>
@@ -457,7 +455,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><p>Try reproducing this sketch with iteration instead of recursion—I dare you!</p>
-</section><section><a id="chapter08_section3" style="display: block;"></a><h3 id="83-the-cantor-set-with-a-recursive-function">8.3  The Cantor Set with a Recursive Function</h3><p><a id="cantor-set-recursion-and-22e03830-1662-0130-0e1b-7cd1c3f718ad" style="display: block;"></a></p>
+</section><section><a id="chapter08_section3" style="display: block;"></a><h3 id="83-the-cantor-set-with-a-recursive-function">8.3  The Cantor Set with a Recursive Function</h3><p><a id="cantor-setrecursion-and-7f98bfe0-251f-0130-b128-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Now we’re ready to visualize the Cantor set in Processing using a recursive function.  Where do we begin?  Well, we know that the Cantor set begins with a line.  So let’s start there and write a function that draws a line.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -647,7 +645,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
 </div><div class="example">
-  <h4 id="exercise-81">Exercise 8.1</h4><p>Exercise:  Using <span class="function">drawCircle()</span> and the Cantor set as models, generate your own pattern with recursion.  Here is a screenshot of one that uses lines.</p>
+  <h4 id="exercise-81">Exercise 8.1</h4><p>Using <span class="function">drawCircle()</span> and the Cantor set as models, generate your own pattern with recursion.  Here is a screenshot of one that uses lines.</p>
 <div class="image-container screenshot" >
 	
 	<img src="/book/imgs/chapter08/ch08_exc01.png" alt="Nature of Code Image" />
@@ -655,7 +653,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 	
 </div>
 
-</div></section><section><a id="chapter08_section4" style="display: block;"></a><h3 id="84-the-koch-curve-and-the-arraylist-technique">8.4  The Koch Curve and the ArrayList Technique</h3><p><a id="arraylist-class-(java)-fractals-and-22e18810-1662-0130-0e1c-7cd1c3f718ad" style="display: block;"></a><a id="fractals-koch-curve-22e19950-1662-0130-0e1d-7cd1c3f718ad" style="display: block;"></a><a id="koch-curve-22e1a8f0-1662-0130-0e1e-7cd1c3f718ad" style="display: block;"></a><a id="recursion-arraylist-objects-and-22e1ba50-1662-0130-0e1f-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter08_section4" style="display: block;"></a><h3 id="84-the-koch-curve-and-the-arraylist-technique">8.4  The Koch Curve and the ArrayList Technique</h3><p><a id="arraylist-class-javafractals-and-7f9c8b70-251f-0130-b129-7cd1c3f718ad" style="display: block;"></a><a id="fractalskoch-curve-7f9cabf0-251f-0130-b12a-7cd1c3f718ad" style="display: block;"></a><a id="koch-curve-7f9cc520-251f-0130-b12b-7cd1c3f718ad" style="display: block;"></a><a id="recursionarraylist-objects-and-7f9cd510-251f-0130-b12c-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Writing a function that recursively calls itself is one technique for generating a fractal pattern on screen.  However, what if you wanted the lines in the above Cantor set to exist as individual objects that could be moved independently?   The recursive function is simple and elegant, but it does not allow you to do much besides simply generating the pattern itself.  However, there is another way we can apply recursion in combination with an <span class="klass">ArrayList</span> that will allow us to not only generate a fractal pattern, but keep track of all its individual parts as objects.</p>
 <p>To demonstrate this technique, let’s look at another famous fractal pattern, discovered in 1904 by Swedish mathematician Helge von Koch.   Here are the rules.  (Note that it starts the same way as the Cantor set, with a single line.)</p>
 <a id="chapter08_figure13" style="display: block;"></a><div class="image-container " >
@@ -671,14 +669,14 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 	
 	<p class="caption">Figure 8.14</p>
 </div>
-<p><a id="monster-curve-22e20980-1662-0130-0e20-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="monster-curve-7f9d09a0-251f-0130-b12d-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="note">
   <h4 id="the-monster-curve">The “Monster” Curve</h4><p>The Koch curve and other fractal patterns are often called “mathematical monsters.”   This is due to an odd paradox that emerges when you apply the recursive definition an infinite number of times.  If the length of the original starting line is one, the first iteration of the Koch curve will yield a line of length four-thirds (each segment is one-third the length of the starting line).  Do it again and you get a length of sixteen-ninths.  As you iterate towards infinity, the length of the Koch curve approaches infinity.  Yet it fits in the tiny finite space provided right here on this paper (or screen)!</p>
 <p>Since we are working in the Processing land of finite pixels, this theoretical paradox won’t be a factor for us.  We’ll have to limit the number of times we recursively apply the Koch rules so that our program won’t run out of memory or crash.</p>
 
 </div><p>We could proceed in the same manner as we did with the Cantor set, and write a recursive function that iteratively applies the Koch rules over and over.   Nevertheless, we are going to tackle this problem in a different manner by treating each segment of the Koch curve as an individual object.  This will open up some design possibilities.  For example, if each segment is an object, we could allow each segment to move independently from its original location and participate in a physics simulation.  In addition, we could use a random color, line thickness, etc. to display each segment differently.</p>
 <p>In order to accomplish our goal of treating each segment as an individual object, we must first decide what this object should be in the first place.  What data should it store?  What functions should it have?</p>
-<p>The Koch curve is a series of connected lines, and so we will think of each segment as a “KochLine.”  Each Koch line has a start point (“a”) and an end point (“b”).  These points are <span class="klass">PVector</span> objects, and the line is drawn with Processing’s <span class="function">line()</span> function.</p>
+<p>The Koch curve is a series of connected lines, and so we will think of each segment as a “KochLine.”  Each <span class="klass">KochLine</span> object has a start point (“a”) and an end point (“b”).  These points are <span class="klass">PVector</span> objects, and the line is drawn with Processing’s <span class="function">line()</span> function.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
   <textarea>class KochLine {
@@ -708,7 +706,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 <span class='one-line'> </span></pre></code></div>
 
   <div class='code-comment-pair stretch'><div class='code-comment stretch'> A line between two points: start and end</div><code><pre><span class='one-line'>  <span class="n">PVector</span> <span class="n">start</span><span class="o">;</span></span>
-<span class='one-line'>  <span class="n">PVector</span> <span class="n">end</span><span class="o">;</span></span></pre></code></div>
+<span class='one-line'>  <span class="n">PVector</span> <span class="n">end</span><span class="o">;</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'>  <span class="n">KochLine</span><span class="o">(</span><span class="n">PVector</span> <span class="n">a</span><span class="o">,</span> <span class="n">PVector</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span></span>
@@ -813,7 +811,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 		
 	</ul>
 </div><p>With the above elements, how and where do we apply Koch rules and principles of recursion?</p>
-<p><a id="koch-curve-implementing-22e344b0-1662-0130-0e21-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="koch-curveimplementing-7f9dc410-251f-0130-b12e-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Remember the Game of Life cellular automata?  In that simulation, we always kept track of two generations: current and next.  When we were finished computing the next generation, next became current and we moved on to computing the new next generation.
  We are going to apply a similar technique here.  We have an <span class="klass">ArrayList</span> that keeps track of the current set of <span class="klass">KochLine</span> objects (at the start of the program, there is only one).  We will need a second <span class="klass">ArrayList</span> (let’s call it “next”) where we will place all the new <span class="klass">KochLine</span> objects that are generated from applying the Koch rules.   For every <span class="klass">KochLine</span> object in the current <span class="klass">ArrayList</span>, four new <span class="klass">KochLine</span> objects are added to the next <span class="klass">ArrayList</span>.  When we’re done, the next <span class="klass">ArrayList</span> becomes the current one.</p>
 <a id="chapter08_figure15" style="display: block;"></a><div class="image-container " >
@@ -861,7 +859,7 @@ a smaller circle is drawn to the left and the right.</div><code><pre><span class
 to compute the locations of these lines!)</div><code><pre><span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(???,???));</span></span>
 <span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(???,???));</span></span>
 <span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(???,???));</span></span>
-<span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(???,???));</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(???,???));</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'>  <span class="o">}</span></span></pre></code></div>
 
@@ -939,7 +937,7 @@ to the Koch rules.</div><code><pre><span class='one-line'>    <span class="n">PV
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">b</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">kochB</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">c</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">kochC</span><span class="o">();</span></span>
 <span class='one-line'>    <span class="n">PVector</span> <span class="n">d</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">kochD</span><span class="o">();</span></span>
-<span class='one-line'>    <span class="n">PVector</span> <span class="n">e</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">kochE</span><span class="o">();</span></span></pre></code></div>
+<span class='one-line'>    <span class="n">PVector</span> <span class="n">e</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">kochE</span><span class="o">();</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'> </span>
 <span class='one-line'>    <span class="n">next</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">KochLine</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">));</span></span>
@@ -1174,7 +1172,7 @@ void setup() {
 	
 </div>
 
-</div></section><section><a id="chapter08_section5" style="display: block;"></a><h3 id="85-trees">8.5  Trees</h3><p><a id="fractals-trees-and-22e8bf90-1662-0130-0e22-7cd1c3f718ad" style="display: block;"></a><a id="natural-fractals-22e8d1d0-1662-0130-0e23-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-trees-and-22e8e200-1662-0130-0e24-7cd1c3f718ad" style="display: block;"></a><a id="stochastic-fractals-trees-as-22e8f310-1662-0130-0e25-7cd1c3f718ad" style="display: block;"></a><a id="trees-22e90460-1662-0130-0e26-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter08_section5" style="display: block;"></a><h3 id="85-trees">8.5  Trees</h3><p><a id="fractalstrees-and-7fa22c20-251f-0130-b12f-7cd1c3f718ad" style="display: block;"></a><a id="natural-fractals-7fa23ea0-251f-0130-b130-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenatrees-and-7fa24da0-251f-0130-b131-7cd1c3f718ad" style="display: block;"></a><a id="stochastic-fractalstrees-as-7fa26190-251f-0130-b132-7cd1c3f718ad" style="display: block;"></a><a id="trees-7fa27260-251f-0130-b133-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The fractals we have examined in this chapter so far are deterministic, meaning they have no randomness and will always produce the identical outcome each time they are run.   They are excellent demonstrations of classic fractals and the programming techniques behind drawing them, but are too precise to feel <em>natural</em>.  In this next part of the chapter, I want to examine some techniques behind generating a stochastic (or non-deterministic) fractal.   The example we’ll use is a branching tree.  Let’s first walk through the steps to create a deterministic version.  Here are our production rules:</p>
 <a id="chapter08_figure19" style="display: block;"></a><div class="image-container " >
 	
@@ -1195,7 +1193,7 @@ void setup() {
 	
 	
 </div>
-<p><a id="2d-transformations-tutorial-(processing)-22e942d0-1662-0130-0e27-7cd1c3f718ad" style="display: block;"></a><a id="fractals-transformation-matrix-(processing)-22e953a0-1662-0130-0e28-7cd1c3f718ad" style="display: block;"></a><a id="popmatrix()-function-(processing)-22e963f0-1662-0130-0e29-7cd1c3f718ad" style="display: block;"></a><a id="pushmatrix()-function-(processing)-22e97ab0-1662-0130-0e2a-7cd1c3f718ad" style="display: block;"></a><a id="transformation-matrix-(processing)-22e98ed0-1662-0130-0e2b-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="transformations-tutorial-processing-7fa29e90-251f-0130-b134-7cd1c3f718ad" style="display: block;"></a><a id="fractalstransformation-matrix-processing-7fa2ada0-251f-0130-b135-7cd1c3f718ad" style="display: block;"></a><a id="popmatrix-function-processing-7fa2bf70-251f-0130-b136-7cd1c3f718ad" style="display: block;"></a><a id="pushmatrix-function-processing-7fa2ce20-251f-0130-b137-7cd1c3f718ad" style="display: block;"></a><a id="transformation-matrix-processing-7fa2e580-251f-0130-b138-7cd1c3f718ad" style="display: block;"></a></p>
 <p>The part that is a bit more difficult than our previous fractals lies in the use of the word <em>rotate</em> in the fractal’s rules.   Each new branch must rotate relative to the previous branch, which is rotated relative to all its previous branches.  Luckily for us, Processing has a mechanism to keep track of rotations for us—the <strong><em>transformation matrix</em></strong>.  If you aren’t familiar with the functions <span class="function">pushMatrix()</span> and <span class="function">popMatrix()</span>, I suggest you read the online Processing tutorial <a href="http://processing.org/learning/transform2d/">2D Transformations</a>, which will cover the concepts you’ll need for this particular example.</p>
 <p>Let’s begin by drawing a single branch, the trunk of the tree.    Since we are going to involve the <span class="function">rotate()</span> function, we’ll need to make sure we are continuously translating along the branches while we draw the tree.  And since the root starts at the bottom of the window (see above), the first step requires translating to that spot:</p>
 <div class="source-code">
@@ -1634,11 +1632,11 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 </div><div class="example">
   <h4 id="exercise-811">Exercise 8.11</h4><p>Use toxiclibs to simulate tree physics.  Each branch of the tree should be two particles connected with a spring.  How can you get the tree to stand up and not fall down?</p>
 
-</div></section><section><a id="chapter08_section6" style="display: block;"></a><h3 id="86-l-systems">8.6  L-systems</h3><p><a id="fractals-l-systems-and-22ec0870-1662-0130-0e2c-7cd1c3f718ad" style="display: block;"></a><a id="l-systems-22ec1950-1662-0130-0e2d-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer-systems-22ec2940-1662-0130-0e2e-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer,-aristid-22ec39a0-1662-0130-0e2f-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-l-systems-and-22ec4a80-1662-0130-0e30-7cd1c3f718ad" style="display: block;"></a></p>
+</div></section><section><a id="chapter08_section6" style="display: block;"></a><h3 id="86-l-systems">8.6  L-systems</h3><p><a id="fractalsl-systems-and-7fa4b1c0-251f-0130-b139-7cd1c3f718ad" style="display: block;"></a><a id="l-systems-7fa4c590-251f-0130-b13a-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer-systems-7fa4d620-251f-0130-b13b-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer-aristid-7fa4e8c0-251f-0130-b13c-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenal-systems-and-7fa7b960-251f-0130-b13d-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In 1968, Hungarian botanist Aristid Lindenmayer developed a grammar-based system to model the growth patterns of plants.    L-systems (short for Lindenmayer systems) can be used to generate all of the recursive fractal patterns we’ve seen so far in this chapter.   We don’t need L-systems to do the kind of work we’re doing here; however, they are incredibly useful because they provide a mechanism for keeping track of fractal structures that require complex and multi-faceted production rules.</p>
 <p>In order to create an example that implements L-systems in Processing, we are going to have to be comfortable with working with (a) recursion, (b) transformation matrices, and (c) strings.    So far we’ve worked with recursion and transformations, but strings are new here.  We will assume the basics, but if that is not comfortable for you, I would suggest taking a look at the Processing tutorial <a href="http://www.processing.org/learning/text/">Strings and Drawing Text</a>.</p>
 <p>An L-system involves three main components:</p>
-<p><a id="alphabet-(l-system-component)-22ec67c0-1662-0130-0e31-7cd1c3f718ad" style="display: block;"></a><a id="l-systems-components-of-22ec7430-1662-0130-0e32-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomena-plant-growth,-modeling-22ec8400-1662-0130-0e33-7cd1c3f718ad" style="display: block;"></a><a id="plant-growth,-modeling-22ec9f40-1662-0130-0e34-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="alphabet-l-system-component-7fa7dc80-251f-0130-b13e-7cd1c3f718ad" style="display: block;"></a><a id="l-systemscomponents-of-7fa7e9a0-251f-0130-b13f-7cd1c3f718ad" style="display: block;"></a><a id="natural-phenomenaplant-growth-modeling-7fa7f9f0-251f-0130-b140-7cd1c3f718ad" style="display: block;"></a><a id="plant-growth-modeling-7fa80b60-251f-0130-b141-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -1648,7 +1646,7 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 </li>
 		
 	</ul>
-</div><p><a id="axiom-(l-system-component)-22ecd020-1662-0130-0e35-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="axiom-l-system-component-7fa82750-251f-0130-b142-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -1658,7 +1656,7 @@ number of times.</div><code><pre><span class='one-line'>    <span class="kt">int
 </li>
 		
 	</ul>
-</div><p><a id="rules-(l-system-component)-22ecfdf0-1662-0130-0e36-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="rules-l-system-component-7fa84120-251f-0130-b143-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="list">
 	
 	<ul>
@@ -1833,7 +1831,7 @@ s += "add some more stuff";</textarea>
 
 </div>
   <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
-</div><p><a id="stringbuffer-class-22ee0f80-1662-0130-0e37-7cd1c3f718ad" style="display: block;"></a><a id="strings-stringbuffer-class-vs.-22ee1cf0-1662-0130-0e38-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="stringbuffer-class-7fa8c000-251f-0130-b144-7cd1c3f718ad" style="display: block;"></a><a id="stringsstringbuffer-class-vs-7fa8cf50-251f-0130-b145-7cd1c3f718ad" style="display: block;"></a></p>
 <p>In most cases, this is fine, but why duplicate a 46,000-character string if you don’t have to?   For better efficiency in our L-system examples, we’ll use the <span class="klass">StringBuffer</span> class, which is optimized for this type of task and can easily be converted into a string after concatenation is complete.</p>
 <div class="source-code">
   <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
@@ -1879,7 +1877,7 @@ back to a String.</div><code><pre><span class='one-line'>  <span class="n">curre
 <p><span class="formula">A:  Draw a line forward.</span><br /><span class="formula">B:  Move forward without drawing.</span></p>
 <p>Let’s look at the sentence of each generation and its visual output.</p>
 <p><span class="formula">Generation 0: A</span><br /><span class="formula">Generation 1: ABA</span><br /><span class="formula">Generation 2: ABABBBABA</span><br /><span class="formula">Generation 3: ABABBBABABBBBBBBBBABABBBABA</span></p>
-<p><a id="cantor-set-l-systems-and-22f1e0e0-1662-0130-0e39-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="cantor-setl-systems-and-7fa93cc0-251f-0130-b146-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Look familiar?  This is the Cantor set generated with an L-system.</p>
 <a id="chapter08_figure25" style="display: block;"></a><div class="image-container " >
 	
@@ -1889,9 +1887,9 @@ back to a String.</div><code><pre><span class='one-line'>  <span class="n">curre
 </div>
 <p>The following alphabet is often used with L-systems: “FG+-[]”, meaning:</p>
 <p><span class="formula">F:  Draw a line and move forward</span><br /><span class="formula">G:  Move forward (without drawing a line)</span><br /><span class="formula">+:  Turn right</span><br /><span class="formula">-:  Turn left</span><br /><span class="formula">[:  Save current location</span><br /><span class="formula">]:  Restore previous location</span></p>
-<p><a id="turtle-graphics-22f24140-1662-0130-0e3a-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="turtle-graphics-7fa983a0-251f-0130-b147-7cd1c3f718ad" style="display: block;"></a></p>
 <p>This type of drawing framework is often referred to as “Turtle graphics” (from the old days of LOGO programming).   Imagine a turtle sitting on your computer screen to which you could issue a small set of commands: turn left, turn right, draw a line, etc.  Processing isn’t set up to operate this way by default, but by using <span class="function">translate()</span>, <span class="function">rotate()</span>, and <span class="function">line()</span>, we can emulate a Turtle graphics engine fairly easily.</p>
-<p><a id="l-systems-translating-into-code-22f286d0-1662-0130-0e3b-7cd1c3f718ad" style="display: block;"></a></p>
+<p><a id="l-systemstranslating-into-code-7fa9a890-251f-0130-b148-7cd1c3f718ad" style="display: block;"></a></p>
 <p>Here’s how we would translate the above L-system alphabet into Processing code.</p>
 <p><span class="formula">F:  line(0,0,0,len); translate(0,len);</span><br /><span class="formula">G:  translate(0,len);</span><br /><span class="formula">+:  rotate(angle);</span><br /><span class="formula">-:  rotate(-angle);</span><br /><span class="formula">[:  pushMatrix();</span><br /><span class="formula">]:  popMatrix();</span></p>
 <p>Assuming we have a sentence generated from the L-system, we can walk through the sentence character by character and call the appropriate function as outlined above.</p>
@@ -1949,7 +1947,7 @@ if/else if structure helps readers not familiar with case statements.</div><code
 <span class='one-line'>    <span class="n">pushMatrix</span><span class="o">();</span></span>
 <span class='one-line'>  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;]&#39;</span><span class="o">)</span> <span class="o">{</span></span>
 <span class='one-line'>    <span class="n">popMatrix</span><span class="o">();</span></span>
-<span class='one-line'>  <span class="o">}</span></span></pre></code></div>
+<span class='one-line'>  <span class="o">}</span></span></pre></code><div style='position:relative;clear:both;display:block;height:1px;width:100%;'></div></div>
 
   <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="o">}</span></span></pre></code></div>
 
@@ -2062,7 +2060,7 @@ a starting length, and an angle for rotations.</div><code><pre><span class='one-
 </div><div class="example">
   <h4 id="exercise-812">Exercise 8.12</h4><p>Use an L-system as a set of instructions for creating objects stored in an <span class="klass">ArrayList</span>.  Use trigonometry and vector math to perform the rotations instead of matrix transformations (much like we did in the Koch curve example).</p>
 
-</div><p><a id="the-algorithmic-beauty-of-plants-(prusinkiewicz/lindenmayer)-22f39db0-1662-0130-0e3c-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer,-aristid-22f3b1a0-1662-0130-0e3d-7cd1c3f718ad" style="display: block;"></a><a id="prusinkiewicz,-przemysław-22f3c490-1662-0130-0e3e-7cd1c3f718ad" style="display: block;"></a></p>
+</div><p><a id="algorithmic-beauty-of-plants-the-prusinkiewiczlindenmayer-7faa3f80-251f-0130-b149-7cd1c3f718ad" style="display: block;"></a><a id="lindenmayer-aristid-7faa4fe0-251f-0130-b14a-7cd1c3f718ad" style="display: block;"></a><a id="prusinkiewicz-przemysaw-7faa5e20-251f-0130-b14b-7cd1c3f718ad" style="display: block;"></a></p>
 <div class="example">
   <h4 id="exercise-813">Exercise 8.13</h4><p>The seminal work in L-systems and plant structures, <em>The Algorithmic Beauty of Plants</em> by Przemysław Prusinkiewicz and Aristid Lindenmayer, was published in 1990.  It is available for free in its entirety <a href="http://algorithmicbotany.org/papers/#abop">online</a>.  Chapter 1 describes many sophisticated L-systems with additional drawing rules and available alphabet characters.  In addition, it describes several methods for generating stochastic L-systems.   Expand the L-system example to include one or more additional features described by Prusinkiewicz and Lindenmayer.</p>
 
@@ -2098,7 +2096,7 @@ Use an L-system to generate instructions for how a creature should move or behav
 		
 	</ul>
 </div>
-</div></section>
+</div><div style="page-break-after:always;"> </div></section>
   	</div>
   </div>
 
