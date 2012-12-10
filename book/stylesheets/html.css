@@ -275,6 +275,7 @@ _____________________________________________________________________________*/
 #footer h4 {
   color: #000000;
   font-size: 15px;
+  font-family: "ProximaNova-Regular";
   margin-bottom: 0.8em;
 }
 
@@ -293,6 +294,7 @@ _____________________________________________________________________________*/
 
 #footer p {
   font-size: 13px;
+  line-height: 16px;
 }
 
 #footer img {
@@ -543,9 +545,9 @@ _____________________________________________________________________________ */
 
 span.highlight {
   background-color: #E9E9E9;
-  font-size: 10pt;
+  font-family: "ProximaNova-SemiBold";
+  font-size: 16pt;
   display: block;
-  margin: 2em 1em;
   padding: 0.8em;
   text-align: center;
 }
