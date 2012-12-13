@@ -31,9 +31,7 @@ img {
   border: 0;
 }
 
-.half-width,
-.half-width-right,
-.half-width-right-border {
+.half-width {
   margin-top: 1.2em;
   margin-bottom: 1.2em;
   position: relative;
@@ -44,18 +42,11 @@ img {
 }
 
 .half-width {
-  float: left;
   margin-right: 2em;
 }
 
-.half-width-right,
-.half-width-right-border {
-  float: right;
-  margin-left: 2em;
-}
-
-.half-width-right-border img {
-  border:1px solid gray;
+.half-width img {
+    border:1px solid gray;
 }
 
 .two-col,
@@ -65,7 +56,6 @@ img {
   width: 50%;
   box-sizing: border-box;
   padding-right: 1em;
-  //margin-right: 1em;
   float: left;
 }
 
@@ -78,16 +68,15 @@ img {
   width: 100%;
   max-width: 100%;
   border:1px solid gray;
-  //-webkit-box-shadow: 1px 1px 2px gray;
 }
 
-.two-col-borderless img {
-  border:0px solid gray;
+.caption {
+  color: #222;
+  font-family: "ProximaNova-Regular";
+  font-size: 100%; /* 100% == 13px when not inside a p tag */
+  border: 0;
 }
 
-.three-col {
-  width: 33%;
-}
 
 a {
   color: #1299B8;
