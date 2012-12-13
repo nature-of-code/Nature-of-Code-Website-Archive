@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class NatureOfCode < Sinatra::Base
   helpers do
 
@@ -12,6 +14,7 @@ class NatureOfCode < Sinatra::Base
     def create_fetch_order(order, item)
       FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
       order = FetchAppAPI::Order.create(
+        id:           SecureRandom.hex(8).upcase,
         title:        "#{DateTime.now}",
         first_name:   order.first_name,
         last_name:    order.last_name,
