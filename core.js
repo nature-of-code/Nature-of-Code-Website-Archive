@@ -13,7 +13,7 @@ function validate_application(formObj) {
 }
 function check_email(email_address){
         var r1 = new RegExp("(@.*@)|(\\.\\.)|(@\\.)|(^\\.)");
-        var r2 = new RegExp("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$");
+        var r2 = new RegExp("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
         if (!r1.test(email_address) && r2.test(email_address)){ // We have good submission
         return true;
         }
