@@ -38,6 +38,7 @@ class NatureOfCode < Sinatra::Base
     if params[:order_type] == "free"
       fetch = create_fetch_order(@order, '001')
       @order.fetch_id = fetch.id
+      @order.paid = true
       @order.save
       erb :purchased
     elsif params[:order_type] == "paypal"
@@ -99,6 +100,7 @@ class NatureOfCode < Sinatra::Base
 
     fetch = create_fetch_order(@order, '001')
     @order.fetch_id = fetch.id
+    @order.paid = true
     @order.save
 
     status 200
@@ -129,6 +131,7 @@ class NatureOfCode < Sinatra::Base
 
     fetch = create_fetch_order(@order, '001')
     @order.fetch_id = fetch.id
+    @order.paid = true
     @order.save
 
     redirect '/purchase/success'
@@ -147,7 +150,7 @@ class NatureOfCode < Sinatra::Base
   #____________________________________________________________________________
   get '/admin/?' do
     protected!
-    @orders = Order.all
+    @orders = Order.all(paid: true)
     @undonated = @orders.all(:donated.not => true)
     @paid = @orders.all(:amount.not => 0.0)
     @free = @orders.all(:amount => 0.0)

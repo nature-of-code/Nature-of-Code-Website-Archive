@@ -14,6 +14,7 @@ class Order
   property :amount, Float, default: 0
   property :donation, Integer
   property :donated, Boolean, default: false
+  property :paid, Boolean, default: false
 
   property :created_at, DateTime
 
