@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Intro I.0 (The Nature of Code)</title>
+
+		<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+
+		<script>
+			Popcorn(function() {				
+
+				var pop = Popcorn.smart(
+					'#video',
+					'http://stu.itp.nyu.edu/~sjg447/noc/i.0.mp4'
+				);
+
+				pop.footnote({
+						start: 1,
+						end: 4,
+						text: "This text is displayed from seconds one to four.",
+						target: "footnotes"
+					})
+					.footnote({
+						start: 5,
+						end: 8,
+						text: "<a href='http://w3.org'>HTML</a> is okay in here,too.",
+						target: "footnotes"
+					}			
+				);
+
+				pop.play();
+
+			});
+		</script>
+
+	</head>
+
+	<body>
+
+		<div id="video" style="width: 640px; height: 360px;" ></div>
+		<div id="footnotes"></div>
+
+	</body>
+
+</html>
+
