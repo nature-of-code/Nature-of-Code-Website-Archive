@@ -4,6 +4,9 @@
 
 		<title>Intro I.0 (The Nature of Code)</title>
 
+	  	<link rel="stylesheet" href="http://natureofcode.com/css/fonts.css"/>
+  		<link rel="stylesheet" href="http://natureofcode.com/css/natureofcode.css" />
+
 		<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
 
 		<script>
@@ -14,18 +17,20 @@
 					'http://stu.itp.nyu.edu/~sjg447/noc/i.0.mp4'
 				);
 
-				pop.footnote({
+				pop.webpage({
 						start: 1,
-						end: 4,
-						text: "This text is displayed from seconds one to four.",
+						end: 1426,
+						src: "http://processing.org",
+						//text: "Welcome, testing a new way to watch these videos with <a href='http://popcornjs.org/'>popcorn.js.<br/><br/>",
 						target: "footnotes"
 					})
 					.footnote({
-						start: 5,
-						end: 8,
+						start: 4,
+						end: 500,
 						text: "<a href='http://w3.org'>HTML</a> is okay in here,too.",
 						target: "footnotes"
-					}			
+					}	
+
 				);
 
 				pop.play();
@@ -33,14 +38,43 @@
 			});
 		</script>
 
+		<style>
+
+		#footnotes {
+			border-style:solid;
+			border-width:1px;
+			height: 100px;
+		}
+
+		#video {
+
+			text-align: center;
+		}
+
+		</style>
+
 	</head>
 
 	<body>
 
-		<div id="video" style="width: 640px; height: 360px;" ></div>
+   <div id="top">
+    <div id="header">
+      <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
+    </div>
+  </div>
+
+ <div id="middle">
+    <div id="content">
+
+		<div id="video" ></div>
+		<br/>
 		<div id="footnotes"></div>
 
 	</body>
+
+	</div>
+</div>
+
 
 </html>
 
