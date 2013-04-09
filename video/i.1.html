@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Intro I.1 Random Walker (The Nature of Code)</title>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+
+		<script>
+			Popcorn(function() {				
+
+				var pop = Popcorn.smart(
+					'#video',
+					'http://stu.itp.nyu.edu/~sjg447/noc/i.1.mp4'
+				);
+
+				$('#content').children().each(function(index,value) {
+
+					pop.footnote({
+						start: $(this).attr('data-start'),
+						end: $(this).attr('data-end'),
+						text: $(this).html(),
+						target: "footnotes"
+					});
+
+				});
+
+				pop.play();
+
+			});
+
+			function parseTime(time) {
+
+				return time;
+			}
+		</script>
+
+		<style>
+			#content {
+				display: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="video" style="width: 640px; height: 360px;" ></div>
+		<div id="footnotes"></div>
+
+		<div id="content">
+			<div class="video" data-start="1" data-end="4">
+				This text is displayed from seconds one to four?
+			</div>
+
+			<div class="video" data-start="5" data-end="8">
+				This text is displayed from seconds five to eight.
+			</div>
+
+			<div class="video" data-start="1:00" data-end="1:10">
+				This text is displayed after a minute.
+			</div>			
+		</div>
+
+	</body>
+
+</html>
