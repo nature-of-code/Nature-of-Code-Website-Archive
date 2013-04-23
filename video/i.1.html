@@ -4,6 +4,9 @@
 
 		<title>Intro I.1 Random Walker (The Nature of Code)</title>
 
+	  	<link rel="stylesheet" href="http://natureofcode.com/css/fonts.css"/>
+  		<link rel="stylesheet" href="http://natureofcode.com/css/natureofcode.css" />
+
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
 
@@ -15,7 +18,7 @@
 					'http://stu.itp.nyu.edu/~sjg447/noc/i.1.mp4'
 				);
 
-				$('#content').children().each(function(index,value) {
+				$('#footnotes_source').children().each(function(index,value) {
 
 					pop.footnote({
 						start: $(this).attr('data-start'),
@@ -37,21 +40,43 @@
 		</script>
 
 		<style>
-			#content {
+			#footnotes_source {
 				display: none;
 			}
+
+
+			#footnotes {
+				border-style:solid;
+				border-width:1px;
+				height: 100px;
+			}
+
+			#video {
+				text-align: center;
+			}
+
 		</style>
 
 	</head>
 
 	<body>
 
-		<div id="video" style="width: 640px; height: 360px;" ></div>
+	<div id="top">
+    	<div id="header">
+    	<h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
+    	</div>
+  	</div>
+
+  	 <div id="middle">
+    	<div id="content">
+
+
+		<div id="video"></div>
 		<div id="footnotes"></div>
 
-		<div id="content">
+		<div id="footnotes_source">
 			<div class="video" data-start="1" data-end="4">
-				This text is displayed from seconds one to four?
+				<p>This text is displayed from seconds one to four?</p>
 			</div>
 
 			<div class="video" data-start="5" data-end="8">
