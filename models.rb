@@ -1,4 +1,3 @@
-
 DataMapper.setup(:default, ENV['DATABASE_URL'])
 
 class Order
@@ -13,43 +12,22 @@ class Order
   property :paypal_token, String
   property :amount, Float, default: 0
   property :donation, Integer
+  property :donation_amount, Float
   property :donated, Boolean, default: false
   property :paid, Boolean, default: false
 
   property :created_at, DateTime
 
   def self.fees_total
-    total = 0
-    all.each do |order|
-      if order.amount > 0
-        # Subtract Stripe fee as well as donation
-        total += 0.029 * order.amount + 0.30
-      end
-    end
-    total
+    order_count = count(:amount.not => 0.0)
+    total_fees = sum(:amount) * 0.029 + order_count * 0.30
+    total_fees
   end
 
   def self.author_total
-    total = 0
-    all.each do |order|
-      if order.amount > 0
-        # Subtract Stripe fee as well as donation
-        total += (1 - order.donation.to_f/100.0 - 0.029) * order.amount - 0.30
-      end
-    end
-    total
-  end
-
-  def self.donation_total
-    total = 0
-    all.each do |order|
-      total += (order.donation.to_f/100.0 * order.amount)
-    end
-    total
-  end
-
-  def donation_amount
-    amount * donation / 100.0
+    revenue, donations = Order.aggregate(:amount.sum, :donation_amount.sum)
+    fees = fees_total
+    revenue - donations - fees
   end
 
   def author_amount

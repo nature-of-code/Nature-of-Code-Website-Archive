@@ -1,81 +1,81 @@
-
 <div id="orders-breakdown">
   <div class="row">
     <div>
       <label>Total Orders</label>
-      <%= @orders.length %>
+      <%= @order_count %>
     </div>
     <div>
       <label>Paid</label>
-      <%= @paid.length %>
+      <%= @paid_count %>
     </div>
     <div>
       <label>Free</label>
-      <%= @free.length %>
+      <%= @free_count %>
     </div>
   </div>
 
   <div class="row">
     <div>
       <label>Total Revenue</label>
-      <%= "$%.2f" % [@orders.sum(:amount)] %>
+      <%= "$%.2f" % [@total_revenue] %>
     </div>
 
     <div>
       <label>Net to Author</label>
-      <%= "$%.2f" % [@orders.author_total] %>
+      <%= "$%.2f" % [Order.author_total] %>
     </div>
 
     <div>
       <label>Total Donations</label>
-      <%= "$%.2f" % [@orders.donation_total] %>
+      <%= "$%.2f" % [@total_donations] %>
     </div>
 
     <div>
-      <label>Stripe Fees</label>
-      <%= "$%.2f" % @orders.fees_total %>
+      <label>Fees</label>
+      <%= "$%.2f" % @total_fees %>
     </div>
   </div>
 
   <div class="row">
     <div>
       <label>Average Price Paid</label>
-      <%= "$%.2f" % @paid.avg(:amount) %>
+      <%= "$%.2f" % Order.avg(:amount, :conditions => ['amount != ?', 0.0]) %>
     </div>
+
 
     <div>
       <label>Average Donation</label>
-      <%= "$%.2f" % [@paid.donation_total / @paid.length] %>
+      <%= "$%.2f" % [@total_donations / @paid_count] %>
     </div>
 
     <div>
       <label>Biggest Purchase</label>
-      <%= "$%.2f" % @paid.max(:amount) %>
+      <%= "$%.2f" % @max_purchase %>
     </div>
   </div>
 
   <div class="row">
     <div>
       <label>Purchased with Stripe</label>
-      <%= @paid.count(:stripe_id.not => nil ) %>
+      <%= Order.count(:stripe_id.not => nil, :amount.not => 0.0) %>
     </div>
 
     <div>
       <label>Purchased with Paypal</label>
-      <%= @paid.count(:paypal_token.not => nil) %>
+      <%= Order.count(:paypal_token.not => nil, :amount.not => 0.0) %>
     </div>
   </div>
 
   <div class="row">
-    <h4>Amount to be Donated: <%= "$%.2f" % @undonated.donation_total %></h4>
+    <h4>Amount to be Donated: <%= "$%.2f" % Order.sum(:donation_amount, :conditions => ['donated != ?', 'true']) %></h4>
     <form action="/admin/mark-paid" method="post">
       <input type="submit" class="submit-button" value="Mark As Donated">
     </form>
   </div>
 </div>
 
+<h3>Last 200 Orders</h3>
 
-<a href="/admin/orders.csv">Download orders as CSV</a>
 <table id="order-table">
   <thead>
     <th>To Author</th>
@@ -88,7 +88,7 @@
 <% @orders.each do |order| %>
   <tr>
     <td><%= "$%.2f" % order.amount %></td>
-    <td><%= "$%.2f" % order.donation_amount %></td>
+    <td><%= "$%.2f" % (order.donation_amount || 0.0) %></td>
     <td><%= order.email %></td>
     <td><%= order.created_at %></td>
     <% if order.amount > 0 %>
@@ -103,3 +103,5 @@
 
 </tfoot>
 </table>
+
+<a href="/admin/orders.csv">Download orders as CSV</a>

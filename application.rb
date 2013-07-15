@@ -150,10 +150,15 @@ class NatureOfCode < Sinatra::Base
   #____________________________________________________________________________
   get '/admin/?' do
     protected!
-    @orders = Order.all(paid: true)
-    @undonated = @orders.all(:donated.not => true)
-    @paid = @orders.all(:amount.not => 0.0)
-    @free = @orders.all(:amount => 0.0)
+
+    @order_count, @total_revenue, @total_donations, @max_purchase = Order.aggregate(:all.count, :amount.sum, :donation_amount.sum, :amount.max)
+
+    @paid_count = Order.count(:amount.not => 0.0)
+    @free_count = @order_count - @paid_count
+    @total_fees = Order.fees_total
+
+    @orders = Order.all(:limit => 200, :order => [:created_at.desc], :created_at.not => nil)
+
     erb :dashboard
   end
 
