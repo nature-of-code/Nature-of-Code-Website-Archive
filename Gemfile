@@ -11,3 +11,7 @@ gem 'paypal-express'
 
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
+
+group :development do
+  gem 'shotgun'
+end
