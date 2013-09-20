@@ -88,7 +88,8 @@
 <% @orders.each do |order| %>
   <tr>
     <td><%= "$%.2f" % order.amount %></td>
-    <td><%= "$%.2f" % (order.donation_amount || 0.0) %></td>
+    <!-- <td><%= "$%.2f" % (order.donation_amount || 0.0) %></td> -->
+    <td><%= (order.donation_amount) %></td>
     <td><%= order.email %></td>
     <td><%= order.created_at %></td>
     <% if order.amount > 0 %>
