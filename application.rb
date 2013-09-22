@@ -157,7 +157,7 @@ class NatureOfCode < Sinatra::Base
     @free_count = @order_count - @paid_count
     @total_fees = Order.fees_total
 
-    @orders = Order.all(:limit => 200, :order => [:created_at.desc], :created_at.not => nil)
+    @orders = Order.all(:limit => 200, :paid => true, :order => [:created_at.desc], :created_at.not => nil)
 
     erb :dashboard
   end
