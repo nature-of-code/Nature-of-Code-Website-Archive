@@ -151,13 +151,13 @@ class NatureOfCode < Sinatra::Base
   get '/admin/?' do
     protected!
 
-    @order_count, @total_revenue, @total_donations, @max_purchase = Order.aggregate(:all.count, :amount.sum, :donation_amount.sum, :amount.max)
+    @order_count, @total_revenue, @total_donations, @max_purchase = Order.completed.aggregate(:all.count, :amount.sum, :donation_amount.sum, :amount.max)
 
-    @paid_count = Order.count(:amount.not => 0.0)
+    @paid_count = Order.completed.count(:amount.not => 0.0)
     @free_count = @order_count - @paid_count
-    @total_fees = Order.fees_total
+    @total_fees = Order.completed.fees_total
 
-    @orders = Order.all(:limit => 200, :paid => true, :order => [:created_at.desc], :created_at.not => nil)
+    @orders = Order.completed.all(:limit => 2000, :paid => true, :order => [:created_at.desc])
 
     erb :dashboard
   end
@@ -165,7 +165,7 @@ class NatureOfCode < Sinatra::Base
   get '/admin/orders.csv' do
     protected!
     content_type :text
-    @orders = Order.all
+    @orders = Order.complete
     erb :orders_csv, layout:false
   end
 

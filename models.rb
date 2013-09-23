@@ -34,6 +34,14 @@ class Order
     amount - donation_amount
   end
 
+  def self.completed
+    all(:paid => true)
+  end
+
+  def self.incomplete
+    all(:paid.not => true)
+  end
+
 end
 
 DataMapper.finalize

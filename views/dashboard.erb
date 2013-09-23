@@ -22,7 +22,7 @@
 
     <div>
       <label>Net to Author</label>
-      <%= "$%.2f" % [Order.author_total] %>
+      <%= "$%.2f" % [Order.completed.author_total] %>
     </div>
 
     <div>
@@ -39,7 +39,7 @@
   <div class="row">
     <div>
       <label>Average Price Paid</label>
-      <%= "$%.2f" % Order.avg(:amount, :conditions => ['amount != ?', 0.0]) %>
+      <%= "$%.2f" % Order.completed.avg(:amount, :conditions => ['amount != ?', 0.0]) %>
     </div>
 
 
@@ -57,17 +57,17 @@
   <div class="row">
     <div>
       <label>Purchased with Stripe</label>
-      <%= Order.count(:stripe_id.not => nil, :amount.not => 0.0) %>
+      <%= Order.completed.count(:stripe_id.not => nil, :amount.not => 0.0) %>
     </div>
 
     <div>
       <label>Purchased with Paypal</label>
-      <%= Order.count(:paypal_token.not => nil, :amount.not => 0.0) %>
+      <%= Order.completed.count(:paypal_token.not => nil, :amount.not => 0.0) %>
     </div>
   </div>
 
   <div class="row">
-    <h4>Amount to be Donated: <%= "$%.2f" % Order.sum(:donation_amount, :conditions => ['donated != ?', 'true']) %></h4>
+    <h4>Amount to be Donated: <%= "$%.2f" % Order.completed.sum(:donation_amount, :conditions => ['donated != ?', 'true']) %></h4>
     <form action="/admin/mark-paid" method="post">
       <input type="submit" class="submit-button" value="Mark As Donated">
     </form>
