@@ -7,6 +7,13 @@ require './models'
 require './helpers'
 
 class NatureOfCode < Sinatra::Base
+  error do
+    email_body = ""
+    email_body += env['sinatra.error'].backtrace.join("\n")
+    send_email("ERROR: #{request.fullpath}", email_body)
+    erb :error
+  end
+
   get '/' do
     # File.read(File.join('public','index.html'))
     redirect 'http://natureofcode.com'
@@ -109,6 +116,7 @@ class NatureOfCode < Sinatra::Base
 
   # Paypal success callback url
   get '/purchase/confirm' do
+    raise "shit".inspect
     @paypal_request = Paypal::Express::Request.new(
       :username   => ENV['PAYPAL_USERNAME'],
       :password   => ENV['PAYPAL_PASSWORD'],
@@ -138,6 +146,7 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/purchase/success' do
+    raise
     erb :purchased
   end
 

@@ -1,5 +1,24 @@
 class NatureOfCode < Sinatra::Base
   helpers do
+    def send_email(email_subject, email_body)
+      Pony.mail({
+        to: ENV['MAIN_EMAIL'],
+        cc: ENV['BACKUP_EMAIL'],
+        from: ENV['MANDRILL_USERNAME'],
+        via: :smtp,
+        via_options: {
+          address:                'smtp.mandrillapp.com',
+          port:                   587,
+          enable_starttls_auto:   true,
+          user_name:              ENV['MANDRILL_USERNAME'],
+          password:               ENV['MANDRILL_APIKEY'],
+          authentication:         :plain,
+          domain:                 'heroku.com'
+        },
+        subject: email_subject,
+        body: email_body
+      })
+    end
 
     # Public: Process order information and create an order for FetchApp with
     # specified information. Triggers an email to be sent from Fetch.
