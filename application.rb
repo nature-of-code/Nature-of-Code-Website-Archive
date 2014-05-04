@@ -101,14 +101,19 @@ class NatureOfCode < Sinatra::Base
     event_json = JSON.parse(request.body.read, symbolize_names: true)
     # Get event from Stripe API to ensure validity.
     event = Stripe::Event.retrieve(event_json[:id])
+
     @order = Order.first(stripe_id: event.data.object[:id])
 
-    puts "Creating fetch order"
+    send_email("stripe request for non-existing record", event.data.object)
 
-    fetch = create_fetch_order(@order, '001')
-    @order.fetch_id = fetch.id
-    @order.paid = true
-    @order.save
+    # If we found the order, create a fetch order.
+    if !@order.nil?
+      puts "Creating fetch order"
+      fetch = create_fetch_order(@order, '001')
+      @order.fetch_id = fetch.id
+      @order.paid = true
+      @order.save
+    end
 
     status 200
     body "ok"
