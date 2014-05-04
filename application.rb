@@ -146,7 +146,6 @@ class NatureOfCode < Sinatra::Base
   end
 
   get '/purchase/success' do
-    raise
     erb :purchased
   end
 
