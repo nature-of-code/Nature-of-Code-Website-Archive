@@ -104,8 +104,6 @@ class NatureOfCode < Sinatra::Base
 
     @order = Order.first(stripe_id: event.data.object[:id])
 
-    send_email("stripe request for non-existing record", event.data.object)
-
     # If we found the order, create a fetch order.
     if !@order.nil?
       puts "Creating fetch order"
@@ -113,6 +111,8 @@ class NatureOfCode < Sinatra::Base
       @order.fetch_id = fetch.id
       @order.paid = true
       @order.save
+    else
+      send_email("stripe request for non-existing record", "#{event.data.object}")
     end
 
     status 200
