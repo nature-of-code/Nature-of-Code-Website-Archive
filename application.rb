@@ -121,7 +121,6 @@ class NatureOfCode < Sinatra::Base
 
   # Paypal success callback url
   get '/purchase/confirm' do
-    raise "shit".inspect
     @paypal_request = Paypal::Express::Request.new(
       :username   => ENV['PAYPAL_USERNAME'],
       :password   => ENV['PAYPAL_PASSWORD'],
