@@ -114,7 +114,7 @@ class NatureOfCode < Sinatra::Base
     elsif event.data.object[:type] == "transfer"
       puts event.data.object
     else
-      send_email("stripe request for non-existing record", "#{event.data.object}")
+      send_email("stripe request for non-existing record", "#{event.data.object.class}\n#{event.data.object['type']}\n#{event.data.object}")
     end
 
     status 200
