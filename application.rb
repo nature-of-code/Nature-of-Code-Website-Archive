@@ -111,10 +111,10 @@ class NatureOfCode < Sinatra::Base
       @order.fetch_id = fetch.id
       @order.paid = true
       @order.save
-    elsif event.data.object[:type] == "transfer"
-      puts event.data.object
+    elsif event.data.object['object']['type'] == "transfer"
+      send_email("stripe transfer", "#{event.type}\n#{event.data.object['object']['type']}")
     else
-      send_email("stripe request for non-existing record", "#{event.data.object.class}\n#{event.data.object['type']}\n#{event.data.object}")
+      send_email("stripe request for non-existing record", "#{event.type}\n#{event.data.object['type']}\n#{event.data.object}")
     end
 
     status 200
