@@ -9,13 +9,15 @@ require './helpers'
 class NatureOfCode < Sinatra::Base
   error do
     email_body = ""
+    email_body += env['sinatra.error'].name +"\n"
+    email_body += env['sinatra.error'].message +"\n"
     email_body += env['sinatra.error'].backtrace.join("\n")
     send_email("ERROR: #{request.fullpath}", email_body)
     erb :error
   end
 
   get '/' do
-    # File.read(File.join('public','index.html'))
+    return File.read(File.join('public','index.html')) if ENV['RACK_ENV'] == "development"
     redirect 'http://natureofcode.com'
   end
 
@@ -87,6 +89,8 @@ class NatureOfCode < Sinatra::Base
         :card => token,
         :description => params[:order][:email]
       )
+
+      puts charge
 
       @order[:stripe_id] = charge.id
       @order[:donation] = params[:order][:donation]

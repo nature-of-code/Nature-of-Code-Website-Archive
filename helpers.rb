@@ -29,13 +29,18 @@ class NatureOfCode < Sinatra::Base
     #
     # Returns nothing.
     def create_fetch_order(order, item)
-      FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
+      puts FetchAppAPI::Base.basic_auth(key: ENV['FETCH_KEY'], token: ENV['FETCH_TOKEN'])
+      puts order.attributes
+      puts order.email, order.first_name, order.email, order.amount
       order = FetchAppAPI::Order.create(
         title:        "#{DateTime.now}",
-        first_name:   order.first_name,
-        last_name:    order.last_name,
+        first_name:   order.first_name || " ",
+        last_name:    order.last_name || " ",
         email:        order.email,
-        order_items:  [{sku: item, price: order.amount}]
+        order_items:  [{
+          sku: item,
+          price: (order.amount || 0)
+        }]
       )
     end
 
