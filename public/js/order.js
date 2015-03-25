@@ -1,6 +1,5 @@
 (function() {
   var setupForm, stripeResponseHandler;
-  $('#paypal-warning').hide();
 
   jQuery(function() {
     var stripeKey;
