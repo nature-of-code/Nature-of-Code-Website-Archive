@@ -18,6 +18,7 @@
       setupStripe();
       $('#stripe-info').show();
       $('#order-type').val('stripe');
+      $('#paypal-warning').hide();
     })
   });
 
