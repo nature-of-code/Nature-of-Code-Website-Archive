@@ -1,5 +1,6 @@
 (function() {
   var setupForm, stripeResponseHandler;
+  $('#paypal-warning').hide();
 
   jQuery(function() {
     var stripeKey;
@@ -11,6 +12,7 @@
       removeStripe();
       $('#stripe-info').hide();
       $('#order-type').val('paypal');
+      $('#paypal-warning').show();
     });
 
     $('#stripe-toggle').click(function() {
