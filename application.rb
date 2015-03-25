@@ -7,8 +7,17 @@ require './models'
 require './helpers'
 
 class NatureOfCode < Sinatra::Base
+  error do
+    email_body = ""
+    email_body += env['sinatra.error'].name +"\n"
+    email_body += env['sinatra.error'].message +"\n"
+    email_body += env['sinatra.error'].backtrace.join("\n")
+    send_email("ERROR: #{request.fullpath}", email_body)
+    erb :error
+  end
+
   get '/' do
-    # File.read(File.join('public','index.html'))
+    return File.read(File.join('public','index.html')) if ENV['RACK_ENV'] == "development"
     redirect 'http://natureofcode.com'
   end
 
@@ -81,6 +90,8 @@ class NatureOfCode < Sinatra::Base
         :description => params[:order][:email]
       )
 
+      puts charge
+
       @order[:stripe_id] = charge.id
       @order[:donation] = params[:order][:donation]
       @order[:amount] = params[:order][:amount]
@@ -94,14 +105,21 @@ class NatureOfCode < Sinatra::Base
     event_json = JSON.parse(request.body.read, symbolize_names: true)
     # Get event from Stripe API to ensure validity.
     event = Stripe::Event.retrieve(event_json[:id])
+
     @order = Order.first(stripe_id: event.data.object[:id])
 
-    puts "Creating fetch order"
-
-    fetch = create_fetch_order(@order, '001')
-    @order.fetch_id = fetch.id
-    @order.paid = true
-    @order.save
+    # If we found the order, create a fetch order.
+    if !@order.nil?
+      puts "Creating fetch order"
+      fetch = create_fetch_order(@order, '001')
+      @order.fetch_id = fetch.id
+      @order.paid = true
+      @order.save
+    elsif ["transfer.paid", "transfer.created"].include? event.type
+      puts "transfer paid"
+    else
+      send_email("stripe request for non-existing record", "#{event.type}\n#{event.data.object['type']}\n#{event.data.object}")
+    end
 
     status 200
     body "ok"

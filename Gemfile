@@ -1,16 +1,23 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 
 gem 'sinatra'
 gem 'thin'
 gem 'json'
 gem 'sass'
-gem 'pg'
+
+# purchasing and content delivery
 gem 'fetchapp-api-ruby' # https://github.com/getsy/fetchapp-api-ruby
 gem 'stripe', :git => 'git://github.com/stripe/stripe-ruby.git'
 gem 'paypal-express'
 
+# database
+gem 'pg'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
+
+# emailing
+gem 'pony', '1.4'
 
 group :development do
   gem 'shotgun'
