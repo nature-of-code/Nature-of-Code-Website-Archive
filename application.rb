@@ -183,7 +183,7 @@ class NatureOfCode < Sinatra::Base
   get '/admin/orders.csv' do
     protected!
     content_type :text
-    @orders = Order.complete
+    @orders = Order.completed
     erb :orders_csv, layout:false
   end
 
