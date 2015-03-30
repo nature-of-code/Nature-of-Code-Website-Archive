@@ -11,12 +11,14 @@
       removeStripe();
       $('#stripe-info').hide();
       $('#order-type').val('paypal');
+      $('#paypal-warning').show();
     });
 
     $('#stripe-toggle').click(function() {
       setupStripe();
       $('#stripe-info').show();
       $('#order-type').val('stripe');
+      $('#paypal-warning').hide();
     })
   });
 

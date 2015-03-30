@@ -1306,3 +1306,14 @@ h3 #display-percent {
     #order-table td:nth-child(1), #order-table td:nth-child(2) {
       text-align: right;
       width: 90px; }
+
+
+
+/* Temporary problem */
+
+#paypal-warning {
+  border: solid;
+  padding: 8px;
+  border-width: 1px;
+  background-color: #30def6;
+}
