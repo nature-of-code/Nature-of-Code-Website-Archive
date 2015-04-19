@@ -30,7 +30,10 @@
     <div id="display-amount"><strong>$<%= "%.2f" % [@amount] %></strong></div>
     <% if @paying %>
     <div id="donation">
-      $<%= "%.2f" % [@amount.to_f * (1-@donation.to_i/100.0)] %> of purchase will be donated to Processing
+      $<%= "%.2f" % [@amount.to_f * (1-@donation.to_i/100.0)] %> of purchase will be donated to Arthritis Research UK
+    </div>
+    <div id="donation">
+      $<%= "%.2f" % [@amount.to_f * @donation.to_i/100.0] %> of purchase will be donated to Processing
     </div>
     <% end %>
   </h3>
