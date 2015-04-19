@@ -1225,3 +1225,10 @@ h3 #display-percent {
 
 .ui-slider-vertical .ui-slider-range-max {
   top: 0; }
+
+  #marathon {
+  border: solid;
+  padding: 8px;
+  border-width: 1px;
+  background-color: #30def6;
+}
