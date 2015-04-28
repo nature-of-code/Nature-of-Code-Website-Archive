@@ -30,9 +30,6 @@
     <div id="display-amount"><strong>$<%= "%.2f" % [@amount] %></strong></div>
     <% if @paying %>
     <div id="donation">
-      $<%= "%.2f" % [@amount.to_f * (1-@donation.to_i/100.0)] %> will be donated to Arthritis Research UK
-    </div>
-    <div id="donation">
       $<%= "%.2f" % [@amount.to_f * @donation.to_i/100.0] %> will be donated to Processing
     </div>
     <% end %>
@@ -100,9 +97,9 @@
 
   <p>You will receive an email with a link to download the book after purchase.</p>
 
-  <div id="paypal-warning" style="display:none;">
+<!--   <div id="paypal-warning" style="display:none;">
   <p><strong><em>Please note I am currently experiencing issues with PayPal orders.  If you receive an "Internal Server Error" do not order again as you were likely charged.  I will input your order manually within 24 hours.  Please don't hestitate to contact me at daniel@shiffman.net if you get this error.</em></strong></p>
-  </div>
+  </div> -->
 
   <button type="submit" class="submit-button">Complete Purchase</button>
 
