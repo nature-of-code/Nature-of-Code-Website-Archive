@@ -1,0 +1,29 @@
+{
+  "name": "natureofcode.com",
+  "version": "2.0.0",
+  "description": "nature of code book selling website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shiffman/natureofcode.com.git"
+  },
+  "keywords": [
+    "nature of code",
+    "processing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shiffman/natureofcode.com/issues"
+  },
+  "homepage": "https://github.com/shiffman/natureofcode.com",
+  "dependencies": {
+    "basic-auth": "^1.0.0",
+    "body-parser": "^1.12.3",
+    "dotenv": "^1.1.0",
+    "express": "^4.12.3"
+  }
+}

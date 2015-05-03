@@ -7,15 +7,6 @@ require './models'
 require './helpers'
 
 class NatureOfCode < Sinatra::Base
-  error do
-    email_body = ""
-    email_body += env['sinatra.error'].name +"\n"
-    email_body += env['sinatra.error'].message +"\n"
-    email_body += env['sinatra.error'].backtrace.join("\n")
-    send_email("ERROR: #{request.fullpath}", email_body)
-    erb :error
-  end
-
   get '/' do
     return File.read(File.join('public','index.html')) if ENV['RACK_ENV'] == "development"
     redirect 'http://natureofcode.com'
@@ -162,34 +153,5 @@ class NatureOfCode < Sinatra::Base
   # Paypal error callback url
   get '/purchase/error' do
     erb :unsuccessful
-  end
-
-  # ADMIN DASHBOARD
-  #____________________________________________________________________________
-  get '/admin/?' do
-    protected!
-
-    @order_count, @total_revenue, @total_donations, @max_purchase = Order.completed.aggregate(:all.count, :amount.sum, :donation_amount.sum, :amount.max)
-
-    @paid_count = Order.completed.count(:amount.not => 0.0)
-    @free_count = @order_count - @paid_count
-    @total_fees = Order.completed.fees_total
-
-    @orders = Order.completed.all(:limit => 2000, :paid => true, :order => [:created_at.desc])
-
-    erb :dashboard
-  end
-
-  get '/admin/orders.csv' do
-    protected!
-    content_type :text
-    @orders = Order.completed
-    erb :orders_csv, layout:false
-  end
-
-  post '/admin/mark-paid/?' do
-    protected!
-    @orders = Order.all(donated: false).update(donated: true)
-    redirect '/admin'
   end
 end
