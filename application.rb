@@ -7,20 +7,6 @@ require './models'
 require './helpers'
 
 class NatureOfCode < Sinatra::Base
-  get '/' do
-    return File.read(File.join('public','index.html')) if ENV['RACK_ENV'] == "development"
-    redirect 'http://natureofcode.com'
-  end
-
-  post '/order' do
-    @amount = params[:amount].to_f
-    @donation = params[:donation]
-
-    # If amount is 0, serve up order form without credit card info
-    @paying = true unless @amount == 0.0
-
-    erb :order
-  end
 
   post '/purchase' do
     email_parts = params[:order][:email].split('@')
@@ -144,10 +130,6 @@ class NatureOfCode < Sinatra::Base
     @order.save
 
     redirect '/purchase/success'
-  end
-
-  get '/purchase/success' do
-    erb :purchased
   end
 
   # Paypal error callback url

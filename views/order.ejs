@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ./partials/head %>
+  <% if (paying) { %>
+    <script src="https://js.stripe.com/v1/" type="text/javascript"></script>
+    <script src="/js/order.js" type="text/javascript"></script>
+    <meta name="stripe-key" content="<%= process.env['STRIPE_PUBLIC_KEY'] %>" />
+    <script>
+    $(function(){
+      $('#new-order').submit(function(){
+        match = $('#order-email').val().match(/\S+@\S+\.[a-zA-Z]{2,}$/);
+
+        if(!match) {
+          $('#payment-errors').text("Please enter an email address.");
+          return false;
+        }
+      });
+    });
+    </script>
+  <% } %>
+</head>
+<body>
+
+<% include ./partials/header %>
+
+<div id="middle">
+  <% if (paying) { %>
+  <div id="secure">
+    <p>Credit card information encrypted and processed securely with <a href="https://stripe.com">Stripe</a>.</p>
+  </div>
+  <% } %>
+  <div id="content">
+    <form id="new-order" method="post" action="/purchase" <% if (paying == false) { %>class="centered"<% } %> >
+
+      <% if (paying) { %>
+      <input type="hidden" id="order-type" name="order_type" value="stripe">
+      <input type="hidden" id="order-stripe-card-token" name="order[token]">
+      <input type=hidden name=order[amount] id=order-amount value="<%= amount %>">
+      <input type=hidden name=order[donation] value="<%= donation %>">
+      <% } else { %>
+      <input type="hidden" id="order-type" name="order_type" value="free">
+      <% } %>
+
+      <h3>
+        The Nature of Code PDF
+        <div id="display-amount"><strong>$<%= (amount*100).toFixed()/100 %></strong></div>
+        <% if (paying) { %>
+        <div id="donation">
+          $<%= (amount * donation/100.0 * 100).toFixed()/100 %> will be donated to Processing
+        </div>
+        <% } %>
+      </h3>
+
+      <div id="order-form-errors"></div>
+
+      <div class="field">
+        <label for="order-email">Email Address</label>
+        <input type="email" name="order[email]" id="order-email">
+      </div>
+
+      <div class="field">
+        <label for="order-first-name">First Name</label>
+        <input type="text" name="order[first_name]" id="order-first-name">
+      </div>
+
+      <div class="field">
+        <label for="order-last-name">Last Name</label>
+        <input type="text" name="order[last_name]" id="order-last-name">
+      </div>
+
+      <% if (paying) { %>
+      <div class="radios">
+        <label><input type="radio" name="payment-toggle" id="stripe-toggle" checked> Pay with credit card</label>
+        or
+        <label><input type="radio" name="payment-toggle" id="paypal-toggle"> Pay with PayPal <!-- PayPal Logo --><div class="PayPalLogo"> <style type="text/css">div.PayPalLogo{text-align:center;margin:0;padding:0;font:normal 7px arial,helvetica,san-serif;line-height:10px;} div.PayPalLogo a{text-decoration:none;color:black;} div.PayPalLogo a:visited{color:black;} div.PayPalLogo a:active{color:black;} div.PayPalLogo a:hover{text-decoration:underline;color:black;} div.PayPalLogo a img{border:0px;margin:0px;text-decoration:none;} </style><a href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=500, height=350');"><img  src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" border="0" alt="PayPal Logo"></a></br></div><!-- PayPal Logo --></label>
+      </div>
+
+      <div id="stripe-info">
+        <div class="field">
+          <label for="card-number">Credit Card Number</label>
+          <input type="text" size=20 autocomplete=off id="card-number">
+        </div>
+
+        <div class="field">
+          <label for="card-code">Security Code (CVV)</label>
+          <input type="text" size=4 autocomplete=off id="card-code">
+        </div>
+
+        <div class="field">
+          <label for="card-month">Card Expiration</label>
+          <fieldset>
+
+          </fieldset>
+        </div>
+
+        <div id="stripe_error">
+          <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+        </div>
+      </div>
+      <% } %>
+
+      <p>You will receive an email with a link to download the book after purchase.</p>
+
+    <!--   <div id="paypal-warning" style="display:none;">
+      <p><strong><em>Please note I am currently experiencing issues with PayPal orders.  If you receive an "Internal Server Error" do not order again as you were likely charged.  I will input your order manually within 24 hours.  Please don't hestitate to contact me at daniel@shiffman.net if you get this error.</em></strong></p>
+      </div> -->
+
+      <button type="submit" class="submit-button">Complete Purchase</button>
+
+    </form>
+
+    <% if (paying) { %>
+    <div id="order-info">
+      <p>Upon successful payment you will receive an email with a link to download your PDF.</p>
+
+      <p>Payments handled securely with <a href="http://stripe.com">Stripe</a>. PDF delivered via <a href="http://www.fetchapp.com/">FetchApp</a>.</p>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% include ./partials/footer %>
+</body>
+</html>

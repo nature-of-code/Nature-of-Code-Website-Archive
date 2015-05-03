@@ -1,5 +1,0 @@
-created_at,email,last name,first name,amount,donation,net to author,has been donated,stripe id,paypal token,fetch id
-<% @orders.each do |order| %>
-<%= order.created_at %>,<%= order.email %>,<%= order.last_name %>,<%= order.first_name %>,<%= order.amount %>,<%= order.donation %>,<%= order.amount > 0 ? order.amount * (0.71 - order.donation.to_f/100) - 0.30 : 0%>,<%= order.donated %>,<%= order.stripe_id%>,<%= order.paypal_token %>,<%= order.fetch_id %>
-
-<% end %>

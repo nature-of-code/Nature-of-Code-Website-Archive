@@ -5,6 +5,22 @@ Repo for web files for nature of code
 
 ## Development
 
+### Sign up for Third Party services
+
+This site relies on [FetchApp](http://fetchapp.com), [Stripe](https://stripe.com) and [PayPal](https://developer.paypal.com/). In order to really test the code, you'll need accounts for all of these services.
+
+With Stripe, you'll need to use the [Test dashboard](https://dashboard.stripe.com/test/dashboard).
+
+With Fetch, there is no test environment, so just use your own email address for delivering assets, and of course, upload some file of some sort to Fetch to enable testing.
+
+With Paypal, log in and follow the guides for [Sandbox Test Accounts](https://developer.paypal.com/webapps/developer/applications/accounts).
+
+- [Stripe Node SDK](https://stripe.com/docs/api/node#intro)
+- [Fetch REST API](http://www.fetchapp.com/pages/help-api2)
+- [PayPal Rest API](https://developer.paypal.com/webapps/developer/docs/api/)
+
+### Local Setup
+
 This app uses Postgres for a database, the easiest way to use Postgres on Mac
 is to install [Postgres.app](http://postgresapp.com/). Be sure the app is
 running and then build the bundle.

@@ -1,8 +1,11 @@
 // Load the .env file if we aren't in production
 if (process.env.ENV !== 'production') { require('dotenv').load() }
 
+var path = require('path')
+var http = require('http')
 var basicAuth = require('basic-auth')
 var bodyParser = require('body-parser')
+var ejs = require('ejs')
 var express = require('express')
 var https = require('https')
 
@@ -12,6 +15,7 @@ var app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
+app.set('view engine', 'ejs')
 app.set('port', process.env.PORT)
 
 // Basic Auth middleware for the console. Since the site is static html, the trigger to
@@ -49,12 +53,23 @@ app.get('/', function (req, res) {
 // POST '/order'
 // The order form on natureofcode.com submits to this page where payment options are
 // selected
-app.post('/order', function (req, res) {})
+app.post('/order', function (req, res) {
+  var amount = req.body.amount
+  var donation = req.body.donation
+
+  res.render('order', {
+    paying: amount === 0.0 ? false : true,
+    amount: amount,
+    donation: donation
+  })
+})
 
 // POST '/purchase'
 // Receives the order submission from `/order`. Determine by the passed params if the
 // order was placed with Stripe or PayPal
-app.post('/purchase', function (req, res) {})
+app.post('/purchase', function (req, res) {
+
+})
 
 // Callback route for Stripe to confirm purchase
 app.post('/hook/stripe', function (req, res) {})
@@ -63,5 +78,14 @@ app.post('/hook/stripe', function (req, res) {})
 app.get('/hook/paypal', function (req, res) {})
 
 // Resulting pages the user is redirected to after `/purchase`
-app.get('purchased/success', function (req, res) {})
+app.get('purchased/success', function (req, res) {
+  res.render('purchased')
+})
+
 app.get('purchased/error', function (req, res) {})
+
+var server = http.createServer(app)
+server.listen(process.env.PORT)
+server.on('listening', function () {
+  console.log('listening on ' + process.env.PORT)
+})
