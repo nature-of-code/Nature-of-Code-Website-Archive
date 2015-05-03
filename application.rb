@@ -131,9 +131,4 @@ class NatureOfCode < Sinatra::Base
 
     redirect '/purchase/success'
   end
-
-  # Paypal error callback url
-  get '/purchase/error' do
-    erb :unsuccessful
-  end
 end

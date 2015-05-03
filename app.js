@@ -79,10 +79,12 @@ app.get('/hook/paypal', function (req, res) {})
 
 // Resulting pages the user is redirected to after `/purchase`
 app.get('purchased/success', function (req, res) {
-  res.render('purchased')
+  res.render('successful')
 })
 
-app.get('purchased/error', function (req, res) {})
+app.get('purchased/error', function (req, res) {
+  res.render('unsuccessful')
+})
 
 var server = http.createServer(app)
 server.listen(process.env.PORT)
