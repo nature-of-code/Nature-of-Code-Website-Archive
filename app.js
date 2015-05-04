@@ -56,9 +56,10 @@ app.get('/', function (req, res) {
 app.post('/order', function (req, res) {
   var amount = req.body.amount
   var donation = req.body.donation
+  var paying = amount > 0 ? true : false
 
   res.render('order', {
-    paying: amount === 0.0 ? false : true,
+    paying: paying,
     amount: amount,
     donation: donation
   })
@@ -68,14 +69,34 @@ app.post('/order', function (req, res) {
 // Receives the order submission from `/order`. Determine by the passed params if the
 // order was placed with Stripe or PayPal
 app.post('/purchase', function (req, res) {
+  if (req.body.order_type === 'free') {
 
+  } else if (req.body.order_type === 'paypal') {
+    // code to process paypal payment
+  } else if (req.body.order_type === 'stripe') {
+    // code to process stripe payment
+  } else {
+    res.status(500).render('unsuccessful')
+  }
+  res.send("hi")
 })
 
 // Callback route for Stripe to confirm purchase
-app.post('/hook/stripe', function (req, res) {})
+app.post('/hook/stripe', function (req, res) {
+  // confirm stripe charge succeeded
+  // create fetch order
+  res.sendStatus(500)
+})
 
 // Callback route for after completing payment process with Paypal
-app.get('/hook/paypal', function (req, res) {})
+app.get('/hook/paypal', function (req, res) {
+  // confirm PayPal details
+  // charge PayPal account
+  // verify charge succeeded
+  // create fetch order
+
+  res.sendStatus(500)
+})
 
 // Resulting pages the user is redirected to after `/purchase`
 app.get('purchased/success', function (req, res) {
