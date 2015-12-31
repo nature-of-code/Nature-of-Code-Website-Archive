@@ -6,11 +6,15 @@
     "url": "https://github.com/shiffman/natureofcode.com/issues"
   },
   "dependencies": {
-    "basic-auth": "^1.0.0",
+    "basic-auth": "1.0.3",
     "body-parser": "^1.12.3",
     "dotenv": "^1.1.0",
     "ejs": "^2.3.1",
-    "express": "^4.12.3"
+    "express": "4.13.3",
+    "mandrill-api": "^1.0.45",
+    "paypal-rest-sdk": "^1.6.8",
+    "pg": "^4.4.3",
+    "stripe": "^4.1.0"
   },
   "homepage": "https://github.com/shiffman/natureofcode.com",
   "keywords": [
