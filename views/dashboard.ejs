@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ./partials/head %>
+</head>
+<body>
+  <% include ./partials/header %>
+  <div id="orders-breakdown">
+    <div class="row">
+      <div>
+        <label>Total Orders</label> <%= ordercount %>
+      </div>
+      <div>
+        <label>Paid</label> <%= paidcount %>
+      </div>
+      <div>
+        <label>Free</label> <%= freecount %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Total Revenue</label> <%= amounttotal %>
+      </div>
+
+      <div>
+        <label>Net Revenue</label> <%= authortotal %>
+      </div>
+
+      <div>
+        <label>Total Donations</label> <%= donationtotal %>
+      </div>
+
+      <div>
+        <label>Fees</label> <%= feestotal %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Average Price Paid</label>
+        <%= avgamount %>
+      </div>
+
+      <div>
+        <label>Average Donation</label>
+        <%= avgdonation %>
+      </div>
+
+      <div>
+        <label>Biggest Purchase</label>
+        <%= maxamount %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Purchased with Stripe</label>
+        <%= stripecount %>
+      </div>
+
+      <div>
+        <label>Purchased with Paypal</label>
+        <%= paypalcount %>
+      </div>
+    </div>
+  </div>
+
+  <a href="<%= paidorderslink %>">Paid Orders</a>
+  <a href="<%= donationorderslink %>">Paid Orders with donations</a>
+</body>
+</html>

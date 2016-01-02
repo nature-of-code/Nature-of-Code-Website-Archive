@@ -1,6 +1,9 @@
+'use strict'
+
 // Load the .env file if we aren't in production
 if (process.env.ENV !== 'production') { require('dotenv').load() }
 
+var _ = require('lodash')
 var path = require('path')
 var http = require('http')
 var basicAuth = require('basic-auth')
@@ -8,6 +11,10 @@ var bodyParser = require('body-parser')
 var ejs = require('ejs')
 var express = require('express')
 var https = require('https')
+var pg = require('pg')
+var numeral = require('numeral')
+
+var dbString = process.env.DATABASE_URL || "postgres://localhost:5432/natureofcode"
 
 var adminRouter = express.Router()
 var app = express()
@@ -38,6 +45,61 @@ var auth = function (req, res, next) {
     return unauthorized(res)
   }
 }
+
+adminRouter.use(auth)
+adminRouter.get('/', function (req, res) {
+  pg.connect(dbString, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({ success: false, data: err});
+    }
+
+    // some serious work can be done here with the messy callbacks
+    client.query(`select
+        max(amount) as maxamount,
+        count(*) as ordercount,
+        sum(amount) as amounttotal,
+        sum(donation_amount) as donationtotal
+      from orders`, function(err, results) {
+      let aggregates = results.rows[0]
+
+      client.query(`select
+          count(amount) as paidcount,
+          avg(amount) as avgamount,
+          avg(donation_amount) as avgdonation,
+          count(stripe_id) as stripecount,
+          count(paypal_token) as paypalcount
+        from orders where amount > 0`, (err, results) => {
+
+        let feestotal = aggregates.amounttotal * 0.029 + results.rows[0].paidcount * 0.30
+        let formattedValues = {
+          ordercount: numeral(aggregates.ordercount).format('0,0'),
+          paidcount: numeral(results.rows[0].paidcount).format('0,0'),
+          freecount: numeral(aggregates.ordercount - results.rows[0].paidcount).format('0,0'),
+          amounttotal: numeral(aggregates.amounttotal).format('$0,0.00'),
+          donationtotal: numeral(aggregates.donationtotal).format('$0,0.00'),
+          maxamount: numeral(aggregates.maxamount).format('$0,0.00'),
+          paidorders: numeral(results.rows[0].paidcount).format('0,0'),
+          authortotal: numeral(aggregates.amounttotal - aggregates.donationtotal - feestotal).format('$0,0.00'),
+          avgamount: numeral(results.rows[0].avgamount).format('$0,0.00'),
+          avgdonation: numeral(results.rows[0].avgdonation).format('$0,0.00'),
+          feestotal: numeral(feestotal).format('$0,0.00'),
+          stripecount: numeral(results.rows[0].stripecount).format('0,0'),
+          paypalcount: numeral(results.rows[0].paypalcount).format('0,0'),
+          paidorderslink: process.env.PAID_ORDERS_LINK,
+          donationorderslink: process.env.DONATION_ORDERS_LINK
+        }
+
+        res.render('dashboard', formattedValues)
+      })
+
+    })
+  })
+})
+
+app.use('/admin', adminRouter)
 
 app.get('/', function (req, res) {
   // Special case for development, render the index file.
