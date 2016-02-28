@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nature Of Code</title>
-  <link rel="stylesheet" href="http://www.natureofcode.com/css/natureofcode.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="http://www.natureofcode.com/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
-  <script src="http://www.natureofcode.com/js/index.js"></script>
+  <title>The Nature of Code</title>
+  <link rel="stylesheet" href="http://natureofcode.com/css/fonts.css"/>
+  <link rel="stylesheet" href="http://natureofcode.com/css/natureofcode.css" />
+  <script src="/js/jquery-1.12.1.min.js"></script>
+  <script src="/js/index.js"></script>
+  <script type = "text/javascript" src="http://natureofcode.com/core.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34673170-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
 </head>
 <body>
   <div id="top">
@@ -17,18 +33,18 @@
 
   <div id="middle">
     <div id="content">
-      A book about applying topics from mathematics, physics, and generative algorithms to computational systems. With Processing!
-
+How can we capture the unpredictable evolutionary and emergent properties of nature in software? How can understanding the mathematical principles behind our physical world help us to create digital worlds? This book focuses on the programming strategies and techniques behind computer simulations of natural systems using <a href="http://www.processing.org">Processing</a>.
       <div id="purchase-options">
         <div id="purchase-pdf">
-          <h3>Buy <strong>The Nature of Code</strong> PDF</h3>
+          <h3>Buy <strong>The Nature of Code</strong> eBook Bundle</h3>
 
           <p>Download the entire book directly from the author.</p>
 
           <ul class="description">
             <li>DRM-free</li>
+            <li>includes PDF, ePub, and Kindle formats</li>
             <li>Delivered by email, no login necessary</li>
-            <li>Receive book updates for free</li>
+            <li>Receive lifetime book updates for free</li>
           </ul>
 
           <form method="POST" action="/order" id="slider-form">
@@ -37,17 +53,17 @@
             <div class="slider-holder">
               <div id="slider"></div>
             </div>
-            <input id="amount" type="hidden" name="amount" value="11.00">
-            <input type="text" id="display-amount" value="$11.00">
+            <input id="amount" type="hidden" name="amount" value="10.00">
+            <input type="text" id="display-amount" value="$10.00">
             </fieldset>
 
-            <p>Donate a percentage to Processing.</p>
+            <p>Donate a percentage to the <a href="http://processing.org">Processing Foundation</a>.</p>
             <fieldset>
               <div class="slider-holder">
                 <div id="percent-slider"></div>
               </div>
-              <input type="hidden" id="percent" name="donation" value="5">
-              <input type="text" id="display-percent" name="percent" value="5%">
+              <input type="hidden" id="percent" name="donation" value="10">
+              <input type="text" id="display-percent" name="percent" value="10%">
             </fieldset>
 
             <div id="breakdown">
@@ -57,27 +73,83 @@
 
             <input type="submit" id="buy-now" value="Buy Now">
           </form>
+
         </div>
 
         <div id="purchase-print">
-          <img src="http://farm9.staticflickr.com/8448/7749029626_04c08b4bed.jpg" style="max-width:100%;">
-          <h3>Print Edition Available Soon!</h3>
+          <img src="http://natureofcode.com/book/imgs/noc_print.jpg" style="max-width:100%;">
+          <h3 style="margin:12px 0 0 0; ">Get the print edition!</h3>
+        <a class="block-link" href="https://www.createspace.com/4068419">CreateSpace</a>
+        <a class="block-link" href = "http://www.amazon.com/gp/product/0985930802/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0985930802&linkCode=as2&tag=natureofcode-20">Amazon</a>
+        <p style="font-style:italic"><br><a href="quality.html">Problem with the <br>quality of your print?</a></p>
+
+      </p>
+
+
+      </p>
+
+
         </div>
       </div>
 
-      <div id="read">
-        <h3>Read the Entire Book Online for Free</h3>
-        <p>The complete book is available as HTML with interactive Processing.js examples.</p>
-        <h4>Coming Soon</h4>
-        <!-- <a class="block-link" href="http://www.natureofcode.com/book">Read Now</a> -->
+      <div class="row">
+        <div class="half-box">
+          <h3>Read the Entire Book Online for Free</h3>
+          <p>The complete book is available as HTML with interactive Processing.js examples.</p>
+          <a class="block-link" href="http://natureofcode.com/book">Read Now</a>
+        </div>
+
+        <div class="half-box">
+          <h3>Download the book's code</h3>
+          <p>All of the <a href="https://github.com/shiffman/The-Nature-of-Code">source files for building the book</a> and <a href="https://github.com/shiffman/The-Nature-of-Code-Examples">the Processing code examples</a> are available on github.</p>
+
+          <a class="block-link" href="https://github.com/downloads/shiffman/The-Nature-of-Code-Examples/The-Nature-of-Code-Examples.zip">Download Code</a>
+        </div>
       </div>
+
     </div>
   </div>
 
   <div id="bottom">
     <div id="footer">
+      <div class="one-third" id="licenses">
+        <h4>Licenses</h4>
+        <p>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/"><img alt="LGPL License" style="border-width:0" src="http://www.gnu.org/graphics/lgplv3-88x31.png" /></a>
+        </p>
 
-      <p>&copy;2012 Daniel Shiffman.</p>
+        <p>
+          The book's text and illustrations are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+        </p>
+
+        <p>
+          All of the book's source code is licensed under the <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/">GNU Lesser General Public License</a> as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+        </p>
+
+      </div>
+
+      <div class="one-third">
+        <h4>Colophon</h4>
+
+        <p>This book was generated with <a href="https://github.com/runemadsen/Magic-Book-Project">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p>
+
+        <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
+
+        <p>Please report any mistakes in the book or bugs in the source with a <a href="https://github.com/shiffman/The-Nature-of-Code/issues?sort=created&state=open">github issue</a> or contact me at <span class="eml">daniel at shiffman dot net</span>.</p>
+      </div>
+
+      <div class="one-third">
+        <h4>Author</h4>
+        <p>Daniel Shiffman is a professor of the <a href="http://itp.nyu.edu/">Interactive Telecommunications Program</a> at New York University.</p>
+
+        <p>He is the author of <a href="http://www.learningprocessing.com/">Learning Processing</a>.</p>
+
+        <p><a href="https://twitter.com/shiffman">Twitter</a> <a href="http://github.com/shiffman">Github</a></p>
+      </div>
+
     </div>
   </div>
 </body>

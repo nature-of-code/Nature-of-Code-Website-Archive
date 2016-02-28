@@ -6,8 +6,10 @@
     "url": "https://github.com/shiffman/natureofcode.com/issues"
   },
   "dependencies": {
+    "babelify": "^7.2.0",
     "basic-auth": "^1.0.3",
     "body-parser": "^1.12.3",
+    "browserify": "^13.0.0",
     "dotenv": "^1.2.0",
     "ejs": "^2.3.1",
     "express": "4.13.3",
@@ -16,7 +18,9 @@
     "numeral": "^1.5.3",
     "paypal-rest-sdk": "^1.6.8",
     "pg": "^4.4.3",
-    "stripe": "^4.1.0"
+    "rangeslider.js": "^2.1.1",
+    "stripe": "^4.1.0",
+    "watchify": "^3.7.0"
   },
   "homepage": "https://github.com/shiffman/natureofcode.com",
   "keywords": [
