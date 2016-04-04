@@ -1,0 +1,83 @@
+img {
+  width: 100%;
+  margin: 0;
+}
+
+.image-container {
+  position: relative;
+  margin: 16px 0 16px 0;
+}
+
+.image-container img {
+  max-width: 100%;
+}
+
+.bella img {
+  width: 25%;
+}
+
+.screenshot img {
+  width: 100%;
+  margin: 0px;
+  //-webkit-box-shadow: 1px 1px 2px gray;
+    border:1px solid gray;
+  // Need a magic solution for border side borders to be partial, not extend all the way to top
+}
+
+.image-container .caption {
+  color: #222;
+  font-family: "ProximaNova-Regular";
+  font-size: 100%; /* 100% == 13px when not inside a p tag */
+  border: 0;
+}
+
+.half-width {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  position: relative;
+  width: 48%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.half-width {
+  margin-right: 2em;
+}
+
+.half-width img {
+    border:1px solid gray;
+}
+
+.two-col,
+.two-col-borderless,
+.three-col
+{
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: 1em;
+  float: left;
+}
+
+.two-col img,
+.two-col canvas,
+.two-col-borderless canvas,
+.three-col img,
+.three-col canvas
+{
+  width: 100%;
+  max-width: 100%;
+  border:1px solid gray;
+}
+
+.caption {
+  color: #222;
+  font-family: "ProximaNova-Regular";
+  font-size: 100%; /* 100% == 13px when not inside a p tag */
+  border: 0;
+}
+
+
+a {
+  color: #1299B8;
+}

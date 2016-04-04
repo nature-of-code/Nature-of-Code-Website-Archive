@@ -1,0 +1,639 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>The Nature of Code</title>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
+  <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
+  <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
+  <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
+	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
+	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
+	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34673170-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script>
+
+    window.onload= function() {
+      offsetUps = document.getElementsByClassName('offset-up');
+      for(var i=0; i < offsetUps.length; i++) {
+        var element = offsetUps[i];
+        var comment = element.getElementsByClassName('code-comment')[0];
+        var height = comment.offsetHeight;
+        comment.style.top = '-' + (height) +  'px';
+      }
+    };
+</script>
+
+</head>
+<body>
+
+  <div id="navigator">
+    <div id="navigator-inner">
+      <div id='nav-bar-wrap'>
+        <div id="mask"></div>
+        <div id="nav-bar">
+          <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
+          <h2>by Daniel Shiffman</h2>
+          <a id="purchase-link" href="/">Buy this book in print</a> <a id="purchase-link" href="/">Buy this book as PDF</a>
+        </div>
+      </div>
+      <div id="toc-holder">
+        <div id="toc-list">
+          <ul>
+            <li><a href="/book/">Welcome</a></li>
+            <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
+            <li><a href="/book/preface">Preface</a></li>
+            <li><a href="/book/introduction">Introduction</a></li>
+            <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
+            <li><a href="/book/chapter-2-forces">2.  Forces</a></li>
+            <li><a href="/book/chapter-3-oscillation">3.  Oscillation</a></li>
+            <li><a href="/book/chapter-4-particle-systems">4.  Particle Systems</a></li>
+            <li><a href="/book/chapter-5-physics-libraries">5.  Physics Libraries</a></li>
+            <li><a href="/book/chapter-6-autonomous-agents">6.  Autonomous Agents</a></li>
+            <li><a href="/book/chapter-7-cellular-automata">7.  Cellular Automata</a></li>
+            <li><a href="/book/chapter-8-fractals">8.  Fractals</a></li>
+            <li><a href="/book/chapter-9-the-evolution-of-code">9.  The Evolution of Code</a></li>
+            <li><a href="/book/chapter-10-neural-networks">10.  Neural Networks</a></li>
+            <li><a href="/book/further-reading">Further Reading</a></li>
+            <li><a href="/book/index">Index</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="top">
+    <div id="header">
+      <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
+      <h2>Daniel Shiffman</h2>
+    </div>
+  </div>
+
+  <div id="middle">
+
+  	<div id="container">
+  		<a id="_preface" style="display: block;"></a><h2 id="preface">Preface</h2>
+<section><a id="_p_1_what_is_this_book" style="display: block;"></a><h3 id="p1-what-is-this-book">P.1 What is this book?</h3><p>At <a href="http://itp.nyu.edu">ITP</a>, I teach a course entitled Introduction to Computational Media.   In this course, the students learn the basics of programming (variables, conditionals, loops, objects, arrays) as well as a survey of applications related to making interactive projects (images, pixels, computer vision, networking, data, 3D).    The course mostly follows the material found in my intro book <em>Learning Processing</em>; in many ways, <em>The Nature of Code</em> serves as a follow-up.   Once you’ve learned the basics and seen an array of applications, your next step might be to delve deeply into a particular area.  For example, you could focus on computer vision (and read a book like Greg Borenstein’s <em>Making Things See</em>).   In the most basic sense, this book is one possible next step in a world of many.  It picks up exactly where <em>Learning Processing</em> leaves off, demonstrating more advanced programming techniques with Processing that focus on algorithms and simulation.</p>
+<p>The goal of this book is simple. We want to take a look at something that naturally occurs in our physical world, then determine how we can write code to simulate that occurrence.</p>
+<p>So then what is this book exactly?  Is it a science book?   The answer is a resounding no.  True, we might examine topics that come from physics or biology, but it won’t be our job to investigate these topics with a particularly high level of academic rigor.  Instead, we’re going to glance at scientific concepts and grab the parts that we need in the service of building a particular software example.</p>
+<p>Is this an art or design book?  I would also say no; after all, we are going to focus on algorithms and their affiliated programming techniques.  Sure, the results will all be visual in nature (manifested as animated Processing sketches), but they will exist more as demonstrations of the algorithms and programming techniques themselves, drawn only with simple shapes and grayscale.   It is my hope, however, that designers and artists can incorporate all of the material here into their practice to make new, engaging work.</p>
+<p>In the end, if this book is anything, it is really just a good old-fashioned programming book.   While a scientific topic may seed a chapter (Newtonian physics, cellular growth, evolution) or the results might inspire an artistic project, the content itself will always boil down to the code implementation, with a particular focus on object-oriented programming.</p>
+</section><section><a id="_p_2_a_word_about_processing" style="display: block;"></a><h3 id="p2-a-word-about-processing">P.2 A word about Processing</h3><p>I am using Processing in this book for a number of reasons.  For one, it’s the language and environment with which I am most comfortable, and it’s what I enjoy using for my personal work.   Two, it’s free, open-source, and well suited to beginners.  There is an active, energetic community of people who program with Processing; for many, it’s the first programming language they’ve learned.  In this sense, I hope that I can reach a wide audience and demonstrate the concepts in a friendly manner by using Processing.</p>
+<p>All that said, there is nothing that ties what we are doing in this book strictly to Processing.   This book could have been written using ActionScript, JavaScript, Java (without Processing), or any number of other open-source “creative coding” environments like openFrameworks, Cinder, or the newly released pocode.   It is my hope that after I’ve completed this book, I’ll be able to release versions of the examples that run in other environments.  If anyone is interested in helping to port the examples, please feel free to contact me (daniel@shiffman.net).</p>
+<p>All of the examples in this book have been tested with Processing 2.0b6, but for the most part, they should also work with earlier versions of Processing.  I’ll be keeping them up-to-date with whatever the latest version is.  The most recent code can always be found on <a href="http://github.com/shiffman/The-Nature-of-Code-Examples">GitHub</a>.</p>
+</section><section><a id="_p_3_what_do_you_need_to_know" style="display: block;"></a><h3 id="p3-what-do-you-need-to-know">P.3 What do you need to know?</h3><p>The prerequisite for understanding the material in this book could be stated as: “one semester of programming instruction with Processing (including familiarity with object-oriented programming).”   That said, there’s no reason why you couldn’t read this book having learned programming using a different language or development environment.   The key here is that you have experience with programming.</p>
+<p>If you’ve never written any code before, you are going to struggle, because this book assumes knowledge of all the basics.   I would suggest picking up an introductory book on Processing, a number of which are listed on <a href="http://processing.org/learning/books/">the Processing website</a>.</p>
+<p>If you are an experienced programmer, but haven’t worked with Processing, you can probably pick it up by <a href="http://processing.org/download/">downloading Processing</a>, poking through the examples, and reading through the <a href="http://processing.org/learning/gettingstarted/">Getting Started</a> page.</p>
+<p>I should also point out that experience with object-oriented programming is crucial. We’ll review some of the basics in the book’s introduction, but I would suggest reading the <a href="http://processing.org/learning/objects">Processing tutorial on objects</a> first.</p>
+</section><section><a id="_p_4_what_are_you_using_to_read_this_book" style="display: block;"></a><h3 id="p4-what-are-you-using-to-read-this-book">P.4 What are you using to read this book?</h3><p>Are you reading this book on a Kindle?  Printed paper?  On your laptop in PDF form?  On a tablet showing an animated HTML5 version?  Are you strapped to a chair, absorbing the content directly into your brain via a series of electrodes, tubes, and cartridges?</p>
+<p>The book you are reading right now was generated with the <a href="http://www.magicbookproject.com">Magic Book project</a>.  The Magic Book is an open-source framework for self-publishing developed at <a href="http://itp.nyu.edu">ITP</a>.   The idea here is that you only need to write the book once as a simple text file.  Once you’ve written your content, you press a magic button, and out comes your book in a variety of formats—PDF, HTML5, printed hardcopy, Kindle, etc.  Everything is designed and styled using CSS.   As of the first release, the only versions available will be digital PDF, printed hardcopy, and HTML5 (which will include animated versions of the examples using Processing.js).  Hopefully over the course of the next year, the book will be available in additional formats.  If you’d like to help with this, please contact me (daniel@shiffman.net).</p>
+</section><section><a id="_p_5_the_story_of_this_book" style="display: block;"></a><h3 id="p5-the-story-of-this-book">P.5 The “story” of this book</h3><p>If you glance over the book’s table of contents, you’ll notice there are ten chapters, each one covering a different topic.  And in one sense, this book is just that—a survey of ten concepts and associated code examples.  Nevertheless, in putting together the material, I had always imagined something of a linear narrative.  Before you begin reading the chapters, I’d like to walk you through this story.</p>
+<section><a id="_part_i_inanimate_objects" style="display: block;"></a><h4 id="part-i-inanimate-objects">Part I: Inanimate objects</h4><p>A soccer ball lies in the grass.  A kick launches it into the air.  Gravity pulls it back down. A heavy gust of wind keeps it afloat a moment longer until it falls and bounces off the head of a jumping player.   The soccer ball is not alive; it makes no choices as to how it will move throughout the world.  Rather, it is an inanimate object waiting to be pushed and pulled by the forces of its environment.</p>
+<div style="page-break-after:always;"> </div><p>How would we model a soccer ball moving in Processing?   If you’ve ever programmed a circle moving across a window, then you’ve probably written the following line of code.</p>
+<div class="source-code">
+  <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
+  <textarea>x = x + 1;</textarea>
+  
+  
+  
+  <div class="code-block">
+
+  <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span></span></pre></code></div>
+
+</div>
+  <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
+</div><p>You draw some shape at location <span class="var">x</span>.  With each frame of animation, you increment the value of <span class="var">x</span>, redraw the shape and voila—the illusion of motion!  Maybe you took it a step or two further, and included a <span class="var">y</span> location, as well as variables for speed along the <em>x</em> and <em>y</em> axes.</p>
+<div class="source-code">
+  <a class="toggle" href="#" data-to-raw='Show Raw' data-to-formatted='Show Formatted'>Show Raw</a>
+  <textarea>x = x + xspeed;
+y = y + yspeed;</textarea>
+  
+  
+  
+  <div class="code-block">
+
+  <div class='code-comment-pair no-comment'><code><pre><span class='one-line'><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xspeed</span><span class="o">;</span></span>
+<span class='one-line'><span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">yspeed</span><span class="o">;</span></span></pre></code></div>
+
+</div>
+  <div style="position: relative;clear:both;display:block;height:1px;width:100%;"></div>
+</div><p>Part I of this story will take us one step further. We’re going to take these variables <span class="var">xspeed</span> and <span class="var">yspeed</span> and learn how together they form a vector (<strong>Chapter 1</strong>), the building block of motion.  We won’t get any new functionality out of this, but it will build a solid foundation for the rest of the book.</p>
+<p>Once we know a little something about vectors, we’re going to quickly realize that a force (<strong>Chapter 2</strong>) is a vector.   Kick a soccer ball and you are applying a force.  What does a force cause an object to do?  According to Isaac Newton, force equals mass times acceleration.   That force causes an object to accelerate.   Modeling forces will allow us to create systems with dynamic motion where objects move according to a variety of rules.</p>
+<p>Now, that soccer ball to which you applied a force might have also been spinning.    If an object moves according to its acceleration, it can spin according to its angular acceleration (<strong>Chapter 3</strong>).  Understanding the basics of angles and trigonometry will allow us to model rotating objects as well as grasp the principles behind oscillating motion, like a pendulum swinging or a spring bouncing.</p>
+<p>Once we’ve tackled the basics of motion and forces for an individual inanimate object, we’ll learn how to make thousands upon thousands of those objects and manage them in a single system called a particle system (<strong>Chapter 4</strong>).   Particle systems will allow us to look at some advanced features of object-oriented programming, namely inheritance and polymorphism.</p>
+<p>In Chapters 1 through 4, all of the examples will be written from “scratch”—meaning the code for the algorithms driving the motion of the objects will be written directly in Processing.   We’re certainly not the first programmers ever to consider the idea of simulating physics in animation, so next we’ll examine how physics libraries (<strong>Chapter 5</strong>) can be used to model more advanced and sophisticated behaviors.  We’ll look at <a href="http://www.box2d.org">Box2D</a> and <a href="http://toxiclibs.org/">toxiclibs' Verlet Physics package</a>.</p>
+</section><section><a id="_part_ii_it_s_alive" style="display: block;"></a><h4 id="part-ii-its-alive">Part II: It’s alive!</h4><p>What does it mean to model life?  Not an easy question to answer, but we can begin by building objects that have an ability to perceive their environment.   Let’s think about this for a moment.  A block that falls off a table moves according to forces, as does a dolphin swimming through the water.  But there is a key difference.  The block cannot decide to leap off that table.  The dolphin can decide to leap out of the water.  The dolphin can have dreams and desires.  It can feel hunger or fear, and those feelings can inform its movements.  By examining techniques behind modeling autonomous agents (<strong>Chapter 6</strong>), we will breathe life into our inanimate objects, allowing them to make decisions about their movements according to their understanding of their environment.</p>
+<p>Through combining the concept of autonomous agents with what we learned about modeling systems in Chapter 4, we’ll look at models of group behavior that exhibit the properties of complexity.   A complex system is typically defined as a system that is “more than the sum of its parts.”  While the individual elements of the system may be incredibly simple and easily understood, the behavior of the system as a whole can be highly complex, intelligent, and difficult to predict.   This will lead us away from thinking purely about modeling motion and into the realm of rule-based systems.   What can we model with cellular automata (<strong>Chapter 7</strong>), a system of cells living on a grid?  What types of patterns can we generate with fractals (<strong>Chapter 8</strong>), the geometry of nature?</p>
+</section><section><a id="_part_iii_intelligence" style="display: block;"></a><h4 id="part-iii-intelligence">Part III: Intelligence</h4><p>We made things move.  Then we gave those things hopes and dreams and fears, along with rules to live by.  The last step in this book will be to make our creations even smarter.  Can we apply the biological process of evolution to computational systems (<strong>Chapter 9</strong>)  in order to evolve our objects?   Taking inspiration from the human brain, can we program an artificial neural network (<strong>Chapter 10</strong>) that can learn from its mistakes and allow our objects to adapt to their environment?</p>
+</section></section><section><a id="_p_6_this_book_as_a_syllabus" style="display: block;"></a><h3 id="p6-this-book-as-a-syllabus">P.6 This book as a syllabus</h3><p>While the content in this book certainly makes for an intense and highly compressed semester, I have designed it to fit into a fourteen-week course.  Nevertheless, it’s worth mentioning that I find that the book chapters sometimes work better expanded across multiple weeks.  For example, the syllabus for my course generally works out as follows:</p>
+<div style="page-break-after:always;"> </div>
+<div class="list">
+<dl class="preface">
+<dt>Week 1</dt><dd><p>Introduction and Vectors (Chapter 1)</p></dd>
+<dt>Week 2</dt><dd><p>Forces (Chapter 2)</p></dd>
+<dt>Week 3</dt><dd><p>Oscillations (Chapter 3)</p></dd>
+<dt>Week 4</dt><dd><p>Particle Systems (Chapter 4)</p></dd>
+<dt>Week 5</dt><dd><p>Physics Libraries Part I (Chapter 5)</p></dd>
+<dt>Week 6</dt><dd><p>Physics Libraries Part II & Steering (Chapters 5-6)</p></dd>
+<dt>Week 7</dt><dd><p>Present midterm projects about motion</p></dd>
+<dt>Week 8</dt><dd><p>Complex Systems: Flocking and 1D Cellular Automata (Chapters 6-7)</p></dd>
+<dt>Week 9</dt><dd><p>Complex Systems: 2D Cellular Automata and Fractals (Chapters 7-8)</p></dd>
+<dt>Week 10</dt><dd><p>Genetic Algorithms (Chapter 9)</p></dd>
+<dt>Week 11</dt><dd><p>Neural Networks (Chapter 10)</p></dd>
+<dt>Weeks 12-13</dt><dd><p>Final project workshop</p></dd>
+<dt>Week 14</dt><dd><p>Final project presentation</p></dd></dl></div><p>If you are considering using this text for a course or workshop, please feel free to contact me.  I hope to eventually release a companion set of videos and slide presentations as supplementary educational materials.</p>
+</section><section><a id="_p_7_the_ecosystem_project" style="display: block;"></a><h3 id="p7-the-ecosystem-project">P.7 The Ecosystem Project</h3><p>As much as I’d like to pretend you could learn everything by curling up in a comfy chair and reading some prose about programming, to learn programming, you’re really going to have to do some programming.  You might find it helpful to keep in mind a project idea (or two) to develop as a set of exercises while going from chapter to chapter.  In fact, when teaching the Nature of Code course at ITP, I have often found that students enjoy building a single project, step by step, week by week, over the course of a semester.</p>
+<p>At the end of each chapter, you’ll find a series of exercises for one such project—exercises that build on each other, one topic at a time.   Consider the following scenario.   You’ve been asked by a science museum to develop the software for a new exhibit—The Digital Ecosystem, a world of animated, procedural creatures that live on a projection screen for visitors to enjoy as they enter the museum. I don’t mean to suggest that this is a particularly innovative or creative concept.  Rather, we’ll use this example project idea as a literal representation of the content in the book, demonstrating how the elements fit together in a single software project.  I encourage you to develop your own idea, one that is more abstract and creative in its thinking.</p>
+</section><section><a id="_p_8_where_do_i_find_the_code_online_and_submit_feedback" style="display: block;"></a><h3 id="p8-where-do-i-find-the-code-online-and-submit-feedback">P.8 Where do I find the code online and submit feedback?</h3><p>For all things book-related, please visit the <a href="http://www.natureofcode.com">Nature of Code website</a>.    The raw source text of the book and all of the illustrations are on <a href="http://github.com/shiffman/The-Nature-of-Code">GitHub</a>.   Please leave feedback and submit corrections using GitHub issues.</p>
+<p>The source code for all of the examples (and exercises) is also available on <a href="http://github.com/shiffman/The-Nature-of-Code-Examples">GitHub</a>.  The chapters themselves include code snippets in-line with the text.  However, I want to mention that in many cases, I have shortened or simplified the code snippets in order to illustrate a specific point.   In all cases, the full code with comments can be found via GitHub.</p>
+<p>If you have questions about the code itself, I would suggest posting them on the <a href="http://forum.processing.org">Processing forum</a>.</p>
+<div style="page-break-after:always;"> </div><div class="toc">
+  <h2>Table of Contents</h2>
+
+  <ul>
+  
+
+    <li><a href="#welcome">Welcome</a></li>
+    
+
+  
+
+    <li><a href="#dedication">Dedication</a></li>
+    
+
+  
+
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    
+      <ul>
+      
+        <li><a href="#a1-a-little-bit-of-history">A.1  A little bit of history</a></li>
+      
+        <li><a href="#a2-kickstarter">A.2 Kickstarter</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#preface">Preface</a></li>
+    
+      <ul>
+      
+        <li><a href="#p1-what-is-this-book">P.1 What is this book?</a></li>
+      
+        <li><a href="#p2-a-word-about-processing">P.2 A word about Processing</a></li>
+      
+        <li><a href="#p3-what-do-you-need-to-know">P.3 What do you need to know?</a></li>
+      
+        <li><a href="#p4-what-are-you-using-to-read-this-book">P.4 What are you using to read this book?</a></li>
+      
+        <li><a href="#p5-the-story-of-this-book">P.5 The “story” of this book</a></li>
+      
+        <li><a href="#p6-this-book-as-a-syllabus">P.6 This book as a syllabus</a></li>
+      
+        <li><a href="#p7-the-ecosystem-project">P.7 The Ecosystem Project</a></li>
+      
+        <li><a href="#p8-where-do-i-find-the-code-online-and-submit-feedback">P.8 Where do I find the code online and submit feedback?</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#introduction">Introduction</a></li>
+    
+      <ul>
+      
+        <li><a href="#i1-random-walks">I.1 Random Walks</a></li>
+      
+        <li><a href="#i2-the-random-walker-class">I.2 The Random Walker Class</a></li>
+      
+        <li><a href="#i3-probability-and-non-uniform-distributions">I.3 Probability and Non-Uniform Distributions</a></li>
+      
+        <li><a href="#i4-a-normal-distribution-of-random-numbers">I.4 A Normal Distribution of Random Numbers</a></li>
+      
+        <li><a href="#i5-a-custom-distribution-of-random-numbers">I.5 A Custom Distribution of Random Numbers</a></li>
+      
+        <li><a href="#i6-perlin-noise-a-smoother-approach">I.6 Perlin Noise (A Smoother Approach)</a></li>
+      
+        <li><a href="#i7-onward">I.7 Onward</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-1-vectors">Chapter 1.  Vectors</a></li>
+    
+      <ul>
+      
+        <li><a href="#11-vectors-you-complete-me">1.1 Vectors, You Complete Me</a></li>
+      
+        <li><a href="#12-vectors-for-processing-programmers">1.2 Vectors for Processing Programmers</a></li>
+      
+        <li><a href="#13-vector-addition">1.3 Vector Addition</a></li>
+      
+        <li><a href="#14-more-vector-math">1.4 More Vector Math</a></li>
+      
+        <li><a href="#15-vector-magnitude">1.5 Vector Magnitude</a></li>
+      
+        <li><a href="#16-normalizing-vectors">1.6 Normalizing Vectors</a></li>
+      
+        <li><a href="#17-vector-motion-velocity">1.7 Vector Motion: Velocity</a></li>
+      
+        <li><a href="#18-vector-motion-acceleration">1.8 Vector Motion: Acceleration</a></li>
+      
+        <li><a href="#19-static-vs-non-static-functions">1.9 Static vs. Non-Static Functions</a></li>
+      
+        <li><a href="#110-interactivity-with-acceleration">1.10 Interactivity with Acceleration</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-2-forces">Chapter 2.  Forces</a></li>
+    
+      <ul>
+      
+        <li><a href="#21-forces-and-newtons-laws-of-motion">2.1 Forces and Newton’s Laws of Motion</a></li>
+      
+        <li><a href="#22-forces-and-processingnewtons-second-law-as-a-function">2.2 Forces and Processing—Newton’s Second Law as a Function</a></li>
+      
+        <li><a href="#23-force-accumulation">2.3 Force Accumulation</a></li>
+      
+        <li><a href="#24-dealing-with-mass">2.4 Dealing with Mass</a></li>
+      
+        <li><a href="#25-creating-forces">2.5 Creating Forces</a></li>
+      
+        <li><a href="#26-gravity-on-earth-and-modeling-a-force">2.6 Gravity on Earth and Modeling a Force</a></li>
+      
+        <li><a href="#27-friction">2.7 Friction</a></li>
+      
+        <li><a href="#28-air-and-fluid-resistance">2.8 Air and Fluid Resistance</a></li>
+      
+        <li><a href="#29-gravitational-attraction">2.9 Gravitational Attraction</a></li>
+      
+        <li><a href="#210-everything-attracts-or-repels-everything">2.10 Everything Attracts (or Repels) Everything</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-3-oscillation">Chapter 3.  Oscillation</a></li>
+    
+      <ul>
+      
+        <li><a href="#31-angles">3.1  Angles</a></li>
+      
+        <li><a href="#32-angular-motion">3.2 Angular Motion</a></li>
+      
+        <li><a href="#33-trigonometry">3.3 Trigonometry</a></li>
+      
+        <li><a href="#34-pointing-in-the-direction-of-movement">3.4 Pointing in the Direction of Movement</a></li>
+      
+        <li><a href="#35-polar-vs-cartesian-coordinates">3.5 Polar vs. Cartesian Coordinates</a></li>
+      
+        <li><a href="#36-oscillation-amplitude-and-period">3.6 Oscillation Amplitude and Period</a></li>
+      
+        <li><a href="#37-oscillation-with-angular-velocity">3.7 Oscillation with Angular Velocity</a></li>
+      
+        <li><a href="#38-waves">3.8 Waves</a></li>
+      
+        <li><a href="#39-trigonometry-and-forces-the-pendulum">3.9 Trigonometry and Forces: The Pendulum</a></li>
+      
+        <li><a href="#310-spring-forces">3.10 Spring Forces</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-4-particle-systems">Chapter 4.  Particle Systems</a></li>
+    
+      <ul>
+      
+        <li><a href="#41-why-we-need-particle-systems">4.1 Why We Need Particle Systems</a></li>
+      
+        <li><a href="#42-a-single-particle">4.2 A Single Particle</a></li>
+      
+        <li><a href="#43-the-arraylist">4.3 The ArrayList</a></li>
+      
+        <li><a href="#44-the-particle-system-class">4.4 The Particle System Class</a></li>
+      
+        <li><a href="#45-a-system-of-systems">4.5 A System of Systems</a></li>
+      
+        <li><a href="#46-inheritance-and-polymorphism-an-introduction">4.6 Inheritance and Polymorphism: An Introduction</a></li>
+      
+        <li><a href="#47-inheritance-basics">4.7 Inheritance Basics</a></li>
+      
+        <li><a href="#48-particles-with-inheritance">4.8 Particles with Inheritance</a></li>
+      
+        <li><a href="#49-polymorphism-basics">4.9 Polymorphism Basics</a></li>
+      
+        <li><a href="#410-particle-systems-with-polymorphism">4.10 Particle Systems with Polymorphism</a></li>
+      
+        <li><a href="#411-particle-systems-with-forces">4.11 Particle Systems with Forces</a></li>
+      
+        <li><a href="#412-particle-systems-with-repellers">4.12 Particle Systems with Repellers</a></li>
+      
+        <li><a href="#413-image-textures-and-additive-blending">4.13 Image Textures and Additive Blending</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-5-physics-libraries">Chapter 5.  Physics Libraries</a></li>
+    
+      <ul>
+      
+        <li><a href="#51-what-is-box2d-and-when-is-it-useful">5.1 What Is Box2D and When Is It Useful?</a></li>
+      
+        <li><a href="#52-getting-box2d-in-processing">5.2 Getting Box2D in Processing</a></li>
+      
+        <li><a href="#53-box2d-basics">5.3 Box2D Basics</a></li>
+      
+        <li><a href="#54-living-in-a-box2d-world">5.4 Living in a Box2D World</a></li>
+      
+        <li><a href="#55-building-a-box2d-body">5.5 Building a Box2D Body</a></li>
+      
+        <li><a href="#56-threes-company-bodies-and-shapes-and-fixtures">5.6 Three’s Company: Bodies and Shapes and Fixtures</a></li>
+      
+        <li><a href="#57-box2d-and-processing-reunited-and-it-feels-so-good">5.7  Box2D and Processing: Reunited and It Feels So Good</a></li>
+      
+        <li><a href="#58-fixed-box2d-objects">5.8  Fixed Box2D Objects</a></li>
+      
+        <li><a href="#59-a-curvy-boundary">5.9  A Curvy Boundary</a></li>
+      
+        <li><a href="#510-complex-forms">5.10  Complex Forms</a></li>
+      
+        <li><a href="#511-feeling-attachedbox2d-joints">5.11 Feeling Attached—Box2D Joints</a></li>
+      
+        <li><a href="#512-bringing-it-all-back-home-to-forces">5.12 Bringing It All Back Home to Forces</a></li>
+      
+        <li><a href="#513-collision-events">5.13 Collision Events</a></li>
+      
+        <li><a href="#514-a-brief-interludeintegration-methods">5.14 A Brief Interlude—Integration Methods</a></li>
+      
+        <li><a href="#515-verlet-physics-with-toxiclibs">5.15 Verlet Physics with toxiclibs</a></li>
+      
+        <li><a href="#516-particles-and-springs-in-toxiclibs">5.16 Particles and Springs in toxiclibs</a></li>
+      
+        <li><a href="#517-putting-it-all-together-a-simple-interactive-spring">5.17 Putting It All Together: A Simple Interactive Spring</a></li>
+      
+        <li><a href="#518-connected-systems-part-i-string">5.18 Connected Systems, Part I: String</a></li>
+      
+        <li><a href="#519-connected-systems-part-ii-force-directed-graph">5.19 Connected Systems, Part II: Force-Directed Graph</a></li>
+      
+        <li><a href="#520-attraction-and-repulsion-behaviors">5.20 Attraction and Repulsion Behaviors</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-6-autonomous-agents">Chapter 6.  Autonomous Agents</a></li>
+    
+      <ul>
+      
+        <li><a href="#61-forces-from-within">6.1  Forces from Within</a></li>
+      
+        <li><a href="#62-vehicles-and-steering">6.2  Vehicles and Steering</a></li>
+      
+        <li><a href="#63-the-steering-force">6.3  The Steering Force</a></li>
+      
+        <li><a href="#64-arriving-behavior">6.4  Arriving Behavior</a></li>
+      
+        <li><a href="#65-your-own-desires-desired-velocity">6.5 Your Own Desires: Desired Velocity</a></li>
+      
+        <li><a href="#66-flow-fields">6.6  Flow Fields</a></li>
+      
+        <li><a href="#67-the-dot-product">6.7  The Dot Product</a></li>
+      
+        <li><a href="#68-path-following">6.8  Path Following</a></li>
+      
+        <li><a href="#69-path-following-with-multiple-segments">6.9 Path Following with Multiple Segments</a></li>
+      
+        <li><a href="#610-complex-systems">6.10  Complex Systems</a></li>
+      
+        <li><a href="#611-group-behaviors-or-lets-not-run-into-each-other">6.11  Group Behaviors (or: Let’s not run into each other)</a></li>
+      
+        <li><a href="#612-combinations">6.12  Combinations</a></li>
+      
+        <li><a href="#613-flocking">6.13  Flocking</a></li>
+      
+        <li><a href="#614-algorithmic-efficiency-or-why-does-my-run-so-slowly">6.14  Algorithmic Efficiency (or: Why does my $@(*%! run so slowly?)</a></li>
+      
+        <li><a href="#615-a-few-last-notes-optimization-tricks">6.15  A Few Last Notes: Optimization Tricks</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-7-cellular-automata">Chapter 7.  Cellular Automata</a></li>
+    
+      <ul>
+      
+        <li><a href="#71-what-is-a-cellular-automaton">7.1 What Is a Cellular Automaton?</a></li>
+      
+        <li><a href="#72-elementary-cellular-automata">7.2  Elementary Cellular Automata</a></li>
+      
+        <li><a href="#73-how-to-program-an-elementary-ca">7.3 How to Program an Elementary CA</a></li>
+      
+        <li><a href="#74-drawing-an-elementary-ca">7.4 Drawing an Elementary CA</a></li>
+      
+        <li><a href="#75-wolfram-classification">7.5 Wolfram Classification</a></li>
+      
+        <li><a href="#76-the-game-of-life">7.6 The Game of Life</a></li>
+      
+        <li><a href="#77-programming-the-game-of-life">7.7  Programming the Game of Life</a></li>
+      
+        <li><a href="#78-object-oriented-cells">7.8 Object-Oriented Cells</a></li>
+      
+        <li><a href="#79-variations-of-traditional-ca">7.9 Variations of Traditional CA</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-8-fractals">Chapter 8.  Fractals</a></li>
+    
+      <ul>
+      
+        <li><a href="#81-what-is-a-fractal">8.1  What Is a Fractal?</a></li>
+      
+        <li><a href="#82-recursion">8.2 Recursion</a></li>
+      
+        <li><a href="#83-the-cantor-set-with-a-recursive-function">8.3  The Cantor Set with a Recursive Function</a></li>
+      
+        <li><a href="#84-the-koch-curve-and-the-arraylist-technique">8.4  The Koch Curve and the ArrayList Technique</a></li>
+      
+        <li><a href="#85-trees">8.5  Trees</a></li>
+      
+        <li><a href="#86-l-systems">8.6  L-systems</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-9-the-evolution-of-code">Chapter 9.  The Evolution of Code</a></li>
+    
+      <ul>
+      
+        <li><a href="#91-genetic-algorithms-inspired-by-actual-events">9.1  Genetic Algorithms: Inspired by Actual Events</a></li>
+      
+        <li><a href="#92-why-use-genetic-algorithms">9.2 Why Use Genetic Algorithms?</a></li>
+      
+        <li><a href="#93-darwinian-natural-selection">9.3  Darwinian Natural Selection</a></li>
+      
+        <li><a href="#94-the-genetic-algorithm-part-i-creating-a-population">9.4 The Genetic Algorithm, Part I: Creating a Population</a></li>
+      
+        <li><a href="#95-the-genetic-algorithm-part-ii-selection">9.5 The Genetic Algorithm, Part II: Selection</a></li>
+      
+        <li><a href="#96-the-genetic-algorithm-part-iii-reproduction">9.6 The Genetic Algorithm, Part III: Reproduction</a></li>
+      
+        <li><a href="#97-code-for-creating-the-population">9.7  Code for Creating the Population</a></li>
+      
+        <li><a href="#98-genetic-algorithms-putting-it-all-together">9.8  Genetic Algorithms: Putting It All Together</a></li>
+      
+        <li><a href="#99-genetic-algorithms-make-them-your-own">9.9  Genetic Algorithms: Make Them Your Own</a></li>
+      
+        <li><a href="#910-evolving-forces-smart-rockets">9.10  Evolving Forces: Smart Rockets</a></li>
+      
+        <li><a href="#911-smart-rockets-putting-it-all-together">9.11 Smart Rockets: Putting It All Together</a></li>
+      
+        <li><a href="#912-interactive-selection">9.12 Interactive Selection</a></li>
+      
+        <li><a href="#913-ecosystem-simulation">9.13  Ecosystem Simulation</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#chapter-10-neural-networks">Chapter 10.  Neural Networks</a></li>
+    
+      <ul>
+      
+        <li><a href="#101-artificial-neural-networks-introduction-and-application">10.1 Artificial Neural Networks: Introduction and Application</a></li>
+      
+        <li><a href="#102-the-perceptron">10.2  The Perceptron</a></li>
+      
+        <li><a href="#103-simple-pattern-recognition-using-a-perceptron">10.3  Simple Pattern Recognition Using a Perceptron</a></li>
+      
+        <li><a href="#104-coding-the-perceptron">10.4  Coding the Perceptron</a></li>
+      
+        <li><a href="#105-a-steering-perceptron">10.5  A Steering Perceptron</a></li>
+      
+        <li><a href="#106-its-a-network-remember">10.6  It’s a “Network,” Remember?</a></li>
+      
+        <li><a href="#107-neural-network-diagrams">10.7  Neural Network Diagrams</a></li>
+      
+        <li><a href="#108-animating-feed-forward">10.8  Animating Feed Forward</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#further-reading">Further Reading</a></li>
+    
+      <ul>
+      
+        <li><a href="#books">Books</a></li>
+      
+        <li><a href="#papers-and-articles">Papers and Articles</a></li>
+      
+      </ul>
+    
+
+  
+
+    <li><a href="#index">Index</a></li>
+    
+
+  
+  </ul>
+</div></div>
+<div id="contents"></section>
+  	</div>
+  </div>
+
+	<div id="bottom">
+		<div id="footer">
+			<div class="one-third" id="licenses">
+        <h4>Licenses</h4>
+        <p>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/"><img alt="LGPL License" style="border-width:0" src="http://www.gnu.org/graphics/lgplv3-88x31.png" /></a>
+        </p>
+
+        <p>
+          The book's text and illustrations are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+        </p>
+
+        <p>
+          All of the book's source code is licensed under the <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/">GNU Lesser General Public License</a> as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+        </p>
+
+      </div>
+
+      <div class="one-third">
+        <h4>Colophon</h4>
+
+        <p>This book was generated with <a href="https://github.com/runemadsen/Magic-Book-Project">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+
+        <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
+
+        <p>Please report any mistakes in the book or bugs in the source with a <a href="https://github.com/shiffman/The-Nature-of-Code/issues?sort=created&state=open">GitHub issue</a> or contact me at <span class="eml">daniel at shiffman dot net</span>.</p>
+      </div>
+
+      <div class="one-third">
+        <h4>Author</h4>
+        <p>Daniel Shiffman is a professor of the <a href="http://itp.nyu.edu/">Interactive Telecommunications Program</a> at New York University.</p>
+
+        <p>He is the author of <a href="http://www.learningprocessing.com/">Learning Processing</a>.</p>
+
+        <p><a href="https://twitter.com/shiffman">Twitter</a> <a href="http://github.com/shiffman">GitHub</a></p>
+      </div>
+		</div>
+	</div>
+</body>
+</html>

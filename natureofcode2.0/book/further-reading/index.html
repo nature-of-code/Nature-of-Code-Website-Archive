@@ -1,0 +1,292 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>The Nature of Code</title>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/book/javascripts/codeprocessing.js"></script>
+	<script type="text/javascript" src="/book/processingjs/processing.js"></script>
+  <script type="text/javascript" src="/book/processingjs/lazyloading.js"></script>
+  <script type="text/javascript" src="/book/javascripts/sketchControls.js"></script>
+  <script type="text/javascript" src="/book/javascripts/jquery.fixed.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $('#toc-list').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'});
+
+      $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
+      // $('code').each(function(){ inlineComments($(this)); });
+      $('div.source-code').each(function(){ setRawCodeHeight($(this)); });
+      $('a.toggle').click(function(){ toggleCodeDisplay($(this)); return false; });
+    });
+  </script>
+	<link rel="stylesheet" href="/book/stylesheets/fonts.css" type="text/css">
+	<link rel="stylesheet" href="/book/stylesheets/html.css" type="text/css">
+	<link rel="stylesheet" href="/book/stylesheets/code-html.css">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34673170-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script>
+
+    window.onload= function() {
+      offsetUps = document.getElementsByClassName('offset-up');
+      for(var i=0; i < offsetUps.length; i++) {
+        var element = offsetUps[i];
+        var comment = element.getElementsByClassName('code-comment')[0];
+        var height = comment.offsetHeight;
+        comment.style.top = '-' + (height) +  'px';
+      }
+    };
+</script>
+
+</head>
+<body>
+
+  <div id="navigator">
+    <div id="navigator-inner">
+      <div id='nav-bar-wrap'>
+        <div id="mask"></div>
+        <div id="nav-bar">
+          <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
+          <h2>by Daniel Shiffman</h2>
+          <a id="purchase-link" href="/">Buy this book in print</a> <a id="purchase-link" href="/">Buy this book as PDF</a>
+        </div>
+      </div>
+      <div id="toc-holder">
+        <div id="toc-list">
+          <ul>
+            <li><a href="/book/">Welcome</a></li>
+            <li><a href="/book/acknowledgments">Acknowledgments</a></li>
+            <li><a href="/book/dedication">Dedication</a></li>
+            <li><a href="/book/preface">Preface</a></li>
+            <li><a href="/book/introduction">Introduction</a></li>
+            <li><a href="/book/chapter-1-vectors">1.  Vectors</a></li>
+            <li><a href="/book/chapter-2-forces">2.  Forces</a></li>
+            <li><a href="/book/chapter-3-oscillation">3.  Oscillation</a></li>
+            <li><a href="/book/chapter-4-particle-systems">4.  Particle Systems</a></li>
+            <li><a href="/book/chapter-5-physics-libraries">5.  Physics Libraries</a></li>
+            <li><a href="/book/chapter-6-autonomous-agents">6.  Autonomous Agents</a></li>
+            <li><a href="/book/chapter-7-cellular-automata">7.  Cellular Automata</a></li>
+            <li><a href="/book/chapter-8-fractals">8.  Fractals</a></li>
+            <li><a href="/book/chapter-9-the-evolution-of-code">9.  The Evolution of Code</a></li>
+            <li><a href="/book/chapter-10-neural-networks">10.  Neural Networks</a></li>
+            <li><a href="/book/further-reading">Further Reading</a></li>
+            <li><a href="/book/index">Index</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="top">
+    <div id="header">
+      <h1><a href="/">The <strong>Nature</strong> of Code</a></h1>
+      <h2>Daniel Shiffman</h2>
+    </div>
+  </div>
+
+  <div id="middle">
+
+  	<div id="container">
+  		<a id="_further_reading" style="display: block;"></a><h2 id="further-reading">Further Reading</h2>
+<section><a id="_books" style="display: block;"></a><h3 id="books">Books</h3><div class="list">
+	
+	<ul>
+		
+			<li><p>
+Alexander, R. McNeill. <a href="http://t.co/IQ0iranE"><em>Principles of Animal Locomotion</em></a>. Princeton, NJ: Princeton University Press, 2002.
+</p>
+</li>
+		
+			<li><p>
+Bentley, Peter. <a href="http://t.co/XIp7b1zw"><em>Evolutionary Design by Computers</em></a>. San Francisco: Morgan Kaufmann Publishers, 1999.
+</p>
+</li>
+		
+			<li><p>
+Bohnacker, Hartmut, Benedikt Gross, Julia Laub, and Claudius Lazzeroni. <a href="http://t.co/8yekmakL"><em>Generative Design: Visualize, Program, and Create with Processing</em></a>. New York: Princeton Architectural Press, 2012.
+</p>
+</li>
+		
+			<li><p>
+Flake, Gary William. <a href="http://t.co/KdbTo1ZX"><em>The Computational Beauty of Nature: Computer Explorations of Fractals, Chaos, Complex Systems, and Adaptation</em></a>. Cambridge, MA: MIT Press, 1998.
+</p>
+</li>
+		
+			<li><p>
+Hale, Nathan Cabot. <a href="http://t.co/ztbQ1zCL"><em>Abstraction in Art and Nature</em></a>. New York: Dover, 1993.
+</p>
+</li>
+		
+			<li><p>
+Hildebrandt, Stefan, and Anthony J. Tromba. <a href="http://t.co/IQ0iranE"><em>Mathematics and Optimal Form</em></a>. New York: Scientific American Library, 1985. Distributed by <br />W. H. Freeman.
+</p>
+</li>
+		
+			<li><p>
+Kline, Morris. <a href="http://t.co/v84SZnGx"><em>Mathematics and the Physical World</em></a>. New York: Crowell, [1959].
+</p>
+</li>
+		
+			<li><p>
+Kodicek, Danny. <a href="http://t.co/ygDdHMak"><em>Mathematics and Physics for Programmers</em></a>. Hingham, MA: Charles River Media, 2005.
+</p>
+</li>
+		
+			<li><p>
+McMahon, Thomas A., and John Tyler Bonner. <a href="http://t.co/EhX3KwZB"><em>On Size and Life</em></a>. New York: Scientific American Library, 1983. Distributed by W. H. Freeman.
+</p>
+</li>
+		
+			<li><p>
+Mandelbrot, Benoit B. <a href="http://t.co/jHRQ5sQC"><em>The Fractal Geometry of Nature</em></a>. San Francisco: W. H. Freeman, 1982.
+</p>
+</li>
+		
+			<li><p>
+Pearce, Peter. <a href="http://t.co/zaGQMOMc"><em>Structure in Nature Is a Strategy for Design</em></a>. Cambridge, MA: MIT Press, 1980.
+</p>
+</li>
+		
+			<li><p>
+Pearson, Matt. <a href="http://t.co/bXCWfgOC"><em>Generative Art</em></a>. Greenwich, CT: Manning Publications, 2011. Distributed by Pearson Education.
+</p>
+</li>
+		
+			<li><p>
+Prusinkiewicz, Przemysław, and Aristid Lindenmayer. <a href="http://t.co/koD7FhJQ"><em>The Algorithmic Beauty of Plants</em></a>. New York: Springer-Verlag, 1990.
+</p>
+</li>
+		
+			<li><p>
+Reas, Casey, and Chandler McWilliams. <a href="http://t.co/1jGgwhvU"><em>Form+Code in Design, Art, and Architecture</em></a>. Design Briefs. New York: Princeton Architectural Press, 2010.
+</p>
+</li>
+		
+			<li><p>
+Reas, Casey, and Ben Fry. <a href="http://t.co/dtODdOQp"><em>Processing: A Programming Handbook for Visual Designers and Artists</em></a>. Cambridge, MA: MIT Press, 2007.
+</p>
+</li>
+		
+			<li><p>
+Thompson, D’Arcy Wentworth. <a href="http://t.co/vncWa1uW"><em>On Growth and Form: The Complete Revised Edition</em></a>. New York: Dover, 1992.
+</p>
+</li>
+		
+			<li><p>
+Vogel., Steven. <a href="http://t.co/fyTbVta1"><em>Life in Moving Fluids</em></a>. Princeton, NJ: Princeton University Press, 1994.
+</p>
+</li>
+		
+			<li><p>
+Wade, David. <a href="http://t.co/1QYDlsDH"><em>Li: Dynamic Form in Nature</em></a>. Wooden Books. New York: Walker & Co., 2003.
+</p>
+</li>
+		
+			<li><p>
+Waterman, Talbot H. <a href="http://t.co/c2otv8LZ"><em>Animal Navigation</em></a>. New York: Scientific American Library, 1989. Distributed by W. H. Freeman.
+</p>
+</li>
+		
+			<li><p>
+Whyte, Lancelot Law. <a href="http://t.co/f7UkVLQM"><em>Aspects of Form: A Symposium on Form in Nature and Art</em></a>. Midland Books, MB 31. Bloomington: Indiana University Press, 1966.
+</p>
+</li>
+		
+	</ul>
+</div><p>For other books that use Processing, see <a href="http://www.processing.org/learning/books">Processing Books</a>.</p>
+</section><section><a id="_papers_and_articles" style="display: block;"></a><h3 id="papers-and-articles">Papers and Articles</h3><div class="list">
+	
+	<ul>
+		
+			<li><p>
+Galanter, Philip. <a href="http://bit.ly/S7dhnq">"The Problem with Evolutionary Art Is…"</a> Paper presented at EvoCOMNET’10: The 7th European Event on the Application of Nature-inspired Techniques for Telecommunication Networks and other Parallel and Distributed Systems, April 7-9, 2010.
+</p>
+</li>
+		
+			<li><p>
+Gardner, Martin. <a href="http://www.ibiblio.org/lifepatterns/october1970.html">"Mathematical Games: The Fantastic Combinations of John Conway’s New Solitaire Game Life."</a> <em>Scientific American</em> 229 (October 1970): 120-23.
+</p>
+</li>
+		
+			<li><p>
+Reeves, William T. <a href="http://dl.acm.org/citation.cfm?id=357320">"Particle Systems—A Technique for Modeling a Class of Fuzzy Objects."</a> <em>ACM Transactions on Graphics</em> 2:2 (April 1983): 91-108.
+</p>
+</li>
+		
+			<li><p>
+Sims, Karl. <a href="http://www.karlsims.com/papers/siggraph91.html">"Artificial Evolution for Computer Graphics."</a> Paper presented at SIGGRAPH '91: The 18th Annual Conference on Computer Graphics and Interactive Techniques, Las Vegas, NV, July 28-August 2, 1991.
+</p>
+</li>
+		
+			<li><p>
+---. <a href="http://www.karlsims.com/papers/siggraph94.pdf">"Evolving Virtual Creatures."</a> Paper presented at SIGGRAPH '94: The 21st Annual Conference on Computer Graphics and Interactive Techniques, Orlando, FL, July 24-29, 1994.
+</p>
+</li>
+		
+			<li><p>
+---. <a href="http://www.karlsims.com/papers/ParticlesSiggraph90.pdf">"Particle Animation and Rendering Using Data Parallel Computation."</a> Paper presented at SIGGRAPH '90: The 17th Annual Conference on Computer Graphics and Interactive Techniques, Dallas, TX, August 6-10, 1990.
+</p>
+</li>
+		
+	</ul>
+</div><div style="page-break-after:always;"> </div></section>
+  	</div>
+  </div>
+
+	<div id="bottom">
+		<div id="footer">
+			<div class="one-third" id="licenses">
+        <h4>Licenses</h4>
+        <p>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
+          <a class="license-badge" rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/"><img alt="LGPL License" style="border-width:0" src="http://www.gnu.org/graphics/lgplv3-88x31.png" /></a>
+        </p>
+
+        <p>
+          The book's text and illustrations are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+        </p>
+
+        <p>
+          All of the book's source code is licensed under the <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/">GNU Lesser General Public License</a> as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+        </p>
+
+      </div>
+
+      <div class="one-third">
+        <h4>Colophon</h4>
+
+        <p>This book was generated with <a href="https://github.com/runemadsen/Magic-Book-Project">The Magic Book Project</a>.
+
+        <p>This book would not have been possible without the generous support of <a href="http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project">Kickstarter</a> backers.</p> 
+
+        <p>This book is typeset on the web in Georgia with headers in Proxima Nova.</p>
+
+        <p>Please report any mistakes in the book or bugs in the source with a <a href="https://github.com/shiffman/The-Nature-of-Code/issues?sort=created&state=open">GitHub issue</a> or contact me at <span class="eml">daniel at shiffman dot net</span>.</p>
+      </div>
+
+      <div class="one-third">
+        <h4>Author</h4>
+        <p>Daniel Shiffman is a professor of the <a href="http://itp.nyu.edu/">Interactive Telecommunications Program</a> at New York University.</p>
+
+        <p>He is the author of <a href="http://www.learningprocessing.com/">Learning Processing</a>.</p>
+
+        <p><a href="https://twitter.com/shiffman">Twitter</a> <a href="http://github.com/shiffman">GitHub</a></p>
+      </div>
+		</div>
+	</div>
+</body>
+</html>

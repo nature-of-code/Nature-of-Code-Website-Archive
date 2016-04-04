@@ -14,13 +14,11 @@ $noto: 'Noto Serif', serif;
 
 body, html {
 
-    height: 100%;
     font-family: 'Noto Serif', serif;
     font-size: 16px;
     line-height: 1.45em;
     color: $black;
     -webkit-font-smoothing: antialiased;
-    overflow: hidden;
 
 }
 
@@ -28,12 +26,11 @@ body, html {
 
     position: relative;
     width: 65%;
-    padding: 100px 100px 33px 180px;
+    padding: 100px 130px 33px 180px;
     margin-left: 0;
     opacity: 1;
     transition: all 0.6s;
     height: 100%;
-    overflow: scroll;
     -webkit-overflow-scrolling: touch;
 
     @media only screen and (max-width: $breakpoint-medium) {
@@ -43,6 +40,10 @@ body, html {
     @media only screen and (max-width: $breakpoint-small) {
         padding: 100px 30px !important;
         width: 100% !important;
+    }
+
+    &.home {
+        padding: 125px 130px 33px 180px
     }
 
     &.out {
@@ -110,9 +111,10 @@ nav {
         
         left: 0;
         background: none;
+        width: 200px;
 
         @media only screen and (max-width: $breakpoint-small) {
-            left: -230px;
+            left: -200px;
         }
     }
 
@@ -209,6 +211,11 @@ nav {
 .logo-set {
         display: inline-block;
         vertical-align: top;
+
+        a {
+            color: $black;
+            text-decoration: none;
+        }
         
         h2 {
             font-family: 'Noto Serif', serif;
@@ -232,6 +239,15 @@ nav {
 .logo-set-home {
 
     width: 150px;
+
+    a {
+        color: $black;
+        text-decoration: none;
+
+        &.active {
+            color: $red;
+        }
+    }
 
     h2 {    
         font-family: 'Noto Serif', serif;
@@ -297,6 +313,14 @@ h3 {
     font-weight: 700;
     margin-bottom: 0.3em;
 
+    a {
+        text-decoration: none;
+        color: $red;
+        &:hover {
+            border-bottom: 2px solid $red;
+        }
+    }
+
 }
 
 h5 {
@@ -337,9 +361,20 @@ a.btn {
     font-weight: 900;
     box-shadow: 0 4px 0 0 rgba(129, 47, 0, 0.17);
     border-radius: 4px;
+    cursor: pointer;
+    min-width: 160px;
+    text-align: center;
+    transition: background 0.2s;
+
+    &:hover {
+        background: darken($red, 5%);
+    }
 
     &.primary {
         background: $green;
+        &:hover {
+            background: darken($green, 5%);
+        }
     }
 
 }
@@ -394,11 +429,16 @@ a.small {
 
 }
 
-//SHIFFMAN.NET SPECIFICS
-
 .row {
     width: 100%;
     overflow: auto;
+}
+
+.action {
+    h2 {
+        margin-top: 0;
+    }
+
 }
 
 .col-left {
@@ -494,12 +534,17 @@ a.small {
         font-size: 38px;
         letter-spacing: 6px;
         font-weight: 900;
-        margin-bottom: 30px;
+        margin-bottom: 0px;
 
         span {
             color: $red;
         }
 
+    }
+
+    h3.subheader {
+        text-transform: uppercase;
+        margin-bottom: 30px;
     }
 
 }
@@ -547,6 +592,17 @@ a.small {
 
 .ebook {
 
+    h2 {
+
+        margin-top: 0px;
+
+        span {
+            font-weight: 900;
+        }
+
+    }
+
+
     ul {
 
         margin: 30px;
@@ -556,6 +612,64 @@ a.small {
             list-style-type: disc;
             
         }
+    }
+
+    .slider {
+
+        margin: 30px 0;
+
+        h3 {
+            display: inline-block;
+        }
+
+        .right-value {
+            float: right;
+        }
+
+        .ui-slider {
+            margin-top: 15px;
+            height: 6px;
+            width: 100%;
+            background: #f1f1f1;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .ui-slider-handle {
+            width: 35px;
+            height: 20px;
+            background: $red;
+            position: absolute;
+            top: -7px;
+            border-radius: 20px;
+            cursor: -webkit-grab; 
+            cursor: -moz-grab;
+            -webkit-box-shadow: 0px 4px 11px 0px rgba(168,168,168,0);
+            -moz-box-shadow: 0px 4px 11px 0px rgba(168,168,168,0);
+            box-shadow: 0px 4px 11px 0px rgba(168,168,168,0);
+            transition: all 0.2s;
+            
+            &::after {
+                content: " ";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                position: absolute;
+                left: 15px;
+                top: 8px;
+                background: #AD0040;
+            }
+            &:focus {
+                outline: none;
+                border: none;
+            }
+            &:hover {
+                -webkit-box-shadow: 0px 4px 11px 0px rgba(168,168,168,0.6);
+                -moz-box-shadow: 0px 4px 11px 0px rgba(168,168,168,0.6);
+                box-shadow: 0px 4px 11px 0px rgba(168,168,168,0.6);
+            }
+        }
+
     }
 
 }
@@ -975,6 +1089,7 @@ a.small {
         h2 {
             margin-bottom: 5px;
             display: inline-block;
+            margin-top: 0px;
             /*text-transform: capitalize;*/
         }
 
@@ -1128,7 +1243,43 @@ article.article-list {
 
 }
 
+footer {
+
+    &.left-container {
+        padding-top: 60px !important;
+    }
+
+    h3 {
+    
+        margin: 20px 0px;
+        color: #666;
+    
+    }
+
+    p {
+        
+        font-size: 12px;
+        line-height: 1.4em;
+        color: #666;
+
+        a {
+            color: #666;
+            border-bottom: 1px solid #f1f1f1;
+            text-decoration: none;
+            &:hover {
+                border-bottom: 1px solid #666;
+            }
+        }
+    
+    }
+
+}
+
 // HELPERS
+
+.text-right {
+    text-align: right;
+}
 
 .hide {
     display: none !important;
