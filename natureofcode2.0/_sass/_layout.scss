@@ -278,6 +278,10 @@ nav {
     background: $light-grey;
     margin: 60px 0 20px 0;
 
+    &.home {
+        margin: 50px 0 20px 0;
+    }
+
 }
 
 // TYPOGRAPHY
@@ -300,7 +304,7 @@ h1 {
 
 h2 {
 
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 0.4em;
     margin-top: 1.5em;
@@ -533,18 +537,19 @@ a.small {
 
         font-size: 38px;
         letter-spacing: 6px;
-        font-weight: 900;
+        font-weight: 700;
         margin-bottom: 0px;
 
         span {
+            font-weight: 900;
             color: $red;
         }
 
     }
 
-    h3.subheader {
-        text-transform: uppercase;
-        margin-bottom: 30px;
+    .subheader {
+        color: $red;
+        margin-bottom: 40px;
     }
 
 }
