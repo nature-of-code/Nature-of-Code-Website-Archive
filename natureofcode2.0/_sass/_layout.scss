@@ -25,7 +25,7 @@ body, html {
 .left-container {
 
     position: relative;
-    width: 65%;
+    width: 70%;
     padding: 100px 130px 33px 180px;
     margin-left: 0;
     opacity: 1;
@@ -43,7 +43,7 @@ body, html {
     }
 
     &.home {
-        padding: 125px 130px 33px 180px
+        padding: 80px 130px 33px 210px;
     }
 
     &.out {
@@ -58,7 +58,7 @@ body, html {
 
     background: $red;
     position: fixed;
-    width: 35%;
+    width: 30%;
     right: 0;
     top: 0;
     min-height: 100%;
@@ -533,12 +533,14 @@ a.small {
 
 .home {
 
+    background: #f1f1f1;
+
     h1 {
 
         font-size: 38px;
         letter-spacing: 6px;
         font-weight: 700;
-        margin-bottom: 0px;
+        margin-bottom: 5px;
 
         span {
             font-weight: 900;
@@ -549,7 +551,9 @@ a.small {
 
     .subheader {
         color: $red;
-        margin-bottom: 40px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
 
 }
@@ -571,7 +575,7 @@ a.small {
 
 .book-actions {
 
-    padding: 60px;
+    padding: 60px 42px;
 
     h3 {
         color: $white;
@@ -596,6 +600,11 @@ a.small {
 }
 
 .ebook {
+
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 3px;
+    margin-top: 30px;
 
     h2 {
 
@@ -1132,6 +1141,7 @@ a.small {
 
     .video-list {
         margin-top: 25px;
+        overflow: auto;
     }
 
     a.video {
@@ -1146,6 +1156,7 @@ a.small {
         padding: 0 7px;
         height: 200px;
         position: relative;
+        float: left;
 
         .watch-button {
             font-size: 10px;
@@ -1255,10 +1266,8 @@ footer {
     }
 
     h3 {
-    
-        margin: 20px 0px;
+        margin: 20px 0px 10px 0;
         color: #666;
-    
     }
 
     p {

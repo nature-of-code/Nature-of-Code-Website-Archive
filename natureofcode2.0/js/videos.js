@@ -1,5 +1,5 @@
 var apiKey 				= "AIzaSyADOKEHZag2UMG52bd7ApxDOssdzVo0j8I";
-var shiffmanPlaylists 	= "PLRqwX-V7Uu6YVljJvFRCyRM6mmF5wMPeE, PLRqwX-V7Uu6ZwSmtE13iJBcoI-r4y7iEc, PLRqwX-V7Uu6ZRrqLcQ5BkBKmBLiGD8n4O, PLRqwX-V7Uu6bR4BcLjHHTopXItSjRA7yG, PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy, PLRqwX-V7Uu6akvoNKE4GAxf6ZeBYoJ4uh, PLRqwX-V7Uu6YHt0dtyf4uiw8tKOxQLvlW, PLRqwX-V7Uu6YrWXvEQFOGbCt6cX83Xunm, PLRqwX-V7Uu6bXUJvjnMWGU5SmjhI-OXef, PLRqwX-V7Uu6bJM3VgzjNV5YxVxUwzALHV";
+var shiffmanPlaylists 	= ["PLRqwX-V7Uu6YVljJvFRCyRM6mmF5wMPeE, PLRqwX-V7Uu6ZwSmtE13iJBcoI-r4y7iEc, PLRqwX-V7Uu6ZRrqLcQ5BkBKmBLiGD8n4O, PLRqwX-V7Uu6bR4BcLjHHTopXItSjRA7yG, PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy, PLRqwX-V7Uu6akvoNKE4GAxf6ZeBYoJ4uh, PLRqwX-V7Uu6YHt0dtyf4uiw8tKOxQLvlW, PLRqwX-V7Uu6YrWXvEQFOGbCt6cX83Xunm, PLRqwX-V7Uu6bXUJvjnMWGU5SmjhI-OXef, PLRqwX-V7Uu6bJM3VgzjNV5YxVxUwzALHV"];
 
 $(document).ready(function(){
 
@@ -9,18 +9,23 @@ $(document).ready(function(){
 
 function getPlaylists() {
 
-	$.get('https://www.googleapis.com/youtube/v3/playlists?key=AIzaSyADOKEHZag2UMG52bd7ApxDOssdzVo0j8I', { part: 'snippet' , id: shiffmanPlaylists, order: 'date'})
-	.done(function(data){
+	console.log(shiffmanPlaylists);
+	for (var i = 0; i < shiffmanPlaylists.length; i++) {
+		
+		$.get('https://www.googleapis.com/youtube/v3/playlists?key=AIzaSyADOKEHZag2UMG52bd7ApxDOssdzVo0j8I', { part: 'snippet' , id: shiffmanPlaylists[i]})
+		.done(function(data){
 
-		console.log(data);
-		populateData(data);
+			console.log(data);
+			populateData(data);
 
-	}, 'JSON')
-	.error(function(){
+		}, 'JSON')
+		.error(function(){
 
-		alert('Ahh sorry we couldn\' theres a problem');
+			alert('Ahh sorry we couldn\' theres a problem');
 
-	});
+		});
+
+	}
 
 }
 
