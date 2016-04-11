@@ -4,7 +4,7 @@ var percent = 10;
 $(function() {
     
     $( ".slider-container-1" ).slider({
-      value:15,
+      value:10,
       min: 0,
       max: 50,
       step: 0.5,
