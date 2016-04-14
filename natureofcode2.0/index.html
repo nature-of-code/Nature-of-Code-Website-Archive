@@ -4,7 +4,7 @@ layout: home
 
 <link rel="stylesheet" type="text/css" href="/css/rangeslider.css">
 
-<section class="left-container home">
+<section class="left-container home out">
   <div class="content-wrapper">
     <h1>THE <span>NATURE</span> OF CODE</h1>
     <h3 class="subheader">Simulating natural systems with Processing</h3>
@@ -13,12 +13,12 @@ layout: home
     </p>
     <div class="ebook">
       <h2>Buy <span>THE NATURE OF CODE</span> eBook Bundle</h2>
-      <p style="font-size:75%">
+      <p>
         Download the entire book (DRM-free, includes PDF, ePub, and Kindle formats) directly from the author. Delivered by email, no login necessary. Receive lifetime book updates for free.
       </p>
       <form id="buy-book" method="POST" action="https://natureofcode.herokuapp.com/order"> 
         <div class="slider">
-            <div class="slider-header"><h3>NAME YOUR PRICE</h3><span class="right-value"><h3 class="amount">$10</h3></span></div>
+            <div class="slider-header"><h3>NAME YOUR PRICE</h3><span class="right-value"><!-- <h3 class="amount">$10</h3> --><input id="user-amount-input" type="text" placeholder="$10" value="$10" class="field-visible amount"/></span></div>
             <div class="slider-container-1">
               <!-- <input type="range" min="10" max="1000" step="10" value="600"/> -->
             </div>
@@ -26,7 +26,7 @@ layout: home
         </div>
         <div class="slider">
 
-            <div class="slider-header"><h3>DONATE <span class="p-percent">10%</span> TO THE <a href="http://processingfoundation.org">PROCESSING FOUNDATION</a></h3><span class="right-value"><h3 class="p-percent">10%</h3></span></div>
+            <div class="slider-header"><h3>DONATE <span class="p-percent">10%</span> TO THE <a href="http://processingfoundation.org">PROCESSING FOUNDATION</a></h3><span class="right-value"><!-- <h3 class="p-percent">10%</h3> --><input id="user-percent-input" type="text" placeholder="10%" value="10%" class="field-visible p-percent"/></span></div>
             <div class="slider-container-2">
               <!-- <input type="range" min="10" max="1000" step="10" value="600"/> -->
             </div>
@@ -43,30 +43,10 @@ layout: home
         </div>
       </form>
     </div>
-    <div class="row action">
-      <span class="line-charm"></span>
-      <div class="col-left">
-        <h2>Read the Entire Book Online for Free</h2>
-        <p>The complete book is available as HTML with interactive examples.</p>
-      </div>  
-      <div class="col-right text-right">
-        <a href="http://natureofcode.com/book" class="btn">READ NOW</a>
-      </div>
-    </div>
-    <div class="row action">
-      <span class="line-charm"></span>
-      <div class="col-left">
-        <h2>Download the book’s code</h2>
-        <p>All of the <a href="https://github.com/shiffman/The-Nature-of-Code">source files for building the book</a> and <a href="https://github.com/shiffman/The-Nature-of-Code-Examples">the Processing code examples</a> are available on github.</p>
-      </div>  
-      <div class="col-right text-right">
-        <a href="https://github.com/downloads/shiffman/The-Nature-of-Code-Examples/The-Nature-of-Code-Examples.zip" class="btn">DOWNLOAD CODE</a>
-      </div>
-    </div>
   </div>
 </section>
 
-<footer class="left-container home">
+<footer class="left-container home out">
 
   <div class="content-wrapper">
     <span class="line-charm first"></span>
@@ -102,14 +82,31 @@ layout: home
 
 </footer>
 
-<section class="right-container">
-  <div class="home-book">
-    <img src="/images/book-noc.png" width="300px">
-  </div>
-    <div class="book-actions">
-      <h3>GET THE PRINT EDITION</h3>
-      <a href="http://www.amazon.com/gp/product/0985930802/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0985930802&linkCode=as2&tag=natureofcode-20" target="_blank" class="btn">BUY ON AMAZON</a>
+<section class="right-container out">
+
+  <div class="feature print-book">
+    <div class="content">
+      <h2>Get the Print Edition!</h2>
+      <!-- <p>Creative Coding for the Total Beginner</p> -->
+      <a href="http://www.amazon.com/gp/product/0985930802/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0985930802&linkCode=as2&tag=natureofcode-20" class="btn">BUY ON AMAZON</a>
       <a href="https://www.createspace.com/4068419" target="_blank" class="btn">CREATESPACE</a>
-      <a href="http://natureofcode.com/quality.html" target="_blank" class="small">Problem with the quality of your print?</a>
     </div>
+    <img class="book" src="/images/book-noc.png" width="181px"/>
+  </div>
+
+  <div class="feature print-book">
+    <div class="content">
+      <h2>Read the Book Online for Free</h2>
+      <p>The complete book is available as HTML with interactive examples.</p>
+      <a href="http://natureofcode.com/book" class="btn">READ NOW</a>
+    </div>
+  </div>
+
+  <div class="feature print-book">
+    <div class="content">
+      <h2>Download the book’s code</h2>
+      <p>All of the <a href="https://github.com/shiffman/The-Nature-of-Code">source files for building the book</a> and <a href="https://github.com/shiffman/The-Nature-of-Code-Examples">the Processing code examples</a> are available on github.</p>
+     <a href="https://github.com/downloads/shiffman/The-Nature-of-Code-Examples/The-Nature-of-Code-Examples.zip" class="btn">DOWNLOAD CODE</a>
+    </div>
+  </div>
 </section>

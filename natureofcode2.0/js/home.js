@@ -13,7 +13,7 @@ $(function() {
         amount = ui.value;
         amount = amount.toFixed(2);
 
-        $( ".amount" ).html( '$' + amount );
+        $( ".amount" ).val( '$' + amount );
         $('#amount-field').val( amount );
         calculatePercentage();
       }
@@ -27,7 +27,7 @@ $(function() {
       slide: function( event, ui ) {
 
       	percent = ui.value;
-        $(".p-percent").html( ui.value + "%" );
+        $(".p-percent").val( ui.value + "%" );
         $('#processing-percent').val(ui.value);
         
         calculatePercentage();
@@ -35,10 +35,32 @@ $(function() {
     });
 
     $('#pay-btn').click(function(){
-		
-		$('#buy-book').submit();
 
-	});
+  		$('#buy-book').submit();
+
+  	});
+
+    $('#user-amount-input').keyup(function(){
+
+      var amountInput = $(this).val().replace("$", "");
+      $(".slider-container-1" ).slider( "value",  amountInput);
+      amount = amountInput;
+      $('#amount-field').val(amountInput);
+      
+      calculatePercentage();
+
+    });
+
+    $('#user-percent-input').keyup(function(){
+
+      var percentInput = $(this).val().replace("%", "");
+      $(".slider-container-2" ).slider( "value",  percentInput);
+      percent = percentInput;
+      $('#processing-percent').val(percentInput);
+
+      calculatePercentage();
+
+    });
 });
 
 function calculatePercentage() {
