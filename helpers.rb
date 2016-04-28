@@ -4,14 +4,14 @@ class NatureOfCode < Sinatra::Base
       Pony.mail({
         to: ENV['MAIN_EMAIL'],
         cc: ENV['BACKUP_EMAIL'],
-        from: ENV['MANDRILL_USERNAME'],
+        from: ENV['MAILGUN_SMTP_LOGIN'],
         via: :smtp,
         via_options: {
-          address:                'smtp.mandrillapp.com',
-          port:                   587,
+          address:                ENV['MAILGUN_SMTP_SERVER'],
+          port:                   ENV['MAILGUN_SMTP_PORT'],
           enable_starttls_auto:   true,
-          user_name:              ENV['MANDRILL_USERNAME'],
-          password:               ENV['MANDRILL_APIKEY'],
+          user_name:              ENV['MAILGUN_SMTP_LOGIN'],
+          password:               ENV['MAILGUN_SMTP_PASSWORD'],
           authentication:         :plain,
           domain:                 'heroku.com'
         },
