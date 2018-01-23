@@ -367,6 +367,8 @@ p {
 
 li {
   font-size: 18.2px;
+  line-height: 1.618em;
+  letter-spacing:0.03em;
 }
 
 /* Tables
