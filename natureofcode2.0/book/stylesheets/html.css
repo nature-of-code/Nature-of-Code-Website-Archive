@@ -312,6 +312,17 @@ _____________________________________________________________________________*/
 /*  background-image: url('../imgs/vertical_grid.jpg');*/
 }
 
+/* Sections
+_____________________________________________________________________________ */
+
+section[data-type="sect1"]:first-of-type, 
+section + section {
+  margin-top: 3em;
+}
+
+/* Globals
+_____________________________________________________________________________ */
+
 h1 {
   font-size: 320%;
   line-height: 1em;
@@ -476,12 +487,11 @@ h2 + blockquote {
   color: #000000;/*#808080;*/
 }
 
-h2 + blockquote span.attribution {
-  display: block;
+h2 + blockquote p[data-type="attribution"] {
   font-style: normal;
   font-size: 16pt;
   margin-left: 24px;
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 blockquote {
@@ -493,12 +503,16 @@ blockquote {
   color: #000000;/*#808080;*/
 }
 
-blockquote span.attribution {
-  display: block;
+blockquote p {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+blockquote p[data-type="attribution"] {
   font-style: italic;
   font-size: 12pt;
   margin-left: 24px;
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 /* Default Elements
@@ -557,9 +571,9 @@ span.highlight {
    .note = breakout boxes
 */
 
-.note h2, .tip, .example h2,
-.note h3, .tip h3, .example h3,
-.note h4, .tip h4, .example h4 {
+.note h2, .tip, .example h2, div[data-type="exercise"] h2, 
+.note h3, .tip h3, .example h3, div[data-type="exercise"] h3, 
+.note h4, .tip h4, .example h4, div[data-type="exercise"] h4  {
   color: #191919;
   margin-bottom: 0.3em;
   font-style: normal;
@@ -580,7 +594,8 @@ span.highlight {
 
 
 /* == EXERCISES */
-div.example {
+div.example,
+div[data-type="exercise"] {
   background-color: #E9E9E9;
   color: #000;
   padding: 3em 1.5em 1em;
@@ -588,6 +603,12 @@ div.example {
   margin: 1.15em 0;
   overflow-y:auto;
   font-style: none;
+}
+
+div[data-type="exercise"] h5 {
+  font-family: "ProximaNova-Regular";
+  margin: 0 0 0.9em 0;
+  font-size: 18.2px;
 }
 
 div.example h3[id],
@@ -610,14 +631,14 @@ div.example h6[id] {
   font-family: "Georgia";
 }
 
-.note h2:first-child, .tip h2:first-child, .example h2:first-child,
-.note h3:first-child, .tip h3:first-child, .example h3:first-child,
-.note h4:first-child, .tip h4:first-child, .example h4:first-child,
-.note p:first-child, .tip p:first-child, .example p:first-child {
+.note h2:first-child, .tip h2:first-child, .example h2:first-child, div[data-type="exercise"] h2:first-child,
+.note h3:first-child, .tip h3:first-child, .example h3:first-child, div[data-type="exercise"] h3:first-child,
+.note h4:first-child, .tip h4:first-child, .example h4:first-child, div[data-type="exercise"] h4:first-child,
+.note p:first-child, .tip p:first-child, .example p:first-child, div[data-type="exercise"] p:first-child {
   margin-top: 0;
 }
 
-.note p:last-child, .tip p:last-child, .example p:last-child {
+.note p:last-child, .tip p:last-child, .example p:last-child, div[data-type="exercise"] p:last-child {
   margin-bottom: 0;
 }
 
@@ -730,9 +751,9 @@ img {
   border:1px solid gray;
 }
 
-.two-col,
-.two-col-borderless,
-.three-col
+div.image-container.two-col,
+div.image-container.two-col-borderless,
+div.image-container.three-col
 {
   width: 50%;
   box-sizing: border-box;
@@ -741,11 +762,11 @@ img {
   float: left;
 }
 
-.two-col img,
-.two-col canvas,
-.two-col-borderless canvas,
-.three-col img,
-.three-col canvas
+div.image-container.two-col img,
+div.image-container.two-col canvas,
+div.image-container.two-col-borderless canvas,
+div.image-container.three-col img,
+div.image-container.three-col canvas
 {
   width: 100%;
   max-width: 100%;
@@ -753,14 +774,68 @@ img {
   //-webkit-box-shadow: 1px 1px 2px gray;
 }
 
-.two-col-borderless img {
+div.image-container.two-col-borderless img {
   border:0px solid gray;
 }
 
-.three-col {
+div.image-container.three-col {
   width: 33%;
 }
 
+/* iFrame Formatting
+_____________________________________________________________________________ */
+
+iframe {
+  display: block;
+  margin: 0 auto 0 auto;
+}
+
+div.three-col,
+div.two-col,
+div.two-col-borderless {
+  display: inline-block;
+  margin: 0 1em 0 0;
+  vertical-align: top;
+}
+
+div.two-col p,
+div.three-col p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+div.two-col p {
+  font-size: 2em;
+}
+
+div.three-col p {
+  font-size: 3em;
+}
+
+div.two-col-container {
+  width: 1600;
+  height: 400;
+  overflow: visible;
+  vertical-align: top;
+}
+
+div.three-col-container {
+  width: 2000;
+  height: 400;
+  overflow: visible;
+  vertical-align: top;
+}
+
+div.two-col p.caption, 
+div.three-col p.caption {
+  color: #222;
+  font-family: "ProximaNova-Regular";
+  border: 0;
+  max-width: 600;
+  margin: 0;
+  padding: 0;
+}
 
 /* Code Formatting
 _____________________________________________________________________________ */
