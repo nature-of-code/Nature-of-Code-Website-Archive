@@ -123,6 +123,25 @@ _____________________________________________________________________________*/
   box-sizing: border-box;
 }
 
+#nav-bar-wrap.hidden:focus-within {
+    z-index: 4;
+}
+
+#nav-bar-wrap.hidden:focus-within #mask {
+    background-color: transparent;
+}
+
+#nav-bar-wrap.hidden:focus-within #nav-bar {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+#nav-bar > *:focus {
+    background-color: rgb(235,0,90);
+    z-index: 99;
+}
+
 #nav-bar-wrap {
   margin: 0;
   position: absolute;

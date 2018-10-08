@@ -6,7 +6,7 @@
 
 (function( $ ){
 
-	$.fn.fixed = function( options ) {
+	$.fn.fixed = function( options, callback = null ) {
 
 		var settings = {
 			'top'	: 0
@@ -59,14 +59,17 @@
 			}
 
 			function setFixed() {
+                if (callback) callback('fixed', $this.css('position') !== 'fixed', $this);
 				$this.css('position','fixed').css('top', settings.top+'px');
 			};
 
 			function setAb() {
+                if (callback) callback('absolute', $this.css('position') !== 'absolute', $this);
 				$this.css('position','absolute').css('top', '0px');
 			};
 
 			function setRel() {
+                if (callback) callback('relative', $this.css('position') !== 'relative', $this);
 				$this.css('position','relative').css('top','auto');
 			}
 
