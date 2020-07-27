@@ -5,7 +5,7 @@ GIT
     stripe (1.16.0)
       json (~> 1.8.5)
       mime-types (>= 1.25, < 3.0)
-      rest-client (~> 1.4)
+      rest-client (~> 2.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -100,7 +100,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
-    rest-client (1.7.2)
+    rest-client (2.0.1)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     sass (3.4.9)
