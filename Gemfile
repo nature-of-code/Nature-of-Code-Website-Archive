@@ -3,6 +3,7 @@ ruby '2.7.1'
 
 gem 'sinatra'
 gem 'thin'
+gem 'json'
 gem 'sass'
 
 # purchasing and content delivery
