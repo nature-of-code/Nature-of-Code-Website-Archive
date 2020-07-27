@@ -3,7 +3,7 @@ GIT
   revision: 9c7ebd21c97358d1329abdbd91628dbf970d314f
   specs:
     stripe (1.16.0)
-      json (~> 1.8.1)
+      json (~> 1.8.5)
       mime-types (>= 1.25, < 3.0)
       rest-client (~> 1.4)
 
@@ -77,8 +77,8 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.11)
-    json (1.8.1)
-    json_pure (1.8.1)
+    json (1.8.5)
+    json_pure (1.8.5)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
