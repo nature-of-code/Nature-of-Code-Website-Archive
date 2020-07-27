@@ -1,0 +1,136 @@
+GIT
+  remote: git://github.com/stripe/stripe-ruby.git
+  revision: 9c7ebd21c97358d1329abdbd91628dbf970d314f
+  specs:
+    stripe (1.16.0)
+      json (~> 1.8.1)
+      mime-types (>= 1.25, < 3.0)
+      rest-client (~> 1.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.1.8)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
+    addressable (2.3.6)
+    attr_required (1.0.0)
+    bcrypt (3.1.9)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
+    daemons (1.1.9)
+    data_mapper (1.2.0)
+      dm-aggregates (~> 1.2.0)
+      dm-constraints (~> 1.2.0)
+      dm-core (~> 1.2.0)
+      dm-migrations (~> 1.2.0)
+      dm-serializer (~> 1.2.0)
+      dm-timestamps (~> 1.2.0)
+      dm-transactions (~> 1.2.0)
+      dm-types (~> 1.2.0)
+      dm-validations (~> 1.2.0)
+    data_objects (0.10.14)
+      addressable (~> 2.1)
+    dm-aggregates (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-constraints (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-core (1.2.1)
+      addressable (~> 2.3)
+    dm-do-adapter (1.2.0)
+      data_objects (~> 0.10.6)
+      dm-core (~> 1.2.0)
+    dm-migrations (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-postgres-adapter (1.2.0)
+      dm-do-adapter (~> 1.2.0)
+      do_postgres (~> 0.10.6)
+    dm-serializer (1.2.2)
+      dm-core (~> 1.2.0)
+      fastercsv (~> 1.5)
+      json (~> 1.6)
+      json_pure (~> 1.6)
+      multi_json (~> 1.0)
+    dm-timestamps (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-transactions (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-types (1.2.2)
+      bcrypt-ruby (~> 3.0)
+      dm-core (~> 1.2.0)
+      fastercsv (~> 1.5)
+      json (~> 1.6)
+      multi_json (~> 1.0)
+      stringex (~> 1.4)
+      uuidtools (~> 2.1)
+    dm-validations (1.2.0)
+      dm-core (~> 1.2.0)
+    do_postgres (0.10.14)
+      data_objects (= 0.10.14)
+    eventmachine (1.0.3)
+    fastercsv (1.5.5)
+    fetchapp-api-ruby (2.0.1)
+      httparty
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    i18n (0.6.11)
+    json (1.8.1)
+    json_pure (1.8.1)
+    mail (2.6.3)
+      mime-types (>= 1.16, < 3)
+    mime-types (2.4.3)
+    minitest (5.4.3)
+    multi_json (1.10.1)
+    multi_xml (0.5.5)
+    netrc (0.9.0)
+    paypal-express (0.8.1)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      rest-client
+    pg (0.17.1)
+    pony (1.4)
+      mail (> 2.0)
+    rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    sass (3.4.9)
+    shotgun (0.9)
+      rack (>= 1.0)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    stringex (1.5.1)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    thread_safe (0.3.4)
+    tilt (1.4.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    uuidtools (2.1.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  data_mapper
+  dm-postgres-adapter
+  fetchapp-api-ruby
+  json
+  paypal-express
+  pg
+  pony (= 1.4)
+  sass
+  shotgun
+  sinatra
+  stripe!
+  thin
