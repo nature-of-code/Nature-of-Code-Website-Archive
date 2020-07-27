@@ -45,3 +45,5 @@ All files outside of the **public** directory in `master` should be removed for
 the `gh-pages` branch and all files in **public/** can be promoted one level.
 
 Currently links to "read the book online" are directed at **book/**.
+
+Deploy!
