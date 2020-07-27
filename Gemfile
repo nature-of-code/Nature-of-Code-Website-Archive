@@ -22,3 +22,4 @@ gem 'pony', '1.4'
 group :development do
   gem 'shotgun'
 end
+gem "bigdecimal", "= 1.3.5"
