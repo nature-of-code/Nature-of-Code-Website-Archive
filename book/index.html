@@ -13,7 +13,15 @@
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
       $('#toc-list').fixed({'top':'8'});
-      $('#nav-bar-wrap').fixed({'top':'8'});
+      $('#nav-bar-wrap').fixed({'top':'8'}, function(status, changed, ele) {
+          if (changed) {
+              if (status !== 'fixed') {
+                  $('#nav-bar-wrap').addClass("hidden");
+              } else {
+                  $('#nav-bar-wrap').removeClass("hidden");
+              }
+          }
+      });
 
       $('span.c1').each(function(){ addStylesToCodeLines($(this)); });
       // $('code').each(function(){ inlineComments($(this)); });
@@ -57,7 +65,7 @@
 
   <div id="navigator">
     <div id="navigator-inner">
-      <div id='nav-bar-wrap'>
+      <div id='nav-bar-wrap' class="hidden">
         <div id="mask"></div>
         <div id="nav-bar">
           <h1><a href="/">THE <strong>NATURE</strong> OF CODE</a></h1>
@@ -67,7 +75,7 @@
       </div>
       <div id="toc-holder">
         <div id="toc-list">
-          <ul>
+          <ul aria-label="table of contents" role="list">
             <li><a href="/book/">Welcome</a></li>
             <li><a href="/book/acknowledgments">Acknowledgments</a></li>
             <li><a href="/book/dedication">Dedication</a></li>
