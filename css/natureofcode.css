@@ -49,7 +49,7 @@ html {
   font-family: 'Georgia'; }
 
 a {
-  color: #30def6; }
+  color: #237480; }
 
 em {
   font-style: italic; }
@@ -220,7 +220,7 @@ h3 #display-percent {
     cursor: pointer; }
 
 .block-link {
-  background-color: #1ed4ed;
+  background-color: #237480;
   color: #fff;
   border: none;
   display: inline-block;
